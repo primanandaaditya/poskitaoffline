@@ -1,0 +1,17 @@
+package com.kitadigi.poskita.sinkron.unit.insert;
+
+import com.kitadigi.poskita.sinkron.retrofit.SinkronResponse;
+import com.kitadigi.poskita.util.Url;
+
+import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.POST;
+
+public interface ISinkronInsertUnit {
+    @FormUrlEncoded
+    @POST(Url.SINKRON_INSERT_UNIT)
+    Call<SinkronResponse> insert_unit(
+            @Field("data") String data
+    );
+}

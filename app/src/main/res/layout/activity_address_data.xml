@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/rl_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50"
+        android:background="@color/colorRed">
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/dimen_30"
+            android:layout_height="@dimen/dimen_30"
+            android:src="@drawable/ic_baseline_arrow_back_24px"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:tint="@color/colorWhite"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_centerVertical="true"
+            tools:ignore="contentDescription"/>
+
+        <TextView
+            android:id="@+id/tv_nav_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_16"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:text="@string/remark_shipping_address"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/rl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBg"
+        android:orientation="vertical">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/rl_address_user"
+                    android:layout_marginTop="@dimen/dimen_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible">
+
+                    <EditText android:id="@+id/et_address_user"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_40"
+                        android:padding="@dimen/dimen_5"
+                        android:textColor="@color/colorGrey"
+                        android:hint="@string/remark_data_address_users"
+                        android:textSize="@dimen/text_12"
+                        android:inputType="textCapWords"
+                        android:layout_gravity="center"
+                        android:imeOptions="actionNext"
+                        android:background="@drawable/button_rounded_white"
+                        android:layout_marginTop="@dimen/dimen_5"
+                        android:layout_marginStart="@dimen/dimen_10"
+                        android:layout_marginEnd="@dimen/dimen_10"
+                        android:textColorHint="@color/colorGrey"
+                        />
+                    <TextView
+                        android:id="@+id/tv_remark_address_user"
+                        android:layout_below="@+id/et_address_user"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorGreyText_2"
+                        android:textSize="@dimen/text_9"
+                        android:layout_marginStart="@dimen/dimen_10"
+                        android:layout_marginBottom="@dimen/dimen_5"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                        <EditText android:id="@+id/et_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dimen_120"
+                            android:padding="@dimen/dimen_5"
+                            android:maxLines="4"
+                            android:textColor="@color/colorGrey"
+                            android:hint="@string/remark_data_address"
+                            android:textSize="@dimen/text_12"
+                            android:layout_gravity="center"
+                            android:gravity="top"
+                            android:inputType="textCapWords"
+                            android:background="@drawable/button_rounded_white"
+                            android:layout_marginTop="@dimen/dimen_5"
+                            android:layout_marginStart="@dimen/dimen_10"
+                            android:layout_marginEnd="@dimen/dimen_10"
+                            android:textColorHint="@color/colorGrey"
+                            android:imeOptions="actionNext"
+                            />
+                        <TextView
+                            android:id="@+id/tv_remark_address"
+                            android:layout_below="@+id/et_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorGreyText_2"
+                            android:textSize="@dimen/text_9"
+                            android:layout_marginStart="@dimen/dimen_10"
+                            android:layout_marginBottom="@dimen/dimen_5"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_address_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText android:id="@+id/et_address_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_40"
+                        android:padding="@dimen/dimen_5"
+                        android:imeOptions="actionDone"
+                        android:textColor="@color/colorGrey"
+                        android:hint="@string/remark_data_address_phone"
+                        android:textSize="@dimen/text_12"
+                        android:layout_gravity="center"
+                        android:inputType="phone"
+                        android:background="@drawable/button_rounded_white"
+                        android:layout_marginTop="@dimen/dimen_5"
+                        android:layout_marginStart="@dimen/dimen_10"
+                        android:layout_marginEnd="@dimen/dimen_10"
+                        android:textColorHint="@color/colorGrey"
+                        />
+                    <TextView
+                        android:id="@+id/tv_remark_address_phone"
+                        android:layout_below="@+id/et_address_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorGreyText_2"
+                        android:textSize="@dimen/text_9"
+                        android:layout_marginStart="@dimen/dimen_10"
+                        android:layout_marginBottom="@dimen/dimen_5"/>
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_save"
+                    android:layout_marginTop="@dimen/dimen_5"
+                    android:layout_marginBottom="@dimen/dimen_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_50"
+                    android:background="@color/colorBg"
+                    android:visibility="visible">
+
+                    <Button
+                        android:id="@+id/btn_save"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/remark_items_button"
+                        android:textColor="@color/colorWhite"
+                        style="@style/dialog_red_button"
+                        android:layout_marginStart="@dimen/dimen_10"
+                        android:layout_marginEnd="@dimen/dimen_10"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+
+
+    </LinearLayout>
+
+</LinearLayout>

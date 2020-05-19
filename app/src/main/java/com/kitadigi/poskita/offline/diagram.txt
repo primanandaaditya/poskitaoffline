@@ -1,0 +1,14 @@
+untuk SELECt
+- buat dulu helpernya
+- cek controller, lihat interface resultnya
+- interface kamu tambahi List<T> seperti
+
+    public interface IKategoriResult {
+        void onKategoriSuccess(KategoriModel kategoriModel, List<Kategori> kategoriOffline);
+        void onKategoriError(String error,List<Kategori> kategoriOffline);
+    }
+- pada interface onSuccess :
+    - hapus dulu semua data di sqlite
+    - looping response.body(), lalu masukkan satu persatu ke sqlite
+- pada interface onFail/onError :
+    - langsung isi dengan data di sqlite

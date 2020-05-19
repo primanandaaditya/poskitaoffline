@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_scan"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.kitadigi.poskita.printer.ScanActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50"
+        android:background="@color/colorRed">
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/dimen_30"
+            android:layout_height="@dimen/dimen_30"
+            android:src="@drawable/ic_baseline_arrow_back_24px"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:tint="@color/colorWhite"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_centerVertical="true"
+            tools:ignore="contentDescription"/>
+
+        <TextView
+            android:id="@+id/tv_nav_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_16"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:text="@string/scan_bluetooth"/>
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:padding="@dimen/dimen_10"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:textAlignment="center"
+            android:id="@+id/statusUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Status" />
+
+        <TextView
+            android:layout_marginBottom="@dimen/dimen_10"
+            android:textAlignment="center"
+            android:id="@+id/tvJumlah"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/jumlah_bluetooth" />
+
+
+        <Button
+            android:layout_marginBottom="@dimen/dimen_10"
+            style="@style/dialog_red_button"
+            android:id="@+id/connect"
+            android:text="@string/scan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <Button
+            android:visibility="gone"
+            style="@style/dialog_red_button"
+            android:id="@+id/disconnect"
+            android:text="Disconnect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/logo"
+            android:src="@mipmap/ic_sudah_sync"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_weight="1"
+                android:id="@+id/rv"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+            </android.support.v7.widget.RecyclerView>
+
+
+            <Button
+                android:layout_weight="0"
+                style="@style/dialog_red_button"
+                android:id="@+id/btnPrint"
+                android:text="@string/cetak_struk_tombol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

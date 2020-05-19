@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <EditText
+        android:padding="@dimen/dimen_5"
+        android:background="@drawable/button_rounded_white"
+        android:layout_marginTop="@dimen/dimen_40"
+        android:hint="@string/nama_kategori"
+        android:id="@+id/et_nama_kategori"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40">
+
+    </EditText>
+
+    <EditText
+        android:padding="@dimen/dimen_5"
+        android:background="@drawable/button_rounded_white"
+        android:hint="@string/kode_kategori"
+        android:id="@+id/et_kode_kategori"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40">
+
+    </EditText>
+
+</LinearLayout>

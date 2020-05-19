@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#C39BD3</color>
+<!--    <color name="colorRed">#ec1a23</color>-->
+    <color name="colorRed">#C39BD3</color>
+    <color name="colorRedDisabled">#70ec1a23</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorBlackShadow">#70000000</color>
+    <color name="colorGrey">#797979</color>
+    <color name="colorGreyText">#616770</color>
+    <color name="colorGreyText_2">#75716f</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBg">#f2f2f2</color>
+    <color name="colorBgHeader">#fff6f1</color>
+    <!-- Shimmer Placeholder -->
+    <color name="colorPlaceholder">#dddddd</color>
+    <color name="gray_btn_bg_color">#D0D0D0</color>
+    <color name="gray_btn_bg_pressed_color">#B6B6B6</color>
+    <color name="blue_btn_bg_color">#AEDEF4</color>
+    <color name="blue_btn_bg_pressed_color">#96BFD2</color>
+    <color name="colorYellow">#fff200</color>
+</resources>

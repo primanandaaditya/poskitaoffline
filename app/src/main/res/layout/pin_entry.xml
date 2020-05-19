@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorRed">
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_marginTop="@dimen/dimen_35"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="@dimen/dimen_50"
+            android:layout_height="@dimen/dimen_50"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/dimen_12"
+            app:tint="@color/colorWhite"
+            app:srcCompat="@drawable/ic_point_of_sale_terminal_pos" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/input_pin"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_16"
+            android:textStyle="bold" />
+
+        <com.alimuzaffar.lib.pin.PinEntryEditText
+            android:id="@+id/txt_pin_entry"
+            android:layout_width="250dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/dimen_16"
+            android:background="@null"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:digits="1234567890"
+            android:focusable="false"
+            android:inputType="number|numberPassword"
+            android:maxLength="6"
+            android:textColor="@android:color/transparent"
+            android:textIsSelectable="false"
+            android:textSize="0px"
+            android:visibility="visible"
+            app:pinBackgroundDrawable="@drawable/selector_pin_round"
+            app:pinBackgroundIsSquare="true"
+            app:pinCharacterSpacing="20dp"
+            app:pinLineColors="@color/colorBg"
+            app:pinTextBottomPadding="4dp" />
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/container"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/keyboard_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/dimen_12" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorRed">
+        <RelativeLayout
+            android:id="@+id/rl_search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_50"
+            android:background="@color/colorRed">
+            <EditText android:id="@+id/et_search"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40"
+                android:padding="@dimen/dimen_10"
+                android:textColor="@color/colorBlack"
+                android:textStyle="italic"
+                android:imeOptions="actionDone"
+                android:inputType="textCapCharacters"
+                android:hint="@string/find_items_header"
+                android:textSize="@dimen/text_12"
+                android:layout_gravity="center"
+                android:background="@drawable/edittext_border"
+                android:layout_marginTop="@dimen/dimen_5"
+                android:layout_marginStart="@dimen/dimen_10"
+                android:layout_marginEnd="@dimen/dimen_10"
+                android:textColorHint="@color/colorGreyText_2"
+                />
+            <ImageView
+                android:id="@+id/iv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_search"
+                android:tint="@color/colorRed"
+                android:layout_marginTop="@dimen/dimen_5"
+                android:layout_marginEnd="@dimen/dimen_20"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_below="@+id/rl_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:id="@+id/rl_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                >
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmer_view_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    shimmer:duration="800">
+
+                    <!-- Adding 3 rows of placeholders -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include layout="@layout/placeholder_items" />
+                        <include layout="@layout/placeholder_items" />
+                        <include layout="@layout/placeholder_items" />
+                        <include layout="@layout/placeholder_items" />
+                        <include layout="@layout/placeholder_items" />
+                        <include layout="@layout/placeholder_items" />
+                        <include layout="@layout/placeholder_items" />
+
+
+                    </LinearLayout>
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_items"
+                    android:layout_below="@+id/shimmer_view_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    />
+            </RelativeLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </RelativeLayout>

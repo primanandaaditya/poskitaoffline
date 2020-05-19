@@ -1,0 +1,81 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorRed"
+        >
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/simpleTableLayout"
+            android:background="@color/colorRed"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_50"
+            android:stretchColumns="1"> <!-- stretch the second column of the layout-->
+
+            <!-- first row of the table layout-->
+            <TableRow
+                android:gravity="center_horizontal|center_vertical"
+                android:minHeight="@dimen/dimen_50"
+                android:id="@+id/firstRow"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dimen_50">
+
+                <!-- first element of the row-->
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="@dimen/dimen_30"
+                    android:layout_height="@dimen/dimen_30"
+                    android:src="@drawable/ic_baseline_arrow_back_24px"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:tint="@color/colorWhite"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_centerVertical="true"
+                    tools:ignore="contentDescription"/>
+
+                <TextView
+                    android:id="@+id/tv_nav_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_16"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:text="@string/report_analisa"/>
+
+
+                <ImageView
+                    android:visibility="invisible"
+                    android:id="@+id/iv_filter"
+                    android:layout_width="@dimen/dimen_20"
+                    android:layout_height="@dimen/dimen_20"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@drawable/ic_search"
+                    android:tint="@color/colorWhite"
+                    tools:ignore="contentDescription" />
+
+            </TableRow>
+        </TableLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            app:tabTextColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabMode="fixed"
+            app:tabGravity="fill"/>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
+</android.support.design.widget.CoordinatorLayout>

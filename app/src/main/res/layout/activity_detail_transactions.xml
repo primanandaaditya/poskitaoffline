@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/rl_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50"
+        android:background="@color/colorRed">
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/dimen_30"
+            android:layout_height="@dimen/dimen_30"
+            android:src="@drawable/ic_baseline_arrow_back_24px"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:tint="@color/colorWhite"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_centerVertical="true"
+            tools:ignore="contentDescription"/>
+
+        <TextView
+            android:id="@+id/tv_nav_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_16"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:text="@string/remark_transactions_detail_header"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/rl_content"
+        android:layout_below="@+id/rl_toolbar"
+        android:layout_above="@+id/rl_save"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBg"
+        android:orientation="vertical">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/dimen_10">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/edittext_border_black">
+                <RelativeLayout
+                    android:id="@+id/rl_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_50"
+                    android:background="@color/colorRed">
+                    <TextView
+                        android:id="@+id/tv_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_5"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/text_12"
+                        android:layout_marginStart="@dimen/dimen_20"
+                        android:layout_centerVertical="true"
+                        android:text="@string/remark_transactions_detail_orders"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rl_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmer_view_container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="visible"
+                        shimmer:duration="800">
+
+                        <!-- Adding 3 rows of placeholders -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <include layout="@layout/placeholder_items" />
+                            <include layout="@layout/placeholder_items" />
+                            <include layout="@layout/placeholder_items" />
+                            <include layout="@layout/placeholder_items" />
+                            <include layout="@layout/placeholder_items" />
+                            <include layout="@layout/placeholder_items" />
+                            <include layout="@layout/placeholder_items" />
+                            <include layout="@layout/placeholder_items" />
+                            <include layout="@layout/placeholder_items" />
+
+
+                        </LinearLayout>
+
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_items"
+                        android:layout_below="@+id/shimmer_view_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rl_add"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_50"
+                    android:background="@color/colorWhite"
+                    android:gravity="center">
+                    <ImageView
+                        android:id="@+id/iv_icon_add"
+                        android:layout_width="@dimen/dimen_10"
+                        android:layout_height="@dimen/dimen_10"
+                        android:src="@drawable/ic_plus"
+                        android:tint="@color/colorGreyText"
+                        android:layout_marginEnd="@dimen/dimen_5"
+                        android:layout_centerVertical="true"/>
+                    <TextView
+                        android:id="@+id/tv_add"
+                        android:layout_toEndOf="@+id/iv_icon_add"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/remark_items_add"
+                        android:background="@color/colorWhite"
+                        android:textColor="@color/colorGreyText"
+                        android:layout_centerVertical="true"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rl_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_50"
+                    android:visibility="gone"
+                    android:background="@color/colorRed">
+                    <TextView
+                        android:id="@+id/tv_remark_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_5"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/text_12"
+                        android:layout_marginStart="@dimen/dimen_20"
+                        android:layout_centerVertical="true"
+                        android:text="@string/remark_payment_detail"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rl_detail_data"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite">
+                    <TextView
+                        android:id="@+id/tv_remark_subtotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorGreyText"
+                        android:layout_marginTop="@dimen/dimen_10"
+                        android:layout_marginBottom="@dimen/dimen_10"
+                        android:textSize="@dimen/text_12"
+                        android:layout_marginStart="@dimen/dimen_20"
+                        android:text="@string/remark_payment_subtotal"/>
+                    <TextView
+                        android:id="@+id/tv_subtotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="@dimen/dimen_10"
+                        android:layout_marginBottom="@dimen/dimen_10"
+                        android:textColor="@color/colorGreyText"
+                        android:textSize="@dimen/text_12"
+                        android:layout_marginEnd="@dimen/dimen_20"
+                        android:text=""/>
+                    <View
+                        android:id="@+id/divider_subtotal"
+                        android:layout_below="@+id/tv_remark_subtotal"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="@dimen/dimen_10"
+                        android:layout_marginEnd="@dimen/dimen_10"
+                        android:background="@color/colorBg" />
+
+                    <TextView
+                        android:id="@+id/tv_remark_total"
+                        android:layout_below="@+id/divider_subtotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlack"
+                        android:layout_marginTop="@dimen/dimen_10"
+                        android:layout_marginBottom="@dimen/dimen_10"
+                        android:textSize="@dimen/text_16"
+                        android:layout_marginStart="@dimen/dimen_20"
+                        android:text="@string/remark_payment_subtotal"/>
+                    <TextView
+                        android:id="@+id/tv_total"
+                        android:layout_below="@+id/divider_subtotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="@dimen/dimen_10"
+                        android:layout_marginBottom="@dimen/dimen_10"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/text_16"
+                        android:layout_marginEnd="@dimen/dimen_20"
+                        android:text=""/>
+
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/rl_save"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50"
+        android:background="@color/colorRed"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/btn_save"
+            android:enabled="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/remark_items_button"
+            android:textAllCaps="true"
+            android:textSize="@dimen/dimen_16"
+            android:textColor="@color/colorWhite"
+            style="@style/dialog_red_button"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

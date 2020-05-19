@@ -1,0 +1,19 @@
+package com.kitadigi.poskita.fragment.edititem;
+
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+
+public interface IEditRequest {
+
+    public void editBarang(String id_product,
+                          MultipartBody.Part image,
+                          RequestBody name_product,
+                          Integer brand_id,
+                          Integer category_id,
+                          Integer unit_id,
+                          Integer purchase_price,
+                          Integer sell_price,
+                          String code_product,
+                          Integer qty_stock,
+                          Integer qty_minimum);
+}

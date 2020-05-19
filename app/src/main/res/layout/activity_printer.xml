@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50"
+        android:background="@color/colorRed">
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/dimen_30"
+            android:layout_height="@dimen/dimen_30"
+            android:src="@drawable/ic_baseline_arrow_back_24px"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:tint="@color/colorWhite"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_centerVertical="true"
+            tools:ignore="contentDescription"/>
+
+        <TextView
+            android:id="@+id/tv_nav_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_16"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:text="@string/cetak"/>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:padding="@dimen/dimen_20"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textAlignment="center"
+                android:id="@+id/lblAttachPrinter"
+                android:text="Attach printer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+
+
+
+            <TextView
+                android:visibility="gone"
+                android:height="150dp"
+                android:id="@+id/lblPrinterName"
+                android:text="Printer name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+
+
+
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/etInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+
+
+
+            <TextView
+                android:id="@+id/tvcetak"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_weight="1"
+                    style="@style/dialog_red_button"
+                    android:visibility="visible"
+                    android:id="@+id/btnConnectPrinter"
+                    android:text="@string/hubungkan_printer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </Button>
+
+                <Button
+                    android:layout_weight="1"
+                    style="@style/dialog_red_button"
+                    android:id="@+id/btnPrintDocument"
+                    android:text="@string/cetak"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </Button>
+
+            </LinearLayout>
+
+
+
+
+
+
+            <Button
+                android:visibility="gone"
+                android:id="@+id/btnDisconnectPrinter"
+                android:text="Disconnect printer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </Button>
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SweetAlertDialog</string>
+    <string name="dialog_default_title">Here\'s a message!</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="LOADING">Loading...</string>
+    <string name="vendor">Vendor</string>
+    <string name="model">Model</string>
+    <string name="os">os</string>
+    <string name="imei1">imei-1</string>
+    <string name="imei2">imei-2</string>
+    <string name="passcode">Passcode</string>
+</resources>

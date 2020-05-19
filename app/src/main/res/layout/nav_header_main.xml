@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nav_header"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_150"
+    android:background="@color/colorWhite"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:gravity="top"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    <RelativeLayout android:id="@+id/layoutHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background="@color/colorRed"
+        android:layout_marginTop="@dimen/dimen_20"
+        android:gravity="start|center">
+        <TextView
+            android:id="@+id/tv_nav_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_12"
+            android:layout_marginStart="@dimen/dimen_5"/>
+
+        <TextClock
+            android:id="@+id/tc_jam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/tv_nav_header"
+            android:format24Hour="HH:mm"
+            android:layout_marginStart="@dimen/dimen_5"
+            android:layout_marginTop="@dimen/dimen_5"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_12" />
+
+        <TextView
+            android:id="@+id/tv_wib"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/tc_jam"
+            android:layout_marginTop="@dimen/dimen_5"
+            android:layout_marginStart="@dimen/dimen_5"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_12" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_70"
+        android:background="@drawable/button_rounded_black"
+        android:layout_margin="@dimen/dimen_5"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/tv_remark_balance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_22"
+            android:layout_marginStart="@dimen/dimen_20"
+            android:layout_marginEnd="@dimen/dimen_20"
+            android:text="@string/remark_balance_header"/>
+
+        <TextView
+            android:id="@+id/tv_balance"
+            android:layout_below="@+id/tv_remark_balance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_14"
+            android:layout_marginStart="@dimen/dimen_20"
+            android:layout_marginEnd="@dimen/dimen_20"/>
+
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_pos"
+            android:icon="@drawable/ic_pos"
+            android:title="@string/remark_pos" />
+        <item
+            android:id="@+id/nav_pembelian"
+            android:icon="@drawable/ic_pembelian"
+            android:title="@string/remark_pembelian" />
+        <item
+            android:id="@+id/nav_items"
+            android:icon="@drawable/ic_items"
+            android:title="@string/remark_items" />
+        <item
+            android:id="@+id/nav_kategori"
+            android:icon="@drawable/ic_kategori"
+            android:title="@string/remark_kategori" />
+        <item
+            android:id="@+id/nav_brand"
+            android:icon="@drawable/ic_brand"
+            android:title="@string/remark_item_brand" />
+        <item
+            android:id="@+id/nav_unit"
+            android:icon="@drawable/ic_unit"
+            android:title="@string/remark_items_unit" />
+        <item
+            android:id="@+id/nav_report"
+            android:icon="@drawable/ic_reports"
+            android:title="@string/remark_report" />
+        <item
+            android:id="@+id/nav_printer"
+            android:icon="@drawable/ic_printer"
+            android:title="@string/remark_printer" />
+        <item
+            android:id="@+id/nav_wholesale"
+            android:icon="@drawable/ic_wholesale"
+            android:title="@string/remark_wholesale" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_address"
+            android:title="@string/remark_profile" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/logout" />
+    </group>
+
+
+
+</menu>

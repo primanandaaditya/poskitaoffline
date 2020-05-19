@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dimen_16"
+    android:background="@color/colorWhite"
+    >
+
+    <LinearLayout
+        android:id="@+id/layoutHome"
+        android:background="@color/colorWhite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_5"
+        android:orientation="vertical"
+        >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_12"
+            android:layout_marginTop="@dimen/dimen_5"
+            android:paddingLeft="@dimen/dimen_10"
+            android:paddingRight="@dimen/dimen_10"
+            android:background="@drawable/button_rounded_soft_grey" />
+
+        <View
+            android:layout_width="@dimen/dimen_200"
+            android:layout_height="@dimen/dimen_12"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:paddingLeft="@dimen/dimen_10"
+            android:paddingRight="@dimen/dimen_10"
+            android:background="@drawable/button_rounded_soft_grey" />
+
+    </LinearLayout>
+
+</RelativeLayout>

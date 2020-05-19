@@ -1,0 +1,329 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="provider" translatable="false">com.kitadigi.poskita.provider</string>
+    <string name="app_name" tools:ignore="MissingTranslation">Pos Kita</string>
+    <string name="hint_username">Masukkan username</string>
+    <string name="hint_password">Masukkan password</string>
+    <string name="tersimpan_offline" translatable="false">Tersimpan offline</string>
+    <string name="tidak_ada_koneksi_internet">Tidak ada koneksi internet</string>
+    <string name="anda_ingin_keluar_aplikasi">Anda ingin keluar aplikasi?</string>
+    <string name="tekan_sekali_lagi_untuk_keluar_aplikasi">Tekan sekali lagi untuk keluar</string>
+    <string name="login">LOGIN</string>
+    <string name="login_success">Success!</string>
+    <string name="gagal_mengambil_gambar" translatable="false">Gagal mengambil gambar, silahkan coba lagi</string>
+    <string name="login_fail">Fail!</string>
+    <string name="hapus">Hapus data?</string>
+    <string name="hapus_semua" translatable="false">Hapus semua</string>
+    <string name="now_loading">Now loading...</string>
+    <string name="bayar">Bayar</string>
+    <string name="login_true">login_true</string>
+    <string name="validasi_login">Username dan password harus diisi</string>
+    <string name="logout">Logout</string>
+    <string name="mau_logout">Apakah Anda akan logout?</string>
+    <string name="apakah_anda_yakin_akan_menghapus">Apakah Anda yakin akan menghapus data ini?</string>
+    <string name="data_tidak_dapat_dikembalikan">Data tidak dapat dikembalikan</string>
+    <string name="tidak_ada_penjualan">Tidak ada penjualan</string>
+    <string name="tidak_ada_pembelian">Tidak ada pembelian</string>
+    <string name="ya">Ya</string>
+    <string name="tidak">Tidak</string>
+    <string name="simpan">Simpan</string>
+    <string name="edit">Edit</string>
+    <string name="ubah">Ubah</string>
+    <string name="batal">Batal</string>
+    <string name="tambah">Tambah</string>
+    <string name="total">Total</string>
+    <string name="selanjutnya">SELANJUTNYA</string>
+    <string name="session_expired">session_expired</string>
+    <string name="silakan_login_lagi">Silakan login kembali</string>
+    <string name="item_berhasil_ditambahkan"> berhasil ditambahkan</string>
+    <string name="success">success</string>
+    <string name="sukses">Sukses</string>
+    <string name="tutup">Tutup</string>
+    <string name="transaksi_berhasil">Transaksi berhasil</string>
+    <string name="nama_kategori">Nama kategori</string>
+    <string name="kode_kategori">Kode kategori</string>
+    <string name="nama_kategori_harus_diisi">Nama kategori harus diisi</string>
+    <string name="nama_unit">Nama unit</string>
+    <string name="nama_supplier">Nama supplier</string>
+    <string name="singkatan_unit">Singkatan</string>
+    <string name="dibayar">Jumlah pembayaran (Rp)</string>
+    <string name="nomor_referensi">Nomor referensi</string>
+    <string name="nama_unit_harus_diisi">Nama unit harus diisi</string>
+    <string name="total_pembelian">Total pembelian (Rp)</string>
+    <string name="nama_brand">Nama brand</string>
+    <string name="pilih_tanggal">Pilih tanggal</string>
+    <string name="deskripsi_brand">Deskripsi brand</string>
+    <string name="nama_brand_harus_diisi">Nama brand harus diisi</string>
+    <string name="insert_ok">Data telah ditambahkan</string>
+    <string name="update_ok">Data telah diupdate</string>
+    <string name="delete_ok">Data telah dihapus</string>
+    <string name="new_transactions_header">Transaksi Baru</string>
+    <string name="find_items_header">Cari Barang</string>
+    <string name="remark_pos">POS</string>
+    <string name="remark_pembelian">Pembelian</string>
+    <string name="remark_report">Report</string>
+    <string name="remark_items">Items</string>
+    <string name="remark_printer" translatable="false">Printer</string>
+    <string name="remark_wholesale">Wholesale</string>
+    <string name="remark_profile">Profil</string>
+    <string name="openDrawer">Buka drawer</string>
+    <string name="closeDrawer">Tutup drawer</string>
+    <string name="tambah_kategori">Tambah kategori</string>
+    <string name="tambah_brand">Tambah brand</string>
+    <string name="pengaturan_printer" translatable="false">Pengaturan Printer</string>
+    <string name="cetak_struk_lama" translatable="false">Cetak struk lama</string>
+    <string name="print_preview">Print preview</string>
+    <string name="tambah_unit">Tambah unit</string>
+    <string name="edit_unit">Edit unit</string>
+    <string name="edit_brand">Edit brand</string>
+    <string name="edit_kategori">Edit kategori</string>
+    <string name="remark_qty">Qty Pembelian</string>
+    <string name="remark_address_header">Tambah alamat</string>
+    <string name="remark_items_header">Tambah Item</string>
+    <string name="remark_items_name">Nama Item</string>
+    <string name="remark_items_unit">Unit/satuan</string>
+    <string name="remark_item_brand">Brand</string>
+    <string name="bluetooth_disconnect">Bluetooth disconnected!</string>
+    <string name="bluetooth_connect">Bluetooth connected</string>
+    <string name="remark_kategori">Kategori</string>
+    <string name="remark_items_price">Harga Items</string>
+    <string name="remark_items_price_buy">Harga Beli</string>
+    <string name="remark_items_price_sell">Harga Jual</string>
+    <string name="remark_barkode">Barkode</string>
+    <string name="remark_stok">Stok</string>
+    <string name="remark_stok_minimum">Stok minimum</string>
+    <string name="stok_kosong">Stok tidak tersedia</string>
+    <string name="remark_items_image">Foto Items</string>
+    <string name="remark_items_image_take">Ambil Foto</string>
+    <string name="remark_items_button">Save</string>
+    <string name="remark_items_finish_button">Selesai</string>
+    <string name="remark_items_finish_cancel">Batal</string>
+    <string name="remark_items_change_back">Uang Kembali</string>
+    <string name="remark_items_transactions">Transaksi berhasil</string>
+    <string name="remark_transactions_detail_header">Konfirmasi Penjualan</string>
+    <string name="remark_sub_pembelian">Konfirmasi Pembelian</string>
+    <string name="remark_transactions_detail_orders">Penjualan Anda</string>
+    <string name="pembelian_anda">Pembelian Anda</string>
+    <string name="remark_payment">Metode Pembayaran</string>
+    <string name="remark_payment_choose">Pilih Metode Pembayaran</string>
+    <string name="remark_payment_cash">Tunai</string>
+    <string name="remark_payment_soon">Bayar Nanti</string>
+    <string name="remark_payment_detail">Detail Pembayaran</string>
+    <string name="remark_payment_subtotal">Subtotal</string>
+    <string name="remark_payment_total">Total</string>
+    <string name="remark_payment_header">Pembayaran</string>
+    <string name="remark_payment_currency">Rp</string>
+    <string name="remark_payment_nomine">Jumlah dibayar</string>
+    <string name="remark_payment_entry">Masukkan Nominal</string>
+    <string name="remark_payment_change">Kembali</string>
+    <string name="remark_payment_change_amount">Kembalian</string>
+    <string name="remark_payment_success">Pembayaran Sukses</string>
+    <string name="data_tersimpan">Data tersimpan</string>
+    <string name="masih_ada_yang_kosong">Masih ada yang harus diisi</string>
+    <string name="remark_items_add">Tambah Items</string>
+    <string name="remark_history_remark">History</string>
+    <string name="remark_app_filter_riwayat_header">Filter Report</string>
+    <string name="remark_app_filter_riwayat_tanggal">Pilih Tanggal</string>
+    <string name="increment">+</string>
+    <string name="decrement">-</string>
+    <string name="display">1</string>
+    <string name="pembelian_berhasil">Pembelian berhasil</string>
+    <string name="add_purchase_order_true">add_purchase_order_true</string>
+    <string name="message">Scan QR Code</string>
+    <string name="turn_off_flashlight">Matikan Flash</string>
+    <string name="turn_on_flashlight">Nyalakan Flash</string>
+    <string name="remark_balance_header">Saldo Anda</string>
+    <string name="input_pin">Masukkan Pin Anda</string>
+    <string name="remark_shipping_address">Alamat Pengiriman</string>
+    <string name="remark_data_address_users">Nama Penerima</string>
+    <string name="remark_data_address">Alamat Penerima</string>
+    <string name="remark_data_address_phone">No HP</string>
+    <string name="remark_detail_report">Detail Riwayat Transaksi</string>
+    <string name="remark_button_back">Kembali</string>
+    <string name="remark_information">Informasi Transaksi</string>
+    <string name="remark_make_order">BUAT PESANAN</string>
+    <string name="no_internet">Tidak ada koneksi internet</string>
+    <string name="memuat_data">Memuat data...</string>
+    <string name="validasi_add_barang">Nama item, harga jual dan unit/satuan harus diisi</string>
+    <string name="stok_minimum_belum_diisi">Stok minimum belum diisi</string>
+    <string name="ambil_foto">Ambil foto</string>
+    <string name="kamera_atau_galeri">Dari kamera atau galeri?</string>
+    <string name="qty_penjualan">Jumlah</string>
+    <string name="label_qty_penjualan">Jumlah : </string>
+    <string name="kamera">Kamera</string>
+    <string name="galeri">Galeri</string>
+    <string name="penjualan_telah_tersimpan">Penjualan telah tersimpan</string>
+    <string name="konfirmasi_pembelian">Konfirmasi Pembelian</string>
+    <string name="report_transaction">Report Transaction</string>
+    <string name="report_transaction_detail">Report Transaction Detail</string>
+    <string name="report_pembelian">Report Pembelian</string>
+    <string name="report_pembelian_detail">Detail Report Pembelian</string>
+    <string name="report_analisa">Report Analisa</string>
+    <string name="report_revenue">Report Revenue</string>
+    <string name="report_stok">Report Stok</string>
+    <string name="report_stok_detail">Detail Report Stok</string>
+    <string name="label_harga_jual">Harga jual :</string>
+    <string name="label_tanggal">Tanggal</string>
+    <string name="label_total_keuntungan">Total keuntungan</string>
+    <string name="label_total_pembelian">Total pembelian</string>
+    <string name="label_total_penjualan">Total penjualan</string>
+    <string name="label_total_purchase_order">Total purchase order</string>
+    <string name="label_total_transaksi">Total transaksi</string>
+    <string name="label_nama_produk">Nama produk</string>
+    <string name="label_qty">Qty item : </string>
+    <string name="label_subtotal">Subtotal : </string>
+    <string name="label_no_invoice">No. invoice</string>
+    <string name="label_total_sale">Total sale</string>
+    <string name="label_payment_ref_no">No. payment ref</string>
+    <string name="label_presentase">Presentase</string>
+    <string name="report_transaction_date">transaction_date</string>
+    <string name="report_date">report_date</string>
+    <string name="ok">OK</string>
+    <string name="struk_berhasil_dihapus" translatable="false">Struk berhasil dihapus</string>
+    <string name="total_penjualan">Total Penjualan</string>
+    <string name="produk_terjual">Produk terjual</string>
+    <string name="produk_terlaku">Produk terlaku</string>
+    <string name="dari_tanggal">Dari tanggal</string>
+    <string name="sampai_tanggal">Sampai tanggal</string>
+    <string name="pasangkan">Pasangkan</string>
+    <string name="lepas">Lepas</string>
+    <string name="hasil_analisa">Hasil analisa</string>
+    <string name="label_total_price">Total price : </string>
+    <string name="label_total_sold">Total sold : </string>
+    <string name="label_total_stok">Total stok : </string>
+    <string name="label_qty_tersedia">Qty tersedia : </string>
+    <string name="label_harga">Harga : </string>
+    <string name="label_qty_terjual">Qty terjual : </string>
+    <string name="label_accumulated_stock">Stok akumulasi : </string>
+    <string name="label_total_current_stock">Total stok : </string>
+    <string name="label_tipe_transaksi">Tipe transaksi</string>
+    <string name="label_no_transaksi">No. transaksi</string>
+    <string name="label_status_transaksi">Status transaksi</string>
+    <string name="label_status_pembayaran">Status pembayaran</string>
+    <string name="label_tanggal_pembayaran">Tanggal pembayaran</string>
+    <string name="label_jumlah">Jumlah</string>
+    <string name="scan_bluetooth">Scan Bluetooth</string>
+    <string name="scan" translatable="false">Scan</string>
+    <string name="ulang_scan" translatable="false">Ulangi scan</string>
+    <string name="nama_bluetooth" translatable="false">Nama bluetooth</string>
+    <string name="sudah_tersambung" translatable="false">Sudah tersambung</string>
+    <string name="bluetooth_sedang_dihidupkan" translatable="false">Bluetooth sedang dihidupkan</string>
+    <string name="bluetooth_sedang_dimatikan" translatable="false">Bluetooth sedang dimatikan</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="keterangan">Keterangan</string>
+    <string name="cari_printer">Cari printer</string>
+    <string name="cari_nama_kategori" translatable="false">Cari nama kategori</string>
+    <string name="cari_nama_brand" translatable="false">Cari nama brand</string>
+    <string name="cari_nama_unit" translatable="false">Cari nama unit</string>
+    <string name="cari_nama_produk" translatable="false">Cari nama produk</string>
+    <string name="cetak">Cetak</string>
+    <string name="tidak_ada_data_sinkroni" translatable="false">Tidak ada data yang disinkron</string>
+    <string name="pilih_printer" translatable="false">Pilih printer</string>
+    <string name="cetak_struk_tombol" translatable="false">Cetak struk</string>
+    <string name="printer_bluetooth_belum_dipasangkan" translatable="false">Printer bluetooth belum dipasangkan</string>
+    <string name="memulai_scan">Memulai scan...</string>
+    <string name="jumlah_bluetooth">Jumlah bluetooth terdeteksi : </string>
+    <string name="hubungkan_printer">Hubungkan printer</string>
+    <string name="bluetooth_dihidupkan">Bluetooth dinyalakan</string>
+    <string name="bluetooth_diputuskan" translatable="false">Bluetooth diputuskan</string>
+    <string name="bluetooth_sudah_dihidupkan">Bluetooth sudah dinyalakan</string>
+    <string name="bluetooth_dimatikan">Bluetooth dimatikan</string>
+    <string name="nama_printer_tersimpan">Nama printer tersimpan : </string>
+    <string name="cetak_struk">Cetak struk?</string>
+    <string name="pastikan_printer_sudah_terhubung">Pastikan printer sudah terhubung</string>
+    <string name="belum_tersambung_dengan_printer_bluetooth">Belum tersambung dengan printer bluetooth</string>
+    <string name="izin_bluetooth_diperlukan_untuk_akses_printer" translatable="false">Izin bluetooth diperlukan untuk akses printer</string>
+    <string name="perangkat_tidak_mendukung_bluetooth" translatable="false">Perangkat tidak mendukung bluetooth</string>
+    <string name="berhasil_disimpan" translatable="false">Berhasil disimpan</string>
+    <string name="berhasil_diedit" translatable="false">Berhasil diedit</string>
+    <string name="berhasil_dihapus" translatable="false">Berhasil dihapus</string>
+    <string name="item" translatable="false">Item</string>
+    <string name="qty" translatable="false">Qty</string>
+    <string name="harga" translatable="false">Harga</string>
+    <string name="tunai" translatable="false">Tunai </string>
+    <string name="terima_kasih" translatable="false">TERIMA KASIH</string>
+    <string name="selamat_belanja_kembali" translatable="false">SELAMAT BELANJA KEMBALI</string>
+
+    <string name="connect" translatable="false">Search for and connect a Bluetooth printer</string>
+    <string name="txt_content" translatable="false">&quot;&quot;</string>
+    <string name="choose_paper_width" translatable="false">Paper width:</string>
+    <string name="width1" translatable="false">58mm</string>
+    <string name="width2" translatable="false">80mm</string>
+    <string name="printhex" translatable="false">HEX</string>
+    <string name="btnSend" translatable="false">Send Data</string>
+    <string name="btn_test" translatable="false">Print Test</string>
+    <string name="btn_prtbmp" translatable="false">Print Picture</string>
+    <string name="printpicture" translatable="false">Graphical Print</string>
+    <string name="chosecommand" translatable="false">Please select instruction</string>
+    <string name="btnClose" translatable="false">Close</string>
+    <string name="contentdescription" translatable="false"></string>
+    <string name="btn_prttable" translatable="false">Print Form</string>
+    <string name="Smallticketprinting" translatable="false">Small Ticket Printing</string>
+    <string name="btn_prtcode" translatable="false">Print 1D/2D Codebar</string>
+    <string name="btn_scqr" translatable="false">Generate QR Code Print</string>
+    <string name="btn_dyca" translatable="false">Turn on the camera</string>
+    <string name="input" translatable="false">Please enter a print!</string>
+    <string name="choose_printcoding" translatable="false"></string>
+    <string name="big5" translatable="false">BIG5</string>
+    <string name="thai" translatable="false">Thai</string>
+    <string name="kor" translatable="false">Korean</string>
+    <string name="gbk12" translatable="false">Simplified</string>
+    <!--  DeviceListActivity -->
+    <string name="scanning" translatable="false">Scanning Device&#8230;</string>
+    <string name="select_device" translatable="false">Select the connected device</string>
+    <string name="none_paired" translatable="false">No matching devices</string>
+    <string name="none_found" translatable="false">No device found</string>
+    <string name="title_paired_devices" translatable="false">Match equipment</string>
+    <string name="title_other_devices" translatable="false">Other useful equipment</string>
+    <string name="button_scan" translatable="false">Scanning device</string>
+    <!--  Message -->
+    <string name="msg_state" translatable="false">Input Error!</string>
+    <string name="empty1" translatable="false">Input is empty, in the text box to enter the content to be converted &#8230;</string>
+    <string name="empty" translatable="false">Input is empty</string>
+    <string name="not_connected" translatable="false">Please connect a Bluetooth printer</string>
+    <string name="bt_not_enabled_leaving" translatable="false">Bluetooth harus dinyalakan</string>
+    <string name="title_connecting" translatable="false">connecting…</string>
+    <string name="title_connected_to" translatable="false">connected: </string>
+    <string name="title_not_connected" translatable="false">Is not connected</string>
+    <string name="Connecting" translatable="false">It is connected to a Bluetooth printer</string>
+    <string name="msg_statev1" translatable="false">Without a picture</string>
+    <string name="strLang" translatable="false">en</string>
+    <string name="camer" translatable="false">No pictures</string>
+    <string name="msg_error" translatable="false">Input errors, please check!</string>
+
+
+    <!-- Toolbar titles when navigation menu item is selected -->
+    <string-array name="nav_item_activity_titles">
+        <item>Transaksi Baru</item>
+        <item>Pembelian</item>
+        <item>Produk/Item</item>
+        <item>Kategori</item>
+        <item>Brand</item>
+        <item>Satuan</item>
+        <item>Laporan</item>
+        <item>Printer</item>
+        <item>Wholesale</item>
+        <item>Profil</item>
+    </string-array>
+
+    <string-array name="dummy_supplier">
+        <item>PT. Indomaret, Tbk</item>
+        <item>PT. Alfamart, Tbk</item>
+        <item>Sinar Harapan</item>
+        <item>CV. Pacific</item>
+    </string-array>
+
+    <string-array name="daftar_report">
+        <item>Report transaksi</item>
+        <item>Report transaksi 2</item>
+        <item>Report transaksi 3</item>
+        <item>Report transaksi 4</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="title_activity_report_analisa_tab" translatable="false">ReportAnalisaTabActivity</string>
+    <string name="tab_text_1" translatable="false">Tab 1</string>
+    <string name="tab_text_2" translatable="false">Tab 2</string>
+
+</resources>
+

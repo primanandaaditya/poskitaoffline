@@ -1,0 +1,162 @@
+[
+    {
+        "idItems"           : 1,
+        "itemsName"         : "Gulaku 1KG",
+        "itemsPrice"        : "10000",
+        "itemsPriceSell"    : "15000",
+        "itemsImage"        : "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/medium/gulaku_gulaku-premium-gula--1-kg-_full02.jpg",
+        "itemsDescription"  : "Gulaku 1KG"
+    },
+    {
+        "idItems"           : 2,
+        "itemsName"         : "Bimoli 1L",
+        "itemsPrice"        : "10000",
+        "itemsPriceSell"    : "15000",
+        "itemsImage"        : "https://ecs7.tokopedia.net/img/cache/700/product-1/2017/1/22/2833458/2833458_3d1a6760-03cf-4227-b23c-0723df51040a_2048_2048.jpg",
+        "itemsDescription"  : "Bimoli 1L"
+    },
+    {
+        "idItems"           : 3,
+        "itemsName"         : "Beras Rojolele 10KG",
+        "itemsPrice"        : "10000",
+        "itemsPriceSell"    : "15000",
+        "itemsImage"        : "https://ecs7.tokopedia.net/img/cache/700/product-1/2016/5/16/9320291/9320291_ec3262ab-9a6e-4944-8362-40440c0440a9.jpg",
+        "itemsDescription"  : "Beras Rojolele 10KG"
+    },
+    {
+        "idItems"           : 4,
+        "itemsName"         : "Kecap Manis ABC 580ML",
+        "itemsPrice"        : "10000",
+        "itemsPriceSell"    : "15000",
+        "itemsImage"        : "https://www.lifull-produk.id/bundles/assets/img/product/1440560791abc_kecap_manis_pouch_580ml-_1.jpg",
+        "itemsDescription"  : "Kecap Manis ABC 580ML"
+    },
+    {
+        "idItems"           : 5,
+        "itemsName"         : "Sabun Cair Nuvo 450ML",
+        "itemsPrice"        : "10000",
+        "itemsPriceSell"    : "15000",
+        "itemsImage"        : "https://assets.klikindomaret.com/products/20063269/20063269_1.jpg",
+        "itemsDescription"  : "Sabun Cair Nuvo 450ML"
+    },
+    {
+        "idItems"           : 6,
+        "itemsName"         : "Sabun Cuci Rinso 475GR",
+        "itemsPrice"        : "10000",
+        "itemsPriceSell"    : "15000",
+        "itemsImage"        : "https://www.rinso.com/content/dam/unilever/dirt_is_good/indonesia/pack_shot/front/laundry/fabrics_cleaning/rinso_deterjen_bubuk_anti_noda_450gr/rinso_anti_noda_12x430g-front-1195144.png",
+        "itemsDescription"  : "Sabun Cuci Rinso 475GR"
+    },
+    {
+        "idItems"           : 7,
+        "itemsName"         : "Desaku Bubuk Balado 11GR",
+        "itemsPrice"        : "10000",
+        "itemsPriceSell"    : "15000",
+        "itemsImage"        : "https://ecs7.tokopedia.net/img/cache/700/product-1/2018/8/20/3607562/3607562_c91dbe15-117a-427d-8456-bae02e22a492_1620_1620.jpg",
+        "itemsDescription"  : "Desaku Bubuk Balado 11GR"
+    },
+    {
+        "idItems"           : 8,
+        "itemsName"         : "Masako Ayam 100GR",
+        "itemsPrice"        : "10000",
+        "itemsPriceSell"    : "15000",
+        "itemsImage"        : "https://assets.klikindomaret.com/products/10035898/10035898_1.jpg",
+        "itemsDescription"  : "Masako Ayam 100GR"
+    },
+    {
+        "idItems"           : 9,
+        "itemsName"         : "Kecap Manis Bango 575ML",
+        "itemsPrice"        : "10000",
+        "itemsPriceSell"    : "15000",
+        "itemsImage"        : "https://ecs7.tokopedia.net/img/cache/700/attachment/2018/9/25/153788075288328/153788075288328_f7121db6-dff9-43cc-a27b-0e36b75f526d.png",
+        "itemsDescription"  : "Kecap Manis Bango 575ML"
+    },
+    {
+        "idItems"           : 10,
+        "itemsName"         : "Sunlight Cuci Piring 800ML",
+        "itemsPrice"        : "10000",
+        "itemsPriceSell"    : "15000",
+        "itemsImage"        : "http://www.sunlight.co.id/Images/2598/2598-1335300-Sunlight_Lime_280x540.png",
+        "itemsDescription"  : "Sunlight Cuci Piring 800ML"
+    },
+    {
+        "idItems"           : 11,
+        "itemsName"         : "Mama Lemon 850ML",
+        "itemsPrice"        : "10000",
+        "itemsPriceSell"    : "15000",
+        "itemsImage"        : "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/mama-lemon_mama-lemon-ekstrak-lime-pouch--800-ml-_full01.jpg",
+        "itemsDescription"  : "Mama Lemon 850ML"
+    },
+    {
+        "idItems"           : 12,
+        "itemsName"         : "Indomie Goreng Rendang 1 Dus",
+        "itemsPrice"        : "10000",
+        "itemsPriceSell"    : "15000",
+        "itemsImage"        : "https://ecs7.tokopedia.net/img/cache/700/product-1/2017/6/7/685262/685262_a046789b-aa3d-4778-892d-df7348164679.jpg",
+        "itemsDescription"  : "Indomie Goreng Rendang 1 Dus"
+    },
+    {
+        "idItems"           : 13,
+        "itemsName"         : "Indomie Goreng Aceh 1 Dus",
+        "itemsPrice"        : "10000",
+        "itemsPriceSell"    : "15000",
+        "itemsImage"        : "https://cekharga.mysenaraiharga.org/details/1050/images/95/MTA-2882605/indomie_indomie-mie-goreng-aceh-mie-instan--1-dus--40-pcs-_full03.jpg",
+        "itemsDescription"  : "Indomie Goreng Aceh 1 Dus"
+    },
+    {
+        "idItems"           : 14,
+        "itemsName"         : "Indomie Rebus Soto 1 Dus",
+        "itemsPrice"        : "10000",
+        "itemsPriceSell"    : "15000",
+        "itemsImage"        : "https://ecs7.tokopedia.net/img/cache/700/product-1/2016/3/7/7823674/7823674_83f7d6d7-c1dd-4a59-9259-6a0ac9463405.jpg",
+        "itemsDescription"  : "Indomie Rebus Soto 1 Dus"
+    },
+    {
+        "idItems"           : 15,
+        "itemsName"         : "Telur Ayam Negeri",
+        "itemsPrice"        : "10000",
+        "itemsPriceSell"    : "15000",
+        "itemsImage"        : "http://kiosagro.com/wp-content/uploads/2017/07/58ae2dc1-8336-40eb-b54d-ff225d433bc6w-1.jpg",
+        "itemsDescription"  : "Telur Ayam Negeri 1 Kg"
+    },
+    {
+        "idItems"           : 16,
+        "itemsName"         : "Minyak Goreng Sunco 2L",
+        "itemsPrice"        : "10000",
+        "itemsPriceSell"    : "15000",
+        "itemsImage"        : "https://cf.shopee.co.id/file/b4a0ceb36fc60343f9fc28206837bdac",
+        "itemsDescription"  : "Minyak Goreng Sunco 2 liter"
+    },
+    {
+        "idItems"           : 17,
+        "itemsName"         : "Luwak White Coffee",
+        "itemsPrice"        : "10000",
+        "itemsPriceSell"    : "15000",
+        "itemsImage"        : "https://i2.wp.com/tokoadesuryati.com/wp-content/uploads/2018/07/kopi-luwak.png?fit=800%2C800",
+        "itemsDescription"  : "Luwak White Coffee isi 10"
+    },
+    {
+        "idItems"           : 18,
+        "itemsName"         : "Kopi ABC Mocca",
+        "itemsPrice"        : "10000",
+        "itemsPriceSell"    : "15000",
+        "itemsImage"        : "https://cf.shopee.co.id/file/9b238eaa57a2c5d0630d0fd33c99fb57",
+        "itemsDescription"  : "Kopi ABC Mocca isi 10"
+    },
+    {
+        "idItems"           : 19,
+        "itemsName"         : "Frisian Flag Cokelat",
+        "itemsPrice"        : "10000",
+        "itemsPriceSell"    : "15000",
+        "itemsImage"        : "https://cf.shopee.co.id/file/95baaa9475de074cbda83acc105556d0",
+        "itemsDescription"  : "Frisian Flag Cokelat 375 gram"
+    },
+    {
+        "idItems"           : 20,
+        "itemsName"         : "Teh Sariwangi",
+        "itemsPrice"        : "10000",
+        "itemsPriceSell"    : "15000",
+        "itemsImage"        : "https://www.tehsariwangi.com/uploads/product/1/2a34720f9a14aad4e15bc9efb9daa0b9.png",
+        "itemsDescription"  : "Teh Sariwangi kotak isi 12"
+    }
+]

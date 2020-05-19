@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/simpleTableLayout"
+        android:background="@color/colorRed"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50"
+        android:stretchColumns="1"> <!-- stretch the second column of the layout-->
+
+        <!-- first row of the table layout-->
+        <TableRow
+            android:gravity="center_horizontal|center_vertical"
+            android:minHeight="@dimen/dimen_50"
+            android:id="@+id/firstRow"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dimen_50">
+
+            <!-- first element of the row-->
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/dimen_30"
+                android:layout_height="@dimen/dimen_30"
+                android:src="@drawable/ic_baseline_arrow_back_24px"
+                android:layout_marginStart="@dimen/dimen_10"
+                android:tint="@color/colorWhite"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_centerVertical="true"
+                tools:ignore="contentDescription"/>
+
+            <TextView
+                android:id="@+id/tv_nav_header"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_16"
+                android:layout_marginStart="@dimen/dimen_10"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:text="@string/report_analisa"/>
+
+
+            <ImageView
+                android:id="@+id/iv_filter"
+                android:layout_width="@dimen/dimen_20"
+                android:layout_height="@dimen/dimen_20"
+                android:layout_marginEnd="@dimen/dimen_10"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_search"
+                android:tint="@color/colorWhite"
+                tools:ignore="contentDescription" />
+
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:visibility="gone"
+        android:background="@color/colorRed"
+        android:stretchColumns="*"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50"> <!-- stretch the second column of the layout-->
+
+        <!-- first row of the table layout-->
+        <TableRow
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/dimen_50"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dimen_50">
+
+            <!-- first element of the row-->
+
+            <TextView
+
+                android:paddingLeft="@dimen/dimen_5"
+                android:id="@+id/tv_total_qty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_10"
+                android:layout_marginStart="@dimen/dimen_10"
+                android:gravity="left|center_vertical"
+                android:text="@string/pilih_tanggal"
+                android:layout_centerInParent="true" />
+
+
+            <TextView
+                android:gravity="right|center_vertical"
+                android:paddingRight="@dimen/dimen_5"
+                android:text="@string/pilih_tanggal"
+                android:id="@+id/tv_grand_total"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_10"
+                android:layout_marginStart="@dimen/dimen_10"
+                android:layout_centerInParent="true" />
+
+        </TableRow>
+    </TableLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/dimen_10"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+            <android.support.v7.widget.CardView
+                android:layout_margin="@dimen/dimen_20"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_view"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                card_view:cardCornerRadius="4dp">
+
+                <LinearLayout
+
+                    android:padding="@dimen/dimen_5"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_15"
+                        />
+                    <TextView
+                        android:text="@string/label_tanggal"
+                        android:id="@+id/tv_label_tanggal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+                    <TextView
+                        android:textColor="@color/colorRed"
+                        android:text="@string/label_tanggal"
+                        android:id="@+id/tv_tanggal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_15"
+                        />
+
+                    <TextView
+                        android:text="@string/produk_terjual"
+                        android:id="@+id/tv_label_produk_terjual"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+                    <TextView
+                        android:textColor="@color/colorRed"
+                        android:text="@string/produk_terjual"
+                        android:id="@+id/tv_produk_terjual"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_15"
+                        />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <TextView
+                        android:text="@string/label_total_keuntungan"
+                        android:id="@+id/tv_label_total_keuntungan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+                    <TextView
+                        android:textColor="@color/colorRed"
+                        android:text="@string/label_total_keuntungan"
+                        android:id="@+id/tv_total_keuntungan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+
+
+
+
+
+
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_15"
+                        />
+
+                    <TextView
+                        android:text="@string/label_total_pembelian"
+                        android:id="@+id/tv_label_total_pembelian"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+                    <TextView
+                        android:textColor="@color/colorRed"
+                        android:text="@string/label_total_pembelian"
+                        android:id="@+id/tv_total_pembelian"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+
+
+
+
+
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_15"
+                        />
+
+                    <TextView
+                        android:text="@string/label_total_penjualan"
+                        android:id="@+id/tv_label_total_penjualan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+                    <TextView
+                        android:textColor="@color/colorRed"
+                        android:text="@string/label_total_penjualan"
+                        android:id="@+id/tv_total_penjualan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+
+
+
+
+
+
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_15"
+                        />
+
+                    <TextView
+                        android:text="@string/label_total_purchase_order"
+                        android:id="@+id/tv_label_total_purchase_order"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+                    <TextView
+                        android:textColor="@color/colorRed"
+                        android:text="@string/label_total_purchase_order"
+                        android:id="@+id/tv_total_purchase_order"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+
+
+
+
+
+
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_15"
+                        />
+
+                    <TextView
+                        android:text="@string/label_total_transaksi"
+                        android:id="@+id/tv_label_total_transaksi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+                    <TextView
+                        android:textColor="@color/colorRed"
+                        android:text="@string/label_total_transaksi"
+                        android:id="@+id/tv_total_transaksi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+
+
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_15"
+                        />
+
+
+
+
+                    <Button
+
+                        android:id="@+id/btn_produk_terlaku"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/produk_terlaku"
+                        android:textColor="@color/colorWhite"
+                        style="@style/dialog_red_button"
+                        android:layout_centerVertical="true"/>
+
+
+
+                    <TextView
+                        android:visibility="gone"
+                        android:text="@string/produk_terlaku"
+                        android:id="@+id/tv_label_produk_terlaku"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+                    <TextView
+                        android:visibility="gone"
+                        android:textColor="@color/colorRed"
+                        android:text="@string/produk_terlaku"
+                        android:id="@+id/tv_produk_terlaku"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+
+
+
+
+
+                </LinearLayout>
+
+
+
+            </android.support.v7.widget.CardView>
+
+
+
+
+        </LinearLayout>
+
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+
+
+
+</LinearLayout>

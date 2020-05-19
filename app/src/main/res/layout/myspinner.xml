@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="?android:attr/spinnerItemStyle"
+    android:singleLine="true"
+    android:textSize="12sp"
+    android:id="@+id/tvspinner"
+    android:gravity="center_vertical"
+    android:textColor="@color/colorRed"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/dimen_40"
+    android:ellipsize="marquee" />
