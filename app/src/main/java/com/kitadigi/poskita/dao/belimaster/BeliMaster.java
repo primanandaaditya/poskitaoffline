@@ -11,6 +11,7 @@ public class BeliMaster {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     private Long id;
+    String tanggal;
     String nomor;
     String supplier_id;
     String ref_no;
@@ -28,6 +29,14 @@ public class BeliMaster {
 
     public void setId(@NonNull Long id) {
         this.id = id;
+    }
+
+    public String getTanggal() {
+        return tanggal;
+    }
+
+    public void setTanggal(String tanggal) {
+        this.tanggal = tanggal;
     }
 
     public String getNomor() {

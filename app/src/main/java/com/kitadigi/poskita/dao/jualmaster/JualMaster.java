@@ -11,6 +11,7 @@ public class JualMaster {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     private Long id;
+    String tanggal;
     String nomor;
     String contact_id;
     Integer total_pay;
@@ -26,6 +27,14 @@ public class JualMaster {
 
     public void setId(@NonNull Long id) {
         this.id = id;
+    }
+
+    public String getTanggal() {
+        return tanggal;
+    }
+
+    public void setTanggal(String tanggal) {
+        this.tanggal = tanggal;
     }
 
     public String getNomor() {

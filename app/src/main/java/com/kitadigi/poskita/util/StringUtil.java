@@ -59,6 +59,15 @@ public class StringUtil {
         return sb.toString();
     }
 
+    public static String tanggalSekarang(){
+
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String hasil = formatter.format(date);
+
+        return hasil;
+    }
+
     public static String tanggalIndonesia(String tanggal){
 
          SimpleDateFormat outSDF = new SimpleDateFormat("dd-MM-yyyy");

@@ -161,6 +161,9 @@ public class AddPembelianController implements IAddPembelianRequest {
 
     void simpanOffline(String supplier_id, String ref_no, Integer total_pay, Integer total_price, boolean sudahSync){
 
+        //buat tanggal sekarang
+        String tanggal = StringUtil.tanggalSekarang();
+
         //buat penomoran otomatis untuk tabel Master Detail penjualan di sqlite
         //tabel yang dilibatkan : JualMaster dan JualDetail
         String nomor = StringUtil.timeMilis();
@@ -185,6 +188,7 @@ public class AddPembelianController implements IAddPembelianRequest {
 
         //insert row untuk tabel BeliMaster
         beliMaster = new BeliMaster();
+        beliMaster.setTanggal(tanggal);
         beliMaster.setSupplier_id(supplier_id);
         beliMaster.setNomor(nomor);
         beliMaster.setRef_no(ref_no);

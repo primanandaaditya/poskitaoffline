@@ -190,6 +190,7 @@ public class SinkronInsertBeliController implements ISinkronAddBeliRequest {
                 try {
 
                     //nama json
+                    jsonObject.put("tanggal", beliMaster.getTanggal());
                     jsonObject.put("nomor_trx", beliMaster.getNomor());
                     jsonObject.put("contact_id",beliMaster.getContact_id());
                     jsonObject.put("supplier_id",beliMaster.getSupplier_id());

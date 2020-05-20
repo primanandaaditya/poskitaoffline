@@ -225,6 +225,8 @@ public class AddTransactionController implements IAddTransactionRequest {
     //melalui tabel JualMaster dan JualDetail
     private void simpanPenjualanOffline(String contact_id, int total_pay, int total_price,boolean sudahSync){
 
+        //buat string untuk tanggal sekarang
+        String tanggal = StringUtil.tanggalSekarang();
 
         //buat penomoran otomatis untuk tabel Master Detail penjualan di sqlite
         //tabel yang dilibatkan : JualMaster dan JualDetail
@@ -248,6 +250,7 @@ public class AddTransactionController implements IAddTransactionRequest {
 
         //insert row untuk tabel JualMaster
         jualMaster = new JualMaster();
+        jualMaster.setTanggal(tanggal);
         jualMaster.setContact_id(contact_id);
         jualMaster.setNomor(nomor);
         jualMaster.setTotal_pay(total_pay);
