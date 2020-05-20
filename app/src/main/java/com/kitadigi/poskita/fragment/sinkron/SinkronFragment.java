@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.activities.massal.kategori.IMKategoriAdapter;
@@ -65,9 +66,12 @@ import com.kitadigi.poskita.sinkron.unit.insert.ISinkronAddUnitResult;
 import com.kitadigi.poskita.sinkron.unit.insert.SinkronInsertUnitController;
 import com.kitadigi.poskita.sinkron.unit.update.ISinkronUpdateUnitResult;
 import com.kitadigi.poskita.sinkron.unit.update.SinkronUpdateUnitController;
+import com.kitadigi.poskita.util.SessionManager;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -83,11 +87,14 @@ public class SinkronFragment extends BaseFragment implements
 
 {
 
+    //init session, untuk menampilkan tanggal last sync
+    SessionManager sessionManager;
 
     //init widget
+    TextView tvLastSync;
     Button btnSinkron;
-    ProgressBar pb;
-    ListView lv;
+    SweetAlertDialog sweetAlertDialog;
+//    ListView lv;
 
 
     //init controller kategori
@@ -123,8 +130,8 @@ public class SinkronFragment extends BaseFragment implements
     //init controller untuk stok atau untuk layar POS/jualfragment.java
     StokController stokController;
 
-    List<Datum> datumList;
-    Datum datum;
+//    List<Datum> datumList;
+//    Datum datum;
 
     public SinkronFragment() {
         // Required empty public constructor
@@ -135,7 +142,12 @@ public class SinkronFragment extends BaseFragment implements
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        datumList = new ArrayList<>();
+        //init session, untuk menampilkan tanggal di tvLastSync
+        sessionManager=new SessionManager(getActivity());
+
+//        datumList = new ArrayList<>();
+
+
 
         //init controller
         sinkronInsertKategoriController =new SinkronInsertKategoriController(getActivity(),this);
@@ -149,7 +161,6 @@ public class SinkronFragment extends BaseFragment implements
         sinkronInsertUnitController     = new SinkronInsertUnitController(getActivity(),this);
         sinkronUpdateUnitController     = new SinkronUpdateUnitController(getActivity(),this);
         sinkronDeleteUnitController     = new SinkronDeleteUnitController(getActivity(),this);
-
 
         sinkronInsertProdukController   = new SinkronInsertProdukController(getActivity(),this);
         sinkronUpdateProdukController   = new SinkronUpdateProdukController(getActivity(), this);
@@ -165,29 +176,32 @@ public class SinkronFragment extends BaseFragment implements
 
         stokController                  = new StokController(this, getActivity());
 
-        pb=(ProgressBar)getActivity().findViewById(R.id.pb);
-        pb.setMax(10);
-        pb.setProgress(0);
 
 
 
-        lv=(ListView)getActivity().findViewById(R.id.lv);
+//        lv=(ListView)getActivity().findViewById(R.id.lv);
+//
+//
+//
+//        datum=new Datum();
+//        datumList.add(datum);
+//
+//        datum=new Datum();
+//        datumList.add(datum);
+//
+//        datum=new Datum();
+//        datumList.add(datum);
+//
+//        final IMKategoriAdapter imKategoriAdapter = new IMKategoriAdapter(getActivity(), datumList);
+//        lv.setAdapter(imKategoriAdapter);
 
-
-
-        datum=new Datum();
-        datumList.add(datum);
-
-        datum=new Datum();
-        datumList.add(datum);
-
-        datum=new Datum();
-        datumList.add(datum);
-
-        final IMKategoriAdapter imKategoriAdapter = new IMKategoriAdapter(getActivity(), datumList);
-        lv.setAdapter(imKategoriAdapter);
+        //tampilkan tanggal terakhir sync
+        tvLastSync=(TextView)getActivity().findViewById(R.id.tvLastSync);
+        this.applyFontRegularToTextView(tvLastSync);
+        tvLastSync.setText(getActivity().getResources().getString(R.string.sinkron_data_terakhir) + sessionManager.getLastSync());
 
         btnSinkron=(Button)getActivity().findViewById(R.id.btnSinkron);
+        this.applyFontBoldToButton(btnSinkron);
         btnSinkron.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -212,6 +226,13 @@ public class SinkronFragment extends BaseFragment implements
 
     void syncInsertKategori(){
 
+        //tampikan sweet dialog
+        //init sweet dialog
+        sweetAlertDialog = new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE);
+        sweetAlertDialog.setTitleText(getActivity().getResources().getString(R.string.now_loading));
+        sweetAlertDialog.setCancelable(false);
+
+        sweetAlertDialog.show();
 
         //tembak API
         sinkronInsertKategoriController.insert_kategori();
@@ -222,7 +243,6 @@ public class SinkronFragment extends BaseFragment implements
 
         //lanjutkan ke sinkron update
         sinkronUpdateKategoriController.update_kategori();
-        pb.setProgress(2);
 
     }
 
@@ -230,32 +250,30 @@ public class SinkronFragment extends BaseFragment implements
     public void onSinkronAddKategoriError(String error) {
 //        this.showToast(error);
         sinkronUpdateKategoriController.update_kategori();
-        pb.setProgress(2);
     }
 
     @Override
     public void onSinkronUpdateKategoriSuccess(SinkronResponse sinkronResponse) {
        //lanjutkan delete
         sinkronDeleteKategoriController.delete_kategori();
-        pb.setProgress(3);
     }
 
     @Override
     public void onSinkronUpdateKategoriError(String error) {
         //lanjutkan delete
         sinkronDeleteKategoriController.delete_kategori();
-        pb.setProgress(3);
+
     }
 
     @Override
     public void onSinkronDeleteKategoriSuccess(SinkronResponse sinkronResponse) {
         sinkronInsertBrandController.insert_brand();
-        pb.setProgress(4);
+
     }
 
     @Override
     public void onSinkronDeleteKategoriError(String error) {
-        pb.setProgress(4);
+
         sinkronInsertBrandController.insert_brand();
     }
 
@@ -442,11 +460,21 @@ public class SinkronFragment extends BaseFragment implements
 
     @Override
     public void onStokSuccess(StokModel stokModel, List<Stok> stokOffline) {
-        this.showToast(stokModel.getMessage());
+        //this.showToast(stokModel.getMessage());
+        sweetAlertDialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+        sweetAlertDialog.setTitleText(getActivity().getResources().getString(R.string.sinkron_berhasil));
+        //sweetAlertDialog.dismissWithAnimation();
+
+        //simpan tanggal sekarang di session
+        sessionManager.createLasySync();
+        tvLastSync.setText(getActivity().getResources().getString(R.string.sinkron_data_terakhir) + sessionManager.getLastSync());
+
     }
 
     @Override
     public void onStokError(String error, List<Stok> stoksOffline) {
-        this.showToast(error);
+        //this.showToast(error);
+        sweetAlertDialog.changeAlertType(SweetAlertDialog.ERROR_TYPE);
+        sweetAlertDialog.setTitleText(error);
     }
 }

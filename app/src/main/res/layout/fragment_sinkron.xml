@@ -14,16 +14,27 @@
        android:layout_height="match_parent">
 
 
+       <TextView
+           android:layout_marginBottom="@dimen/dimen_20"
+           android:textAlignment="center"
+           android:id="@+id/tvLastSync"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+       </TextView>
+
 
        <Button
+           style="@style/dialog_red_button"
            android:id="@+id/btnSinkron"
-           android:text="coba"
+           android:text="@string/remark_sinkron"
            android:layout_width="match_parent"
            android:layout_height="wrap_content">
 
        </Button>
 
        <ProgressBar
+           android:visibility="gone"
            android:id="@+id/pb"
            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
            android:layout_width="match_parent"
@@ -32,12 +43,6 @@
        </ProgressBar>
 
 
-       <ListView
-           android:id="@+id/lv"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent">
-
-       </ListView>
 
    </LinearLayout>
 

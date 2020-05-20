@@ -100,6 +100,7 @@ public class BrandController implements IBrandRequest {
                             brand.setDescription(brandData.getDescription());
                             brand.setId(Long.parseLong(brandData.getId()));
                             brand.setName(brandData.getName());
+                            brand.setKode_id(brandData.getMobile_id());
                             brand.setSync_delete(Constants.STATUS_SUDAH_SYNC);
                             brand.setSync_insert(Constants.STATUS_SUDAH_SYNC);
                             brand.setSync_update(Constants.STATUS_SUDAH_SYNC);

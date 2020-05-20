@@ -35,6 +35,11 @@
             android:icon="@drawable/ic_printer"
             android:title="@string/remark_printer" />
         <item
+            android:id="@+id/nav_sinkron"
+            android:icon="@drawable/ic_wholesale"
+            android:title="@string/remark_sinkron" />
+        <item
+            android:visible="false"
             android:id="@+id/nav_wholesale"
             android:icon="@drawable/ic_wholesale"
             android:title="@string/remark_wholesale" />

@@ -7,6 +7,15 @@ public class UnitData {
     private String name;
     private String short_name;
     private String additional;
+    private String mobile_id;
+
+    public String getMobile_id() {
+        return mobile_id;
+    }
+
+    public void setMobile_id(String mobile_id) {
+        this.mobile_id = mobile_id;
+    }
 
     public String getId() {
         return id;

@@ -92,18 +92,18 @@ public class InsertSync {
                     if (kategori.getSync_insert()== Constants.STATUS_BELUM_SYNC){
 
                         //mulai nembak API
-                        iAddKategori.addKategori(enkriptedUserId,kategori.getName_category(),kategori.getCode_category())
-                                .enqueue(new Callback<BaseResponse>() {
-                                    @Override
-                                    public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                                        Log.d("sync ktgr OK", call.request().url().toString());
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<BaseResponse> call, Throwable t) {
-                                        Log.d("sync ktgr gagal", call.request().url().toString());
-                                    }
-                                });
+//                        iAddKategori.addKategori(enkriptedUserId,kategori.getName_category(),kategori.getCode_category())
+//                                .enqueue(new Callback<BaseResponse>() {
+//                                    @Override
+//                                    public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+//                                        Log.d("sync ktgr OK", call.request().url().toString());
+//                                    }
+//
+//                                    @Override
+//                                    public void onFailure(Call<BaseResponse> call, Throwable t) {
+//                                        Log.d("sync ktgr gagal", call.request().url().toString());
+//                                    }
+//                                });
                     }
                 }
                 return "";

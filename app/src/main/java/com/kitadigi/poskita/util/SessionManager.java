@@ -1,5 +1,7 @@
 package com.kitadigi.poskita.util;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -57,10 +59,9 @@ public class SessionManager {
 
     //nama jual model
     public static final String KEY_JUAL_MODEL = "JualModel";
-    public static final String KEY_JUAL_MODEL_ID = "id";
-    public static final String KEY_JUAL_MODEL_NAMA_PRODUK = "name_product";
-    public static final String KEY_JUAL_MODEL_SELL_PRICE = "sell_price";
-    public static final String KEY_JUAL_MODEL_QTY_AVAILABLE = "qty_available";
+
+    //nama untuk last sync
+    public static final String KEY_LAST_SYNC = "last_sync";
 
     //nama beli model
     public static final String KEY_BELI_MODEL = "BeliModel";
@@ -91,6 +92,14 @@ public class SessionManager {
         editor.commit();
     }
 
+    public void createLasySync(){
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+        editor.putString(KEY_LAST_SYNC,formatter.format(date));
+        editor.commit();
+    }
+
     public void createIdUsers(String id_users){
         editor.putString(KEY_ID_USERS, id_users);
         editor.commit();
@@ -114,6 +123,11 @@ public class SessionManager {
 
         // return user
         return user;
+    }
+
+    public String getLastSync(){
+        String hasil = pref.getString(KEY_LAST_SYNC, "");
+        return hasil;
     }
 
     public String getIdUsers(){

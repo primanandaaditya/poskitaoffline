@@ -450,6 +450,10 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                         navItemIndex = 7;
                         CURRENT_TAG = TAG_POS;
                         break;
+                    case R.id.nav_sinkron:
+                        navItemIndex = 8;
+                        CURRENT_TAG = TAG_SINKRON;
+                        break;
                     case R.id.nav_wholesale:
                         navItemIndex = 8;
                         CURRENT_TAG = TAG_SINKRON;

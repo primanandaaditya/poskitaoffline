@@ -98,7 +98,7 @@ public class BrandFragment extends BaseFragment implements IBrandResult {
         final MainActivity mainActivity = (MainActivity) getActivity();
         context                         = mainActivity;
 
-        brandController=new BrandController(getActivity(),this,true);
+        brandController=new BrandController(getActivity(),this, true);
 
         //init database
         db                              = new Database(context);

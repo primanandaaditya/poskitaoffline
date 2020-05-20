@@ -109,6 +109,7 @@ public class KategoriController implements IKategoriRequest {
                             kategori=new Kategori();
                             kategori.setName_category(datum.getName());
                             kategori.setCode_category(datum.getCode_category());
+                            kategori.setKode_id(datum.getMobile_id());
                             kategori.setId(Long.parseLong(datum.getId()));
                             kategori.setSync_delete(Constants.STATUS_SUDAH_SYNC);
                             kategori.setSync_update(Constants.STATUS_SUDAH_SYNC);

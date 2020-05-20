@@ -96,6 +96,7 @@ public class UnitController implements IUnitRequest {
                             unit.setSingkatan(unitData.getShort_name());
                             unit.setId(Long.parseLong(unitData.getId()));
                             unit.setBusiness_id(unitData.getBusiness_id());
+                            unit.setKode_id(unitData.getMobile_id());
                             unit.setSync_delete(Constants.STATUS_SUDAH_SYNC);
                             unit.setSync_update(Constants.STATUS_SUDAH_SYNC);
                             unit.setSync_insert(Constants.STATUS_SUDAH_SYNC);

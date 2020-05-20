@@ -6,6 +6,8 @@ public class Datum {
     String id,category_id,sub_category_id,units_id,brands_id,types,code_product,name_product,brands_name,name_category;
     String name_sub_category,units_name,image,purchase_price,sell_price,qty_stock,qty_minimum,additional;
 
+    String mobile_id;
+
     public Datum(){
 
     }
@@ -29,6 +31,14 @@ public class Datum {
         this.qty_stock = qty_stock;
         this.qty_minimum = qty_minimum;
         this.additional = additional;
+    }
+
+    public String getMobile_id() {
+        return mobile_id;
+    }
+
+    public void setMobile_id(String mobile_id) {
+        this.mobile_id = mobile_id;
     }
 
     public String getId() {

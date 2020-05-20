@@ -122,6 +122,7 @@ public class BarangController implements IBarangRequest {
                             item.setBrand_name(datum.getBrands_name());
                             item.setSell_price(Integer.parseInt(datum.getSell_price()));
                             item.setAdditional(datum.getAdditional());
+                            item.setKode_id(datum.getMobile_id());
                             item.setSync_delete(Constants.STATUS_SUDAH_SYNC);
                             item.setSync_insert(Constants.STATUS_SUDAH_SYNC);
                             item.setSync_update(Constants.STATUS_SUDAH_SYNC);
