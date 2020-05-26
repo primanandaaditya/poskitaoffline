@@ -245,6 +245,7 @@
     <string name="selamat_belanja_kembali" translatable="false">SELAMAT BELANJA KEMBALI</string>
     <string name="sinkron_berhasil" translatable="false">Sinkron berhasil</string>
     <string name="sinkron_data_terakhir" translatable="false">Sinkron data terakhir : </string>
+    <string name="duplikasi_kategori" translatable="false">Nama kategori ini sudah ada</string>
 
     <string name="connect" translatable="false">Search for and connect a Bluetooth printer</string>
     <string name="txt_content" translatable="false">&quot;&quot;</string>

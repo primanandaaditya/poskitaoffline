@@ -50,8 +50,10 @@ public class AddKategoriController implements IAddKategoriRequest {
 
         if (offlineMode){
 
-            roomHelper.insertKategoriBuilder(false,nama_kategori,kode_kategori);
-            iAddKategoriResult.onError("");
+
+//            roomHelper.insertKategoriBuilder(false,nama_kategori,kode_kategori);
+//            iAddKategoriResult.onError("");
+            simpanOffline(false,nama_kategori,kode_kategori);
         }else{
 
             //cek dulu apakah ada internet
@@ -83,9 +85,7 @@ public class AddKategoriController implements IAddKategoriRequest {
 
                                 //jika gagal nembak API
                                 //simpan di sqlite
-                                roomHelper.insertKategoriBuilder(false,nama_kategori,kode_kategori);
-
-                                iAddKategoriResult.onError(t.getMessage());
+                                simpanOffline(false,nama_kategori,kode_kategori);
                                 sweetAlertDialog.dismissWithAnimation();
 
 
@@ -98,14 +98,25 @@ public class AddKategoriController implements IAddKategoriRequest {
             }else{
                 //jika tidak ada internet
                 //simpan di sqlite
-
-                roomHelper.insertKategoriBuilder(false,nama_kategori,kode_kategori);
-                iAddKategoriResult.onError("");
+                simpanOffline(false,nama_kategori, kode_kategori);
             }
-
         }
+    }
 
+    @Override
+    public void simpanOffline(boolean sudahSync,String name_category, String code_category) {
+        //cek duplikasi
+        boolean adaRow = roomHelper.cekNamaKategori(name_category);
 
+        //jika tidak ada duplikasi
+        if (adaRow==false){
+
+            roomHelper.insertKategoriBuilder(sudahSync,name_category,code_category);
+            iAddKategoriResult.onError(context.getResources().getString(R.string.tersimpan_offline));
+        }else{
+            //jika ada duplikasi
+            iAddKategoriResult.onError(context.getResources().getString(R.string.duplikasi_kategori));
+        }
     }
 
 

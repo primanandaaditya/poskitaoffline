@@ -106,8 +106,24 @@ public class KategoriHelper {
         kategoriDAO.update(kategori);
     }
 
-    //fungsi ini untuk looping kategori sqlite yg belum disync
-    //lalu disimpan ke server
 
+    public boolean cekNamaKategori(String name_category){
+
+        boolean hasil = false;
+
+        //cari nama kategori yang sama
+        List<Kategori> kategoris = kategoriDAO.cekNamaKategori(name_category);
+
+        //jika jumlah list =0 (belum ada), return false
+        int jumlah = kategoris.size();
+
+        if (jumlah==0){
+            hasil=false;
+        }else{
+            hasil=true;
+        }
+
+        return hasil;
+    }
 
 }

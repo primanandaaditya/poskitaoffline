@@ -65,6 +65,11 @@ public class KategoriInsertDAO implements IAddKategoriRequest {
         }
     }
 
+    @Override
+    public void simpanOffline(boolean sudahSync, String name_category, String code_category) {
+
+    }
+
     //fungsi ini untuk inisialisasi database sqlite
     public void initRoom(){
         database = Room.databaseBuilder(context, Db.class, "mydb")

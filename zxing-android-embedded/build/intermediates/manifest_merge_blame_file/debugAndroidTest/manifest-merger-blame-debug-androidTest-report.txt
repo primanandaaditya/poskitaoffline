@@ -1,0 +1,89 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.google.zxing.client.android.test" >
+4
+5    <uses-sdk
+5-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:5:5-74
+6        android:minSdkVersion="14"
+6-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:5:15-41
+7        android:targetSdkVersion="14" />
+7-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:5:42-71
+8
+9    <instrumentation
+9-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:11:5-15:86
+10        android:name="android.test.InstrumentationTestRunner"
+10-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:11:22-75
+11        android:functionalTest="false"
+11-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:14:22-52
+12        android:handleProfiling="false"
+12-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:13:22-53
+13        android:label="Tests for com.google.zxing.client.android.test"
+13-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:15:22-84
+14        android:targetPackage="com.google.zxing.client.android.test" />
+14-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:12:22-82
+15
+16    <uses-permission android:name="android.permission.CAMERA" /> <!-- Don't require camera, as this requires a rear camera. This allows it to work on the Nexus 7 -->
+16-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:23:5-65
+16-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:23:22-62
+17    <uses-feature
+17-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:26:5-28:36
+18        android:name="android.hardware.camera"
+18-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:27:9-47
+19        android:required="false" />
+19-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:28:9-33
+20    <uses-feature
+20-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:29:5-31:36
+21        android:name="android.hardware.camera.front"
+21-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:30:9-53
+22        android:required="false" /> <!-- TODO replace above two with next line after Android 4.2 -->
+22-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:31:9-33
+23    <!-- <uses-feature android:name="android.hardware.camera.any"/> -->
+24    <uses-feature
+24-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:34:5-36:36
+25        android:name="android.hardware.camera.autofocus"
+25-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:35:9-57
+26        android:required="false" />
+26-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:36:9-33
+27    <uses-feature
+27-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:37:5-39:36
+28        android:name="android.hardware.camera.flash"
+28-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:38:9-53
+29        android:required="false" />
+29-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:39:9-33
+30    <uses-feature
+30-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:40:5-42:36
+31        android:name="android.hardware.screen.landscape"
+31-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:41:9-57
+32        android:required="false" />
+32-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:42:9-33
+33    <uses-feature
+33-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:43:5-45:36
+34        android:name="android.hardware.wifi"
+34-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:44:9-45
+35        android:required="false" />
+35-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:45:9-33
+36
+37    <application android:debuggable="true" >
+37-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:7:5-9:19
+37-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:7:18-43
+38        <uses-library android:name="android.test.runner" />
+38-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:8:9-60
+38-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:8:23-57
+39
+40        <activity
+40-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:48:9-54:63
+41            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+41-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:49:13-74
+42            android:clearTaskOnLaunch="true"
+42-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:50:13-45
+43            android:screenOrientation="sensorLandscape"
+43-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:51:13-56
+44            android:stateNotNeeded="true"
+44-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:52:13-42
+45            android:theme="@style/zxing_CaptureTheme"
+45-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:53:13-54
+46            android:windowSoftInputMode="stateAlwaysHidden" />
+46-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:54:13-60
+47    </application>
+48
+49</manifest>

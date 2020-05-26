@@ -49,4 +49,8 @@ public interface KategoriDAO {
     //kalau sudah nembak API delete
     @Query("DELETE FROM kategori WHERE sync_delete = 0")
     public void hapusKategoriSudahSync();
+
+    //untuk validasi duplikasi
+    @Query("SELECT * FROM kategori WHERE  name_category = :name_category AND sync_delete = 1")
+    public List<Kategori> cekNamaKategori(String name_category);
 }

@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.base.BaseActivity;
@@ -25,9 +26,6 @@ public class AddKategoriActivity extends BaseActivity implements IAddKategoriRes
     //init controller
     AddKategoriController addKategoriController;
     EditKategoriController editKategoriController;
-//    KategoriInsertDAO kategoriInsertDAO;
-//    KategoriEditDAO kategoriEditDAO;
-
 
     //var ini untuk menangkap intent dari listview kategori
     String id_kategori;
@@ -117,16 +115,12 @@ public class AddKategoriActivity extends BaseActivity implements IAddKategoriRes
 
 
         //apply font
-        this.applyFontRegularToTextView(tv_nav_header);
+        this.applyFontBoldToTextView(tv_nav_header);
         this.applyFontRegularToTextView(tv_kode_kategori);
         this.applyFontRegularToTextView(tv_nama_kategori);
         this.applyFontRegularToEditText(et_kode_kategori);
         this.applyFontRegularToEditText(et_nama_kategori);
         this.applyFontBoldToButton(btnSave);
-
-        //init db offline
-//        kategoriInsertDAO=new KategoriInsertDAO(AddKategoriActivity.this,this);
-//        kategoriEditDAO=new KategoriEditDAO(AddKategoriActivity.this,this);
 
     }
 
@@ -145,7 +139,7 @@ public class AddKategoriActivity extends BaseActivity implements IAddKategoriRes
     @Override
     public void onError(String error) {
 //        this.showToast(error);
-//        Toast.makeText(AddKategoriActivity.this,getResources().getString(R.string.tersimpan_offline),Toast.LENGTH_SHORT).show();
+        Toast.makeText(AddKategoriActivity.this,error, Toast.LENGTH_LONG).show();
         kosongkanEditText();
     }
 
@@ -221,5 +215,6 @@ public class AddKategoriActivity extends BaseActivity implements IAddKategoriRes
     @Override
     public void onEditError(String error) {
 //        this.showToast(error);
+        finish();
     }
 }
