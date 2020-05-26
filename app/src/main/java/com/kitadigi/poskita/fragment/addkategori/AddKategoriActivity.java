@@ -141,6 +141,7 @@ public class AddKategoriActivity extends BaseActivity implements IAddKategoriRes
 //        this.showToast(error);
         Toast.makeText(AddKategoriActivity.this,error, Toast.LENGTH_LONG).show();
         kosongkanEditText();
+        finish();
     }
 
     void kosongkanEditText(){

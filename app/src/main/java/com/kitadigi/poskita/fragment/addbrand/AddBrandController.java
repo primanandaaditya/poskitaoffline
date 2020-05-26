@@ -65,19 +65,7 @@ public class AddBrandController implements IAddBrandRequest {
 
 
         if (offlineMode){
-
-            Brand brand = new Brand();
-            brand.setName(name);
-            brand.setDescription(description);
-            brand.setKode_id(bussinessId);
-            brand.setSync_delete(Constants.STATUS_SUDAH_SYNC);
-            brand.setSync_insert(Constants.STATUS_BELUM_SYNC);
-            brand.setSync_delete(Constants.STATUS_SUDAH_SYNC);
-            brandHelper.addBrand(brand);
-
-
-            iAddBrandResult.onBrandError("");
-
+            simpanOffline(name, description);
         }else{
 
             //cek koneksi internet
@@ -120,17 +108,7 @@ public class AddBrandController implements IAddBrandRequest {
                                 //jika gagal nembak API, simpan di sqlite
                                 //buat var brand
                                 //status sync insert = belum sync
-                                Brand brand = new Brand();
-                                brand.setName(name);
-                                brand.setDescription(description);
-                                brand.setKode_id(bussinessId);
-                                brand.setSync_delete(Constants.STATUS_SUDAH_SYNC);
-                                brand.setSync_insert(Constants.STATUS_BELUM_SYNC);
-                                brand.setSync_delete(Constants.STATUS_SUDAH_SYNC);
-                                brandHelper.addBrand(brand);
-
-
-                                iAddBrandResult.onBrandError(t.getMessage().toString());
+                                simpanOffline(name, description);
                                 sweetAlertDialog.dismissWithAnimation();
                             }
                         });
@@ -139,25 +117,36 @@ public class AddBrandController implements IAddBrandRequest {
                 //jika tidak ada koneksi internet
                 //buat var brand
                 //status sync insert = belum sync
-                Brand brand = new Brand();
-                brand.setName(name);
-                brand.setDescription(description);
-                brand.setKode_id(bussinessId);
-                brand.setSync_delete(Constants.STATUS_SUDAH_SYNC);
-                brand.setSync_insert(Constants.STATUS_BELUM_SYNC);
-                brand.setSync_delete(Constants.STATUS_SUDAH_SYNC);
-                brandHelper.addBrand(brand);
-
-
-                iAddBrandResult.onBrandError("");
-
+                simpanOffline(name, description);
             }
+        }
+    }
 
+    void simpanOffline(String nama,String deskripsi){
 
+        //cek duplikasi
+        boolean adaRow = brandHelper.cekNamaBrand(nama);
 
+        //jika tidak ada duplikasi
+        if (adaRow==false){
+
+            Brand brand = new Brand();
+            brand.setName(nama);
+            brand.setDescription(deskripsi);
+            brand.setKode_id(bussinessId);
+            brand.setSync_delete(Constants.STATUS_SUDAH_SYNC);
+            brand.setSync_insert(Constants.STATUS_BELUM_SYNC);
+            brand.setSync_delete(Constants.STATUS_SUDAH_SYNC);
+            brandHelper.addBrand(brand);
+
+            iAddBrandResult.onBrandError(context.getResources().getString(R.string.tersimpan_offline));
+        }else{
+            //jika ada duplikasi
+            iAddBrandResult.onBrandError(context.getResources().getString(R.string.duplikasi_brand));
         }
 
 
 
     }
+
 }

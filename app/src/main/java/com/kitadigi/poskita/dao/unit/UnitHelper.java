@@ -81,4 +81,23 @@ public class UnitHelper {
     //lalu disimpan ke server
 
 
+    //cek duplikasi
+    public boolean cekNamaUnit(String nama_unit){
+
+        boolean hasil = false;
+
+        //cari nama  yang sama
+        List<Unit> units = unitDAO.cekNamaUnit(nama_unit);
+
+        //jika jumlah list =0 (belum ada), return false
+        int jumlah = units.size();
+
+        if (jumlah==0){
+            hasil=false;
+        }else{
+            hasil=true;
+        }
+
+        return hasil;
+    }
 }

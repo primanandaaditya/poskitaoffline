@@ -4,6 +4,7 @@ import android.arch.persistence.room.Room;
 import android.content.Context;
 
 import com.kitadigi.poskita.dao.database.Db;
+import com.kitadigi.poskita.dao.kategori.Kategori;
 import com.kitadigi.poskita.util.SessionManager;
 
 import java.util.List;
@@ -81,4 +82,22 @@ public class BrandHelper {
     //lalu disimpan ke server
 
 
+    public boolean cekNamaBrand(String nama_brand){
+
+        boolean hasil = false;
+
+        //cari nama  yang sama
+        List<Brand> brands = brandDAO.cekNamaBrand(nama_brand);
+
+        //jika jumlah list =0 (belum ada), return false
+        int jumlah = brands.size();
+
+        if (jumlah==0){
+            hasil=false;
+        }else{
+            hasil=true;
+        }
+
+        return hasil;
+    }
 }

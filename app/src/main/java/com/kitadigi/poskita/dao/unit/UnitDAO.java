@@ -6,6 +6,8 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
+import com.kitadigi.poskita.dao.brand.Brand;
+
 import java.util.List;
 
 @Dao
@@ -46,4 +48,9 @@ public interface UnitDAO {
     //kalau sudah nembak API delete
     @Query("DELETE FROM unit WHERE sync_delete = 0")
     public void hapusUnitSudahSync();
+
+
+    //fungsi untuk cek duplikasi
+    @Query("SELECT * FROM unit WHERE name = :nama AND sync_delete = 1")
+    public List<Unit> cekNamaUnit(String nama);
 }

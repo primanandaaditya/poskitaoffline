@@ -47,4 +47,9 @@ public interface BrandDAO {
     //kalau sudah nembak API delete
     @Query("DELETE FROM brand WHERE sync_delete = 0")
     public void hapusBrandSudahSync();
+
+
+    //fungsi untuk cek duplikasi
+    @Query("SELECT * FROM brand WHERE name = :nama AND sync_delete = 1")
+    public List<Brand> cekNamaBrand(String nama);
 }

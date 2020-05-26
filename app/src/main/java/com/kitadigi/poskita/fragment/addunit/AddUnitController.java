@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.base.BaseResponse;
+import com.kitadigi.poskita.dao.brand.Brand;
 import com.kitadigi.poskita.dao.unit.Unit;
 import com.kitadigi.poskita.dao.unit.UnitHelper;
 import com.kitadigi.poskita.util.Constants;
@@ -67,16 +68,7 @@ public class AddUnitController implements AddUnitRequest {
 
 
             //simpan di sqlite
-            Unit unit=new Unit();
-            unit.setName(name_unit);
-            unit.setSingkatan(code_unit);
-            unit.setKode_id(bussinessId);
-            unit.setSync_delete(Constants.STATUS_SUDAH_SYNC);
-            unit.setSync_insert(Constants.STATUS_BELUM_SYNC);
-            unit.setSync_update(Constants.STATUS_SUDAH_SYNC);
-            unitHelper.addUnit(unit);
-
-            addUnitResult.onAddUnitError("");
+           simpanOffline(name_unit, code_unit);
 
         }else{
 
@@ -117,16 +109,7 @@ public class AddUnitController implements AddUnitRequest {
 
                         //jika gagal nembak API
                         //simpan di sqlite
-                        Unit unit=new Unit();
-                        unit.setName(name_unit);
-                        unit.setSingkatan(code_unit);
-                        unit.setKode_id(bussinessId);
-                        unit.setSync_delete(Constants.STATUS_SUDAH_SYNC);
-                        unit.setSync_insert(Constants.STATUS_BELUM_SYNC);
-                        unit.setSync_update(Constants.STATUS_SUDAH_SYNC);
-                        unitHelper.addUnit(unit);
-
-                        addUnitResult.onAddUnitError(t.getMessage());
+                        simpanOffline(name_unit, code_unit);
                         sweetAlertDialog.dismissWithAnimation();
                     }
                 });
@@ -134,20 +117,40 @@ public class AddUnitController implements AddUnitRequest {
                 //jika tidak ada koneksi internet
                 //jika gagal nembak API
                 //simpan di sqlite
-                Unit unit=new Unit();
-                unit.setName(name_unit);
-                unit.setSingkatan(code_unit);
-                unit.setKode_id(bussinessId);
-                unit.setSync_delete(Constants.STATUS_SUDAH_SYNC);
-                unit.setSync_insert(Constants.STATUS_BELUM_SYNC);
-                unit.setSync_update(Constants.STATUS_SUDAH_SYNC);
-                unitHelper.addUnit(unit);
-
-                addUnitResult.onAddUnitError("");
+                simpanOffline(name_unit, code_unit);
             }
 
 
         }
+
+    }
+
+    void simpanOffline(String name_unit,String code_unit){
+
+
+        //cek duplikasi
+        boolean adaRow = unitHelper.cekNamaUnit(name_unit);
+
+        //jika tidak ada duplikasi
+        if (adaRow==false){
+
+            //simpan di sqlite
+            Unit unit=new Unit();
+            unit.setName(name_unit);
+            unit.setSingkatan(code_unit);
+            unit.setKode_id(bussinessId);
+            unit.setSync_delete(Constants.STATUS_SUDAH_SYNC);
+            unit.setSync_insert(Constants.STATUS_BELUM_SYNC);
+            unit.setSync_update(Constants.STATUS_SUDAH_SYNC);
+            unitHelper.addUnit(unit);
+
+            addUnitResult.onAddUnitError(context.getResources().getString(R.string.tersimpan_offline));
+
+        }else{
+            //jika ada duplikasi
+            addUnitResult.onAddUnitError(context.getResources().getString(R.string.duplikasi_unit));
+        }
+
 
 
 

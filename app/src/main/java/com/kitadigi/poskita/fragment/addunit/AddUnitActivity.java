@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.base.BaseActivity;
@@ -148,8 +149,9 @@ public class AddUnitActivity extends BaseActivity implements AddUnitResult, IEdi
 
     @Override
     public void onAddUnitError(String error) {
-//this.showToast(error);
+        Toast.makeText(AddUnitActivity.this,error,Toast.LENGTH_LONG).show();
         kosongkanEdit();
+        finish();
     }
 
     @Override
@@ -162,8 +164,10 @@ public class AddUnitActivity extends BaseActivity implements AddUnitResult, IEdi
 
     @Override
     public void onEditUnitError(String error) {
-//        this.showToast(error);
+
+        Toast.makeText(AddUnitActivity.this,error,Toast.LENGTH_LONG).show();
         kosongkanEdit();
+        finish();
     }
 
     void kosongkanEdit(){

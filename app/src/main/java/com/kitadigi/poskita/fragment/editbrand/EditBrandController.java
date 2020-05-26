@@ -72,7 +72,7 @@ public class EditBrandController implements IEditRequest {
             //commit di sqlite
             brandHelper.updateBrand(brand);
 
-            iEditResult.onEditError("");
+            iEditResult.onEditError(context.getResources().getString(R.string.tersimpan_offline));
 
         }else{
 
@@ -137,7 +137,7 @@ public class EditBrandController implements IEditRequest {
                 //commit di sqlite
                 brandHelper.updateBrand(brand);
 
-                iEditResult.onEditError("");
+                iEditResult.onEditError(context.getResources().getString(R.string.tersimpan_offline));
             }
 
 
