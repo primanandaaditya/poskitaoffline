@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.kitadigi.poskita.R;
+import com.kitadigi.poskita.dao.brand.Brand;
 import com.kitadigi.poskita.dao.produk.Item;
 import com.kitadigi.poskita.dao.produk.ItemHelper;
 import com.kitadigi.poskita.util.Constants;
@@ -92,43 +93,9 @@ public class AddBarangController implements IAddBarangRequest {
 
         if (offlineMode){
 
-            //jika tidak ada koneksi internet
-
-            //jika gagal nembak API, simpan di sqlite
-            //buat var brand
-            //status sync insert = belum sync
-            item=new Item();
-            item.setKode_id(businessId);
-            item.setName_product(nama_produk);
-            item.setCode_product(code_product);
-            item.setBrand_id(brand_id);
-            item.setCategory_id(category_id);
-            item.setUnit_id(unit_id);
-            item.setPurchase_price(purchase_price);
-            item.setSell_price(sell_price);
-            item.setQty_stock(qty_stock);
-            item.setQty_minimum(qty_minimum);
-            item.setTypes("");
-            item.setCategory_name("");
-            item.setBrand_name("");
-            item.setUnit_name("");
-            item.setSync_update(Constants.STATUS_SUDAH_SYNC);
-            item.setSync_insert(Constants.STATUS_BELUM_SYNC);
-            item.setSync_delete(Constants.STATUS_SUDAH_SYNC);
-
-            //simpan foto barang di hp user
-            //cek dulu apakah user ambil foto dari kamera/galeri atau tidak
-            //jika imageFilePath kosong/null, berarti nyimpen item tanpa gambar
-            if (imageFilePath.matches("") || imageFilePath==null){
-                item.setImage("");
-            }else{
-                //simpan nama gambar di item-nya sqlite
-                item.setImage(imageFilePath);
-            }
-
-            //commit disqlite
-            itemHelper.addItem(item);
-            iAddBarangResult.onError("");
+            //jika mode offline
+            //simpan offline
+            simpanOffline(code_product, brand_id, category_id, unit_id, purchase_price, sell_price, qty_stock, qty_minimum);
 
         }else{
 
@@ -211,38 +178,7 @@ public class AddBarangController implements IAddBarangRequest {
                         //jika gagal nembak API, simpan di sqlite
                         //buat var brand
                         //status sync insert = belum sync
-                        item=new Item();
-                        item.setKode_id(businessId);
-                        item.setName_product(nama_produk);
-                        item.setCode_product(code_product);
-                        item.setBrand_id(brand_id);
-                        item.setCategory_id(category_id);
-                        item.setUnit_id(unit_id);
-                        item.setPurchase_price(purchase_price);
-                        item.setSell_price(sell_price);
-                        item.setQty_stock(qty_stock);
-                        item.setQty_minimum(qty_minimum);
-                        item.setTypes("");
-                        item.setCategory_name("");
-                        item.setBrand_name("");
-                        item.setUnit_name("");
-                        item.setSync_update(Constants.STATUS_SUDAH_SYNC);
-                        item.setSync_insert(Constants.STATUS_BELUM_SYNC);
-                        item.setSync_delete(Constants.STATUS_SUDAH_SYNC);
-
-                        //simpan foto barang di hp user
-                        //cek dulu apakah user ambil foto dari kamera/galeri atau tidak
-                        //jika imageFilePath kosong/null, berarti nyimpen item tanpa gambar
-                        if (imageFilePath.matches("") || imageFilePath==null){
-                            item.setImage("");
-                        }else{
-                            //simpan nama gambar di item-nya sqlite
-                            item.setImage(imageFilePath);
-                        }
-
-
-                        //commit disqlite
-                        itemHelper.addItem(item);
+                        simpanOffline(code_product, brand_id, category_id, unit_id, purchase_price, sell_price, qty_stock, qty_minimum);
 
                         sweetAlertDialog.dismissWithAnimation();
                     }
@@ -253,41 +189,60 @@ public class AddBarangController implements IAddBarangRequest {
                 //jika gagal nembak API, simpan di sqlite
                 //buat var brand
                 //status sync insert = belum sync
-                item=new Item();
-                item.setKode_id(businessId);
-                item.setName_product(nama_produk);
-                item.setCode_product(code_product);
-                item.setBrand_id(brand_id);
-                item.setCategory_id(category_id);
-                item.setUnit_id(unit_id);
-                item.setPurchase_price(purchase_price);
-                item.setSell_price(sell_price);
-                item.setQty_stock(qty_stock);
-                item.setQty_minimum(qty_minimum);
-                item.setTypes("");
-                item.setCategory_name("");
-                item.setBrand_name("");
-                item.setUnit_name("");
-                item.setSync_update(Constants.STATUS_SUDAH_SYNC);
-                item.setSync_insert(Constants.STATUS_BELUM_SYNC);
-                item.setSync_delete(Constants.STATUS_SUDAH_SYNC);
+                simpanOffline(code_product, brand_id, category_id, unit_id, purchase_price, sell_price, qty_stock, qty_minimum);
+            }
+        }
+    }
 
-                //simpan foto barang di hp user
-                //cek dulu apakah user ambil foto dari kamera/galeri atau tidak
-                //jika imageFilePath kosong/null, berarti nyimpen item tanpa gambar
-                if (imageFilePath.matches("") || imageFilePath==null){
-                    item.setImage("");
-                }else{
-                    //simpan nama gambar di item-nya sqlite
-                    item.setImage(imageFilePath);
-                }
+    void simpanOffline(String code_product, Integer brand_id,Integer category_id,Integer unit_id, Integer purchase_price, Integer sell_price,Integer qty_stock, Integer qty_minimum){
 
-                //commit disqlite
-                itemHelper.addItem(item);
-                iAddBarangResult.onError("");
+
+        //cek duplikasi
+        boolean adaRow = itemHelper.cekNamaItem(nama_produk);
+
+        //jika tidak ada duplikasi
+        if (adaRow==false){
+
+            item=new Item();
+            item.setKode_id(businessId);
+            item.setName_product(nama_produk);
+            item.setCode_product(code_product);
+            item.setBrand_id(brand_id);
+            item.setCategory_id(category_id);
+            item.setUnit_id(unit_id);
+            item.setPurchase_price(purchase_price);
+            item.setSell_price(sell_price);
+            item.setQty_stock(qty_stock);
+            item.setQty_minimum(qty_minimum);
+            item.setTypes("");
+            item.setCategory_name("");
+            item.setBrand_name("");
+            item.setUnit_name("");
+            item.setSync_update(Constants.STATUS_SUDAH_SYNC);
+            item.setSync_insert(Constants.STATUS_BELUM_SYNC);
+            item.setSync_delete(Constants.STATUS_SUDAH_SYNC);
+
+            //simpan foto barang di hp user
+            //cek dulu apakah user ambil foto dari kamera/galeri atau tidak
+            //jika imageFilePath kosong/null, berarti nyimpen item tanpa gambar
+            if (imageFilePath.matches("") || imageFilePath==null){
+                item.setImage("");
+            }else{
+                //simpan nama gambar di item-nya sqlite
+                item.setImage(imageFilePath);
             }
 
+            //commit disqlite
+            itemHelper.addItem(item);
+            iAddBarangResult.onError(context.getResources().getString(R.string.tersimpan_offline));
+
+        }else{
+            //jika ada duplikasi
+            iAddBarangResult.onError(context.getResources().getString(R.string.duplikasi_item));
         }
+
+
+
 
 
 

@@ -3,6 +3,7 @@ package com.kitadigi.poskita.dao.produk;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 
+import com.kitadigi.poskita.dao.brand.Brand;
 import com.kitadigi.poskita.dao.database.Db;
 import com.kitadigi.poskita.util.SessionManager;
 
@@ -75,5 +76,24 @@ public class ItemHelper {
     //fungsi ini untuk looping brand sqlite yg belum disync
     //lalu disimpan ke server
 
+
+    public boolean cekNamaItem(String nama_item){
+
+        boolean hasil = false;
+
+        //cari nama  yang sama
+        List<Item> items = itemDAO.cekNamaItem(nama_item);
+
+        //jika jumlah list =0 (belum ada), return false
+        int jumlah = items.size();
+
+        if (jumlah==0){
+            hasil=false;
+        }else{
+            hasil=true;
+        }
+
+        return hasil;
+    }
 
 }

@@ -590,27 +590,6 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
     }
 
 
-    private void setLoadingDialog(String message){
-        //Loading dialog
-        sweetAlertDialog = new SweetAlertDialog(ItemsDataActivity.this, SweetAlertDialog.PROGRESS_TYPE);
-        sweetAlertDialog.setTitleText(message);
-        sweetAlertDialog.setCancelable(false);
-    }
-
-    private void setSuccessDialog(String title){
-        sweetAlertDialog = new SweetAlertDialog(ItemsDataActivity.this, SweetAlertDialog.SUCCESS_LARGE_TYPE)
-                .setTitleText(title)
-                .setConfirmText("TUTUP")
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        hideAlertDialog();
-                        ItemsDataActivity.super.onBackPressed();
-                    }
-                });
-        sweetAlertDialog.setCancelable(false);
-    }
-
     public void showAlertDialog(){
         if(!sweetAlertDialog.isShowing()){
             sweetAlertDialog.show();
@@ -632,7 +611,13 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
 
     @Override
     public void onError(String error) {
-//        Toast.makeText(ItemsDataActivity.this, error,Toast.LENGTH_SHORT).show();
+         Toast.makeText(ItemsDataActivity.this, error,Toast.LENGTH_LONG).show();
+         //kalau duplikasi, jangan finish()
+         if (error.equals(getResources().getString(R.string.duplikasi_item))){
+
+         }else{
+             finish();
+         }
     }
 
 

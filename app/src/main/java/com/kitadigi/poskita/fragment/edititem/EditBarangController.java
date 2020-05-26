@@ -88,20 +88,7 @@ public class EditBarangController implements IEditRequest {
 
             //jika gagal nembak API
             //edit barang di sqlite
-            item.setName_product(nama_produk);
-            item.setImage(imageFilePath);
-            item.setCode_product(code_product);
-            item.setBrand_id(brand_id);
-            item.setCategory_id(category_id);
-            item.setUnit_id(unit_id);
-            item.setPurchase_price(purchase_price);
-            item.setSell_price(sell_price);
-            item.setQty_stock(qty_stock);
-            item.setQty_minimum(qty_minimum);
-            item.setSync_update(Constants.STATUS_BELUM_SYNC);
-            itemHelper.updateItem(item);
-
-            iAddBarangResult.onError("");
+            editOffline(code_product, brand_id, category_id, unit_id, purchase_price, sell_price, qty_stock, qty_minimum);
 
         }else{
 
@@ -158,26 +145,15 @@ public class EditBarangController implements IEditRequest {
 
                     @Override
                     public void onFailure(Call<AddBarangResult> call, Throwable t) {
-                        iAddBarangResult.onError(t.getMessage());
+
                         Log.d("upload foto edit error", t.getMessage().toString());
                         Log.d("url edit product error", call.request().url().toString());
 
                         //jika gagal nembak API
                         //edit barang di sqlite
-                        item.setName_product(nama_produk);
-                        item.setImage(imageFilePath);
-                        item.setCode_product(code_product);
-                        item.setBrand_id(brand_id);
-                        item.setCategory_id(category_id);
-                        item.setUnit_id(unit_id);
-                        item.setPurchase_price(purchase_price);
-                        item.setSell_price(sell_price);
-                        item.setQty_stock(qty_stock);
-                        item.setQty_minimum(qty_minimum);
-                        item.setSync_update(Constants.STATUS_BELUM_SYNC);
-                        itemHelper.updateItem(item);
-
+                        editOffline(code_product, brand_id, category_id, unit_id, purchase_price, sell_price, qty_stock, qty_minimum);
                         sweetAlertDialog.dismissWithAnimation();
+                        iAddBarangResult.onError(context.getResources().getString(R.string.tersimpan_offline));
                     }
                 });
             }else{
@@ -187,20 +163,7 @@ public class EditBarangController implements IEditRequest {
 
                 //jika gagal nembak API
                 //edit barang di sqlite
-                item.setName_product(nama_produk);
-                item.setImage(imageFilePath);
-                item.setCode_product(code_product);
-                item.setBrand_id(brand_id);
-                item.setCategory_id(category_id);
-                item.setUnit_id(unit_id);
-                item.setPurchase_price(purchase_price);
-                item.setSell_price(sell_price);
-                item.setQty_stock(qty_stock);
-                item.setQty_minimum(qty_minimum);
-                item.setSync_update(Constants.STATUS_BELUM_SYNC);
-                itemHelper.updateItem(item);
-
-                iAddBarangResult.onError("");
+                editOffline(code_product, brand_id, category_id, unit_id, purchase_price, sell_price, qty_stock, qty_minimum);
             }
 
 
@@ -209,5 +172,23 @@ public class EditBarangController implements IEditRequest {
 
 
 
+
+    }
+
+    void editOffline(String code_product,Integer brand_id,Integer category_id,Integer unit_id,Integer purchase_price,Integer sell_price,Integer qty_stock,Integer qty_minimum){
+        item.setName_product(nama_produk);
+        item.setImage(imageFilePath);
+        item.setCode_product(code_product);
+        item.setBrand_id(brand_id);
+        item.setCategory_id(category_id);
+        item.setUnit_id(unit_id);
+        item.setPurchase_price(purchase_price);
+        item.setSell_price(sell_price);
+        item.setQty_stock(qty_stock);
+        item.setQty_minimum(qty_minimum);
+        item.setSync_update(Constants.STATUS_BELUM_SYNC);
+        itemHelper.updateItem(item);
+
+        iAddBarangResult.onError(context.getResources().getString(R.string.tersimpan_offline));
     }
 }
