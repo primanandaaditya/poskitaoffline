@@ -44,4 +44,7 @@ public interface JualMasterDAO {
     @Query("SELECT * FROM jualmaster WHERE id = :id AND sync_insert = 0")
     public List<JualMaster> getSudahTerjual(Long id);
 
+    @Query("SELECT * FROM jualmaster WHERE tanggal = :tanggal")
+    public List<JualMaster> getJualMasterByTanggal(String tanggal);
+
 }

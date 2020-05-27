@@ -26,40 +26,41 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.kitadigi.poskita.sinkron.kategori.SyncKategoriActivity"></activity>
-        <activity android:name="com.kitadigi.poskita.activities.printer.PrintingActivity" />
-        <activity android:name="com.kitadigi.poskita.activities.pos.PrintPreviewActivity" />
-        <activity android:name="com.kitadigi.poskita.printer.ScanActivity" />
-        <activity android:name="com.kitadigi.poskita.offline.KategoriActivity" />
-        <activity android:name="com.kitadigi.poskita.printer.PairedBTActivity" />
-        <activity android:name="com.kitadigi.poskita.printer.PrinterActivity" />
-        <activity android:name="com.kitadigi.poskita.activities.report.analisa.ReportAnalisaTabActivity" />
-        <activity android:name="com.kitadigi.poskita.activities.report.stokdetail.ReportStokDetailActivity" />
-        <activity android:name="com.kitadigi.poskita.activities.report.stok.ReportStokActivity" />
-        <activity android:name="com.kitadigi.poskita.activities.report.revenue.ReportRevenueActivity" />
-        <activity android:name="com.kitadigi.poskita.activities.report.analisa.ReportAnalisaActivity" />
-        <activity android:name="com.kitadigi.poskita.activities.report.pembeliandetail.ReportPembelianDetailActivity" />
-        <activity android:name="com.kitadigi.poskita.activities.report.pembelian.ReportPembelianActivity" />
-        <activity android:name="com.kitadigi.poskita.activities.report.transactiondetail.ReportTransactionDetailActivity" />
-        <activity android:name="com.kitadigi.poskita.activities.report.transaction.ReportTransactionActivity" />
-        <activity android:name="com.kitadigi.poskita.activities.pembelian.PembelianBerhasilActivity" />
-        <activity android:name="com.kitadigi.poskita.activities.pembelian.KonfirmasiPembelianActivity" />
-        <activity android:name="com.kitadigi.poskita.activities.pembelian.SubPembelianActivity" />
-        <activity android:name="com.kitadigi.poskita.activities.pos.MetodePembayaranActivity" />
-        <activity android:name="com.kitadigi.poskita.activities.pos.SubTransaksiActivity" />
-        <activity android:name="com.kitadigi.poskita.fragment.addunit.AddUnitActivity" />
-        <activity android:name="com.kitadigi.poskita.fragment.addbrand.AddBrandActivity" />
-        <activity android:name="com.kitadigi.poskita.fragment.addkategori.AddKategoriActivity" />
-        <activity android:name="com.kitadigi.poskita.activities.coba.CobaActivity" />
+        <activity android:name=".activities.reportoffline.jual.ROJualActivity"></activity>
+        <activity android:name=".sinkron.kategori.SyncKategoriActivity" />
+        <activity android:name=".activities.printer.PrintingActivity" />
+        <activity android:name=".activities.pos.PrintPreviewActivity" />
+        <activity android:name=".printer.ScanActivity" />
+        <activity android:name=".offline.KategoriActivity" />
+        <activity android:name=".printer.PairedBTActivity" />
+        <activity android:name=".printer.PrinterActivity" />
+        <activity android:name=".activities.report.analisa.ReportAnalisaTabActivity" />
+        <activity android:name=".activities.report.stokdetail.ReportStokDetailActivity" />
+        <activity android:name=".activities.report.stok.ReportStokActivity" />
+        <activity android:name=".activities.report.revenue.ReportRevenueActivity" />
+        <activity android:name=".activities.report.analisa.ReportAnalisaActivity" />
+        <activity android:name=".activities.report.pembeliandetail.ReportPembelianDetailActivity" />
+        <activity android:name=".activities.report.pembelian.ReportPembelianActivity" />
+        <activity android:name=".activities.report.transactiondetail.ReportTransactionDetailActivity" />
+        <activity android:name=".activities.report.transaction.ReportTransactionActivity" />
+        <activity android:name=".activities.pembelian.PembelianBerhasilActivity" />
+        <activity android:name=".activities.pembelian.KonfirmasiPembelianActivity" />
+        <activity android:name=".activities.pembelian.SubPembelianActivity" />
+        <activity android:name=".activities.pos.MetodePembayaranActivity" />
+        <activity android:name=".activities.pos.SubTransaksiActivity" />
+        <activity android:name=".fragment.addunit.AddUnitActivity" />
+        <activity android:name=".fragment.addbrand.AddBrandActivity" />
+        <activity android:name=".fragment.addkategori.AddKategoriActivity" />
+        <activity android:name=".activities.coba.CobaActivity" />
         <activity
-            android:name="com.kitadigi.poskita.printer.DeviceListActivity"
+            android:name=".printer.DeviceListActivity"
             android:theme="@android:style/Theme.Dialog" />
-        <activity android:name="com.kitadigi.poskita.printer.NyobaActivity" />
+        <activity android:name=".printer.NyobaActivity" />
         <activity
-            android:name="com.kitadigi.poskita.activities.login.LoginActivity"
+            android:name=".activities.login.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.kitadigi.poskita.MainActivity"
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -68,53 +69,53 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.kitadigi.poskita.ItemsDataActivity"
+            android:name=".ItemsDataActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name="com.kitadigi.poskita.ItemsAddressActivity"
+            android:name=".ItemsAddressActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name="com.kitadigi.poskita.ItemsTransactionsActivity"
+            android:name=".ItemsTransactionsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.kitadigi.poskita.ItemsTransactionsWholeSaleActivity"
+            android:name=".ItemsTransactionsWholeSaleActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.kitadigi.poskita.ItemsPaymentActivity"
+            android:name=".ItemsPaymentActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.kitadigi.poskita.ItemsPaymentMethodActivity"
+            android:name=".ItemsPaymentMethodActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.kitadigi.poskita.ItemsPaymentMethodWholeSaleActivity"
+            android:name=".ItemsPaymentMethodWholeSaleActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.kitadigi.poskita.ItemsPaymentResultActivity"
+            android:name=".ItemsPaymentResultActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.kitadigi.poskita.ItemsPaymentResultWholeSaleActivity"
+            android:name=".ItemsPaymentResultWholeSaleActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.kitadigi.poskita.EntryPinActivity"
+            android:name=".EntryPinActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.kitadigi.poskita.ReportDetailsActivity"
+            android:name=".ReportDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.kitadigi.poskita.util.ScannerActivity"
+            android:name=".util.ScannerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 

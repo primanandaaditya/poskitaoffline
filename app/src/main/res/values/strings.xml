@@ -154,7 +154,8 @@
     <string name="galeri">Galeri</string>
     <string name="penjualan_telah_tersimpan">Penjualan telah tersimpan</string>
     <string name="konfirmasi_pembelian">Konfirmasi Pembelian</string>
-    <string name="report_transaction">Report Transaction</string>
+    <string name="report_transaction" translatable="false">Report Transaction</string>
+    <string name="histori_penjualan" translatable="false">Histori Penjualan</string>
     <string name="report_transaction_detail">Report Transaction Detail</string>
     <string name="report_pembelian">Report Pembelian</string>
     <string name="report_pembelian_detail">Detail Report Pembelian</string>
@@ -175,6 +176,9 @@
     <string name="label_no_invoice">No. invoice</string>
     <string name="label_total_sale">Total sale</string>
     <string name="label_payment_ref_no">No. payment ref</string>
+    <string name="total_harga" translatable="false">Total harga</string>
+    <string name="total_bayar" translatable="false">Total bayar</string>
+    <string name="grand_total" translatable="false">Grand total</string>
     <string name="label_presentase">Presentase</string>
     <string name="report_transaction_date">transaction_date</string>
     <string name="report_date">report_date</string>

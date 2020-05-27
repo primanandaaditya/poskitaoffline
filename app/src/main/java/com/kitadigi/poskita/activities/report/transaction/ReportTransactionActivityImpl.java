@@ -53,7 +53,6 @@ public class ReportTransactionActivityImpl implements GetResultIntractor {
                 sweetAlertDialog.dismissWithAnimation();
             }
         });
-        ;
 
     }
 }

@@ -2,6 +2,7 @@ package com.kitadigi.poskita.util;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import java.text.DecimalFormat;
@@ -9,6 +10,7 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -62,9 +64,22 @@ public class StringUtil {
     public static String tanggalSekarang(){
 
         Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String hasil = formatter.format(date);
 
+        return hasil;
+    }
+
+    public static String tanggalDariDatePicker(DatePicker datePicker){
+
+        Integer tahun = datePicker.getYear();
+        Integer bulan = datePicker.getMonth();
+        Integer tanggal = datePicker.getDayOfMonth();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(tahun,bulan,tanggal);
+
+        String hasil = new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime());
         return hasil;
     }
 

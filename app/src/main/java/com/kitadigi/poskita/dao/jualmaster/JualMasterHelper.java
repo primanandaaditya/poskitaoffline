@@ -78,5 +78,8 @@ public class JualMasterHelper {
         return jualDAO.getSudahTerjual(id);
     }
 
+    public List<JualMaster> getJualMasterByTanggal(String tanggal){
+        return jualDAO.getJualMasterByTanggal(tanggal);
+    }
 
 }
