@@ -41,4 +41,8 @@ public interface BeliMasterDAO {
 
     @Query("SELECT * FROM belimaster WHERE nomor = :nomor")
     public BeliMaster getBeliMasterByNomor(String nomor);
+
+    @Query("SELECT * FROM belimaster WHERE tanggal =:tanggal")
+    public List<BeliMaster> getBeliMasterByTanggal(String tanggal);
+
 }

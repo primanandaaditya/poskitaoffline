@@ -26,7 +26,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.reportoffline.jual.ROJualActivity"></activity>
+        <activity android:name=".activities.reportoffline.beli.ROBeliActivity"></activity>
+        <activity android:name=".activities.reportoffline.jual.ROJualActivity" />
         <activity android:name=".sinkron.kategori.SyncKategoriActivity" />
         <activity android:name=".activities.printer.PrintingActivity" />
         <activity android:name=".activities.pos.PrintPreviewActivity" />

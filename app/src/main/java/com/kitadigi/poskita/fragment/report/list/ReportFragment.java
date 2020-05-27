@@ -16,6 +16,7 @@ import com.kitadigi.poskita.activities.report.pembelian.ReportPembelianActivity;
 import com.kitadigi.poskita.activities.report.revenue.ReportRevenueActivity;
 import com.kitadigi.poskita.activities.report.stok.ReportStokActivity;
 import com.kitadigi.poskita.activities.report.transaction.ReportTransactionActivity;
+import com.kitadigi.poskita.activities.reportoffline.beli.ROBeliActivity;
 import com.kitadigi.poskita.activities.reportoffline.jual.ROJualActivity;
 import com.kitadigi.poskita.base.BaseFragment;
 
@@ -81,8 +82,10 @@ public class ReportFragment extends BaseFragment {
 //                        startActivity(intent);
                         break;
                     case 1:
-                        Intent rpa = new Intent(getActivity(), ReportPembelianActivity.class);
-                        startActivity(rpa);
+                        Intent roHistoriBeli = new Intent(getActivity(), ROBeliActivity.class);
+                        startActivity(roHistoriBeli);
+//                        Intent rpa = new Intent(getActivity(), ReportPembelianActivity.class);
+//                        startActivity(rpa);
                         break;
                     case 2:
                         Intent rre = new Intent(getActivity(), ReportRevenueActivity.class);

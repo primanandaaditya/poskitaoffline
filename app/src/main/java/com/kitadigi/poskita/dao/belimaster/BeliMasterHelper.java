@@ -72,4 +72,9 @@ public class BeliMasterHelper {
     public BeliMaster getBeliMasterByNomor(String nomor){
         return beliDAO.getBeliMasterByNomor(nomor);
     }
+
+    public List<BeliMaster> getBeliMasterByTanggal(String tanggal){
+        return beliDAO.getBeliMasterByTanggal(tanggal);
+    }
+
 }
