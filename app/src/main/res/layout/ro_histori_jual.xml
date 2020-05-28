@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:descendantFocusability="blocksDescendants"
     android:padding="@dimen/dimen_10"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -194,5 +195,21 @@
     </LinearLayout>
 
 
+    <LinearLayout
+        android:gravity="right"
+        android:paddingTop="@dimen/dimen_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnDetail"
+            style="@style/dialog_red_button"
+            android:text="@string/remark_detail_report"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_20">
+
+        </Button>
+
+    </LinearLayout>
 
 </LinearLayout>

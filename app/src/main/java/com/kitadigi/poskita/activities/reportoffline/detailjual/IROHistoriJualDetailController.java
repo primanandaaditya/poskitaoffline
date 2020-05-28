@@ -90,4 +90,42 @@ public class IROHistoriJualDetailController implements IROHistoriJualDetailReque
             result.onHistoriJualDetailError(e.getMessage());
         }
     }
+
+    @Override
+    public Integer getTotalItem(List<DetailJualModel> detailJualModels) {
+        Integer hasil;
+        Integer qty;
+
+        //looping untuk get qty
+        if (detailJualModels.size()==0){
+            hasil=0;
+        }else{
+            hasil =0;
+            for (DetailJualModel detailJualModel: detailJualModels){
+                qty = detailJualModel.getQty();
+                hasil = hasil + qty;
+            }
+        }
+
+        return hasil;
+    }
+
+    @Override
+    public Integer getGrandTotal(List<DetailJualModel> detailJualModels) {
+        Integer hasil;
+        Integer total;
+
+        //looping untuk get qty
+        if (detailJualModels.size()==0){
+            hasil=0;
+        }else{
+            hasil =0;
+            for (DetailJualModel detailJualModel: detailJualModels){
+                total = detailJualModel.getSubtotal();
+                hasil = hasil + total;
+            }
+        }
+
+        return hasil;
+    }
 }

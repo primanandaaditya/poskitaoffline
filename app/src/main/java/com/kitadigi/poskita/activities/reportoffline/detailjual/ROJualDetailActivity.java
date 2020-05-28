@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.base.BaseActivity;
 import com.kitadigi.poskita.util.SessionManager;
+import com.kitadigi.poskita.util.StringUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -90,16 +91,26 @@ public class ROJualDetailActivity extends BaseActivity implements IROHistoriJual
     void requestReport(String nomor_transaksi){
         controller = new IROHistoriJualDetailController(ROJualDetailActivity.this,this);
         controller.getReport(nomor_transaksi);
+
+
     }
 
     @Override
     public void onHistoriJualDetailSuccess(List<DetailJualModel> detailJualModels) {
         ROHistoriJualDetailAdapter roHistoriJualDetailAdapter = new ROHistoriJualDetailAdapter(ROJualDetailActivity.this,detailJualModels);
         lv.setAdapter(roHistoriJualDetailAdapter);
+
+        String total_qty = controller.getTotalItem(detailJualModels).toString() + " item";
+        String grand_total = "Grand total : " + StringUtil.formatRupiah(controller.getGrandTotal(detailJualModels));
+
+        tv_total_qty.setText(total_qty);
+        tv_grand_total.setText(grand_total);
     }
 
     @Override
     public void onHistoriJualDetailError(String error) {
         this.showToast(error);
+        tv_total_qty.setText("");
+        tv_grand_total.setText("");
     }
 }
