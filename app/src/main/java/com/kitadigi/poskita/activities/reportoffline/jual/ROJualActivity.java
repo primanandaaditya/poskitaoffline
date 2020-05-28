@@ -1,12 +1,14 @@
 package com.kitadigi.poskita.activities.reportoffline.jual;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.activities.report.transaction.ReportTransactionActivity;
+import com.kitadigi.poskita.activities.reportoffline.detailjual.ROJualDetailActivity;
 import com.kitadigi.poskita.base.BaseActivity;
 import com.kitadigi.poskita.dao.jualmaster.JualMaster;
 import com.kitadigi.poskita.util.SessionManager;
@@ -168,6 +171,32 @@ public class ROJualActivity extends BaseActivity implements IROHistoriJualResult
         Integer sum = sumRecord(jualMasters);
         String strSum = getResources().getString(R.string.grand_total) + " : " + StringUtil.formatRupiah(sum);
         tv_grand_total.setText(strSum);
+
+        //jika listview diklik
+        //akan muncul activity ROJualDetailActivity.java
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //buat class jualmaster
+                //nanti diambil nomor-nya
+                //diselipkan di intent
+                JualMaster jualMaster = (JualMaster)parent.getAdapter().getItem(position);
+
+                //buat intent untuk nampilkan report detail
+                //dengan ROJualDetailActivity.java
+                Intent intent = new Intent(ROJualActivity.this, ROJualDetailActivity.class);
+
+                //selipkan nomor di intent
+                intent.putExtra("nomor", jualMaster.getNomor());
+
+                //tampilkan detail
+                startActivity(intent);
+
+
+
+            }
+        });
     }
 
     @Override

@@ -96,4 +96,8 @@ public class ItemHelper {
         return hasil;
     }
 
+    public Item getItemByKodeId(String kode_id){
+        return itemDAO.getItemByKodeId(kode_id);
+    }
+
 }

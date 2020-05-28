@@ -54,4 +54,7 @@ public interface ItemDAO {
     //fungsi untuk cek duplikasi
     @Query("SELECT * FROM item WHERE name_product = :nama AND sync_delete = 1")
     public List<Item> cekNamaItem(String nama);
+
+    @Query("SELECT * FROM item WHERE kode_id =:kode_id")
+    public Item getItemByKodeId(String kode_id);
 }
