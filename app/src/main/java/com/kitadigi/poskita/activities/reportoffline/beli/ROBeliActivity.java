@@ -1,17 +1,21 @@
 package com.kitadigi.poskita.activities.reportoffline.beli;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kitadigi.poskita.R;
+import com.kitadigi.poskita.activities.reportoffline.detailbeli.ROHistoriBeliDetailActivity;
 import com.kitadigi.poskita.base.BaseActivity;
 import com.kitadigi.poskita.dao.belimaster.BeliMaster;
 import com.kitadigi.poskita.util.SessionManager;
@@ -164,6 +168,25 @@ public class ROBeliActivity extends BaseActivity implements IROHistoriBeliResult
 
         Integer sum = iroHistoriBeliController.getSum(beliMasters);
         tv_grand_total.setText(getResources().getString(R.string.grand_total) + ": " + sum.toString());
+
+        //jika diklik akan menampilkan laporan pembelian detail
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //siapkan intent
+                Intent intent = new Intent(ROBeliActivity.this, ROHistoriBeliDetailActivity.class);
+
+                //get nomor dari listview
+                BeliMaster beliMaster = (BeliMaster) parent.getAdapter().getItem(position);
+
+                //selipkan di intent
+                intent.putExtra("nomor",beliMaster.getNomor());
+
+                //tampilkan detail
+                startActivity(intent);
+            }
+        });
 
     }
 

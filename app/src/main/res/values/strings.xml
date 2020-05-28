@@ -158,6 +158,7 @@
     <string name="histori_penjualan" translatable="false">Histori Penjualan</string>
     <string name="histori_pembelian" translatable="false">Histori Pembelian</string>
     <string name="report_transaction_detail">Report Transaction Detail</string>
+    <string name="detail_pembelian" translatable="false">Detail Pembelian</string>
     <string name="report_pembelian">Report Pembelian</string>
     <string name="report_pembelian_detail">Detail Report Pembelian</string>
     <string name="report_analisa">Report Analisa</string>
