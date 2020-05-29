@@ -70,6 +70,7 @@
     <string name="closeDrawer">Tutup drawer</string>
     <string name="tambah_kategori">Tambah kategori</string>
     <string name="tambah_brand">Tambah brand</string>
+    <string name="grafik_penjualan_harian" translatable="false">Grafik Penjualan Harian</string>
     <string name="pengaturan_printer" translatable="false">Pengaturan Printer</string>
     <string name="cetak_struk_lama" translatable="false">Cetak struk lama</string>
     <string name="print_preview">Print preview</string>

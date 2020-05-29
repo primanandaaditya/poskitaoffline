@@ -7,6 +7,8 @@ import com.kitadigi.poskita.dao.jualdetail.JualDetailHelper;
 import com.kitadigi.poskita.dao.jualmaster.JualMaster;
 import com.kitadigi.poskita.dao.jualmaster.JualMasterHelper;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class GrafikJualHarianController implements IGrafikJualHarianRequest {
@@ -15,9 +17,7 @@ public class GrafikJualHarianController implements IGrafikJualHarianRequest {
     IGrafikJualHarianResult result;
 
     JualMasterHelper jualMasterHelper;
-    JualDetailHelper jualDetailHelper;
 
-    List<JualMaster> jualMasters;
 
     public GrafikJualHarianController(Context context, IGrafikJualHarianResult result) {
         this.context = context;
@@ -46,4 +46,43 @@ public class GrafikJualHarianController implements IGrafikJualHarianRequest {
 
 
     }
+
+    public HashMap<Integer,String> getMap(List<GrafikJualHarianModel> grafikJualHarianModels){
+
+        HashMap<Integer,String> hashMap = new HashMap<>();
+
+        //tampung variabel tanggal dan jumlah
+        String tanggal;
+
+        //get jumlah array untuk jumlah sumbu chart
+        int jml = grafikJualHarianModels.size();
+
+        //looping array untuk persiapan data
+        for (int i=0; i <= jml -1; i++){
+            tanggal = grafikJualHarianModels.get(i).getTanggal();
+            hashMap.put(i+1,tanggal);
+        }
+
+        return hashMap;
+    }
+
+
+    public List<Float> getFloats(List<GrafikJualHarianModel> grafikJualHarianModels){
+
+        List<Float> hasil = new ArrayList<>();
+
+        Integer jumlah;
+
+        //get jumlah array untuk jumlah sumbu chart
+        int jml = grafikJualHarianModels.size();
+
+        //looping array untuk persiapan data
+        for (int i=0; i <= jml -1; i++){
+            jumlah = grafikJualHarianModels.get(i).getJumlah();
+            hasil.add((float) jumlah);
+        }
+
+        return hasil;
+    }
+
 }
