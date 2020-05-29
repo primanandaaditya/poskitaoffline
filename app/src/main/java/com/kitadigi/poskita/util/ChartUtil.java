@@ -66,7 +66,6 @@ public class ChartUtil {
 
         for(int num =awal; num <= akhir; num++){
             entries1.add(new PieEntry( SumbuY.get(num-1), SumbuX.get(num) ));
-
         }
 
         PieDataSet pieDataSet = new PieDataSet(entries1, label);
@@ -79,7 +78,7 @@ public class ChartUtil {
 
     public  static void BarChartFormat(BarChart barChart, final HashMap<Integer, String> SumbuX, List<Float> SumbuY, String label){
 
-        barChart.setScaleMinima(5,0);
+        barChart.setScaleMinima(2,0);
         List<BarEntry> entries1 = new ArrayList<BarEntry>();
         int awal,akhir;
         awal= 1 ;
@@ -96,86 +95,45 @@ public class ChartUtil {
 
             BarDataSet barDataSet = new BarDataSet(entries1, label);
             BarData barData = new BarData(barDataSet);
-            barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-
-
+//            barDataSet.setColors(R.color.colorRed);
 
             XAxis xAxis = barChart.getXAxis();
-
             xAxis.setDrawLabels(true);
-
             xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-
             xAxis.setDrawGridLines(false);
-
             xAxis.setLabelCount(1);
-
             xAxis.setLabelRotationAngle(90);
-
             xAxis.setGranularity(1);
 
             xAxis.setValueFormatter(new IAxisValueFormatter() {
-
-
-
                 @Override
-
                 public String getFormattedValue(float value, AxisBase axis) {
-
-
-
                     return labelX;
 
                 }
-
-
-
             });
 
-
-
             barChart.setData(barData);
-
             barChart.invalidate();
-
-
 
         }else{
 
-
-
             for(int num =awal; num <= akhir; num++){
-
                 entries1.add(new BarEntry(num, SumbuY.get(num-1)));
-
             }
 
 
-
-
-
             BarDataSet barDataSet = new BarDataSet(entries1, label);
-
             BarData barData = new BarData(barDataSet);
-
-
-
-            barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-
+//            barDataSet.setColors(R.color.colorRed);
 
 
             XAxis xAxis = barChart.getXAxis();
-
             xAxis.setGranularity(1);
-
             xAxis.setDrawLabels(true);
-
             xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-
             xAxis.setDrawGridLines(false);
-
             xAxis.setLabelRotationAngle(90);
-
             xAxis.setValueFormatter(new IAxisValueFormatter() {
 
 
@@ -183,9 +141,6 @@ public class ChartUtil {
                 @Override
 
                 public String getFormattedValue(float value, AxisBase axis) {
-
-
-
                     return SumbuX.get((int)value);
 
                 }
@@ -197,20 +152,12 @@ public class ChartUtil {
 
 
             barChart.setData(barData);
-
             barChart.invalidate();
-
-
-
         }
-
-
-
-
-
     }
 
     public  static void LineChartFormat(LineChart lineChart, final HashMap<Integer, String> SumbuX, List<Float> SumbuY, String label){
+
 
         lineChart.setScaleMinima(2,0);
         List<Entry> entries1 = new ArrayList<Entry>();
@@ -228,8 +175,14 @@ public class ChartUtil {
 
 
             LineDataSet dataSet = new LineDataSet(entries1, label);
+            dataSet.setFillColor(R.color.colorRed);
+            dataSet.setCircleColor(R.color.colorRed);
+            dataSet.setCircleColorHole(R.color.colorRed);
+
+
             dataSet.setDrawFilled(true);
             LineData data = new LineData(dataSet);
+
 
             XAxis xAxis = lineChart.getXAxis();
             xAxis.setDrawLabels(true);
