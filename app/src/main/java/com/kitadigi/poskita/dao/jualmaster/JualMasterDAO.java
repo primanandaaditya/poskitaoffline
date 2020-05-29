@@ -7,6 +7,7 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
 import com.kitadigi.poskita.activities.reportoffline.grafik.harian.GrafikJualHarianModel;
+import com.kitadigi.poskita.activities.reportoffline.revenue.RevenueModel;
 
 import java.util.List;
 
@@ -51,5 +52,8 @@ public interface JualMasterDAO {
 
     @Query("SELECT tanggal,SUM(total_price) as jumlah FROM jualmaster GROUP BY tanggal ORDER BY tanggal")
     public List<GrafikJualHarianModel> grupByTanggal();
+
+    @Query("SELECT tanggal,nomor,sum(total_item) as qty,sum(total_price) as grandtotal FROM jualmaster WHERE tanggal >= :tanggal_dari AND tanggal <= :tanggal_sampai GROUP BY tanggal,nomor ORDER BY tanggal")
+    public List<RevenueModel> grupByTanggalNomor(String tanggal_dari,String tanggal_sampai);
 
 }

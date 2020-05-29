@@ -225,6 +225,10 @@ public class AddTransactionController implements IAddTransactionRequest {
     //melalui tabel JualMaster dan JualDetail
     private void simpanPenjualanOffline(String contact_id, int total_pay, int total_price,boolean sudahSync){
 
+        //buat var integer, untuk di-set ke kolom totalitem di tabel JualMaster sqlite
+        Integer totalqty;
+        Integer totalitem = 0;
+
         //buat string untuk tanggal sekarang
         String tanggal = StringUtil.tanggalSekarang();
 
@@ -238,11 +242,19 @@ public class AddTransactionController implements IAddTransactionRequest {
         //looping, untuk di-pass di tabel JualDetail
         for (JualModel jualModel: listJualModel.getJualModels()){
 
+            //tampung dulu qty di variabel
+            totalqty = jualModel.getQty();
+
+            //tambahkan qty diatas dalam var totalitem
+            //totalitem nanti di-assign di kolom totalitem di tabel jualmaster
+            totalitem = totalitem + totalqty;
+
             jualDetail =new JualDetail();
             jualDetail.setKode_id(jualModel.getId());
             jualDetail.setNomor(nomor);
             jualDetail.setPrice(jualModel.getSell_price());
             jualDetail.setQty(jualModel.getQty());
+
 
             //commit insert ke tabel JualDetail
             jualDetailHelper.addJualDetail(jualDetail);
@@ -253,6 +265,7 @@ public class AddTransactionController implements IAddTransactionRequest {
         jualMaster.setTanggal(tanggal);
         jualMaster.setContact_id(contact_id);
         jualMaster.setNomor(nomor);
+        jualMaster.setTotal_item(totalitem);
         jualMaster.setTotal_pay(total_pay);
         jualMaster.setTotal_price(total_price);
         jualMaster.setSync_delete(Constants.STATUS_SUDAH_SYNC);

@@ -14,6 +14,7 @@ public class JualMaster {
     String tanggal;
     String nomor;
     String contact_id;
+    Integer total_item;
     Integer total_pay;
     Integer total_price;
     private Integer sync_insert;
@@ -27,6 +28,14 @@ public class JualMaster {
 
     public void setId(@NonNull Long id) {
         this.id = id;
+    }
+
+    public Integer getTotal_item() {
+        return total_item;
+    }
+
+    public void setTotal_item(Integer total_item) {
+        this.total_item = total_item;
     }
 
     public String getTanggal() {
