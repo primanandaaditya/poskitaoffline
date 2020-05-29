@@ -3,6 +3,7 @@ package com.kitadigi.poskita.dao.jualmaster;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 
+import com.kitadigi.poskita.activities.reportoffline.grafik.harian.GrafikJualHarianModel;
 import com.kitadigi.poskita.dao.database.Db;
 import com.kitadigi.poskita.util.SessionManager;
 
@@ -80,6 +81,10 @@ public class JualMasterHelper {
 
     public List<JualMaster> getJualMasterByTanggal(String tanggal){
         return jualDAO.getJualMasterByTanggal(tanggal);
+    }
+
+    public List<GrafikJualHarianModel> grupByTanggal(){
+        return jualDAO.grupByTanggal();
     }
 
 }

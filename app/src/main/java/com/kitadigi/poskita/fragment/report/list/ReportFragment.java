@@ -17,6 +17,7 @@ import com.kitadigi.poskita.activities.report.revenue.ReportRevenueActivity;
 import com.kitadigi.poskita.activities.report.stok.ReportStokActivity;
 import com.kitadigi.poskita.activities.report.transaction.ReportTransactionActivity;
 import com.kitadigi.poskita.activities.reportoffline.beli.ROBeliActivity;
+import com.kitadigi.poskita.activities.reportoffline.grafik.harian.GrafikJualHarianActivity;
 import com.kitadigi.poskita.activities.reportoffline.jual.ROJualActivity;
 import com.kitadigi.poskita.base.BaseFragment;
 
@@ -57,6 +58,7 @@ public class ReportFragment extends BaseFragment {
         daftarReport=new ArrayList<>();
         daftarReport.add("Histori penjualan");
         daftarReport.add("Histori pembelian");
+        daftarReport.add("Grafik penjualan harian");
         daftarReport.add("Report transaksi");
         daftarReport.add("Report pembelian");
         daftarReport.add("Report revenue");
@@ -88,8 +90,10 @@ public class ReportFragment extends BaseFragment {
 //                        startActivity(rpa);
                         break;
                     case 2:
-                        Intent rre = new Intent(getActivity(), ReportRevenueActivity.class);
-                        startActivity(rre);
+                        Intent grafikJualHarian = new Intent(getActivity(), GrafikJualHarianActivity.class);
+                        startActivity(grafikJualHarian);
+//                        Intent rre = new Intent(getActivity(), ReportRevenueActivity.class);
+//                        startActivity(rre);
                         break;
                     case 3:
                         Intent rstok = new Intent(getActivity(), ReportStokActivity.class);

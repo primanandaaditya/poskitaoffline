@@ -6,6 +6,8 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
+import com.kitadigi.poskita.activities.reportoffline.grafik.harian.GrafikJualHarianModel;
+
 import java.util.List;
 
 @Dao
@@ -46,5 +48,8 @@ public interface JualMasterDAO {
 
     @Query("SELECT * FROM jualmaster WHERE tanggal = :tanggal")
     public List<JualMaster> getJualMasterByTanggal(String tanggal);
+
+    @Query("SELECT tanggal,SUM(total_price) as jumlah FROM jualmaster GROUP BY tanggal ORDER BY tanggal")
+    public List<GrafikJualHarianModel> grupByTanggal();
 
 }
