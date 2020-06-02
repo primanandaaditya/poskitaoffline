@@ -42,9 +42,22 @@ public class BarangAdapter extends RecyclerView.Adapter<BarangAdapter.DataViewHo
 
     //var ini untuk cek apakah gambar sudah disimpan di hp user
     File file;
-    boolean adaGambar;
+    boolean adaGambar, readOnly;
     ContextWrapper contextWrapper;
     Bitmap myBitmap;
+
+
+    public BarangAdapter(Context context,  List<Item> items, boolean readOnly) {
+        this.mContext           = context;
+        this.items              = items;
+        this.readOnly           = readOnly;
+        contextWrapper=new ContextWrapper(context);
+
+        //untuk filter
+        itemList=new ArrayList<>();
+        itemList.addAll(items);
+
+    }
 
     public BarangAdapter(Context context,  List<Item> items, PrimaItemFragment primaItemFragment) {
         this.mContext           = context;
@@ -71,12 +84,22 @@ public class BarangAdapter extends RecyclerView.Adapter<BarangAdapter.DataViewHo
     @Override
     public void onBindViewHolder(BarangAdapter.DataViewHolder holder, int position) {
 
+
+        //jika read only
+        //hide untuk tombol edit dan delete
+        if (readOnly){
+            holder.iv_delete.setVisibility(View.GONE);
+            holder.iv_edit.setVisibility(View.GONE);
+        }
+
         final Item item     = items.get(position);
 
         /* Custom fonts */
         Typeface fonts              = Typeface.createFromAsset(mContext.getAssets(), "fonts/OpenSans-Regular.ttf");
         Typeface fontsItalic        = Typeface.createFromAsset(mContext.getAssets(), "fonts/OpenSans-Italic.ttf");
         Typeface fontsBold          = Typeface.createFromAsset(mContext.getAssets(), "fonts/OpenSans-Bold.ttf");
+
+
 
         holder.tv_title.setTypeface(fontsBold);
         holder.tv_price.setTypeface(fonts);

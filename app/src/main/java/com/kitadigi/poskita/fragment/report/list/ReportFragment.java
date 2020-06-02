@@ -19,6 +19,7 @@ import com.kitadigi.poskita.activities.report.transaction.ReportTransactionActiv
 import com.kitadigi.poskita.activities.reportoffline.beli.ROBeliActivity;
 import com.kitadigi.poskita.activities.reportoffline.grafik.harian.GrafikJualHarianActivity;
 import com.kitadigi.poskita.activities.reportoffline.jual.ROJualActivity;
+import com.kitadigi.poskita.activities.reportoffline.kartustok.PilihBarangActivity;
 import com.kitadigi.poskita.activities.reportoffline.revenue.RORevenueActivity;
 import com.kitadigi.poskita.base.BaseFragment;
 
@@ -61,7 +62,7 @@ public class ReportFragment extends BaseFragment {
         daftarReport.add("Histori pembelian");
         daftarReport.add("Grafik penjualan harian");
         daftarReport.add("Report revenue");
-        daftarReport.add("Report stok");
+        daftarReport.add("Kartu stok");
         daftarReport.add("Report ringkasan analisa");
 
         //init adapter untuk listview
@@ -99,8 +100,10 @@ public class ReportFragment extends BaseFragment {
                         startActivity(roRevenue);
                         break;
                     case 4:
-                        Intent ranalisa = new Intent(getActivity(), ReportAnalisaTabActivity.class);
-                        startActivity(ranalisa);
+//                        Intent ranalisa = new Intent(getActivity(), ReportAnalisaTabActivity.class);
+//                        startActivity(ranalisa);
+                        Intent ikartustok = new Intent(getActivity(), PilihBarangActivity.class);
+                        startActivity(ikartustok);
                         break;
                     default:
                         // code block

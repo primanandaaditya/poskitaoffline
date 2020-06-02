@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/rl_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50"
+        android:background="@color/colorRed">
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/dimen_30"
+            android:layout_height="@dimen/dimen_30"
+            android:src="@drawable/ic_baseline_arrow_back_24px"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:tint="@color/colorWhite"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_centerVertical="true"
+            tools:ignore="contentDescription"/>
+
+        <TextView
+            android:id="@+id/tv_nav_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_16"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:text="@string/pilih_barang"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/rl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+</LinearLayout>
