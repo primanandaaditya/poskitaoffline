@@ -5,7 +5,7 @@ public class RevenueModel {
     String tanggal;
     String nomor;
     Integer qty;
-    Integer grandTotal;
+    Integer grandtotal;
 
     public String getNomor() {
         return nomor;
@@ -31,11 +31,12 @@ public class RevenueModel {
         this.qty = qty;
     }
 
-    public Integer getGrandTotal() {
-        return grandTotal;
+
+    public Integer getGrandtotal() {
+        return grandtotal;
     }
 
-    public void setGrandTotal(Integer grandTotal) {
-        this.grandTotal = grandTotal;
+    public void setGrandtotal(Integer grandtotal) {
+        this.grandtotal = grandtotal;
     }
 }

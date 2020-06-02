@@ -181,6 +181,8 @@
     <string name="label_payment_ref_no">No. payment ref</string>
     <string name="total_harga" translatable="false">Total harga</string>
     <string name="total_bayar" translatable="false">Total bayar</string>
+    <string name="total_qty" translatable="false">Total qty</string>
+    <string name="nomor_transaksi" translatable="false">Nomor transaksi</string>
     <string name="grand_total" translatable="false">Grand total</string>
     <string name="label_presentase">Presentase</string>
     <string name="report_transaction_date">transaction_date</string>

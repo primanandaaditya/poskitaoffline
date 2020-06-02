@@ -4,16 +4,19 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.base.BaseActivity;
 import com.kitadigi.poskita.util.SessionManager;
+import com.kitadigi.poskita.util.StringUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -100,13 +103,21 @@ public class RORevenueActivity extends BaseActivity implements IRORevenueResult 
 
     }
 
-    void requestReport(String tanggal_dari,String tanggal_sampai){
+    void requestReport(){
         roRevenueController=new RORevenueController(RORevenueActivity.this,this);
         roRevenueController.getRevenue(tanggal_dari, tanggal_sampai);
+        Log.d("tanggal_dari",tanggal_dari);
+        Log.d("tanggal_sampai",tanggal_sampai);
     }
 
     @Override
     public void onRORevenueSuccess(List<RevenueModel> revenueModels) {
+        RORevenueAdapter roRevenueAdapter=new RORevenueAdapter(RORevenueActivity.this,revenueModels);
+        lv.setAdapter(roRevenueAdapter);
+
+        //set qty dan grandtotal
+        roRevenueController.getTotalQty(revenueModels,tv_total_qty);
+        roRevenueController.getGrandTotal(revenueModels, tv_grand_total);
 
     }
 
@@ -140,11 +151,7 @@ public class RORevenueActivity extends BaseActivity implements IRORevenueResult 
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
-                String tahun = String.valueOf(et_periode_awal.getYear());
-                String bulan = String.valueOf(et_periode_awal.getMonth()+1);
-                String tanggal = String.valueOf(et_periode_awal.getDayOfMonth());
-                String filterTanggal = tahun + "-" + bulan + "-" +tanggal;
+                String filterTanggal = StringUtil.tanggalDariDatePicker(et_periode_awal);
 
                 //simpan ke variabel tanggal_dari
                 tanggal_dari = filterTanggal;
@@ -195,16 +202,13 @@ public class RORevenueActivity extends BaseActivity implements IRORevenueResult 
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                String tahun = String.valueOf(et_periode_awal.getYear());
-                String bulan = String.valueOf(et_periode_awal.getMonth()+1);
-                String tanggal = String.valueOf(et_periode_awal.getDayOfMonth());
-                String filterTanggal = tahun + "-" + bulan + "-" +tanggal;
+                String filterTanggal = StringUtil.tanggalDariDatePicker(et_periode_awal);
 
                 //simpan ke variabel tanggal sampai
                 tanggal_sampai = filterTanggal;
 
                 //tembak API
-                requestReport(tanggal_dari,tanggal_sampai);
+                requestReport();
 
                 //tutup dialog
                 dialog.dismiss();
