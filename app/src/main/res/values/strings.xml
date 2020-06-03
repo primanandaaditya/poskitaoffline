@@ -163,8 +163,9 @@
     <string name="detail_pembelian" translatable="false">Detail Pembelian</string>
     <string name="report_pembelian">Report Pembelian</string>
     <string name="report_pembelian_detail">Detail Report Pembelian</string>
-    <string name="report_analisa">Report Analisa</string>
-    <string name="report_revenue">Report Revenue</string>
+    <string name="report_analisa" translatable="false">Report Analisa</string>
+    <string name="report_revenue" translatable="false">Report Revenue</string>
+    <string name="kartu_stok" translatable="false">Kartu Stok</string>
     <string name="report_stok">Report Stok</string>
     <string name="report_stok_detail">Detail Report Stok</string>
     <string name="label_harga_jual">Harga jual :</string>

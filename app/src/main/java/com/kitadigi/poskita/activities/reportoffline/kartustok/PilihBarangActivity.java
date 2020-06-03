@@ -1,5 +1,6 @@
 package com.kitadigi.poskita.activities.reportoffline.kartustok;
 
+import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -29,16 +31,14 @@ public class PilihBarangActivity extends BaseActivity implements IBarangResult {
 
     ImageView iv_back;
     TextView tv_nav_header;
-    RecyclerView lv;
+    ListView lv;
     SearchView sv;
 
 
 
     //init controller untuk nampilin data barang
     BarangController barangController;
-
-    BarangAdapter barangAdapter;
-
+    KartuStokAdapter kartuStokAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,21 +50,11 @@ public class PilihBarangActivity extends BaseActivity implements IBarangResult {
 
     void findID(){
 
-
-
         tv_nav_header=(TextView)findViewById(R.id.tv_nav_header);
         iv_back=(ImageView)findViewById(R.id.iv_back);
 
         //setting recyclerview
-        lv=(RecyclerView)findViewById(R.id.lv);
-        lv.setHasFixedSize(true);
-        lv.setItemViewCacheSize(20);
-        lv.setDrawingCacheEnabled(true);
-        lv.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(PilihBarangActivity.this);
-        lv.setLayoutManager(mLayoutManager);
-        lv.setItemAnimator(new DefaultItemAnimator());
-        lv.addItemDecoration(new DividerItemDecoration(LinearLayoutManager.VERTICAL, ContextCompat.getDrawable(PilihBarangActivity.this, R.drawable.item_decorator)));
+        lv=(ListView) findViewById(R.id.lv);
 
 
 
@@ -86,19 +76,31 @@ public class PilihBarangActivity extends BaseActivity implements IBarangResult {
 
     @Override
     public void onSuccess(BarangResult barangResult, List<Item> items) {
-        Log.d("jml", String.valueOf(items.size()));
-        barangAdapter = new BarangAdapter(PilihBarangActivity.this, items, true);
-        lv.setAdapter(barangAdapter);
 
+        //kalau sukses, tampilkan list
+        Log.d("jml", String.valueOf(items.size()));
+        kartuStokAdapter = new KartuStokAdapter(PilihBarangActivity.this, items);
+        lv.setAdapter(kartuStokAdapter);
+
+        //klik listview
+        klikListView();
+
+        //biar bisa filter listview
         filterBarang();
     }
 
     @Override
     public void onError(String error, List<Item> items) {
         Log.d("jml", String.valueOf(items.size()));
-        barangAdapter = new BarangAdapter(PilihBarangActivity.this, items, true);
-        lv.setAdapter(barangAdapter);
 
+        //tampilkan di listview
+        kartuStokAdapter = new KartuStokAdapter(PilihBarangActivity.this, items);
+        lv.setAdapter(kartuStokAdapter);
+
+        //klik listview
+        klikListView();
+
+        //biar bisa filter listview
         filterBarang();
     }
 
@@ -114,11 +116,33 @@ public class PilihBarangActivity extends BaseActivity implements IBarangResult {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                barangAdapter.filter(s);
+                kartuStokAdapter.filter(s);
                 return false;
             }
 
         });
+
+    }
+
+
+    //bila listview diklik, maka akan pindah ke ROKartuStokActivity.java
+    //untuk ditampilkan kartu stok
+    //dalam intent diselipkan 'mobile_id'
+    void klikListView(){
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Item item = (Item)parent.getAdapter().getItem(position);
+                Log.d("kodeid",item.getKode_id().toString());
+                Intent intent = new Intent(PilihBarangActivity.this, ROKartuStokActivity.class);
+                intent.putExtra("kode_id", item.getKode_id());
+                startActivity(intent);
+
+            }
+        });
+
 
     }
 }
