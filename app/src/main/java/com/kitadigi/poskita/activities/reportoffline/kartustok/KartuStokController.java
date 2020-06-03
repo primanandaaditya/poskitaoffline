@@ -3,6 +3,10 @@ package com.kitadigi.poskita.activities.reportoffline.kartustok;
 import android.content.Context;
 import android.util.Log;
 
+import com.kitadigi.poskita.dao.belidetail.BeliDetail;
+import com.kitadigi.poskita.dao.belidetail.BeliDetailHelper;
+import com.kitadigi.poskita.dao.belimaster.BeliMaster;
+import com.kitadigi.poskita.dao.belimaster.BeliMasterHelper;
 import com.kitadigi.poskita.dao.jualdetail.JualDetail;
 import com.kitadigi.poskita.dao.jualdetail.JualDetailHelper;
 import com.kitadigi.poskita.dao.jualmaster.JualMaster;
@@ -23,8 +27,12 @@ public class KartuStokController implements IKartuStokRequest {
     //var untuk parameter mobile_id item
     String kode_id;
 
+    //init sqlite
     JualMasterHelper jualMasterHelper;
     JualDetailHelper jualDetailHelper;
+    BeliMasterHelper beliMasterHelper;
+    BeliDetailHelper beliDetailHelper;
+
 
     List<KartuStokModel> kartuStokModels;
     KartuStokModel kartuStokModel;
@@ -124,6 +132,8 @@ public class KartuStokController implements IKartuStokRequest {
         }
 
         hitungKeluar();
+        hitungMasuk();
+        hitungSisa();
         result.onSuccessKartuStok(kartuStokModels);
 
 //        try {
@@ -206,10 +216,90 @@ public class KartuStokController implements IKartuStokRequest {
     @Override
     public void hitungMasuk() {
 
+        Log.d("hitungmasuk","hitungmasuk");
+        //var untuk counter untuk jumlah keluar
+        Integer masuk,qty;
+
+        masuk = 0;
+
+        //cek size array
+        Integer jml = kartuStokModels.size();
+        Log.d("jml data", String.valueOf(jml));
+
+        if (jml==0){
+
+        }else{
+
+            //jika ada data
+            beliDetailHelper=new BeliDetailHelper(context);
+            beliMasterHelper=new BeliMasterHelper(context);
+
+            //looping list dulu
+            for (KartuStokModel kartuStokModel: kartuStokModels){
+
+                //cari tanggal dulu
+                tanggal = kartuStokModel.getTanggal();
+
+                //get list belimaster, karena kolom yang menyimpan tanggal adalahh belimaster
+                List<BeliMaster> beliMasters = beliMasterHelper.getBeliMasterByTanggal(tanggal);
+                Log.d(tanggal, String.valueOf(beliMasters.size()));
+
+                //looping di belimaster, untuk get nomor
+                for (BeliMaster beliMaster: beliMasters){
+
+                    //tampung nomor trx
+                    nomor = beliMaster.getNomor();
+
+                    //get beli detail list
+                    List<BeliDetail> beliDetails = beliDetailHelper.getBeliByNomor(nomor);
+                    Log.d("jml beliDetail", String.valueOf(beliDetails.size()));
+
+                    //looping belidetail
+                    for (BeliDetail beliDetail: beliDetails){
+
+                        //cocokan dulu dengan kode_id
+                        if (beliDetail.getKode_id_produk().equals(kode_id)){
+
+                            Log.d("bandingkan", beliDetail.getKode_id_produk().toString() + " - " + kode_id);
+                            //tampung var qty
+                            qty = Integer.parseInt(beliDetail.getQty());
+
+                            //tambah dengan counter
+                            masuk = masuk + qty;
+                        }
+
+                    }
+
+                    //set jumlah masuk di kartustokmodel
+                    kartuStokModel.setMasuk(masuk);
+                    Log.d("keluar jml", masuk.toString());
+
+
+                }
+            }
+        }
+
     }
 
     @Override
     public void hitungSisa() {
 
+        //fungsi ini hanya untuk menghitung selisih keluar dan masuk
+
+        Integer masuk,keluar,sisa;
+
+        //cek jumlah data
+        if (kartuStokModels.size()==0){
+
+        }else{
+            for (KartuStokModel kartuStokModel: kartuStokModels){
+
+                masuk=kartuStokModel.getMasuk();
+                keluar = kartuStokModel.getKeluar();
+                sisa = masuk - keluar;
+
+                kartuStokModel.setSisa(sisa);
+            }
+        }
     }
 }
