@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class PilihBarangActivity extends BaseActivity implements IBarangResult {
     ImageView iv_back;
     TextView tv_nav_header;
     RecyclerView lv;
+    SearchView sv;
 
 
 
@@ -47,6 +49,9 @@ public class PilihBarangActivity extends BaseActivity implements IBarangResult {
     }
 
     void findID(){
+
+
+
         tv_nav_header=(TextView)findViewById(R.id.tv_nav_header);
         iv_back=(ImageView)findViewById(R.id.iv_back);
 
@@ -84,6 +89,8 @@ public class PilihBarangActivity extends BaseActivity implements IBarangResult {
         Log.d("jml", String.valueOf(items.size()));
         barangAdapter = new BarangAdapter(PilihBarangActivity.this, items, true);
         lv.setAdapter(barangAdapter);
+
+        filterBarang();
     }
 
     @Override
@@ -91,7 +98,27 @@ public class PilihBarangActivity extends BaseActivity implements IBarangResult {
         Log.d("jml", String.valueOf(items.size()));
         barangAdapter = new BarangAdapter(PilihBarangActivity.this, items, true);
         lv.setAdapter(barangAdapter);
+
+        filterBarang();
     }
 
 
+    void filterBarang(){
+
+        sv=(SearchView)findViewById(R.id.sv);
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                barangAdapter.filter(s);
+                return false;
+            }
+
+        });
+
+    }
 }

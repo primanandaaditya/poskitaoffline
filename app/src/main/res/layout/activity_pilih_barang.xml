@@ -43,6 +43,13 @@
         android:background="@color/white"
         android:orientation="vertical">
 
+        <SearchView
+            android:id="@+id/sv"
+            android:queryHint="@string/cari_nama_produk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </SearchView>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/lv"
             android:layout_width="match_parent"
