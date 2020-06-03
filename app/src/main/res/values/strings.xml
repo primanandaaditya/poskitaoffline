@@ -185,6 +185,9 @@
     <string name="total_bayar" translatable="false">Total bayar</string>
     <string name="total_qty" translatable="false">Total qty</string>
     <string name="nomor_transaksi" translatable="false">Nomor transaksi</string>
+    <string name="keluar" translatable="false">Keluar</string>
+    <string name="masuk" translatable="false">Masuk</string>
+    <string name="sisa" translatable="false">Sisa</string>
     <string name="grand_total" translatable="false">Grand total</string>
     <string name="label_presentase">Presentase</string>
     <string name="report_transaction_date">transaction_date</string>

@@ -18,8 +18,12 @@ import com.kitadigi.poskita.base.BaseActivity;
 import com.kitadigi.poskita.util.SessionManager;
 import com.kitadigi.poskita.util.StringUtil;
 
-public class ROKartuStokActivity extends BaseActivity {
+import java.util.List;
 
+public class ROKartuStokActivity extends BaseActivity implements IKartuStokResult {
+
+    //init controller
+    KartuStokController kartuStokController;
 
     //session untuk get enkrip id user
     SessionManager sessionManager;
@@ -52,6 +56,9 @@ public class ROKartuStokActivity extends BaseActivity {
     //var untuk menampung string intent dari PilihBarangActivity.java
     String kode_id;
 
+
+    //init adapter
+    KartuStokDetailAdapter kartuStokDetailAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +115,9 @@ public class ROKartuStokActivity extends BaseActivity {
 
 
     void requestReport(){
+
+        kartuStokController=new KartuStokController(ROKartuStokActivity.this, this, kode_id);
+        kartuStokController.getReport(tanggal_dari,tanggal_sampai);
 
     }
 
@@ -193,7 +203,7 @@ public class ROKartuStokActivity extends BaseActivity {
                 //simpan ke variabel tanggal sampai
                 tanggal_sampai = filterTanggal;
 
-                //tembak API
+                //proses report
                 requestReport();
 
                 //tutup dialog
@@ -210,5 +220,18 @@ public class ROKartuStokActivity extends BaseActivity {
         });
 
         dialog.show();
+    }
+
+    @Override
+    public void onSuccessKartuStok(List<KartuStokModel> kartuStokModels) {
+
+        //tampilkan di listview
+        kartuStokDetailAdapter = new KartuStokDetailAdapter(ROKartuStokActivity.this, kartuStokModels);
+        lv.setAdapter(kartuStokDetailAdapter);
+    }
+
+    @Override
+    public void onErrorKartuStok(String error) {
+        this.showToast(error);
     }
 }
