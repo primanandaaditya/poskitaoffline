@@ -2,6 +2,7 @@ package com.kitadigi.poskita.activities.reportoffline.kartustok;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.kitadigi.poskita.dao.belidetail.BeliDetail;
 import com.kitadigi.poskita.dao.belidetail.BeliDetailHelper;
@@ -205,10 +206,7 @@ public class KartuStokController implements IKartuStokRequest {
                             //tambah dengan counter
                             keluar = keluar + qty;
                         }
-
                     }
-
-
                 }
 
                 //set di properti
@@ -275,12 +273,8 @@ public class KartuStokController implements IKartuStokRequest {
                             //tambah dengan counter
                             masuk = masuk + qty;
                         }
-
                     }
-
-
                 }
-
 
                 //set jumlah masuk di kartustokmodel
                 kartuStokModel.setMasuk(masuk);
@@ -310,6 +304,51 @@ public class KartuStokController implements IKartuStokRequest {
 
                 kartuStokModel.setSisa(sisa);
             }
+        }
+    }
+
+    public void sumKeluar(List<KartuStokModel> kartuStokModels, TextView textView){
+
+        if (kartuStokModels.size()==0){
+            textView.setText("Total keluar: 0");
+        }else{
+
+            //var untuk counter dalam loopin
+            Integer counter;
+            Integer jml;
+
+            //looping model
+            counter = 0;
+            for (KartuStokModel kartuStokModel: kartuStokModels){
+
+                jml = kartuStokModel.getKeluar();
+                counter = counter + jml;
+            }
+
+            textView.setText("Total keluar: " + counter.toString());
+        }
+    }
+
+
+    public void sumMasuk(List<KartuStokModel> kartuStokModels, TextView textView){
+
+        if (kartuStokModels.size()==0){
+            textView.setText("Total keluar: 0");
+        }else{
+
+            //var untuk counter dalam loopin
+            Integer counter;
+            Integer jml;
+
+            //looping model
+            counter = 0;
+            for (KartuStokModel kartuStokModel: kartuStokModels){
+
+                jml = kartuStokModel.getMasuk();
+                counter = counter + jml;
+            }
+
+            textView.setText("Total masuk: " + counter.toString());
         }
     }
 }

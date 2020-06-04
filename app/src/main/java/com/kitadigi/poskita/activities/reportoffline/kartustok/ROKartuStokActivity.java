@@ -2,6 +2,7 @@ package com.kitadigi.poskita.activities.reportoffline.kartustok;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +18,9 @@ import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.base.BaseActivity;
 import com.kitadigi.poskita.util.SessionManager;
 import com.kitadigi.poskita.util.StringUtil;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.List;
 
 public class ROKartuStokActivity extends BaseActivity implements IKartuStokResult {
@@ -38,10 +41,10 @@ public class ROKartuStokActivity extends BaseActivity implements IKartuStokResul
     ListView lv;
 
     //init tv
-    TextView tv_nav_header, tv_total_qty, tv_grand_total,tv_tanggal;
+    TextView tv_nav_header, tv_total_qty, tv_grand_total, tv_title, tv_price_purchase, tv_price_sell;
 
     //init imageview
-    ImageView iv_back,iv_filter;
+    ImageView iv_back,iv_filter, iv_icon;
 
 
 
@@ -49,7 +52,6 @@ public class ROKartuStokActivity extends BaseActivity implements IKartuStokResul
     AlertDialog.Builder dialog;
     LayoutInflater inflater;
     View dialogView;
-    TextView tv_title;
     DatePicker et_periode_awal;
 
 
@@ -89,6 +91,9 @@ public class ROKartuStokActivity extends BaseActivity implements IKartuStokResul
             }
         });
 
+        //untuk nampilin gambar
+        iv_icon=(ImageView)findViewById(R.id.iv_icon);
+
         //init session manager
         sessionManager=new SessionManager(ROKartuStokActivity.this);
         enkripIdUser=sessionManager.getEncryptedIdUsers();
@@ -100,13 +105,23 @@ public class ROKartuStokActivity extends BaseActivity implements IKartuStokResul
         tv_nav_header=(TextView)findViewById(R.id.tv_nav_header);
         tv_total_qty=(TextView)findViewById(R.id.tv_total_qty);
         tv_grand_total=(TextView)findViewById(R.id.tv_grand_total);
+        tv_title=(TextView)findViewById(R.id.tv_title);
+        tv_price_purchase=(TextView)findViewById(R.id.tv_price_purchase);
+        tv_price_sell=(TextView)findViewById(R.id.tv_price_sell);
+
 //        tv_tanggal=(TextView)findViewById(R.id.tv_tanggal);
 
         //aply font
         this.applyFontBoldToTextView(tv_nav_header);
         this.applyFontRegularToTextView(tv_total_qty);
         this.applyFontRegularToTextView(tv_grand_total);
+        this.applyFontBoldToTextView(tv_title);
+        this.applyFontRegularToTextView(tv_price_purchase);
+        this.applyFontRegularToTextView(tv_price_sell);
 //        this.applyFontRegularToTextView(tv_tanggal);
+
+        //pasang nama,gambar produk
+        settingItem();
 
         //waktu pertama kali, suruh user memilih tanggal
         DialogFormStartDate();
@@ -228,10 +243,67 @@ public class ROKartuStokActivity extends BaseActivity implements IKartuStokResul
         //tampilkan di listview
         kartuStokDetailAdapter = new KartuStokDetailAdapter(ROKartuStokActivity.this, kartuStokModels);
         lv.setAdapter(kartuStokDetailAdapter);
+
+        //tampilkan sum masuk dan keluar
+        kartuStokController.sumKeluar(kartuStokModels,tv_total_qty);
+        kartuStokController.sumMasuk(kartuStokModels, tv_grand_total);
     }
 
     @Override
     public void onErrorKartuStok(String error) {
         this.showToast(error);
+    }
+
+    //fungsi ini untuk mendapatkan intent dari PilihBarangActivity.java
+    //dari listview yang diklik
+    void settingItem(){
+
+        //tampung var intent
+        Intent intent = getIntent();
+
+        //get nilai param dalam intent
+        String nama_barang = intent.getStringExtra("nama_barang");
+        String harga_beli = intent.getStringExtra("harga_beli");
+        String harga_jual = intent.getStringExtra("harga_jual");
+
+        //settext dalam textview
+        tv_title.setText(nama_barang);
+        tv_price_sell.setText("Harga jual : " + harga_jual);
+        tv_price_purchase.setText("Harga beli : " + harga_beli);
+
+        //cek dulu apakah gambar benar2 ada di server
+        if (intent.getStringExtra("image")==null || intent.getStringExtra("image").equals("")){
+            //jika gambar tidak ada
+            //tidak usah load
+            Log.d("gambar item","String kosong");
+        }else{
+            //jika gambar ada
+            //gambar sudah disimpan di hp user
+            //tampilkan di imageview
+
+            String image = intent.getStringExtra("image");
+
+            File file = new File(image);
+            boolean adaGambar=file.exists();
+
+            if (adaGambar){
+                //jika file gambar ada
+                //load di iv_icon
+//                file = new  File(directory.getAbsolutePath() + "/" + item.getImage());
+//                myBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+//                holder.iv_icon.setImageBitmap(myBitmap);
+                Picasso.with(ROKartuStokActivity.this)
+                        .load(new File(image))
+                        .into(iv_icon);
+                Log.d("picasso ada", file.getAbsolutePath());
+
+            }else{
+                //tidak ada gambar
+
+            }
+
+
+        }
+
     }
 }

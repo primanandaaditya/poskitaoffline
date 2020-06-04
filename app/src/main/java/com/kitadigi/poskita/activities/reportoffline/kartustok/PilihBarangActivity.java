@@ -137,7 +137,15 @@ public class PilihBarangActivity extends BaseActivity implements IBarangResult {
                 Item item = (Item)parent.getAdapter().getItem(position);
                 Log.d("kodeid",item.getKode_id().toString());
                 Intent intent = new Intent(PilihBarangActivity.this, ROKartuStokActivity.class);
+
+                //lemparkan variabel dalam intent
                 intent.putExtra("kode_id", item.getKode_id());
+                intent.putExtra("nama_barang", item.getName_product());
+                intent.putExtra("image", item.getImage());
+                intent.putExtra("harga_beli", item.getPurchase_price().toString());
+                intent.putExtra("harga_jual", item.getSell_price().toString());
+
+                //mulai intent
                 startActivity(intent);
 
             }
