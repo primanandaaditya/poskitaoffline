@@ -53,98 +53,94 @@ public class KartuStokController implements IKartuStokRequest {
     @Override
     public void getReport(String tanggalDari, String tanggalSampai) {
 
-
-        //buat calendar, untuk menambah hari waktu looping selisih hari
-        Calendar c = Calendar.getInstance();
-
-        //parameter tanggalDari dan tanggalSampai
-        //diambil dari datePicker di ROKartuStokActivity.java
-
-
-        //HH converts hour in 24 hours format (0-23), day calculation
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
-        //buat var untuk param, lalu dikonversi jadi date
-        Date dateDari = null;
-        Date dateSampai = null;
-
-        //hitung selisih antara 2 tanggal
         try {
-            dateDari = format.parse(tanggalDari);
-            dateSampai = format.parse(tanggalSampai);
 
-            //in milliseconds
-            long diff = dateSampai.getTime() - dateDari.getTime();
+            //buat calendar, untuk menambah hari waktu looping selisih hari
+            Calendar c = Calendar.getInstance();
 
-            long diffSeconds = diff / 1000 % 60;
-            long diffMinutes = diff / (60 * 1000) % 60;
-            long diffHours = diff / (60 * 60 * 1000) % 24;
-            long diffDays = diff / (24 * 60 * 60 * 1000);
+            //parameter tanggalDari dan tanggalSampai
+            //diambil dari datePicker di ROKartuStokActivity.java
 
-            System.out.print(diffDays + " days, ");
-            System.out.print(diffHours + " hours, ");
-            System.out.print(diffMinutes + " minutes, ");
-            System.out.print(diffSeconds + " seconds.");
 
-            Log.d("s hari",String.valueOf(diffDays));
+            //HH converts hour in 24 hours format (0-23), day calculation
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
-            selisihHari = diffDays;
+            //buat var untuk param, lalu dikonversi jadi date
+            Date dateDari = null;
+            Date dateSampai = null;
 
-        } catch (Exception e) {
+            //hitung selisih antara 2 tanggal
+            try {
+                dateDari = format.parse(tanggalDari);
+                dateSampai = format.parse(tanggalSampai);
 
-            selisihHari = 0l;
-            e.printStackTrace();
+                //in milliseconds
+                long diff = dateSampai.getTime() - dateDari.getTime();
 
+                long diffSeconds = diff / 1000 % 60;
+                long diffMinutes = diff / (60 * 1000) % 60;
+                long diffHours = diff / (60 * 60 * 1000) % 24;
+                long diffDays = diff / (24 * 60 * 60 * 1000);
+
+                System.out.print(diffDays + " days, ");
+                System.out.print(diffHours + " hours, ");
+                System.out.print(diffMinutes + " minutes, ");
+                System.out.print(diffSeconds + " seconds.");
+
+                Log.d("s hari",String.valueOf(diffDays));
+
+                selisihHari = diffDays;
+
+            } catch (Exception e) {
+
+                selisihHari = 0l;
+                e.printStackTrace();
+
+            }
+
+
+            //buat list<kartustokmodel>
+            //yang pertama kali diisi adalah kolom 'tanggal'
+            //dengan looping berdasarkan selisih hari diatas
+
+            kartuStokModels=new ArrayList<>();
+
+            //looping selisih hari, sambil membuat list kartustokmodel
+            for (int i = 0; i <= selisihHari; i++) {
+
+                //buat object kartu stok model
+                kartuStokModel = new KartuStokModel();
+
+                //assign-kan calendar dengan tanggalDari
+                c.setTime(dateDari);
+
+                //tambahkan 1 hari dari tanggal
+                c.add(Calendar.DATE,i);
+
+                //buat tanggal dengan format yyyy-mm-dd
+                //supaya sama dengan kolom tanggal di sqlite
+                tanggal = new SimpleDateFormat("yyyy-MM-dd").format(c.getTime());
+
+                //set model kartustokmodel
+                kartuStokModel.setTanggal(tanggal);
+                kartuStokModel.setKeluar(0);
+                kartuStokModel.setMasuk(0);
+                kartuStokModel.setSisa(0);
+
+
+                //tambahkan model di list
+                kartuStokModels.add(kartuStokModel);
+
+            }
+
+            hitungKeluar();
+            hitungMasuk();
+            hitungSisa();
+
+            result.onSuccessKartuStok(kartuStokModels);
+        }catch (Exception e){
+            result.onErrorKartuStok(e.getMessage());
         }
-
-
-        //buat list<kartustokmodel>
-        //yang pertama kali diisi adalah kolom 'tanggal'
-        //dengan looping berdasarkan selisih hari diatas
-
-        kartuStokModels=new ArrayList<>();
-
-        //looping selisih hari, sambil membuat list kartustokmodel
-        for (int i = 0; i <= selisihHari; i++) {
-
-            //buat object kartu stok model
-            kartuStokModel = new KartuStokModel();
-
-            //assign-kan calendar dengan tanggalDari
-            c.setTime(dateDari);
-
-            //tambahkan 1 hari dari tanggal
-            c.add(Calendar.DATE,i);
-
-            //buat tanggal dengan format yyyy-mm-dd
-            //supaya sama dengan kolom tanggal di sqlite
-            tanggal = new SimpleDateFormat("yyyy-MM-dd").format(c.getTime());
-
-            //set model kartustokmodel
-            kartuStokModel.setTanggal(tanggal);
-            kartuStokModel.setKeluar(0);
-            kartuStokModel.setMasuk(0);
-            kartuStokModel.setSisa(0);
-
-
-            //tambahkan model di list
-            kartuStokModels.add(kartuStokModel);
-
-        }
-
-        hitungKeluar();
-        hitungMasuk();
-        hitungSisa();
-        result.onSuccessKartuStok(kartuStokModels);
-
-//        try {
-//
-//
-//
-//            result.onSuccessKartuStok(kartuStokModels);
-//        }catch (Exception e){
-//            result.onErrorKartuStok(e.getMessage());
-//        }
     }
 
     @Override

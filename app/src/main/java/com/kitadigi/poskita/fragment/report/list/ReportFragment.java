@@ -21,6 +21,7 @@ import com.kitadigi.poskita.activities.reportoffline.grafik.harian.GrafikJualHar
 import com.kitadigi.poskita.activities.reportoffline.jual.ROJualActivity;
 import com.kitadigi.poskita.activities.reportoffline.kartustok.PilihBarangActivity;
 import com.kitadigi.poskita.activities.reportoffline.revenue.RORevenueActivity;
+import com.kitadigi.poskita.activities.reportoffline.terlaris.ROTerlarisActivity;
 import com.kitadigi.poskita.base.BaseFragment;
 
 import java.util.ArrayList;
@@ -63,7 +64,9 @@ public class ReportFragment extends BaseFragment {
         daftarReport.add("Grafik penjualan harian");
         daftarReport.add("Report revenue");
         daftarReport.add("Kartu stok");
+        daftarReport.add("Produk terlaris");
         daftarReport.add("Report ringkasan analisa");
+
 
         //init adapter untuk listview
         daftarReportAdapter=new DaftarReportAdapter(getActivity(),ReportFragment.this,daftarReport);
@@ -104,6 +107,13 @@ public class ReportFragment extends BaseFragment {
 //                        startActivity(ranalisa);
                         Intent ikartustok = new Intent(getActivity(), PilihBarangActivity.class);
                         startActivity(ikartustok);
+                        break;
+
+
+                    case 5:
+                        Intent roTerlaris = new Intent(getActivity(), ROTerlarisActivity.class);
+                        startActivity(roTerlaris);
+
                         break;
                     default:
                         // code block

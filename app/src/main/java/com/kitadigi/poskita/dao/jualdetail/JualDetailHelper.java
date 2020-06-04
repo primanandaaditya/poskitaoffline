@@ -4,6 +4,7 @@ import android.arch.persistence.room.Room;
 import android.content.Context;
 
 import com.kitadigi.poskita.dao.database.Db;
+import com.kitadigi.poskita.dao.models.SumQtyJualDetail;
 import com.kitadigi.poskita.util.SessionManager;
 
 import java.util.List;
@@ -60,6 +61,9 @@ public class JualDetailHelper {
         return jualDAO.getJualDetailByKodeId(kode_id);
     }
 
+    public List<SumQtyJualDetail> getSumQtyJualDetail(){
+        return jualDAO.getSumQtyJualDetail();
+    }
 
     //fungsi ini untuk menghapus semua record brand
     public void deleteAllJual(){

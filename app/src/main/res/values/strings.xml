@@ -165,6 +165,7 @@
     <string name="report_pembelian_detail">Detail Report Pembelian</string>
     <string name="report_analisa" translatable="false">Report Analisa</string>
     <string name="report_revenue" translatable="false">Report Revenue</string>
+    <string name="produk_terlaris" translatable="false">Produk Terlaris</string>
     <string name="kartu_stok" translatable="false">Kartu Stok</string>
     <string name="report_stok">Report Stok</string>
     <string name="report_stok_detail">Detail Report Stok</string>
