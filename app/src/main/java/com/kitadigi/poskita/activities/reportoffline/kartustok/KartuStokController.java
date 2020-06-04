@@ -157,7 +157,7 @@ public class KartuStokController implements IKartuStokRequest {
 
         //cek size array
         Integer jml = kartuStokModels.size();
-        Log.d("jml data", String.valueOf(jml));
+//        Log.d("jml data", String.valueOf(jml));
 
         if (jml==0){
 
@@ -170,12 +170,17 @@ public class KartuStokController implements IKartuStokRequest {
             //looping list dulu
             for (KartuStokModel kartuStokModel: kartuStokModels){
 
+
+                //nolkan jumlah keluar
+                keluar = 0;
+
+
                 //cari tanggal dulu
                 tanggal = kartuStokModel.getTanggal();
 
                 //get list jualmaster, karena kolom yang menyimpan tanggal adalahh jualmaster
                 List<JualMaster> jualMasters = jualMasterHelper.getJualMasterByTanggal(tanggal);
-                Log.d(tanggal, String.valueOf(jualMasters.size()));
+//                Log.d(tanggal, String.valueOf(jualMasters.size()));
 
                 //looping di jualmaster, untuk get nomor
                 for (JualMaster jualMaster: jualMasters){
@@ -185,7 +190,7 @@ public class KartuStokController implements IKartuStokRequest {
 
                     //get jual detail list
                     List<JualDetail> jualDetails = jualDetailHelper.getJualDetailByNomor(nomor);
-                    Log.d("jml jualDetail", String.valueOf(jualDetails.size()));
+//                    Log.d("jml jualDetail", String.valueOf(jualDetails.size()));
 
                     //looping jual detail
                     for (JualDetail jualDetail: jualDetails){
@@ -193,7 +198,7 @@ public class KartuStokController implements IKartuStokRequest {
                         //cocokan dulu dengan kode_id
                         if (jualDetail.getKode_id().equals(kode_id)){
 
-                            Log.d("bandingkan", jualDetail.getKode_id().toString() + " - " + kode_id);
+//                            Log.d("bandingkan", jualDetail.getKode_id().toString() + " - " + kode_id);
                             //tampung var qty
                             qty = jualDetail.getQty();
 
@@ -203,12 +208,12 @@ public class KartuStokController implements IKartuStokRequest {
 
                     }
 
-                    //set jumlah keluar di kartustokmodel
-                    kartuStokModel.setKeluar(keluar);
-                    Log.d("keluar jml", keluar.toString());
 
-                    //nol-kan kembali jumlah keluar
                 }
+
+                //set di properti
+                kartuStokModel.setKeluar(keluar);
+
             }
         }
     }
@@ -237,12 +242,15 @@ public class KartuStokController implements IKartuStokRequest {
             //looping list dulu
             for (KartuStokModel kartuStokModel: kartuStokModels){
 
+                //nolkan jumlah masuk
+                masuk = 0;
+
                 //cari tanggal dulu
                 tanggal = kartuStokModel.getTanggal();
 
-                //get list belimaster, karena kolom yang menyimpan tanggal adalahh belimaster
+                //get list belimaster, karena kolom yang menyimpan tanggal adalah belimaster
                 List<BeliMaster> beliMasters = beliMasterHelper.getBeliMasterByTanggal(tanggal);
-                Log.d(tanggal, String.valueOf(beliMasters.size()));
+//                Log.d(tanggal, String.valueOf(beliMasters.size()));
 
                 //looping di belimaster, untuk get nomor
                 for (BeliMaster beliMaster: beliMasters){
@@ -270,12 +278,14 @@ public class KartuStokController implements IKartuStokRequest {
 
                     }
 
-                    //set jumlah masuk di kartustokmodel
-                    kartuStokModel.setMasuk(masuk);
-                    Log.d("keluar jml", masuk.toString());
-
 
                 }
+
+
+                //set jumlah masuk di kartustokmodel
+                kartuStokModel.setMasuk(masuk);
+                Log.d("masuk jml", masuk.toString());
+
             }
         }
 
