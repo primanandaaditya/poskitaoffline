@@ -212,9 +212,16 @@ public class ROTerlarisActivity extends BaseActivity implements  IROTerlarisResu
 
     @Override
     public void onTerlarisSuccess(List<ROTerlarisModel> roTerlarisModels) {
+
+        ROTerlarisAdapter roTerlarisAdapter = new ROTerlarisAdapter(ROTerlarisActivity.this, roTerlarisModels);
+        lv.setAdapter(roTerlarisAdapter);
+
         for (ROTerlarisModel roTerlarisModel: roTerlarisModels){
             Log.d("kode_id", roTerlarisModel.getName_product());
             Log.d("laris", roTerlarisModel.getJumlah_terjual().toString());
+            Log.d("persentase", roTerlarisModel.getPersentase().toString());
+            Log.d("bintang", roTerlarisModel.getBintang().toString());
+
         }
     }
 

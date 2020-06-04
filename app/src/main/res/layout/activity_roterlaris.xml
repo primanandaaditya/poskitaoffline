@@ -46,6 +46,7 @@
 
 
             <ImageView
+                android:visibility="invisible"
                 android:id="@+id/iv_filter"
                 android:layout_width="@dimen/dimen_20"
                 android:layout_height="@dimen/dimen_20"
@@ -60,6 +61,7 @@
     </TableLayout>
 
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:visibility="gone"
         android:background="@color/colorRed"
         android:stretchColumns="*"
         android:layout_width="match_parent"

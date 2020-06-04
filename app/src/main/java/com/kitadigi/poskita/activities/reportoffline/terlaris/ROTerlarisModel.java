@@ -1,5 +1,7 @@
 package com.kitadigi.poskita.activities.reportoffline.terlaris;
 
+import java.util.Comparator;
+
 public class ROTerlarisModel {
 
     Long id;
@@ -19,8 +21,17 @@ public class ROTerlarisModel {
     private Integer qty_stock;
     private Integer qty_minimum;
 
-    private Integer jumlah_terjual;
-    private Integer persentase;
+    private Float jumlah_terjual;
+    private Float persentase;
+    private Float bintang;
+
+    public Float getBintang() {
+        return bintang;
+    }
+
+    public void setBintang(Float bintang) {
+        this.bintang = bintang;
+    }
 
     public Long getId() {
         return id;
@@ -166,19 +177,34 @@ public class ROTerlarisModel {
         this.qty_minimum = qty_minimum;
     }
 
-    public Integer getJumlah_terjual() {
+    public Float getJumlah_terjual() {
         return jumlah_terjual;
     }
 
-    public void setJumlah_terjual(Integer jumlah_terjual) {
+    public void setJumlah_terjual(Float jumlah_terjual) {
         this.jumlah_terjual = jumlah_terjual;
     }
 
-    public Integer getPersentase() {
+    public Float getPersentase() {
         return persentase;
     }
 
-    public void setPersentase(Integer persentase) {
+    public void setPersentase(Float persentase) {
         this.persentase = persentase;
     }
+
+
+    public static Comparator<ROTerlarisModel> modelComparator = new Comparator<ROTerlarisModel>() {
+
+        public int compare(ROTerlarisModel s1, ROTerlarisModel s2) {
+
+            Float dt1 = s1.getJumlah_terjual();
+            Float dt2 = s2.getJumlah_terjual();
+
+            //order descending
+            return dt2.compareTo(dt1);
+
+        }
+
+    };
 }

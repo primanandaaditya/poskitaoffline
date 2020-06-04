@@ -1,14 +1,17 @@
 package com.kitadigi.poskita.activities.reportoffline.terlaris;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.kitadigi.poskita.dao.jualdetail.JualDetailHelper;
 import com.kitadigi.poskita.dao.jualmaster.JualMasterHelper;
 import com.kitadigi.poskita.dao.models.SumQtyJualDetail;
 import com.kitadigi.poskita.dao.produk.Item;
 import com.kitadigi.poskita.dao.produk.ItemHelper;
+import com.kitadigi.poskita.util.StringUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -75,8 +78,9 @@ public class ROTerlarisController implements IROTerlarisRequest {
                 roTerlarisModel.setTypes(item.getTypes());
                 roTerlarisModel.setUnit_id(item.getUnit_id());
                 roTerlarisModel.setUnit_name(item.getUnit_name());
-                roTerlarisModel.setJumlah_terjual(0);
-                roTerlarisModel.setPersentase(0);
+                roTerlarisModel.setJumlah_terjual(0f);
+                roTerlarisModel.setPersentase(0f);
+                roTerlarisModel.setBintang(0f);
 
                 //tambahkan ke array
                 roTerlarisModels.add(roTerlarisModel);
@@ -85,7 +89,9 @@ public class ROTerlarisController implements IROTerlarisRequest {
             }
 
             cariTotalQty();
-
+            hitungPersentase();
+            urutkanJumlahTerjual();
+            
             iroTerlarisResult.onTerlarisSuccess(roTerlarisModels);
 
         }catch (Exception e){
@@ -118,15 +124,60 @@ public class ROTerlarisController implements IROTerlarisRequest {
 
             //jika tidak ada, kasih nilai '0'
             if (sumQtyJualDetail==null){
-                roTerlarisModel.setJumlah_terjual(0);
+                roTerlarisModel.setJumlah_terjual(0f);
             }else{
                 total_qty = sumQtyJualDetail.getTotal_qty();
-                roTerlarisModel.setJumlah_terjual(total_qty);
+                roTerlarisModel.setJumlah_terjual((float)total_qty);
             }
 
 
         }
 
+    }
+
+    void hitungPersentase(){
+
+        //jika tidak ada data
+        Integer jml = roTerlarisModels.size();
+
+        if (jml==0){
+
+        }else{
+
+            float counter, qty;
+            float persentase,bintang;
+
+            counter = 0;
+
+            //looping ini untuk mencari sum(jumlah_terjual)
+            //cari sum dari total semua penjualan item
+            for (ROTerlarisModel roTerlarisModel: roTerlarisModels){
+
+                //tampung jumlah terjual
+                qty = roTerlarisModel.getJumlah_terjual();
+
+                counter = counter + qty;
+            }
+            Log.d("conter", String.valueOf(counter));
+
+
+            //looping untuk set persentase
+            for (ROTerlarisModel roTerlarisModel: roTerlarisModels){
+
+                qty = roTerlarisModel.getJumlah_terjual();
+
+                persentase = ( qty / counter ) * 100;
+                bintang = (qty /counter) * 5;
+
+                roTerlarisModel.setBintang(bintang);
+                roTerlarisModel.setPersentase(persentase);
+            }
+
+        }
+    }
+
+    void urutkanJumlahTerjual(){
+        Collections.sort(roTerlarisModels, ROTerlarisModel.modelComparator);
     }
 
     public SumQtyJualDetail findUsingIterator(
