@@ -192,6 +192,89 @@
 
             </LinearLayout>
 
+
+
+
+            <LinearLayout
+
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <TextView
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:textAlignment="center"
+                    android:id="@+id/tv_label_grafik_penjualan"
+                    android:text="@string/grafik_penjualan"
+                    android:textSize="@dimen/dimen_20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/line_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_250">
+
+                </com.github.mikephil.charting.charts.LineChart>
+
+                <View
+                    android:background="@color/gray_btn_bg_color"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_4">
+
+                </View>
+
+                <TextView
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:textAlignment="center"
+                    android:id="@+id/tv_label_grafik_item_penjualan"
+                    android:text="@string/grafik_item_penjualan"
+                    android:textSize="@dimen/dimen_20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/line_chart2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_250">
+
+                </com.github.mikephil.charting.charts.LineChart>
+
+
+                <View
+                    android:background="@color/gray_btn_bg_color"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_4">
+
+                </View>
+
+                <TextView
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:textAlignment="center"
+                    android:id="@+id/tv_label_grafik_rasio"
+                    android:text="@string/grafik_rasio"
+                    android:textSize="@dimen/dimen_20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/pie_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_250">
+
+                </com.github.mikephil.charting.charts.PieChart>
+
+            </LinearLayout>
+
+
+
         </LinearLayout>
 
     </ScrollView>

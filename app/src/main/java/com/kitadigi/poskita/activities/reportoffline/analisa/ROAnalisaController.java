@@ -2,11 +2,15 @@ package com.kitadigi.poskita.activities.reportoffline.analisa;
 
 import android.content.Context;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.kitadigi.poskita.dao.belimaster.BeliMasterHelper;
 import com.kitadigi.poskita.dao.jualmaster.JualMasterHelper;
+import com.kitadigi.poskita.util.ChartUtil;
 import com.kitadigi.poskita.util.StringUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ROAnalisaController implements IROAnalisaRequest {
@@ -73,6 +77,90 @@ public class ROAnalisaController implements IROAnalisaRequest {
 //            result.onROAnalisaGagal(e.getMessage());
 //        }
     }
+
+    public void setGrafikGrandTotalPenjualan(LineChart lineChart){
+
+
+
+        final HashMap<Integer, String> map = new HashMap<>();
+        List<Float> floats = new ArrayList<Float>();
+
+
+        int jml = roAnalisaModelJual.size();
+
+        for (int i=0; i <= jml -1; i++){
+            map.put(i+1, roAnalisaModelJual.get(i).getTanggal());
+            floats.add((float) roAnalisaModelJual.get(i).getGrand_total_penjualan());
+        }
+
+        ChartUtil.LineChartFormat(lineChart, map, floats,"");
+    }
+
+
+    public void setGrafikTotalItemPenjualan(LineChart lineChart){
+
+
+
+        final HashMap<Integer, String> map = new HashMap<>();
+        List<Float> floats = new ArrayList<Float>();
+
+
+        int jml = roAnalisaModelJual.size();
+
+        for (int i=0; i <= jml -1; i++){
+            map.put(i+1, roAnalisaModelJual.get(i).getTanggal());
+            floats.add((float) roAnalisaModelJual.get(i).getTotal_item_penjualan());
+        }
+
+        ChartUtil.LineChartFormat(lineChart, map, floats,"");
+    }
+
+    public void setGrafikRasio(PieChart pieChart){
+
+
+        //hitung total grand untuk penjualan
+        Integer hasilPenjualan, hasilPembelian;
+        Integer grandTotal;
+
+        //looping model list
+        hasilPenjualan = 0;
+        hasilPembelian = 0;
+        grandTotal = 0;
+
+        for (ROAnalisaModel roAnalisaModel: roAnalisaModelJual){
+            if (roAnalisaModel.getGrand_total_penjualan()==null){
+            }else{
+                grandTotal = roAnalisaModel.getGrand_total_penjualan();
+                hasilPenjualan = hasilPenjualan + grandTotal;
+            }
+        }
+
+
+        //hitung total grand pembelian
+        for (ROAnalisaModel roAnalisaModel: roAnalisaModelBeli){
+            if (roAnalisaModel.getGrand_total_pembelian()==null){
+            }else{
+                grandTotal = roAnalisaModel.getGrand_total_pembelian();
+                hasilPembelian = hasilPembelian + grandTotal;
+            }
+        }
+
+
+        //bentuk komponen chart lingkaran
+        final HashMap<Integer, String> map = new HashMap<>();
+        List<Float> floats = new ArrayList<Float>();
+
+        //bentuk label
+        map.put(0, "Pembelian");
+        map.put(1, "Penjualan");
+
+        //bentuk sumby
+        floats.add((float) hasilPenjualan);
+        floats.add((float) hasilPembelian);
+
+        ChartUtil.PieChartFormat(pieChart, map, floats,"");
+    }
+
 
     String getGrandTotalPenjualan(List<ROAnalisaModel> roAnalisaModels){
 

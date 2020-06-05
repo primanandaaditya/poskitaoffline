@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.base.BaseActivity;
 import com.kitadigi.poskita.util.SessionManager;
@@ -38,8 +40,14 @@ public class ROAnalisaActivity extends BaseActivity implements IROAnalisaResult 
     TextView tv_nav_header, tv_label_grand_total_penjualan, tv_label_grand_total_pembelian,
     tv_label_total_item_penjualan, tv_total_item_penjualan, tv_grand_total_penjualan,tv_grand_total_pembelian;
 
+    TextView tv_label_grafik_penjualan, tv_label_grafik_item_penjualan;
+
     //init imageview
     ImageView iv_back,iv_filter;
+
+    //init chart
+    LineChart lineChart, lineChart2;
+    PieChart pieChart;
 
 
 
@@ -88,6 +96,8 @@ public class ROAnalisaActivity extends BaseActivity implements IROAnalisaResult 
         tv_total_item_penjualan=(TextView)findViewById(R.id.tv_total_item_penjualan);
         tv_grand_total_pembelian=(TextView)findViewById(R.id.tv_grand_total_pembelian);
         tv_grand_total_penjualan=(TextView)findViewById(R.id.tv_grand_total_penjualan);
+        tv_label_grafik_item_penjualan=(TextView)findViewById(R.id.tv_label_grafik_item_penjualan);
+        tv_label_grafik_penjualan=(TextView)findViewById(R.id.tv_label_grafik_penjualan);
 
         //aply font
         this.applyFontBoldToTextView(tv_nav_header);
@@ -97,6 +107,13 @@ public class ROAnalisaActivity extends BaseActivity implements IROAnalisaResult 
         this.applyFontBoldToTextView(tv_grand_total_pembelian);
         this.applyFontBoldToTextView(tv_grand_total_penjualan);
         this.applyFontBoldToTextView(tv_total_item_penjualan);
+        this.applyFontBoldToTextView(tv_label_grafik_item_penjualan);
+        this.applyFontBoldToTextView(tv_label_grafik_penjualan);
+
+        //init chart
+        lineChart = (LineChart)findViewById(R.id.line_chart);
+        lineChart2 = (LineChart)findViewById(R.id.line_chart2);
+        pieChart = (PieChart)findViewById(R.id.pie_chart);
 
         //waktu pertama kali, suruh user memilih tanggal
         DialogFormStartDate();
@@ -106,6 +123,7 @@ public class ROAnalisaActivity extends BaseActivity implements IROAnalisaResult 
 
 
     void  requestReport(){
+
         roAnalisaController = new ROAnalisaController(ROAnalisaActivity.this, this);
         roAnalisaController.getReport(tanggal_dari,tanggal_sampai);
 
@@ -227,6 +245,15 @@ public class ROAnalisaActivity extends BaseActivity implements IROAnalisaResult 
         //set teks ke grand total pembelian
         String grandTotalPembelian = roAnalisaController.getGrandTotalPembelian(roAnalisaModels);
         tv_grand_total_pembelian.setText(grandTotalPembelian);
+
+        //setting chart line grand total penjualan
+        roAnalisaController.setGrafikGrandTotalPenjualan(lineChart);
+
+        //setting chart line total item penjualan
+        roAnalisaController.setGrafikTotalItemPenjualan(lineChart2);
+
+        //setting chart pie (rasio penjualan vs pembelian)
+        roAnalisaController.setGrafikRasio(pieChart);
     }
 
     @Override

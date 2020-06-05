@@ -51,6 +51,9 @@
     <string name="total_pembelian">Total pembelian (Rp)</string>
     <string name="nama_brand">Nama brand</string>
     <string name="pilih_tanggal">Pilih tanggal</string>
+    <string name="grafik_penjualan" translatable="false">Grafik Penjualan</string>
+    <string name="grafik_item_penjualan" translatable="false">Grafik Item Penjualan</string>
+    <string name="grafik_rasio" translatable="false">Rasio Penjualan dan Pembelian</string>
     <string name="grand_total_penjualan" translatable="false">Grand Total Penjualan</string>
     <string name="grand_total_pembelian" translatable="false">Grand Total Pembelian</string>
     <string name="total_item_penjualan" translatable="false">Total Item Penjualan</string>
