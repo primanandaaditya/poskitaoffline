@@ -91,7 +91,7 @@ public class ROTerlarisController implements IROTerlarisRequest {
             cariTotalQty();
             hitungPersentase();
             urutkanJumlahTerjual();
-            
+
             iroTerlarisResult.onTerlarisSuccess(roTerlarisModels);
 
         }catch (Exception e){

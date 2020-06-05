@@ -5,6 +5,9 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
+
+import com.kitadigi.poskita.activities.reportoffline.analisa.ROAnalisaModel;
+
 import java.util.List;
 
 @Dao
@@ -44,5 +47,8 @@ public interface BeliMasterDAO {
 
     @Query("SELECT * FROM belimaster WHERE tanggal =:tanggal")
     public List<BeliMaster> getBeliMasterByTanggal(String tanggal);
+
+    @Query("SELECT tanggal, sum(total_price) as grand_total_pembelian FROM belimaster WHERE tanggal >= :tanggal_dari AND tanggal <= :tanggal_sampai GROUP BY tanggal ORDER BY tanggal")
+    public List<ROAnalisaModel> analisaModel(String tanggal_dari, String tanggal_sampai);
 
 }

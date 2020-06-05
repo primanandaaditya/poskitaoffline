@@ -3,6 +3,7 @@ package com.kitadigi.poskita.dao.jualmaster;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 
+import com.kitadigi.poskita.activities.reportoffline.analisa.ROAnalisaModel;
 import com.kitadigi.poskita.activities.reportoffline.grafik.harian.GrafikJualHarianModel;
 import com.kitadigi.poskita.activities.reportoffline.revenue.RevenueModel;
 import com.kitadigi.poskita.dao.database.Db;
@@ -92,4 +93,7 @@ public class JualMasterHelper {
         return jualDAO.grupByTanggal();
     }
 
+    public List<ROAnalisaModel> analisaModel(String tanggalDari, String tanggalSampai){
+        return jualDAO.analisaModel(tanggalDari,tanggalSampai);
+    }
 }

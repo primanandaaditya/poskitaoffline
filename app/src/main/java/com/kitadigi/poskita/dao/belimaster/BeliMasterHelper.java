@@ -3,6 +3,7 @@ package com.kitadigi.poskita.dao.belimaster;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 
+import com.kitadigi.poskita.activities.reportoffline.analisa.ROAnalisaModel;
 import com.kitadigi.poskita.dao.database.Db;
 import com.kitadigi.poskita.util.SessionManager;
 
@@ -77,4 +78,8 @@ public class BeliMasterHelper {
         return beliDAO.getBeliMasterByTanggal(tanggal);
     }
 
+
+    public List<ROAnalisaModel> analisaModel (String tanggalDari,String tanggalSampai){
+        return beliDAO.analisaModel(tanggalDari, tanggalSampai);
+    }
 }

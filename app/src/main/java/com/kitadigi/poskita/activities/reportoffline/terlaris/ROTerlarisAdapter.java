@@ -82,7 +82,7 @@ public class ROTerlarisAdapter extends BaseAdapter {
         final ROTerlarisModel roTerlarisModel = roTerlarisModels.get(position);
 
         //aply font
-        tv_nama_produk.setTypeface(fonts);
+        tv_nama_produk.setTypeface(fontsBold);
         tv_jumlah_terjual.setTypeface(fonts);
         tv_persentase.setTypeface(fonts);
 
