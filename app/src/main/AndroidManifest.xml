@@ -26,7 +26,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.reportoffline.analisa.ROAnalisaActivity"></activity>
+        <activity android:name=".activities.sinkron.PengaturanSinkronActivity"></activity>
+        <activity android:name=".activities.reportoffline.analisa.ROAnalisaActivity" />
         <activity android:name=".activities.reportoffline.terlaris.ROTerlarisActivity" />
         <activity android:name=".activities.reportoffline.kartustok.ROKartuStokActivity" />
         <activity android:name=".activities.reportoffline.kartustok.PilihBarangActivity" />

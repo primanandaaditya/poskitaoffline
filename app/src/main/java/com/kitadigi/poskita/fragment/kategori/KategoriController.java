@@ -103,19 +103,26 @@ public class KategoriController implements IKategoriRequest {
 
                         //looping hasil kategori
                         //masukkan semua data online ke sqlite
-                        for (Datum datum:response.body().getData()){
+                        if (response.body().getData().size()==0){
 
-                            Log.d("kategori",datum.getId().toString());
-                            kategori=new Kategori();
-                            kategori.setName_category(datum.getName());
-                            kategori.setCode_category(datum.getCode_category());
-                            kategori.setKode_id(datum.getMobile_id());
-                            kategori.setId(Long.parseLong(datum.getId()));
-                            kategori.setSync_delete(Constants.STATUS_SUDAH_SYNC);
-                            kategori.setSync_update(Constants.STATUS_SUDAH_SYNC);
-                            kategori.setSync_insert(Constants.STATUS_SUDAH_SYNC);
-                            kategoriHelper.addKategori(kategori);
+                        }else{
+
+                            for (Datum datum:response.body().getData()){
+
+                                Log.d("kategori",datum.getId().toString());
+                                kategori=new Kategori();
+                                kategori.setName_category(datum.getName());
+                                kategori.setCode_category(datum.getCode_category());
+                                kategori.setKode_id(datum.getMobile_id());
+                                kategori.setId(Long.parseLong(datum.getId()));
+                                kategori.setSync_delete(Constants.STATUS_SUDAH_SYNC);
+                                kategori.setSync_update(Constants.STATUS_SUDAH_SYNC);
+                                kategori.setSync_insert(Constants.STATUS_SUDAH_SYNC);
+                                kategoriHelper.addKategori(kategori);
+                            }
+
                         }
+
 
                         iKategoriResult.onKategoriSuccess(response.body(),kategoriHelper.getAllKategori());
 //                    if ((showDialog == true)) {

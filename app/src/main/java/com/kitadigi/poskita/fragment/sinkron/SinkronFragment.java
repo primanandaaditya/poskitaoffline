@@ -1,6 +1,7 @@
 package com.kitadigi.poskita.fragment.sinkron;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.activities.massal.kategori.IMKategoriAdapter;
+import com.kitadigi.poskita.activities.sinkron.PengaturanSinkronActivity;
 import com.kitadigi.poskita.base.BaseFragment;
 import com.kitadigi.poskita.dao.brand.Brand;
 import com.kitadigi.poskita.dao.kategori.Kategori;
@@ -92,7 +94,7 @@ public class SinkronFragment extends BaseFragment implements
 
     //init widget
     TextView tvLastSync;
-    Button btnSinkron;
+    Button btnSinkron, btnPengaturan;
     SweetAlertDialog sweetAlertDialog;
 //    ListView lv;
 
@@ -199,6 +201,18 @@ public class SinkronFragment extends BaseFragment implements
         tvLastSync=(TextView)getActivity().findViewById(R.id.tvLastSync);
         this.applyFontRegularToTextView(tvLastSync);
         tvLastSync.setText(getActivity().getResources().getString(R.string.sinkron_data_terakhir) + sessionManager.getLastSync());
+
+        //tombol untuk panggil activity pengaturan sinkon
+        btnPengaturan=(Button)getActivity().findViewById(R.id.btnPengaturan);
+        this.applyFontBoldToButton(btnPengaturan);
+        btnPengaturan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), PengaturanSinkronActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         btnSinkron=(Button)getActivity().findViewById(R.id.btnSinkron);
         this.applyFontBoldToButton(btnSinkron);

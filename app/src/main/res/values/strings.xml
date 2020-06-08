@@ -71,6 +71,11 @@
     <string name="remark_printer" translatable="false">Printer</string>
     <string name="remark_wholesale">Wholesale</string>
     <string name="remark_sinkron" translatable="false">Sinkron data</string>
+    <string name="pengaturan_sinkron" translatable="false">Pengaturan sinkron</string>
+    <string name="interval" translatable="false">Interval</string>
+    <string name="satu_jam" translatable="false">1 jam</string>
+    <string name="dua_jam" translatable="false">2 jam</string>
+    <string name="satu_hari" translatable="false">1 hari</string>
     <string name="remark_profile">Profil</string>
     <string name="openDrawer">Buka drawer</string>
     <string name="closeDrawer">Tutup drawer</string>
