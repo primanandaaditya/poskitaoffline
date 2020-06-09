@@ -1,15 +1,21 @@
 package com.kitadigi.poskita.activities.sinkron;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.base.BaseActivity;
+import com.kitadigi.poskita.util.AlarmReceiver;
 
 public class PengaturanSinkronActivity extends BaseActivity {
 
@@ -17,6 +23,8 @@ public class PengaturanSinkronActivity extends BaseActivity {
     TextView tv_nav_header, tv_internal;
     ImageView iv_back;
     Button btn_save;
+
+    private PendingIntent pendingIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +36,12 @@ public class PengaturanSinkronActivity extends BaseActivity {
     }
 
     void findID(){
+
+        /* Retrieve a PendingIntent that will perform a broadcast */
+        Intent alarmIntent = new Intent(PengaturanSinkronActivity.this, AlarmReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(PengaturanSinkronActivity.this, 0, alarmIntent, 0);
+
+
 
         //find id
         radio_satu_jam = (RadioButton)findViewById(R.id.radio_satu_jam);
@@ -53,5 +67,23 @@ public class PengaturanSinkronActivity extends BaseActivity {
                 finish();
             }
         });
+
+
+        btn_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                start();
+            }
+        });
     }
+
+
+    public void start() {
+        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        int interval = 8000;
+
+        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
+        Toast.makeText(this, "Alarm Set", Toast.LENGTH_SHORT).show();
+    }
+
 }
