@@ -41,6 +41,8 @@ public class SessionManager {
     private static final String IS_LOGIN = "IsLoggedIn";
 
 
+    //untuk nyimpan interval sinkron
+    public static final String KEY_INTERVAL_SINKRON = "interval_sinkron";
 
     // User name (make variable public to access from outside)
     public static final String KEY_NAME = "name";
@@ -110,6 +112,10 @@ public class SessionManager {
         editor.commit();
     }
 
+    public void createIntervalSinkron(long interval_sinkron){
+        editor.putLong(KEY_INTERVAL_SINKRON, interval_sinkron);
+    }
+
     public HashMap<String, String> getUserDetails(){
         HashMap<String, String> user = new HashMap<String, String>();
         // user name
@@ -143,6 +149,11 @@ public class SessionManager {
     public String getLeadingZeroBussinessId(){
         String hasil = pref.getString(KEY_BUSSINESS_ID, "");
         return StringUtil.leadingZero(hasil);
+    }
+
+    public Long getIntervalSinkron(){
+        Long hasil = pref.getLong(KEY_INTERVAL_SINKRON, 3600000);
+        return hasil;
     }
 
     //untuk meyimpan nama printer

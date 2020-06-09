@@ -3,24 +3,24 @@
 3    package="com.google.zxing.client.android.test" >
 4
 5    <uses-sdk
-5-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:5:5-74
+5-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger274018208708336734.xml:5:5-74
 6        android:minSdkVersion="14"
-6-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:5:15-41
+6-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger274018208708336734.xml:5:15-41
 7        android:targetSdkVersion="14" />
-7-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:5:42-71
+7-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger274018208708336734.xml:5:42-71
 8
 9    <instrumentation
-9-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:11:5-15:86
+9-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger274018208708336734.xml:11:5-15:86
 10        android:name="android.test.InstrumentationTestRunner"
-10-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:11:22-75
+10-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger274018208708336734.xml:11:22-75
 11        android:functionalTest="false"
-11-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:14:22-52
+11-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger274018208708336734.xml:14:22-52
 12        android:handleProfiling="false"
-12-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:13:22-53
+12-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger274018208708336734.xml:13:22-53
 13        android:label="Tests for com.google.zxing.client.android.test"
-13-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:15:22-84
+13-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger274018208708336734.xml:15:22-84
 14        android:targetPackage="com.google.zxing.client.android.test" />
-14-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:12:22-82
+14-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger274018208708336734.xml:12:22-82
 15
 16    <uses-permission android:name="android.permission.CAMERA" /> <!-- Don't require camera, as this requires a rear camera. This allows it to work on the Nexus 7 -->
 16-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:23:5-65
@@ -64,11 +64,11 @@
 35-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:45:9-33
 36
 37    <application android:debuggable="true" >
-37-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:7:5-9:19
-37-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:7:18-43
+37-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger274018208708336734.xml:7:5-9:19
+37-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger274018208708336734.xml:7:18-43
 38        <uses-library android:name="android.test.runner" />
-38-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:8:9-60
-38-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2646242720459787971.xml:8:23-57
+38-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger274018208708336734.xml:8:9-60
+38-->/home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger274018208708336734.xml:8:23-57
 39
 40        <activity
 40-->[__tested_artifact__::zxing-android-embedded] /home/tog/Documents/poskitaoffline/zxing-android-embedded/build/intermediates/library_manifest/debug/AndroidManifest.xml:48:9-54:63

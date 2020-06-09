@@ -58,6 +58,9 @@
 
                 </TextView>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_10"/>
 
                 <RadioGroup
                     android:layout_width="match_parent"
@@ -80,6 +83,7 @@
                     </RadioButton>
 
                     <RadioButton
+                        android:checked="true"
                         android:text="@string/satu_hari"
                         android:id="@+id/radio_satu_hari"
                         android:layout_width="match_parent"
@@ -89,6 +93,10 @@
 
 
                 </RadioGroup>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_10"/>
 
                 <Button
                     android:id="@+id/btn_save"

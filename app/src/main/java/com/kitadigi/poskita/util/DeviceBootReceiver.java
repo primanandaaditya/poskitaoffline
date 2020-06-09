@@ -9,15 +9,26 @@ import android.widget.Toast;
 
 public class DeviceBootReceiver extends BroadcastReceiver {
 
+
+    //session untuk ambil nilai interval sinkron
+    SessionManager sessionManager;
+
     @Override
     public void onReceive(Context context, Intent intent) {
+
+        //init session
+        sessionManager = new SessionManager(context);
+
+        //var untuk tampung nilai interval sinkron dari session
+        Long interval = sessionManager.getIntervalSinkron();
+
         if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
             /* Setting the alarm here */
             Intent alarmIntent = new Intent(context, AlarmReceiver.class);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, alarmIntent, 0);
 
             AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            int interval = 8000;
+
             manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
 
 ////            manager.setExact(AlarmManager.RTC_WAKEUP, interval, pendingIntent);
