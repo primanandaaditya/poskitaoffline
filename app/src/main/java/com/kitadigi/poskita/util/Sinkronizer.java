@@ -1,6 +1,7 @@
 package com.kitadigi.poskita.util;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.dao.brand.Brand;
@@ -54,6 +55,7 @@ import com.kitadigi.poskita.sinkron.unit.update.ISinkronUpdateUnitResult;
 import com.kitadigi.poskita.sinkron.unit.update.SinkronUpdateUnitController;
 
 import java.util.List;
+import java.util.TooManyListenersException;
 
 public class Sinkronizer implements
         ISinkronAddKategoriResult, ISinkronUpdateKategoriResult, ISinkronDeleteKategoriResult,
@@ -372,12 +374,13 @@ public class Sinkronizer implements
 
         //simpan tanggal sekarang di session
         sessionManager.createLasySync();
+        Toast.makeText(context, "Sinkron OK", Toast.LENGTH_SHORT).show();
 
     }
 
     @Override
     public void onStokError(String error, List<Stok> stoksOffline) {
         //this.showToast(error);
-
+        Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
     }
 }

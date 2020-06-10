@@ -69,6 +69,7 @@ import com.kitadigi.poskita.sinkron.unit.insert.SinkronInsertUnitController;
 import com.kitadigi.poskita.sinkron.unit.update.ISinkronUpdateUnitResult;
 import com.kitadigi.poskita.sinkron.unit.update.SinkronUpdateUnitController;
 import com.kitadigi.poskita.util.SessionManager;
+import com.kitadigi.poskita.util.Sinkronizer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -219,9 +220,9 @@ public class SinkronFragment extends BaseFragment implements
         btnSinkron.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //sinkron mulai dari insert kategori dulu
                 syncInsertKategori();
-//                String data = imKategoriAdapter.createJSONArray().toString();
-//                sinkronInsertKategoriController.insert_kategori(data);
             }
         });
 

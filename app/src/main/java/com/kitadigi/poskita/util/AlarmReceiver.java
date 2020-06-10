@@ -38,6 +38,10 @@ public class AlarmReceiver extends BroadcastReceiver {
 //        sinkronizer=new Sinkronizer(context);
 //        sinkronizer.doSinkron();
 //
-        Log.d(calendar.getTime().toString(),"Proses sinkronisasi...");
+        Log.d(calendar.getTime().toString(),"Proses sinkronisasi sedang berjalan...");
+
+        sinkronizer = new Sinkronizer(context);
+        sinkronizer.doSinkron();
+
     }
 }
