@@ -13,7 +13,11 @@
     <string name="login_fail">Fail!</string>
     <string name="hapus">Hapus data?</string>
     <string name="hapus_semua" translatable="false">Hapus semua</string>
+    <string name="kitadigi_poskita" translatable="false">KITADIGI POSKITA</string>
     <string name="now_loading">Now loading...</string>
+    <string name="proses_sinkron_telah_selesai" translatable="false">Proses sinkron telah selesai</string>
+    <string name="proses_sinkron_dimulai" translatable="false">Proses sinkron dimulai...</string>
+    <string name="proses_sinkron_sedang_diproses" translatable="false">Proses sinkron sedang diproses...</string>
     <string name="bayar">Bayar</string>
     <string name="login_true">login_true</string>
     <string name="validasi_login">Username dan password harus diisi</string>

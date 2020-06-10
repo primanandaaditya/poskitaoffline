@@ -12,10 +12,11 @@ import com.kitadigi.poskita.R;
 
 import java.util.Calendar;
 
-public class AlarmReceiver extends BroadcastReceiver {
+public class AlarmReceiver extends BroadcastReceiver implements ISinkronizer {
 
     Calendar calendar = Calendar.getInstance();
     Sinkronizer sinkronizer;
+
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -23,25 +24,39 @@ public class AlarmReceiver extends BroadcastReceiver {
         //coba buat notifikasi
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
 
+        //pasang icon pada notifikasi
         mBuilder.setSmallIcon(R.drawable.ic_shopping_cart);
 
-        mBuilder.setContentTitle("KitaDigi PosKita");
-        mBuilder.setContentText("Sinkronisasi sedang diproses");
+        //pasang title
+        mBuilder.setContentTitle(context.getResources().getString(R.string.kitadigi_poskita));
 
+        //pasang subtitle
+        mBuilder.setContentText(context.getResources().getString(R.string.proses_sinkron_sedang_diproses));
+
+        //mulai create notifikasi dan tampilkan di HP
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-// notificationID allows you to update the notification later on.
         mNotificationManager.notify(0, mBuilder.build());
 
-        // For our recurring task, we'll just display a message
-//        Toast.makeText(context, "I'm running", Toast.LENGTH_SHORT).show();
-//        sinkronizer=new Sinkronizer(context);
-//        sinkronizer.doSinkron();
-//
         Log.d(calendar.getTime().toString(),"Proses sinkronisasi sedang berjalan...");
 
-        sinkronizer = new Sinkronizer(context);
+        //mulai proses sinkronisasi ke server
+        sinkronizer = new Sinkronizer(context, this);
         sinkronizer.doSinkron();
 
+    }
+
+    @Override
+    public void onBegin() {
+        Log.d("on begin", "BEGIN");
+    }
+
+    @Override
+    public void onProgress() {
+        Log.d("on progress", "PROGRESS");
+    }
+
+    @Override
+    public void onFinish(String pesan) {
+        Log.d("on finish", "FINISH");
     }
 }

@@ -68,6 +68,7 @@ public class Sinkronizer implements
 
 
     Context context;
+    ISinkronizer iSinkronizer;
 
     //init session, untuk menampilkan tanggal last sync
     SessionManager sessionManager;
@@ -106,11 +107,18 @@ public class Sinkronizer implements
     StokController stokController;
 
 
-    public Sinkronizer(Context context) {
+    public Sinkronizer(Context context, ISinkronizer iSinkronizer) {
         this.context = context;
+        this.iSinkronizer = iSinkronizer;
+
+        //interface menyatakan mulai
+        iSinkronizer.onBegin();
     }
 
     public void doSinkron(){
+
+        //interface menyatakan sedang dalam progress
+        iSinkronizer.onProgress();
 
         //init session, untuk menampilkan tanggal di tvLastSync
         sessionManager=new SessionManager(context);
@@ -374,13 +382,20 @@ public class Sinkronizer implements
 
         //simpan tanggal sekarang di session
         sessionManager.createLasySync();
-        Toast.makeText(context, "Sinkron OK", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, "Sinkron OK", Toast.LENGTH_SHORT).show();
+
+        //interface sudah selesai
+        iSinkronizer.onFinish(context.getResources().getString(R.string.proses_sinkron_telah_selesai));
 
     }
 
     @Override
     public void onStokError(String error, List<Stok> stoksOffline) {
-        //this.showToast(error);
-        Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+
+        //simpan tanggal di session
+        sessionManager.createLasySync();
+
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 }
