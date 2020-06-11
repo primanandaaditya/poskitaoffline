@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
@@ -72,6 +73,20 @@ public class AlarmReceiver extends BroadcastReceiver implements ISinkronizer {
     }
 
     @Override
+    public void onNoInternet() {
+
+        //jika tidak ada internet
+        //hilangkan notifikasi dari hp user
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+
+                mNotificationManager.cancel(0);
+            }
+        }, 3000);   //3 detik
+    }
+
+    @Override
     public void onBegin() {
         Log.d("on begin", "BEGIN");
     }
@@ -87,6 +102,13 @@ public class AlarmReceiver extends BroadcastReceiver implements ISinkronizer {
         remoteViews.setTextViewText(R.id.tv_text, selesai );
 
         //hilangkan notifikasi dari hp user
-//        mNotificationManager.cancel(0);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+
+                mNotificationManager.cancel(0);
+            }
+        }, 5000);   //5
+
     }
 }

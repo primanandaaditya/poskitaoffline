@@ -68,6 +68,7 @@ import com.kitadigi.poskita.sinkron.unit.insert.ISinkronAddUnitResult;
 import com.kitadigi.poskita.sinkron.unit.insert.SinkronInsertUnitController;
 import com.kitadigi.poskita.sinkron.unit.update.ISinkronUpdateUnitResult;
 import com.kitadigi.poskita.sinkron.unit.update.SinkronUpdateUnitController;
+import com.kitadigi.poskita.util.InternetChecker;
 import com.kitadigi.poskita.util.SessionManager;
 import com.kitadigi.poskita.util.Sinkronizer;
 
@@ -89,6 +90,9 @@ public class SinkronFragment extends BaseFragment implements
         IStokResult
 
 {
+
+    //buat cek internet
+    InternetChecker internetChecker;
 
     //init session, untuk menampilkan tanggal last sync
     SessionManager sessionManager;
@@ -145,11 +149,11 @@ public class SinkronFragment extends BaseFragment implements
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        //init cek internet
+        internetChecker = new InternetChecker();
+
         //init session, untuk menampilkan tanggal di tvLastSync
         sessionManager=new SessionManager(getActivity());
-
-//        datumList = new ArrayList<>();
-
 
 
         //init controller
@@ -241,16 +245,26 @@ public class SinkronFragment extends BaseFragment implements
 
     void syncInsertKategori(){
 
-        //tampikan sweet dialog
-        //init sweet dialog
-        sweetAlertDialog = new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE);
-        sweetAlertDialog.setTitleText(getActivity().getResources().getString(R.string.now_loading));
-        sweetAlertDialog.setCancelable(false);
+        //cek dulu apakah ada internet atau tidak?
+        if (internetChecker.haveNetwork(getActivity())){
 
-        sweetAlertDialog.show();
+            //tampikan sweet dialog
+            //init sweet dialog
+            sweetAlertDialog = new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE);
+            sweetAlertDialog.setTitleText(getActivity().getResources().getString(R.string.now_loading));
+            sweetAlertDialog.setCancelable(false);
 
-        //tembak API
-        sinkronInsertKategoriController.insert_kategori();
+            sweetAlertDialog.show();
+
+            //tembak API
+            sinkronInsertKategoriController.insert_kategori();
+        }else{
+
+            //jika tidak ada internet, munculkan pesan
+            this.showToast(getActivity().getResources().getString(R.string.tidak_ada_koneksi_internet));
+        }
+
+
     }
 
     @Override
@@ -263,8 +277,9 @@ public class SinkronFragment extends BaseFragment implements
 
     @Override
     public void onSinkronAddKategoriError(String error) {
-//        this.showToast(error);
-        sinkronUpdateKategoriController.update_kategori();
+
+        abortProses(error);
+//        sinkronUpdateKategoriController.update_kategori();
     }
 
     @Override
@@ -276,8 +291,10 @@ public class SinkronFragment extends BaseFragment implements
     @Override
     public void onSinkronUpdateKategoriError(String error) {
         //lanjutkan delete
-        sinkronDeleteKategoriController.delete_kategori();
+//        sinkronDeleteKategoriController.delete_kategori();
 
+
+        abortProses(error);
     }
 
     @Override
@@ -289,7 +306,9 @@ public class SinkronFragment extends BaseFragment implements
     @Override
     public void onSinkronDeleteKategoriError(String error) {
 
-        sinkronInsertBrandController.insert_brand();
+//        sinkronInsertBrandController.insert_brand();
+
+        abortProses(error);
     }
 
     @Override
@@ -301,7 +320,9 @@ public class SinkronFragment extends BaseFragment implements
     @Override
     public void onSinkronAddBrandError(String error) {
         //lanjutkan ke sinkron update brand
-        sinkronUpdateBrandController.update_brand();
+//        sinkronUpdateBrandController.update_brand();
+
+        abortProses(error);
     }
 
     @Override
@@ -313,7 +334,9 @@ public class SinkronFragment extends BaseFragment implements
     @Override
     public void onSinkronUpdateBrandError(String error) {
         //lanjutkan ke sinkron delete brand
-        sinkronDeleteBrandController.delete_brand();
+//        sinkronDeleteBrandController.delete_brand();
+
+        abortProses(error);
     }
 
     @Override
@@ -326,7 +349,9 @@ public class SinkronFragment extends BaseFragment implements
     @Override
     public void onSinkronDeleteBrandError(String error) {
         //lanjut ke sync insert unit
-        sinkronInsertUnitController.insert_unit();
+//        sinkronInsertUnitController.insert_unit();
+
+        abortProses(error);
     }
 
     @Override
@@ -338,7 +363,9 @@ public class SinkronFragment extends BaseFragment implements
     @Override
     public void onSinkronAddUnitError(String error) {
 //lanjut ke sync update unit
-        sinkronUpdateUnitController.update_unit();
+//        sinkronUpdateUnitController.update_unit();
+
+        abortProses(error);
     }
 
     @Override
@@ -350,7 +377,9 @@ public class SinkronFragment extends BaseFragment implements
     @Override
     public void onSinkronUpdateUnitError(String error) {
         //lanjut ke sync delete unit
-        sinkronDeleteUnitController.delete_unit();
+//        sinkronDeleteUnitController.delete_unit();
+
+        abortProses(error);
     }
 
     @Override
@@ -362,7 +391,9 @@ public class SinkronFragment extends BaseFragment implements
     @Override
     public void onSinkronDeleteUnitError(String error) {
         //lanjut ke sync insert produk
-        sinkronInsertProdukController.insert_produk();
+//        sinkronInsertProdukController.insert_produk();
+
+        abortProses(error);
     }
 
     @Override
@@ -374,7 +405,9 @@ public class SinkronFragment extends BaseFragment implements
     @Override
     public void onSinkronAddProdukError(String error) {
         //lanjut ke sync update produk
-        sinkronUpdateProdukController.update_produk();
+//        sinkronUpdateProdukController.update_produk();
+
+        abortProses(error);
     }
 
     @Override
@@ -386,7 +419,9 @@ public class SinkronFragment extends BaseFragment implements
     @Override
     public void onSinkronUpdateProdukError(String error) {
         //lanjut ke sync delete produk
-        sinkronDeleteProdukController.delete_produk();
+//        sinkronDeleteProdukController.delete_produk();
+
+        abortProses(error);
     }
 
     @Override
@@ -398,7 +433,9 @@ public class SinkronFragment extends BaseFragment implements
     @Override
     public void onSinkronDeleteProdukError(String error) {
         //lanjut ke sync jual
-        sinkronInsertJualController.insert_jual();
+//        sinkronInsertJualController.insert_jual();
+
+        abortProses(error);
     }
 
     @Override
@@ -410,7 +447,9 @@ public class SinkronFragment extends BaseFragment implements
     @Override
     public void onSinkronAddJualError(String error) {
         //lanjutkan ke sync pembelian
-        sinkronInsertBeliController.insert_beli();
+//        sinkronInsertBeliController.insert_beli();
+
+        abortProses(error);
     }
 
     @Override
@@ -422,7 +461,9 @@ public class SinkronFragment extends BaseFragment implements
     @Override
     public void onSinkronAddBeliError(String error) {
         //lanjut ke get kategori
-        kategoriController.getKategoriList();
+//        kategoriController.getKategoriList();
+
+        abortProses(error);
     }
 
     @Override
@@ -434,7 +475,9 @@ public class SinkronFragment extends BaseFragment implements
     @Override
     public void onKategoriError(String error, List<Kategori> kategoriOffline) {
         //lanjut ke get brand
-        brandController.getBrandList();
+//        brandController.getBrandList();
+
+        abortProses(error);
     }
 
     @Override
@@ -446,7 +489,9 @@ public class SinkronFragment extends BaseFragment implements
     @Override
     public void onBrandError(String error, List<Brand> brandOffline) {
         //lanjut ke get unit
-        unitController.getUnitList();
+//        unitController.getUnitList();
+
+        abortProses(error);
     }
 
     @Override
@@ -458,7 +503,9 @@ public class SinkronFragment extends BaseFragment implements
     @Override
     public void onError(String error, List<Item> items) {
         //lanjut ke sync stok
-        stokController.getStok();
+//        stokController.getStok();
+
+        abortProses(error);
     }
 
     @Override
@@ -470,7 +517,9 @@ public class SinkronFragment extends BaseFragment implements
     @Override
     public void onUnitError(String error, List<Unit> units) {
         //lanjut ke get produk
-        barangController.getBarang();
+//        barangController.getBarang();
+
+        abortProses(error);
     }
 
     @Override
@@ -489,7 +538,16 @@ public class SinkronFragment extends BaseFragment implements
     @Override
     public void onStokError(String error, List<Stok> stoksOffline) {
         //this.showToast(error);
-        sweetAlertDialog.changeAlertType(SweetAlertDialog.ERROR_TYPE);
-        sweetAlertDialog.setTitleText(error);
+
+        abortProses(error);
+    }
+
+    void abortProses(String error){
+
+        tvLastSync.setText(getActivity().getResources().getString(R.string.sinkron_data_terakhir) + sessionManager.getLastSync());
+
+        sessionManager.createLasySync();
+        sweetAlertDialog.dismissWithAnimation();
+
     }
 }

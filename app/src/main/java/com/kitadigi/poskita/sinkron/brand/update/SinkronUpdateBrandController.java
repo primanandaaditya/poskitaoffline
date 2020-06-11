@@ -61,8 +61,9 @@ public class SinkronUpdateBrandController implements ISinkronUpdateBrandRequest 
             if (data==""){
                 //jika tidak ada data sama sekali
                 //langsung result-kan error
-                iSinkronUpdateBrandResult.onSinkronUpdateBrandError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
+//                iSinkronUpdateBrandResult.onSinkronUpdateBrandError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
 
+                iSinkronUpdateBrandResult.onSinkronUpdateBrandSuccess(null);
             }else{
 
                 //munculkan progress

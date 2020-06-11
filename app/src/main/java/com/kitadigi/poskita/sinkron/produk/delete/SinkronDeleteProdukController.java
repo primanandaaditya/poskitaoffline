@@ -66,8 +66,9 @@ public class SinkronDeleteProdukController implements ISinkronDeleteProdukReques
             if (data==""){
                 //jika tidak ada data sama sekali
                 //langsung result-kan error
-                iSinkronDeleteProdukResult.onSinkronDeleteProdukError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
+//                iSinkronDeleteProdukResult.onSinkronDeleteProdukError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
 
+                iSinkronDeleteProdukResult.onSinkronDeleteProdukSuccess(null);
             }else{
 
                 //munculkan progress

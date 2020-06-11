@@ -62,8 +62,9 @@ public class SinkronDeleteBrandController implements ISinkronDeleteBrandRequest 
             if (data==""){
                 //jika tidak ada data sama sekali
                 //langsung result-kan error
-                iSinkronDeleteBrandResult.onSinkronDeleteBrandError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
+//                iSinkronDeleteBrandResult.onSinkronDeleteBrandError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
 
+                iSinkronDeleteBrandResult.onSinkronDeleteBrandSuccess(null);
             }else{
 
                 //munculkan progress

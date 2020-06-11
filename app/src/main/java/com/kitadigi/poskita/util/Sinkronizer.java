@@ -66,6 +66,8 @@ public class Sinkronizer implements
         IKategoriResult, IBrandResult, IUnitResult, IBarangResult,
         IStokResult {
 
+    //cek internet koneksi
+    InternetChecker internetChecker;
 
     Context context;
     ISinkronizer iSinkronizer;
@@ -117,44 +119,54 @@ public class Sinkronizer implements
 
     public void doSinkron(){
 
-        //interface menyatakan sedang dalam progress
-        iSinkronizer.onProgress();
+        //cek apakah ada internet atau tidak?
+        internetChecker = new InternetChecker();
+        if (internetChecker.haveNetwork(context)){
 
-        //init session, untuk menampilkan tanggal di tvLastSync
-        sessionManager=new SessionManager(context);
+            //jika ada internet, langsungkan sinkron
 
-        //init controller
-        sinkronInsertKategoriController =new SinkronInsertKategoriController(context,this);
-        sinkronUpdateKategoriController =new SinkronUpdateKategoriController(context,this);
-        sinkronDeleteKategoriController =new SinkronDeleteKategoriController(context,this);
+            //interface menyatakan sedang dalam progress
+            iSinkronizer.onProgress();
 
-        sinkronInsertBrandController    = new SinkronInsertBrandController(context,this);
-        sinkronUpdateBrandController    = new SinkronUpdateBrandController(context,this);
-        sinkronDeleteBrandController    = new SinkronDeleteBrandController(context,this);
+            //init session, untuk menampilkan tanggal di tvLastSync
+            sessionManager=new SessionManager(context);
 
-        sinkronInsertUnitController     = new SinkronInsertUnitController(context,this);
-        sinkronUpdateUnitController     = new SinkronUpdateUnitController(context,this);
-        sinkronDeleteUnitController     = new SinkronDeleteUnitController(context,this);
+            //init controller
+            sinkronInsertKategoriController =new SinkronInsertKategoriController(context,this);
+            sinkronUpdateKategoriController =new SinkronUpdateKategoriController(context,this);
+            sinkronDeleteKategoriController =new SinkronDeleteKategoriController(context,this);
 
-        sinkronInsertProdukController   = new SinkronInsertProdukController(context,this);
-        sinkronUpdateProdukController   = new SinkronUpdateProdukController(context, this);
-        sinkronDeleteProdukController   = new SinkronDeleteProdukController(context, this);
+            sinkronInsertBrandController    = new SinkronInsertBrandController(context,this);
+            sinkronUpdateBrandController    = new SinkronUpdateBrandController(context,this);
+            sinkronDeleteBrandController    = new SinkronDeleteBrandController(context,this);
 
-        sinkronInsertJualController     = new SinkronInsertJualController(context,this);
-        sinkronInsertBeliController     = new SinkronInsertBeliController(context, this);
+            sinkronInsertUnitController     = new SinkronInsertUnitController(context,this);
+            sinkronUpdateUnitController     = new SinkronUpdateUnitController(context,this);
+            sinkronDeleteUnitController     = new SinkronDeleteUnitController(context,this);
 
-        kategoriController              = new KategoriController(context,this);
-        brandController                 = new BrandController(context, this);
-        unitController                  = new UnitController(context, this);
-        barangController                = new BarangController(this,context);
+            sinkronInsertProdukController   = new SinkronInsertProdukController(context,this);
+            sinkronUpdateProdukController   = new SinkronUpdateProdukController(context, this);
+            sinkronDeleteProdukController   = new SinkronDeleteProdukController(context, this);
 
-        stokController                  = new StokController(this, context);
+            sinkronInsertJualController     = new SinkronInsertJualController(context,this);
+            sinkronInsertBeliController     = new SinkronInsertBeliController(context, this);
+
+            kategoriController              = new KategoriController(context,this);
+            brandController                 = new BrandController(context, this);
+            unitController                  = new UnitController(context, this);
+            barangController                = new BarangController(this,context);
+
+            stokController                  = new StokController(this, context);
 
 
-        //mulai sinkron
-        sinkronInsertKategoriController.insert_kategori();
+            //mulai sinkron
+            sinkronInsertKategoriController.insert_kategori();
 
+        }else{
 
+            //jika tidak ada internet, loncat ke interface onNoInternet()
+            iSinkronizer.onNoInternet();
+        }
 
     }
     @Override
@@ -168,7 +180,11 @@ public class Sinkronizer implements
     @Override
     public void onSinkronAddKategoriError(String error) {
 //        this.showToast(error);
-        sinkronUpdateKategoriController.update_kategori();
+//        sinkronUpdateKategoriController.update_kategori();
+
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -180,7 +196,10 @@ public class Sinkronizer implements
     @Override
     public void onSinkronUpdateKategoriError(String error) {
         //lanjutkan delete
-        sinkronDeleteKategoriController.delete_kategori();
+//        sinkronDeleteKategoriController.delete_kategori();
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
 
     }
 
@@ -193,7 +212,10 @@ public class Sinkronizer implements
     @Override
     public void onSinkronDeleteKategoriError(String error) {
 
-        sinkronInsertBrandController.insert_brand();
+//        sinkronInsertBrandController.insert_brand();
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -205,7 +227,11 @@ public class Sinkronizer implements
     @Override
     public void onSinkronAddBrandError(String error) {
         //lanjutkan ke sinkron update brand
-        sinkronUpdateBrandController.update_brand();
+//        sinkronUpdateBrandController.update_brand();
+
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -217,7 +243,11 @@ public class Sinkronizer implements
     @Override
     public void onSinkronUpdateBrandError(String error) {
         //lanjutkan ke sinkron delete brand
-        sinkronDeleteBrandController.delete_brand();
+//        sinkronDeleteBrandController.delete_brand();
+
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -230,7 +260,10 @@ public class Sinkronizer implements
     @Override
     public void onSinkronDeleteBrandError(String error) {
         //lanjut ke sync insert unit
-        sinkronInsertUnitController.insert_unit();
+//        sinkronInsertUnitController.insert_unit();
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -242,7 +275,11 @@ public class Sinkronizer implements
     @Override
     public void onSinkronAddUnitError(String error) {
 //lanjut ke sync update unit
-        sinkronUpdateUnitController.update_unit();
+//        sinkronUpdateUnitController.update_unit();
+
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -254,7 +291,11 @@ public class Sinkronizer implements
     @Override
     public void onSinkronUpdateUnitError(String error) {
         //lanjut ke sync delete unit
-        sinkronDeleteUnitController.delete_unit();
+//        sinkronDeleteUnitController.delete_unit();
+
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -266,7 +307,10 @@ public class Sinkronizer implements
     @Override
     public void onSinkronDeleteUnitError(String error) {
         //lanjut ke sync insert produk
-        sinkronInsertProdukController.insert_produk();
+//        sinkronInsertProdukController.insert_produk();
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -278,7 +322,11 @@ public class Sinkronizer implements
     @Override
     public void onSinkronAddProdukError(String error) {
         //lanjut ke sync update produk
-        sinkronUpdateProdukController.update_produk();
+//        sinkronUpdateProdukController.update_produk();
+
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -290,7 +338,11 @@ public class Sinkronizer implements
     @Override
     public void onSinkronUpdateProdukError(String error) {
         //lanjut ke sync delete produk
-        sinkronDeleteProdukController.delete_produk();
+//        sinkronDeleteProdukController.delete_produk();
+
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -302,7 +354,11 @@ public class Sinkronizer implements
     @Override
     public void onSinkronDeleteProdukError(String error) {
         //lanjut ke sync jual
-        sinkronInsertJualController.insert_jual();
+//        sinkronInsertJualController.insert_jual();
+
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -314,7 +370,11 @@ public class Sinkronizer implements
     @Override
     public void onSinkronAddJualError(String error) {
         //lanjutkan ke sync pembelian
-        sinkronInsertBeliController.insert_beli();
+//        sinkronInsertBeliController.insert_beli();
+
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -326,7 +386,11 @@ public class Sinkronizer implements
     @Override
     public void onSinkronAddBeliError(String error) {
         //lanjut ke get kategori
-        kategoriController.getKategoriList();
+//        kategoriController.getKategoriList();
+
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -338,7 +402,11 @@ public class Sinkronizer implements
     @Override
     public void onKategoriError(String error, List<Kategori> kategoriOffline) {
         //lanjut ke get brand
-        brandController.getBrandList();
+//        brandController.getBrandList();
+
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -350,7 +418,11 @@ public class Sinkronizer implements
     @Override
     public void onBrandError(String error, List<Brand> brandOffline) {
         //lanjut ke get unit
-        unitController.getUnitList();
+//        unitController.getUnitList();
+
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -362,7 +434,11 @@ public class Sinkronizer implements
     @Override
     public void onError(String error, List<Item> items) {
         //lanjut ke sync stok
-        stokController.getStok();
+//        stokController.getStok();
+
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -374,7 +450,11 @@ public class Sinkronizer implements
     @Override
     public void onUnitError(String error, List<Unit> units) {
         //lanjut ke get produk
-        barangController.getBarang();
+//        barangController.getBarang();
+
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override

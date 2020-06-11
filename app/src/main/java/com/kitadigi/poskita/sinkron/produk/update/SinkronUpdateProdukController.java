@@ -76,8 +76,9 @@ public class SinkronUpdateProdukController implements ISinkronUpdateProdukReques
             if (data==""){
                 //jika tidak ada data sama sekali
                 //langsung result-kan error
-                iSinkronUpdateProdukResult.onSinkronUpdateProdukError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
+//                iSinkronUpdateProdukResult.onSinkronUpdateProdukError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
 
+                iSinkronUpdateProdukResult.onSinkronUpdateProdukSuccess(null);
             }else{
                 //jika ada data yg mau di-sync
                 //munculkan progress

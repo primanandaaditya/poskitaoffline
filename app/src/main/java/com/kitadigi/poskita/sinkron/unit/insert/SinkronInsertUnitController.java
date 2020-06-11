@@ -61,8 +61,9 @@ public class SinkronInsertUnitController implements ISinkronAddUnitRequest {
             if (data==""){
                 //jika tidak ada data sama sekali
                 //langsung result-kan error
-                iSinkronAddUnitResult.onSinkronAddUnitError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
+//                iSinkronAddUnitResult.onSinkronAddUnitError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
 
+                iSinkronAddUnitResult.onSinkronAddUnitSuccess(null);
             }else{
                 //jika ada data yg mau di-sync
                 //munculkan progress

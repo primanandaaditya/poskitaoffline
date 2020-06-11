@@ -62,8 +62,9 @@ public class SinkronUpdateUnitController implements ISinkronUpdateUnitRequest {
             if (data==""){
                 //jika tidak ada data sama sekali
                 //langsung result-kan error
-                iSinkronUpdateUnitResult.onSinkronUpdateUnitError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
+//                iSinkronUpdateUnitResult.onSinkronUpdateUnitError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
 
+                iSinkronUpdateUnitResult.onSinkronUpdateUnitSuccess(null);
             }else{
 
                 //munculkan progress

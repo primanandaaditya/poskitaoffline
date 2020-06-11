@@ -70,8 +70,9 @@ public class SinkronInsertJualController implements ISinkronAddJualRequest {
             if (data==""){
                 //jika tidak ada data sama sekali
                 //langsung result-kan error
-                iSinkronAddJualResult.onSinkronAddJualError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
+//                iSinkronAddJualResult.onSinkronAddJualError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
 
+                iSinkronAddJualResult.onSinkronAddJualSuccess(null);
             }else{
                 //jika ada data yg mau di-sync
                 //munculkan progress

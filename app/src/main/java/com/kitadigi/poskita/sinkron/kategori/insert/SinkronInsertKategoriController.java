@@ -58,8 +58,7 @@ public class SinkronInsertKategoriController implements ISinkronAddKategoriReque
 
             if (data==""){
                 //jika tidak ada data sama sekali
-                //langsung result-kan error
-                iSinkronAddKategoriResult.onSinkronAddKategoriError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
+                iSinkronAddKategoriResult.onSinkronAddKategoriSuccess(null);
 
             }else{
                 //jika ada data yg mau di-sync

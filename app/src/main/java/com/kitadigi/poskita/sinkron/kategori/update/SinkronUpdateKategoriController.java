@@ -60,8 +60,9 @@ public class SinkronUpdateKategoriController implements ISinkronUpdateKategoriRe
             if (data==""){
                 //jika tidak ada data sama sekali
                 //langsung result-kan error
-                iSinkronUpdateKategoriResult.onSinkronUpdateKategoriError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
+//                iSinkronUpdateKategoriResult.onSinkronUpdateKategoriError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
 
+                iSinkronUpdateKategoriResult.onSinkronUpdateKategoriSuccess(null);
             }else{
 
                 //munculkan progress

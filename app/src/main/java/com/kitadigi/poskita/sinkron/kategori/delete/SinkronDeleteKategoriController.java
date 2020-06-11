@@ -57,9 +57,10 @@ public class SinkronDeleteKategoriController implements ISinkronDeleteKategoriRe
 
             if (data==""){
                 //jika tidak ada data sama sekali
-                //langsung result-kan error
-                iSinkronDeleteKategoriResult.onSinkronDeleteKategoriError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
+//                //langsung result-kan error
+//                iSinkronDeleteKategoriResult.onSinkronDeleteKategoriError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
 
+                iSinkronDeleteKategoriResult.onSinkronDeleteKategoriSuccess(null);
             }else{
 
                 //munculkan progress

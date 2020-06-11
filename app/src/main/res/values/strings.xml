@@ -77,6 +77,7 @@
     <string name="remark_sinkron" translatable="false">Sinkron data</string>
     <string name="pengaturan_sinkron" translatable="false">Pengaturan sinkron</string>
     <string name="interval" translatable="false">Interval</string>
+    <string name="lima_menit" translatable="false">5 menit</string>
     <string name="satu_jam" translatable="false">1 jam</string>
     <string name="dua_jam" translatable="false">2 jam</string>
     <string name="satu_hari" translatable="false">1 hari</string>

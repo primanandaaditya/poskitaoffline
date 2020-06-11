@@ -62,8 +62,9 @@ public class SinkronDeleteUnitController implements ISinkronDeleteUnitRequest {
             if (data==""){
                 //jika tidak ada data sama sekali
                 //langsung result-kan error
-                iSinkronDeleteUnitResult.onSinkronDeleteUnitError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
+                //iSinkronDeleteUnitResult.onSinkronDeleteUnitError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
 
+                iSinkronDeleteUnitResult.onSinkronDeleteUnitSuccess(null);
             }else{
 
                 //munculkan progress

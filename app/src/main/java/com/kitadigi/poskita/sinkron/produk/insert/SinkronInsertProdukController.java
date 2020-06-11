@@ -72,8 +72,9 @@ public class SinkronInsertProdukController implements ISinkronAddProdukRequest {
             if (data==""){
                 //jika tidak ada data sama sekali
                 //langsung result-kan error
-                iSinkronAddProdukResult.onSinkronAddProdukError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
+//                iSinkronAddProdukResult.onSinkronAddProdukError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
 
+                iSinkronAddProdukResult.onSinkronAddProdukSuccess(null);
             }else{
                 //jika ada data yg mau di-sync
                 //munculkan progress

@@ -61,8 +61,9 @@ public class SinkronInsertBrandController implements ISinkronAddBrandRequest {
             if (data==""){
                 //jika tidak ada data sama sekali
                 //langsung result-kan error
-                iSinkronAddBrandResult.onSinkronAddBrandError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
+//                iSinkronAddBrandResult.onSinkronAddBrandError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
 
+                iSinkronAddBrandResult.onSinkronAddBrandSuccess(null);
             }else{
                 //jika ada data yg mau di-sync
                 //munculkan progress
