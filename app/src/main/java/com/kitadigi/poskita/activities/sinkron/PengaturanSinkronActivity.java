@@ -111,7 +111,7 @@ public class PengaturanSinkronActivity extends BaseActivity {
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
         manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
-        Toast.makeText(this, "Alarm Set", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getResources().getString(R.string.alarm_diaktifkan), Toast.LENGTH_SHORT).show();
     }
 
 }

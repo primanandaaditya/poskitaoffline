@@ -75,7 +75,10 @@
     <string name="remark_printer" translatable="false">Printer</string>
     <string name="remark_wholesale">Wholesale</string>
     <string name="remark_sinkron" translatable="false">Sinkron data</string>
-    <string name="pengaturan_sinkron" translatable="false">Pengaturan sinkron</string>
+    <string name="pengaturan_sinkron" translatable="false">Pengaturan alarm sinkron</string>
+    <string name="alarm_dimatikan" translatable="false">Alarm dimatikan</string>
+    <string name="alarm_diaktifkan" translatable="false">Alarm diaktifkan</string>
+    <string name="matikan_alarm" translatable="false">Matikan alarm</string>
     <string name="interval" translatable="false">Interval</string>
     <string name="lima_menit" translatable="false">5 menit</string>
     <string name="satu_jam" translatable="false">1 jam</string>

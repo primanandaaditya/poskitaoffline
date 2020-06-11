@@ -29,12 +29,9 @@ public class DeviceBootReceiver extends BroadcastReceiver {
 
             AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-            interval=5000l;
+//            interval=5000l;
             manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
 
-////            manager.setExact(AlarmManager.RTC_WAKEUP, interval, pendingIntent);
-//
-//            manager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
             Toast.makeText(context, "Alarm Set", Toast.LENGTH_SHORT).show();
         }
     }

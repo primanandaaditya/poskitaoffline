@@ -18,6 +18,7 @@ import java.util.Calendar;
 
 public class AlarmReceiver extends BroadcastReceiver implements ISinkronizer {
 
+    InternetChecker internetChecker;
     Calendar calendar = Calendar.getInstance();
     Sinkronizer sinkronizer;
     RemoteViews remoteViews;
@@ -29,46 +30,71 @@ public class AlarmReceiver extends BroadcastReceiver implements ISinkronizer {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        selesai= context.getResources().getString(R.string.proses_sinkron_telah_selesai);
+        //cek dulu apakah ada internet
+        internetChecker = new InternetChecker();
 
-        //siapkan layout untuk notif
-        remoteViews = new RemoteViews(context.getPackageName(), R.layout.notifikasi_sinkron_small);
+        //jika ada internet
+        if (internetChecker.haveNetwork(context)){
 
+            selesai= context.getResources().getString(R.string.proses_sinkron_telah_selesai);
 
-        //coba buat notifikasi
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
-
-        //pasang icon pada notifikasi
-        mBuilder.setSmallIcon(R.drawable.ic_shopping_cart);
-
-
-        //pasang icon large/besar
-        Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
-                R.drawable.ic_shopping_cart);
-        mBuilder.setLargeIcon(icon);
+            //siapkan layout untuk notif
+            remoteViews = new RemoteViews(context.getPackageName(), R.layout.notifikasi_sinkron_small);
 
 
+            //coba buat notifikasi
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
 
-        //pasang layout buatan sendiri
-        mBuilder.setCustomContentView(remoteViews);
-        mBuilder.setStyle(new NotificationCompat.DecoratedCustomViewStyle());
-
-        //pasang title
-//        mBuilder.setContentTitle(context.getResources().getString(R.string.kitadigi_poskita));
-
-        //pasang subtitle
-//        mBuilder.setContentText(context.getResources().getString(R.string.proses_sinkron_sedang_diproses));
-
-        //mulai create notifikasi dan tampilkan di HP
-        mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(0, mBuilder.build());
+            //pasang icon pada notifikasi
+            mBuilder.setSmallIcon(R.drawable.ic_shopping_cart);
 
 
-        Log.d(calendar.getTime().toString(),"Proses sinkronisasi sedang berjalan...");
+            //pasang icon large/besar
+            Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
+                    R.drawable.ic_shopping_cart);
+            mBuilder.setLargeIcon(icon);
 
-        //mulai proses sinkronisasi ke server
-        sinkronizer = new Sinkronizer(context, this);
-        sinkronizer.doSinkron();
+
+            //pasang layout buatan sendiri
+            mBuilder.setCustomContentView(remoteViews);
+            mBuilder.setStyle(new NotificationCompat.DecoratedCustomViewStyle());
+
+            //mulai create notifikasi dan tampilkan di HP
+            mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            mNotificationManager.notify(0, mBuilder.build());
+
+            //mulai proses sinkronisasi ke server
+            sinkronizer = new Sinkronizer(context, this);
+            sinkronizer.doSinkron();
+
+        }else{
+
+            //coba buat notifikasi
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
+
+            //pasang icon pada notifikasi
+            mBuilder.setSmallIcon(R.drawable.ic_shopping_cart);
+
+
+            //pasang icon large/besar
+            Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
+                    R.drawable.ic_shopping_cart);
+            mBuilder.setLargeIcon(icon);
+
+
+            //pasang title
+            mBuilder.setContentTitle(context.getResources().getString(R.string.kitadigi_poskita));
+
+            //pasang subtitle
+            mBuilder.setContentText(context.getResources().getString(R.string.tidak_ada_koneksi_internet));
+
+            //mulai create notifikasi dan tampilkan di HP
+            mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            mNotificationManager.notify(0, mBuilder.build());
+
+        }
+
+
 
     }
 

@@ -1,7 +1,11 @@
 package com.kitadigi.poskita.fragment.sinkron;
 
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +16,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.activities.massal.kategori.IMKategoriAdapter;
@@ -68,6 +73,7 @@ import com.kitadigi.poskita.sinkron.unit.insert.ISinkronAddUnitResult;
 import com.kitadigi.poskita.sinkron.unit.insert.SinkronInsertUnitController;
 import com.kitadigi.poskita.sinkron.unit.update.ISinkronUpdateUnitResult;
 import com.kitadigi.poskita.sinkron.unit.update.SinkronUpdateUnitController;
+import com.kitadigi.poskita.util.AlarmReceiver;
 import com.kitadigi.poskita.util.InternetChecker;
 import com.kitadigi.poskita.util.SessionManager;
 import com.kitadigi.poskita.util.Sinkronizer;
@@ -76,6 +82,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+
+import static android.content.Context.ALARM_SERVICE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -99,7 +107,7 @@ public class SinkronFragment extends BaseFragment implements
 
     //init widget
     TextView tvLastSync;
-    Button btnSinkron, btnPengaturan;
+    Button btnSinkron, btnPengaturan, btnMatikanAlarm;
     SweetAlertDialog sweetAlertDialog;
 //    ListView lv;
 
@@ -230,6 +238,18 @@ public class SinkronFragment extends BaseFragment implements
             }
         });
 
+        btnMatikanAlarm = (Button)getActivity().findViewById(R.id.btnMatikanAlarm);
+        this.applyFontBoldToButton(btnMatikanAlarm);
+        btnMatikanAlarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PackageManager pm  = getActivity().getPackageManager();
+                ComponentName componentName = new ComponentName(getActivity(), AlarmReceiver.class);
+                pm.setComponentEnabledSetting(componentName,PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                        PackageManager.DONT_KILL_APP);
+                Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.alarm_dimatikan), Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 
