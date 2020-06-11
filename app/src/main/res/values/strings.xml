@@ -363,6 +363,7 @@
     <string name="title_activity_report_analisa_tab" translatable="false">ReportAnalisaTabActivity</string>
     <string name="tab_text_1" translatable="false">Tab 1</string>
     <string name="tab_text_2" translatable="false">Tab 2</string>
+    <string name="title_activity_coba">CobaActivity</string>
 
 </resources>
 

@@ -125,8 +125,6 @@ public class StokSyncAdapter extends RecyclerView.Adapter<StokSyncAdapter.DataVi
 //
             //cek apakah ada file tersebut, buat jaga-jaga
             if(imgFile.exists()){
-//                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-//                holder.iv_icon.setImageBitmap(myBitmap);
                 Picasso.with(mContext)
                         .load(imgFile)
                         .into(holder.iv_icon);
@@ -137,6 +135,10 @@ public class StokSyncAdapter extends RecyclerView.Adapter<StokSyncAdapter.DataVi
         }
 
 
+        //fungsi ini untuk menampilkan popup
+        //berisi gambar,harga jual, dan stok
+        //juga tombol
+        //lihat JualFragment.java di fungsi addItems()
         holder.rl_items.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -203,11 +205,10 @@ public class StokSyncAdapter extends RecyclerView.Adapter<StokSyncAdapter.DataVi
                     Log.d("qty sdh terbeli", String.valueOf(qty_yang_sudah_terbeli));
                     Log.d("qty total",String.valueOf(qty_total));
 
-
-//                    Toast.makeText(mContext,String.valueOf(qty_yang_sudah_terjual),Toast.LENGTH_SHORT).show();
+                    //tampilkan popup dari jualfragment.java
+                    //lihat fungsi addItems()
                     jualFragment.addItems(stok.getKode_id(),stok.getName_product(),stok.getSell_price(), bitmap,"", qty_available);
 
-//                    jualFragment.addItems(stok.getId().toString(),stok.getName_product(),stok.getSell_price(), bitmap,"", stok.getQty_available());
                 }
 
             }

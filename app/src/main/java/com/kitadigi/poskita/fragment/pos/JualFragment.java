@@ -163,6 +163,7 @@ public class JualFragment extends BaseFragment implements IStokResult {
 
 
     void tampilkanKeranjang(){
+
         //cari subtotal penjualan offline
         final SubTotalModel subTotalModel;
         subTotalModel = sessionManager.sumTotalPenjualanOffline();
@@ -574,8 +575,8 @@ public class JualFragment extends BaseFragment implements IStokResult {
         ImageView iv_delete_shortcut        = dialogView.findViewById(R.id.iv_delete_shortcut);
         TextView tv_items                   = dialogView.findViewById(R.id.tv_items);
         TextView tv_price                   = dialogView.findViewById(R.id.tv_price);
-        final TextView tv_qty                     = dialogView.findViewById(R.id.tv_qty);
-        final NumberPicker np_qty                 = dialogView.findViewById(R.id.np_qty);
+        final TextView tv_qty               = dialogView.findViewById(R.id.tv_qty);
+        final NumberPicker np_qty           = dialogView.findViewById(R.id.np_qty);
 
         np_qty.setMinValue(1);
 

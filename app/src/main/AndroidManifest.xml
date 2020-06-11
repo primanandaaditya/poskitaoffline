@@ -17,8 +17,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -28,7 +27,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.sinkron.PengaturanSinkronActivity"></activity>
+        <activity android:name=".activities.sinkron.PengaturanSinkronActivity" />
         <activity android:name=".activities.reportoffline.analisa.ROAnalisaActivity" />
         <activity android:name=".activities.reportoffline.terlaris.ROTerlarisActivity" />
         <activity android:name=".activities.reportoffline.kartustok.ROKartuStokActivity" />
@@ -143,18 +142,16 @@
 
         <receiver android:name=".util.AlarmReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
-        </receiver>
-
-        <!-- Will not be called unless the application explicitly enables it -->
-        <receiver android:name=".util.DeviceBootReceiver"
+        </receiver> <!-- Will not be called unless the application explicitly enables it -->
+        <receiver
+            android:name=".util.DeviceBootReceiver"
             android:enabled="false">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>
