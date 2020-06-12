@@ -31,6 +31,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -38,6 +39,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.kitadigi.poskita.base.BaseActivity;
 import com.kitadigi.poskita.dao.brand.Brand;
 import com.kitadigi.poskita.dao.kategori.Kategori;
@@ -79,11 +82,17 @@ import com.kitadigi.poskita.util.ResizeImage;
 import com.kitadigi.poskita.util.UrlToBitmap;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+
 public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
         IKategoriResult,
         IBrandResult,
         IUnitResult
 {
+
+    //qr code scanner object
+    private IntentIntegrator qrScan;
+
 
     private static final String TAG = ItemsDataActivity.class.getName();
     Context context;
@@ -109,6 +118,7 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
     ImageView iv_back, iv_preview_photo;
     Button btn_photo, btn_save;
     Spinner sp_unit_id, sp_brand_id, sp_kategori;
+    ImageButton ib_barkode;
 
     /* typeface fonts */
     Typeface fonts, fontsItalic;
@@ -148,6 +158,17 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
         setContentView(R.layout.activity_items_data);
         context = this;
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+
+        //init find id
+        findID();
+
+
+    }
+
+    void findID(){
+        //init barcode scanner
+        qrScan = new IntentIntegrator(ItemsDataActivity.this);
 
         //init id spinner kategori dan brand
         id_brand=0;
@@ -197,6 +218,8 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
         sp_unit_id = findViewById(R.id.sp_unit_id);
         sp_brand_id = findViewById(R.id.sp_brand_id);
         sp_kategori = findViewById(R.id.sp_kategori);
+
+
 
 
 
@@ -422,9 +445,16 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
             }
         });
 
-
+        //init imagebutton
+        ib_barkode                  = (ImageButton)findViewById(R.id.ib_barkode);
+        //jika diklik akan scan barkode
+        ib_barkode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                qrScan.initiateScan();
+            }
+        });
     }
-
 
     void dialogKameraGaleri(){
         //,munculkan dialog kepada user
@@ -529,6 +559,19 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
             default:
                 super.onActivityResult(requestCode, resultCode, data);
                 break;
+        }
+
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            //if qrcode has nothing in it
+            if (result.getContents() == null) {
+                Toast.makeText(this, getResources().getString(R.string.barkode_tidak_ditemukan), Toast.LENGTH_LONG).show();
+            } else {
+                et_barkode.setText(result.getContents().toString());
+//                Toast.makeText(ItemsDataActivity.this, result.getContents().toString(),Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 

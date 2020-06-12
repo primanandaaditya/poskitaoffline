@@ -238,20 +238,40 @@
                     android:textSize="@dimen/text_9" />
 
 
-                <EditText android:id="@+id/et_barkode"
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen_40"
-                    android:padding="@dimen/dimen_5"
-                    android:textColor="@color/colorRed"
-                    android:hint="@string/remark_barkode"
-                    android:textSize="@dimen/text_12"
-                    android:layout_gravity="center"
-                    android:nextFocusDown="@id/et_stok"
-                    android:background="@drawable/button_rounded_white"
-                    android:layout_marginStart="@dimen/dimen_10"
-                    android:layout_marginEnd="@dimen/dimen_10"
-                    android:textColorHint="@color/colorRed"
-                    />
+                    android:layout_height="wrap_content">
+
+                    <EditText android:id="@+id/et_barkode"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_40"
+                        android:padding="@dimen/dimen_5"
+                        android:textColor="@color/colorRed"
+                        android:hint="@string/remark_barkode"
+                        android:textSize="@dimen/text_12"
+                        android:layout_gravity="center"
+                        android:nextFocusDown="@id/et_stok"
+                        android:background="@drawable/button_rounded_white"
+                        android:layout_marginStart="@dimen/dimen_10"
+                        android:layout_marginEnd="@dimen/dimen_10"
+                        android:textColorHint="@color/colorRed"
+                        />
+
+                    <ImageButton
+                       android:layout_marginRight="@dimen/dimen_10"
+                        android:background="@drawable/button_rounded_red"
+                        android:id="@+id/ib_barkode"
+                        android:src="@drawable/ic_barkode"
+                        android:layout_weight="2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </ImageButton>
+
+                </LinearLayout>
+
 
 
 

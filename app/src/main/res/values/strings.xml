@@ -74,6 +74,7 @@
     <string name="remark_items">Items</string>
     <string name="remark_printer" translatable="false">Printer</string>
     <string name="remark_wholesale">Wholesale</string>
+    <string name="barkode_tidak_ditemukan" translatable="false">Barkode tidak ditemukan</string>
     <string name="remark_sinkron" translatable="false">Sinkron data</string>
     <string name="pengaturan_sinkron" translatable="false">Pengaturan alarm sinkron</string>
     <string name="alarm_dimatikan" translatable="false">Alarm dimatikan</string>
