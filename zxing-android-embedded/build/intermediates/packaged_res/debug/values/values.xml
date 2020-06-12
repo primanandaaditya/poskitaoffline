@@ -32,6 +32,7 @@
     <string name="library_zxingandroidembedded_repositoryLink" translatable="false">https://github.com/journeyapps/zxing-android-embedded</string>
     <string name="zxing_app_name">Scanner barkode</string>
     <string name="zxing_button_ok">OK</string>
+    <string name="zxing_kitadigi_poskita" translatable="false">KITADIGI POSKITA</string>
     <string name="zxing_msg_camera_framework_bug">Maaf, ada masalah pada kamera. Anda dapat me-restart alat ini</string>
     <string name="zxing_msg_default_status">Tempatkan barkode dalam kotak ini</string>
     <style name="zxing_CaptureTheme" parent="android:Theme.Holo.NoActionBar.Fullscreen">

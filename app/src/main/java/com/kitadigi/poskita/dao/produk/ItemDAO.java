@@ -57,4 +57,7 @@ public interface ItemDAO {
 
     @Query("SELECT * FROM item WHERE kode_id =:kode_id")
     public Item getItemByKodeId(String kode_id);
+
+    @Query("SELECT * FROM item WHERE code_product = :code_product")
+    public Item getItemByBarkode(String code_product);
 }

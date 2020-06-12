@@ -207,6 +207,8 @@ public class StokSyncAdapter extends RecyclerView.Adapter<StokSyncAdapter.DataVi
 
                     //tampilkan popup dari jualfragment.java
                     //lihat fungsi addItems()
+                    //untuk parameter id pada fungsi jualFragment.addItems(), diganti dengan kode_id
+                    //sehubungan dengan sinkronisasi tabel penjualan
                     jualFragment.addItems(stok.getKode_id(),stok.getName_product(),stok.getSell_price(), bitmap,"", qty_available);
 
                 }

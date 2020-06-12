@@ -64,6 +64,7 @@ dimen notification_small_icon_size_as_large
 dimen notification_subtext_size
 dimen notification_top_pad
 dimen notification_top_pad_large_text
+drawable ic_poskita
 drawable notification_action_background
 drawable notification_bg
 drawable notification_bg_low
@@ -164,6 +165,7 @@ string library_zxingandroidembedded_repositoryLink
 string status_bar_notification_info_overflow
 string zxing_app_name
 string zxing_button_ok
+string zxing_kitadigi_poskita
 string zxing_msg_camera_framework_bug
 string zxing_msg_default_status
 style TextAppearance_Compat_Notification

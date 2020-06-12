@@ -16,7 +16,6 @@
  -->
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <!--
     This Activity is typically full-screen. Therefore we can safely use centerCrop scaling with
     a SurfaceView, without fear of weird artifacts. -->

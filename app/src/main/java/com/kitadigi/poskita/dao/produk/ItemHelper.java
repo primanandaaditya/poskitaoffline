@@ -100,4 +100,8 @@ public class ItemHelper {
         return itemDAO.getItemByKodeId(kode_id);
     }
 
+    public Item getItemByBarkode(String barkode){
+        return itemDAO.getItemByBarkode(barkode);
+    }
+
 }

@@ -6,9 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -37,6 +39,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.kitadigi.poskita.MainActivity;
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.activities.pos.SubTransaksiActivity;
@@ -49,6 +53,8 @@ import com.kitadigi.poskita.dao.jualdetail.JualDetail;
 import com.kitadigi.poskita.dao.jualdetail.JualDetailHelper;
 import com.kitadigi.poskita.dao.jualmaster.JualMaster;
 import com.kitadigi.poskita.dao.jualmaster.JualMasterHelper;
+import com.kitadigi.poskita.dao.produk.Item;
+import com.kitadigi.poskita.dao.produk.ItemHelper;
 import com.kitadigi.poskita.dao.stok.Stok;
 import com.kitadigi.poskita.database.Database;
 import com.kitadigi.poskita.fragment.POSFragment;
@@ -62,11 +68,13 @@ import com.kitadigi.poskita.util.Constants;
 import com.kitadigi.poskita.util.SessionManager;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -107,6 +115,7 @@ public class JualFragment extends BaseFragment implements IStokResult {
     private RecyclerView recycler_view;
     private EditText et_search;
     private RelativeLayout rl_content, rl_button, rl_cart;
+    private FloatingActionButton fab;
 
     /* Shimmer */
     private ShimmerFrameLayout mShimmerViewContainer;
@@ -126,19 +135,11 @@ public class JualFragment extends BaseFragment implements IStokResult {
 
     //init controller
     StokController stokController;
-    //items
-//    private List<Items> items = new ArrayList<>();
-//    private List<Items> itemsAll = new ArrayList<>();
-//    private ItemsAddNewAdapter itemsAdapter;
-//    private List<Items> itemsSelect = new ArrayList<>();
-//    private ItemsSelectAdapter itemsSelectAdapter;
+
 
     //variable
     int check, checkTransaction, checkItems, checkTemp, checkAddress;
-    String jsonListItems;
-    String jsonTransaction;
     String now;
-    String kodeTransaction;
     int totalQty;
     int total;
     String jsonListAll;
@@ -146,6 +147,9 @@ public class JualFragment extends BaseFragment implements IStokResult {
     private SweetAlertDialog sweetAlertDialog;
     private AlertDialog alertDialog;
     LayoutInflater inflater = null;
+
+    //init scanner barkode
+    IntentIntegrator intentIntegrator;
 
     public JualFragment() {
         // Required empty public constructor
@@ -219,6 +223,10 @@ public class JualFragment extends BaseFragment implements IStokResult {
     private void initMain(View view) {
 
 
+        //init barkode scanner
+//        intentIntegrator = new IntentIntegrator.forSupportFragment(JualFragment.this);
+//        IntentIntegrator.forSupportFragment(MyFragment.this).initiateScan();
+
         //session manager untuk myimpen penjualan offline
         sessionManager = new SessionManager(getActivity());
 
@@ -254,6 +262,7 @@ public class JualFragment extends BaseFragment implements IStokResult {
         rl_content                      = view.findViewById(R.id.rl_content);
         rl_button                       = view.findViewById(R.id.rl_button);
         rl_cart                         = view.findViewById(R.id.rl_cart);
+        fab                             = view.findViewById(R.id.fab);
 
 
         /* Shimmer */
@@ -420,6 +429,17 @@ public class JualFragment extends BaseFragment implements IStokResult {
             db.addListItemsTemp("8","Masako Ayam 100GR", "10000", "15000","https://assets.klikindomaret.com/products/10035898/10035898_1.jpg", "Masako Ayam 100GR","2", "1");
         }
 
+
+        //tombol untuk scan barkode
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //scan barkode
+//                intentIntegrator.initiateScan();
+                IntentIntegrator.forSupportFragment(JualFragment.this).initiateScan();
+            }
+        });
 
         //tarik data produk dari server
         refreshData();
@@ -785,4 +805,123 @@ public class JualFragment extends BaseFragment implements IStokResult {
         return hasil;
     }
 
+
+
+
+    //onActivityResult untuk callback barkode scanner
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        //semua kode dibawah sebagai hasil tangkapan barkode scanner
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+
+        //cek apakah ada hasil scan
+        if (result.getContents()==null){
+
+            //jika null/tidak ada
+            Toast.makeText(getActivity(),getActivity().getResources().getString(R.string.barkode_tidak_ditemukan), Toast.LENGTH_SHORT).show();
+
+
+        }else {
+
+            //tampung dalam variabel
+            String barcode = result.getContents();
+
+            Log.d("barkode", barcode);
+
+            //cari dalam sqlite, barkode yang di-scan
+            //init dulu sqlite-nya
+            ItemHelper itemHelper = new ItemHelper(getActivity());
+
+            //tampung dalam class
+            if (itemHelper.getItemByBarkode(barcode) == null){
+
+                //jika tidak ada data barang yang sesuai barkode
+                Toast.makeText(getActivity(),getActivity().getResources().getString(R.string.barkode_tidak_ditemukan) + " " + barcode, Toast.LENGTH_SHORT).show();
+            }else{
+
+                //jika ada data yang sesuai
+                //tampung dalam variabel
+                Item item = itemHelper.getItemByBarkode(barcode);
+
+                Log.d("nama", item.getName_product());
+                Log.d("kode id", item.getKode_id());
+
+                //tampung semua properti item dalam variabel
+                String kodeId = item.getKode_id().toString();
+                String namaItem = item.getName_product().toString();
+                String hargaJual = item.getSell_price().toString();
+                String tipe = item.getTypes().toString();
+                String pathFoto = item.getImage();
+                Bitmap bitmap=null;
+
+                //buat file baru dari pathFoto
+                File imgFile = new File(pathFoto);
+//
+                //cek apakah ada file tersebut, buat jaga-jaga
+                if(imgFile.exists()){
+                    bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                }
+
+                //kode dibawah ini untuk menentukan berapa qty available
+                //ditinjau dari jumlah pembelian, penjualan, item yang sudah dimasukkan dalam cart
+                int qty_yang_sudah_diinput;
+                int qty_yang_sudah_terjual;
+                int qty_yang_sudah_terbeli;
+                int qty_total;
+                int qty_available;
+                int qty_stok_sekarang;
+
+
+                qty_stok_sekarang = item.getQty_stock();
+
+
+
+                //cari jumlah barang yang sudah di-add ke keranjang
+                qty_yang_sudah_diinput = sessionManager.jumlahItemYangDiinputKePenjualanOffline(kodeId);
+
+                //cari jumlah barang terjual yang ada disqlite, tapi belum di-sync
+                qty_yang_sudah_terjual = getJumlahJual(kodeId);
+
+                //cari jumlah barang terbeli yang ada disqlite, tapi belum di-sync
+                qty_yang_sudah_terbeli = getJumlahBeli(kodeId);
+                Log.d("terbeli", String.valueOf(qty_yang_sudah_terbeli));
+
+                //jumlahkan kedua variabel diatas, nantinya akan dijadikan pengurang
+                qty_total = qty_stok_sekarang + qty_yang_sudah_terbeli - (qty_yang_sudah_diinput + qty_yang_sudah_terjual);
+
+                //jika stok =0 atau jumlah stok sama dengan yang diinputkan
+                //munculkan pesan, kalau overstok
+                if ( (qty_stok_sekarang + qty_yang_sudah_terbeli )<=0 || ( (qty_stok_sekarang + qty_yang_sudah_terbeli ) - qty_yang_sudah_diinput == 0)  ){
+                    Toast.makeText(getActivity(),getActivity().getResources().getString(R.string.stok_kosong),Toast.LENGTH_SHORT).show();
+                }else{
+                    //jika lebih dari 0
+                    //tampilkan dialog
+
+                    //karena sekarang ada mode OFFLINE,
+                    //maka fungsi addItems dibawah menggunakan kode_id,
+                    //bukan id item lagi
+
+                    //kurangkan qty_available pada stok dengan qty_total
+                    //tambahkan dengan qty_terbeli, karena pembelian sifatnya menambah stok
+                    qty_available = qty_total;
+                    Log.d("qty sdh diinput", String.valueOf(qty_yang_sudah_diinput));
+                    Log.d("qty sdh terjual", String.valueOf(qty_yang_sudah_terjual));
+                    Log.d("qty sdh terbeli", String.valueOf(qty_yang_sudah_terbeli));
+                    Log.d("qty total",String.valueOf(qty_total));
+
+                    //tampilkan popup dari jualfragment.java
+                    //lihat fungsi addItems()
+                    //untuk parameter id pada fungsi jualFragment.addItems(), diganti dengan kode_id
+                    //sehubungan dengan sinkronisasi tabel penjualan
+//                    jualFragment.addItems(stok.getKode_id(),stok.getName_product(),stok.getSell_price(), bitmap,"", qty_available);
+                    addItems(kodeId,namaItem,hargaJual,bitmap,tipe,qty_available);
+
+                }
+            }
+        }
+
+    }
 }
