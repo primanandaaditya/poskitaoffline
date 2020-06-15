@@ -818,7 +818,7 @@ public class JualFragment extends BaseFragment implements IStokResult {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
         //cek apakah ada hasil scan
-        if (result.getContents()==null){
+        if (result == null){
 
             //jika null/tidak ada
             Toast.makeText(getActivity(),getActivity().getResources().getString(R.string.barkode_tidak_ditemukan), Toast.LENGTH_SHORT).show();

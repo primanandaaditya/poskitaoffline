@@ -187,34 +187,26 @@ public class StokController implements IStokRequest {
                 if (item.getSync_delete()== Constants.STATUS_BELUM_SYNC ){
 
                 }else{
-                    //jika tidak di-delete, dimasukkan
-                    //tapi cek dulu status sync insert-nya
-                    //jika belum sync
-                    //masukkan saja
-                    //antisipasi: user sudah sync online, kemudian dia masukin item baru secara offline
-                    if (item.getSync_insert()==Constants.STATUS_BELUM_SYNC){
 
-                        stok=new Stok();
-                        stok.setKode_id(item.getKode_id());
-                        stok.setBrands_id(item.getBrand_id().toString());
-                        stok.setBrands_name(item.getBrand_name());
-                        stok.setCategory_id(item.getCategory_id().toString());
-                        stok.setCode_product(item.getCode_product());
-                        stok.setId(item.getId());
-                        stok.setName_category(item.getCategory_name());
-                        stok.setName_product(item.getName_product());
-                        stok.setPurchase_price(item.getPurchase_price().toString());
-                        stok.setQty_available(item.getQty_stock());
-                        stok.setSell_price(item.getSell_price().toString());
-                        stok.setTypes(item.getTypes());
-                        stok.setUnits_id(item.getUnit_id().toString());
-                        stok.setUnits_name(item.getUnit_name());
-                        stok.setImage(item.getImage());
-                        stokList.add(stok);
+                    //masukkan semua item ke stok controller atau layar POS
+                    stok=new Stok();
+                    stok.setKode_id(item.getKode_id());
+                    stok.setBrands_id(item.getBrand_id().toString());
+                    stok.setBrands_name(item.getBrand_name());
+                    stok.setCategory_id(item.getCategory_id().toString());
+                    stok.setCode_product(item.getCode_product());
+                    stok.setId(item.getId());
+                    stok.setName_category(item.getCategory_name());
+                    stok.setName_product(item.getName_product());
+                    stok.setPurchase_price(item.getPurchase_price().toString());
+                    stok.setQty_available(item.getQty_stock());
+                    stok.setSell_price(item.getSell_price().toString());
+                    stok.setTypes(item.getTypes());
+                    stok.setUnits_id(item.getUnit_id().toString());
+                    stok.setUnits_name(item.getUnit_name());
+                    stok.setImage(item.getImage());
+                    stokList.add(stok);
 
-                    }else{
-
-                    }
 
                     //dapatkan semua list stok dari tabel sqlite
                     List<Stok> stokDariTabel = stokHelper.semuaStok();
@@ -222,7 +214,6 @@ public class StokController implements IStokRequest {
                     //tambahkan dengan stokList
                     stokList.addAll(stokDariTabel);
 
-                    Log.d("gbr stok gagal", stok.getImage());
                 }
             }
             iStokResult.onStokError("", stokList);
