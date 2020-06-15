@@ -114,6 +114,7 @@
 
 
                 <TextView
+                    android:visibility="gone"
                     android:layout_marginStart="@dimen/dimen_10"
                     android:layout_marginEnd="@dimen/dimen_10"
                     android:text="@string/nama_supplier"
@@ -125,6 +126,7 @@
                     android:textSize="@dimen/text_9" />
 
                 <Spinner
+                    android:visibility="gone"
                     android:entries="@array/dummy_supplier"
                     android:id="@+id/sp_supplier"
                     android:padding="@dimen/dimen_5"
@@ -168,6 +170,35 @@
                     android:textColorHint="@color/colorRed"
                     />
 
+
+
+                <TextView
+                    android:id="@+id/tv_label_tanggal"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:text="@string/tanggal"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGreyText_2"
+                    android:textSize="@dimen/text_9" />
+
+
+                <EditText android:id="@+id/et_tanggal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_40"
+                    android:padding="@dimen/dimen_5"
+                    android:textColor="@color/colorRed"
+                    android:hint="@string/tanggal"
+                    android:textSize="@dimen/text_12"
+                    android:layout_gravity="center"
+                    android:inputType="textCapWords"
+                    android:imeOptions="actionNext"
+                    android:background="@drawable/button_rounded_white"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:textColorHint="@color/colorRed"
+                    />
 
 
                 <Button

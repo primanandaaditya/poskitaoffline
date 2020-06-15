@@ -95,7 +95,7 @@ public class PengaturanSinkronActivity extends BaseActivity {
                 }
 
                 //simpan di session
-                interval = 5000;
+//                interval = 5000;
                 sessionManager.createIntervalSinkron(interval);
 
                 //mulai pasang alarm

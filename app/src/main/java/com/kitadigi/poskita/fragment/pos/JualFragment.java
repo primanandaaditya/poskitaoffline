@@ -821,15 +821,12 @@ public class JualFragment extends BaseFragment implements IStokResult {
         if (result == null){
 
             //jika null/tidak ada
-            Toast.makeText(getActivity(),getActivity().getResources().getString(R.string.barkode_tidak_ditemukan), Toast.LENGTH_SHORT).show();
 
 
         }else {
 
             //tampung dalam variabel
             String barcode = result.getContents();
-
-            Log.d("barkode", barcode);
 
             //cari dalam sqlite, barkode yang di-scan
             //init dulu sqlite-nya
@@ -839,15 +836,12 @@ public class JualFragment extends BaseFragment implements IStokResult {
             if (itemHelper.getItemByBarkode(barcode) == null){
 
                 //jika tidak ada data barang yang sesuai barkode
-                Toast.makeText(getActivity(),getActivity().getResources().getString(R.string.barkode_tidak_ditemukan) + " " + barcode, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),getActivity().getResources().getString(R.string.barkode_tidak_ditemukan) + ":" + barcode, Toast.LENGTH_SHORT).show();
             }else{
 
                 //jika ada data yang sesuai
                 //tampung dalam variabel
                 Item item = itemHelper.getItemByBarkode(barcode);
-
-                Log.d("nama", item.getName_product());
-                Log.d("kode id", item.getKode_id());
 
                 //tampung semua properti item dalam variabel
                 String kodeId = item.getKode_id().toString();

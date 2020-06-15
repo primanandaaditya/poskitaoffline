@@ -1,11 +1,16 @@
 package com.kitadigi.poskita.activities.pembelian;
 
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -16,11 +21,15 @@ import com.kitadigi.poskita.MainActivity;
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.base.BaseActivity;
 import com.kitadigi.poskita.base.BaseResponse;
+import com.kitadigi.poskita.util.DateUtil;
 import com.kitadigi.poskita.util.SessionManager;
 import com.kitadigi.poskita.util.SpinnerFormat;
 import com.kitadigi.poskita.util.StringUtil;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,8 +40,8 @@ public class KonfirmasiPembelianActivity extends BaseActivity implements IAddPem
     AddPembelianController addPembelianController;
 
     //init widget
-    TextView tv_nama_supplier,tv_nomor_referensi,tv_uang_dibayar,tv_total_pembelian, tv_nav_header;
-    EditText et_nomor_referensi, et_uang_dibayar, et_total_pembelian;
+    TextView tv_label_tanggal,tv_nama_supplier,tv_nomor_referensi,tv_uang_dibayar,tv_total_pembelian, tv_nav_header;
+    EditText et_nomor_referensi, et_uang_dibayar, et_total_pembelian, et_tanggal;
     Spinner sp_supplier;
     Button btnSave;
     ImageView iv_back;
@@ -45,6 +54,7 @@ public class KonfirmasiPembelianActivity extends BaseActivity implements IAddPem
 
     //session untuk menghapus ppembelian offline, kalau sudah menyimpan
     SessionManager sessionManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,9 +90,11 @@ public class KonfirmasiPembelianActivity extends BaseActivity implements IAddPem
         //findid
         sp_supplier=(Spinner)findViewById(R.id.sp_supplier);
         et_uang_dibayar=(EditText)findViewById(R.id.et_uang_dibayar);
+        et_tanggal = (EditText)findViewById(R.id.et_tanggal);
         et_total_pembelian=(EditText)findViewById(R.id.et_total_pembelian);
        et_nomor_referensi =(EditText) findViewById(R.id.et_nomor_referensi);
        tv_nomor_referensi=(TextView)findViewById(R.id.tv_nomor_referensi);
+       tv_label_tanggal=(TextView)findViewById(R.id.tv_label_tanggal);
        tv_nama_supplier=(TextView)findViewById(R.id.tv_nama_supplier);
        tv_uang_dibayar=(TextView)findViewById(R.id.tv_uang_dibayar);
        tv_nav_header=(TextView)findViewById(R.id.tv_nav_header);
@@ -101,6 +113,8 @@ public class KonfirmasiPembelianActivity extends BaseActivity implements IAddPem
        this.applyFontBoldToEditText(et_total_pembelian);
        this.applyFontBoldToTextView(tv_total_pembelian);
        this.applyFontBoldToTextView(tv_nav_header);
+       this.applyFontBoldToTextView(tv_label_tanggal);
+       this.applyFontRegularToEditText(et_tanggal);
 
 
 
@@ -176,21 +190,29 @@ public class KonfirmasiPembelianActivity extends BaseActivity implements IAddPem
         //tampilkan total pembelian dari intent ke et_total_pembelian
         et_total_pembelian.setText(total_pembelian.toString());
 
+        //textbox tanggal
+        //jika diklik, muncul datepicker
+        et_tanggal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //untuk memunculkan dialog date picker
+                DateUtil dateUtil=new DateUtil();
+                dateUtil.dateDialog(KonfirmasiPembelianActivity.this, et_tanggal);
+
+            }
+        });
 
        btnSave.setEnabled(true);
        btnSave.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
 
-//               Toast.makeText(KonfirmasiPembelianActivity.this, String.valueOf(sessionManager.getPembelianOffline().getBeliModels().size()),Toast.LENGTH_SHORT).show();
-
                //dapatkan uang yang dibayar
                String total_pembayaran = et_uang_dibayar.getText().toString().replaceAll("[-\\[\\]^/,'*:.!><~@#$%+=?|\"\\\\()]+", "");
 
-               Log.d("beli-idsupp", id_supplier.toString());
-               Log.d("beli-ref",et_nomor_referensi.getText().toString());
-               Log.d("beli-totalbayar", total_pembayaran.toString());
-               Log.d("beli-totalbeli", total_pembelian.toString());
+               //untuk id supplier bisa dianggap = 0
+               id_supplier = 0;
 
                //simpan online
                addPembelianController.addPembelian(
@@ -251,4 +273,6 @@ public class KonfirmasiPembelianActivity extends BaseActivity implements IAddPem
         this.finish();
 
     }
+
+
 }

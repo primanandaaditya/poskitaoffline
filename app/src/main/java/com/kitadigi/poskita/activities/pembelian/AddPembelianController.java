@@ -210,36 +210,6 @@ public class AddPembelianController implements IAddPembelianRequest {
     }
 
 
-    //fungsi ini tidak terpakai
-    //==============================================================================================
-    //==============================================================================================
-    void simpanPembelianOffline(String supplier_id, String ref_no, Integer total_pay, Integer total_price, boolean sudahSync){
-
-        //siapkan 3 string untuk idproductmaster,qty dan price
-        ArrayPosModel arrayPosModel = siapkanArray();
-
-        beli=new Beli();
-        beli.setSupplier_id(supplier_id);
-        beli.setRef_no(ref_no);
-        beli.setId_product_master(arrayPosModel.getArrayIdProductMaster());
-        beli.setPrice(arrayPosModel.getArrayPrice());
-        beli.setQty(arrayPosModel.getArrayQty());
-        beli.setTotal_pay(total_pay);
-        beli.setTotal_price(total_price);
-        beli.setSync_delete(Constants.STATUS_SUDAH_SYNC);
-        beli.setSync_update(Constants.STATUS_SUDAH_SYNC);
-        if (sudahSync){
-            beli.setSync_insert(Constants.STATUS_SUDAH_SYNC);
-        }else{
-            beli.setSync_insert(Constants.STATUS_BELUM_SYNC);
-        }
-
-        //commit insert
-        beliHelper.addBeli(beli);
-
-    }
-    //==============================================================================================
-
     private ArrayPosModel siapkanArray(){
 
         //siapkan 3 array

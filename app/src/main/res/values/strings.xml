@@ -51,6 +51,7 @@
     <string name="singkatan_unit">Singkatan</string>
     <string name="dibayar">Jumlah pembayaran (Rp)</string>
     <string name="nomor_referensi">Nomor referensi</string>
+    <string name="tanggal" translatable="false">Tanggal</string>
     <string name="nama_unit_harus_diisi">Nama unit harus diisi</string>
     <string name="total_pembelian">Total pembelian (Rp)</string>
     <string name="nama_brand">Nama brand</string>
