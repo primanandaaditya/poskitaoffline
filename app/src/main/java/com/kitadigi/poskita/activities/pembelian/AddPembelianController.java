@@ -80,12 +80,12 @@ public class AddPembelianController implements IAddPembelianRequest {
     }
 
     @Override
-    public void addPembelian(final String supplier_id, final String ref_no, final Integer total_pay, final Integer total_price) {
+    public void addPembelian(final String tanggal, final String supplier_id, final String ref_no, final Integer total_pay, final Integer total_price) {
 
 
         if (offlineMode){
 
-            simpanOffline(supplier_id,ref_no,total_pay,total_price,false);
+            simpanOffline(tanggal,supplier_id,ref_no,total_pay,total_price,false);
             iAddPembelianResult.onAddPembelianError("");
 
         }else{
@@ -122,7 +122,7 @@ public class AddPembelianController implements IAddPembelianRequest {
                         //simpan di sqlite
                         //tapi sync insert = SUDAH SYNC
 //                    simpanPembelianOffline(supplier_id,ref_no,total_pay,total_price,true);
-                        simpanOffline(supplier_id,ref_no,total_pay,total_price,true);
+                        simpanOffline(tanggal,supplier_id,ref_no,total_pay,total_price,true);
                         sweetAlertDialog.dismissWithAnimation();
                     }
 
@@ -135,7 +135,7 @@ public class AddPembelianController implements IAddPembelianRequest {
                         //simpan di sqlite saja
                         //tapi sync insert = BELUM_SYNC
 //                    simpanPembelianOffline(supplier_id,ref_no,total_pay,total_price,false);
-                        simpanOffline(supplier_id,ref_no,total_pay,total_price,false);
+                        simpanOffline(tanggal,supplier_id,ref_no,total_pay,total_price,false);
                         iAddPembelianResult.onAddPembelianError(t.getMessage());
                         sweetAlertDialog.dismissWithAnimation();
                     }
@@ -145,7 +145,7 @@ public class AddPembelianController implements IAddPembelianRequest {
                 //simpan di sqlite saja
                 //tapi sync insert = BELUM_SYNC
                 //simpanPembelianOffline(supplier_id,ref_no,total_pay,total_price,false);
-                simpanOffline(supplier_id,ref_no,total_pay,total_price,false);
+                simpanOffline(tanggal,supplier_id,ref_no,total_pay,total_price,false);
                 iAddPembelianResult.onAddPembelianError("");
 
             }
@@ -159,10 +159,7 @@ public class AddPembelianController implements IAddPembelianRequest {
 
     }
 
-    void simpanOffline(String supplier_id, String ref_no, Integer total_pay, Integer total_price, boolean sudahSync){
-
-        //buat tanggal sekarang
-        String tanggal = StringUtil.tanggalSekarang();
+    void simpanOffline(String tanggal, String supplier_id, String ref_no, Integer total_pay, Integer total_price, boolean sudahSync){
 
         //buat penomoran otomatis untuk tabel Master Detail penjualan di sqlite
         //tabel yang dilibatkan : JualMaster dan JualDetail

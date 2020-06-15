@@ -216,6 +216,7 @@ public class KonfirmasiPembelianActivity extends BaseActivity implements IAddPem
 
                //simpan online
                addPembelianController.addPembelian(
+                       et_tanggal.getText().toString(),
                        id_supplier.toString(),
                        et_nomor_referensi.getText().toString(),
                        Integer.parseInt(total_pembayaran),
