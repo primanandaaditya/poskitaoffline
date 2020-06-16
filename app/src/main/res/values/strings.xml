@@ -30,6 +30,7 @@
     <string name="ya">Ya</string>
     <string name="tidak">Tidak</string>
     <string name="simpan">Simpan</string>
+    <string name="simpan_semua" translatable="false">Simpan semua</string>
     <string name="edit">Edit</string>
     <string name="ubah">Ubah</string>
     <string name="batal">Batal</string>

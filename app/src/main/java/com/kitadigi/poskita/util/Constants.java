@@ -41,6 +41,7 @@ public class Constants {
 
     public static String poskita = "poskita";
 
+    public static Integer maxInput = 100;
 /*********************************************************************************/
 
 }

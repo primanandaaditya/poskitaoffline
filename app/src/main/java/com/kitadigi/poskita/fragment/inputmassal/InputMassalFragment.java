@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.kitadigi.poskita.R;
+import com.kitadigi.poskita.activities.massal.kategori.InputMassalKategoriActivity;
 import com.kitadigi.poskita.fragment.report.list.DaftarReportAdapter;
 
 import java.util.ArrayList;
@@ -65,6 +66,10 @@ public class InputMassalFragment extends Fragment {
 
                 switch(position) {
                     case 0:
+
+                        //tampilkan input massal kategori
+                        Intent imKategori = new Intent(getActivity(), InputMassalKategoriActivity.class);
+                        startActivity(imKategori);
 
                         break;
                     case 1:

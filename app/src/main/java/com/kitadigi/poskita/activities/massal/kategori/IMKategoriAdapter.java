@@ -1,6 +1,7 @@
 package com.kitadigi.poskita.activities.massal.kategori;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.fragment.kategori.Datum;
@@ -20,6 +22,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
+import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class IMKategoriAdapter extends BaseAdapter {
 
@@ -49,70 +60,156 @@ public class IMKategoriAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        if (inflater == null)
-            inflater = (LayoutInflater) context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        if (convertView == null)
+
+        final ViewHolder viewHolder;
+        convertView = null;
+
+        if (convertView == null) {
+            viewHolder = new ViewHolder();
+            inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.im_kategori, null);
 
-        //find id
-        EditText etNamaKategori= (EditText) convertView.findViewById(R.id.et_nama_kategori);
-        EditText etKodeKategori = (EditText) convertView.findViewById(R.id.et_kode_kategori);
+            viewHolder.etNamaKategori = (EditText) convertView
+                    .findViewById(R.id.et_nama_kategori);
+            viewHolder.etKodeKategori = (EditText) convertView
+                    .findViewById(R.id.et_kode_kategori);
+
+            viewHolder.etNamaKategori.setTag(position);
+//            viewHolder.etKodeKategori.setTag(position);
+
+            viewHolder.etNamaKategori.setText(datumList.get(position).getName());
+//            viewHolder.etKodeKategori.setText(datumList.get(position).getCode_category());
+
+
+            convertView.setTag(viewHolder);
+        }else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+        int tag_position_nama=(Integer) viewHolder.etNamaKategori.getTag();
+//        int tag_position_kode = (Integer) viewHolder.etKodeKategori.getTag();
+
+        viewHolder.etNamaKategori.setId(tag_position_nama);
+//        viewHolder.etKodeKategori.setId(tag_position_kode);
+
+//        if (inflater == null)
+//            inflater = (LayoutInflater) context
+//                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        if (convertView == null)
+//            convertView = inflater.inflate(R.layout.im_kategori, null);
+//
+//
+//        //find id
+//        final EditText etNamaKategori= (EditText) convertView.findViewById(R.id.et_nama_kategori);
+//        final EditText etKodeKategori = (EditText) convertView.findViewById(R.id.et_kode_kategori);
+        TextView tvNomor = (TextView) convertView.findViewById(R.id.tv_nomor);
+
 
 
         //setting font
         Typeface fonts              = Typeface.createFromAsset(context.getAssets(), "fonts/OpenSans-Regular.ttf");
 
         //setting font
-        etNamaKategori.setTypeface(fonts);
-        etKodeKategori.setTypeface(fonts);
+//        etNamaKategori.setTypeface(fonts);
+//        etKodeKategori.setTypeface(fonts);
+
+        //set tag
+//        etNamaKategori.setTag(position);
+//        etKodeKategori.setTag(position);
+
+
 
         // getting movie data for the row
-        final Datum datum = datumList.get(position);
+
 
         //tampilkan nilai
-        etNamaKategori.setText(datum.getName());
-        etKodeKategori.setText(datum.getCode_category());
+//        etNamaKategori.setText(datum.getName());
+//        etKodeKategori.setText(datum.getCode_category());
 
-        //tambahkan event untuk listen perubahan
-        //semua perubahan akan dikirim di var di index masing-masing
-        etNamaKategori.addTextChangedListener(new TextWatcher() {
+        //tampilkana nomor urut
+        tvNomor.setText(String.valueOf(position+1));
+        tvNomor.setTypeface(fonts);
+
+
+        viewHolder.etNamaKategori.addTextChangedListener(new TextWatcher() {
+
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
 
+                final int position2 = viewHolder.etNamaKategori.getId();
+                final EditText Caption = (EditText) viewHolder.etNamaKategori;
+                if(Caption.getText().toString().length()>0){
+//                    datumList.set(position2,Integer.parseInt(Caption.getText().toString()));
+                   Datum datum = datumList.get(position2);
+                    datum.setName(Caption.getText().toString());
+                }else{
+                    Toast.makeText(context, "Please enter some value", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                datum.setName(s.toString());
-                Log.d(  " nama kategori" + String.valueOf(position), s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        //tambahkan event untuk listen perubahan
-        //semua perubahan akan dikirim di var di index masing-masing
-        etKodeKategori.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                datum.setCode_category(s.toString());
-                Log.d("kode kategori" + String.valueOf(position), s.toString());
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
+
         });
+
+        //tambahkan event untuk listen perubahan
+        //semua perubahan akan dikirim di var di index masing-masing
+//        etNamaKategori.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//                if (etNamaKategori.hasFocus()){
+//                    datum.setName(s.toString());
+//                    Log.d(  " nama kategori" + String.valueOf(position), s.toString());
+//                }
+////
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
+//        etNamaKategori.setText(datum.getName());
+//
+
+
+        //tambahkan event untuk listen perubahan
+        //semua perubahan akan dikirim di var di index masing-masing
+//        etKodeKategori.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                if (etKodeKategori.hasFocus()){
+//                    datum.setCode_category(s.toString());
+//                    Log.d("kode kategori" + String.valueOf(position), s.toString());
+//
+//                }
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
+//        etKodeKategori.setText(datum.getCode_category());
 
         return convertView;
     }
@@ -122,22 +219,32 @@ public class IMKategoriAdapter extends BaseAdapter {
         JSONObject jsonObject;
 
         for (Datum datum : datumList){
-            jsonObject = new JSONObject();
-            try {
-                jsonObject.put("nama", datum.getName());
-                jsonObject.put("mobile_id", StringUtil.timeMilis());
-                jsonObject.put("business_id","1");
-                jsonObject.put("short_code",datum.getCode_category());
-                jsonObject.put("parent_id","0");
-                jsonObject.put("created_by","1");
-                hasil.put(jsonObject);
-            } catch (JSONException e) {
-                e.printStackTrace();
+
+            if (datum.getName()==null || datum.getName() == ""){
+
+            }else{
+                jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("nama", datum.getName());
+                    jsonObject.put("mobile_id", StringUtil.timeMilis());
+                    jsonObject.put("business_id","1");
+                    jsonObject.put("short_code",datum.getCode_category());
+                    jsonObject.put("parent_id","0");
+                    jsonObject.put("created_by","1");
+                    hasil.put(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
+
+
         }
-
-
         return  hasil;
     }
+}
+
+class ViewHolder {
+    EditText etNamaKategori;
+    EditText etKodeKategori;
 }
