@@ -15,7 +15,7 @@ import java.util.List;
 public class DaftarReportAdapter extends BaseAdapter {
 
     private Context context;
-    private ReportFragment reportFragment;
+//    private ReportFragment reportFragment;
     private LayoutInflater inflater;
     private List<String> daftarReport;
 
@@ -32,9 +32,9 @@ public class DaftarReportAdapter extends BaseAdapter {
 
     }
 
-    public DaftarReportAdapter(Context context,ReportFragment reportFragment, List<String> daftarReport) {
+    public DaftarReportAdapter(Context context, List<String> daftarReport) {
         this.context=context;
-        this.reportFragment = reportFragment;
+//        this.reportFragment = reportFragment;
         this.daftarReport = daftarReport;
 
         initFont();
@@ -59,7 +59,7 @@ public class DaftarReportAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if (inflater == null)
-            inflater = (LayoutInflater) reportFragment.getActivity()
+            inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (convertView == null)
             convertView = inflater.inflate(R.layout.listview_report, null);

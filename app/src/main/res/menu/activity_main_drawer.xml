@@ -44,6 +44,11 @@
             android:icon="@drawable/ic_wholesale"
             android:title="@string/remark_wholesale" />
         <item
+            android:id="@+id/nav_input_massal"
+            android:icon="@drawable/ic_address"
+            android:title="@string/input_massal" />
+        <item
+            android:visible="false"
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_address"
             android:title="@string/remark_profile" />

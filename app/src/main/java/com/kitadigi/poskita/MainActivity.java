@@ -35,6 +35,7 @@ import com.kitadigi.poskita.adapter.ItemsAdapter;
 import com.kitadigi.poskita.database.Database;
 import com.kitadigi.poskita.fragment.POSFragment;
 import com.kitadigi.poskita.fragment.brand.BrandFragment;
+import com.kitadigi.poskita.fragment.inputmassal.InputMassalFragment;
 import com.kitadigi.poskita.fragment.item.PrimaItemFragment;
 import com.kitadigi.poskita.fragment.kategori.PrimaKategoriFragment;
 import com.kitadigi.poskita.fragment.pembelian.PembelianFragment;
@@ -95,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     private static final String TAG_UNIT        = "unit";
     private static final String TAG_PRINTER     = "printer";
     private static final String TAG_SINKRON     = "sinkron";
+    private static final String TAG_INPUT_MASSAL = "inputmassal";
     public static String CURRENT_TAG            = TAG_POS;
 
     // toolbar titles respected to selected nav menu item
@@ -389,8 +391,10 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
             case 9:
 //                AddressFragment addressFragment = new AddressFragment();
 //                return addressFragment;
-                JualFragment jualFragment3=new JualFragment();
-                return jualFragment3;
+
+                InputMassalFragment inputMassalFragment = new InputMassalFragment();
+                return inputMassalFragment;
+
             default:
                 return new POSFragment();
         }
@@ -458,9 +462,9 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                         navItemIndex = 8;
                         CURRENT_TAG = TAG_SINKRON;
                         break;
-                    case R.id.nav_profile:
+                    case R.id.nav_input_massal:
                         navItemIndex = 9;
-                        CURRENT_TAG = TAG_POS;
+                        CURRENT_TAG = TAG_INPUT_MASSAL;
                         break;
                     case R.id.nav_logout:
 

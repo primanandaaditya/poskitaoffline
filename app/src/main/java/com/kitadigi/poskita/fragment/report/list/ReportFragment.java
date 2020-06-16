@@ -70,7 +70,7 @@ public class ReportFragment extends BaseFragment {
 
 
         //init adapter untuk listview
-        daftarReportAdapter=new DaftarReportAdapter(getActivity(),ReportFragment.this,daftarReport);
+        daftarReportAdapter=new DaftarReportAdapter(getActivity(),daftarReport);
 
         lv.setAdapter(daftarReportAdapter);
 

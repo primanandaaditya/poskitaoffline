@@ -87,6 +87,7 @@
     <string name="dua_jam" translatable="false">2 jam</string>
     <string name="satu_hari" translatable="false">1 hari</string>
     <string name="remark_profile">Profil</string>
+    <string name="input_massal" translatable="false">Input massal</string>
     <string name="openDrawer">Buka drawer</string>
     <string name="closeDrawer">Tutup drawer</string>
     <string name="tambah_kategori">Tambah kategori</string>
@@ -345,6 +346,7 @@
         <item>Laporan</item>
         <item>Printer</item>
         <item>Sinkron data</item>
+        <item>Input massal</item>
         <item>Wholesale</item>
         <item>Profil</item>
     </string-array>
