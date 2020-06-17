@@ -86,25 +86,37 @@ public class KategoriHelper {
             hasil = context.getResources().getString(R.string.tidak_ada_input);
         }else{
 
+            //boolean untuk cek duplikasi
+            boolean ada;
+
             //buat variabel kategori model
             Kategori kategori;
 
             //looping array
             for (Datum datum : datumList){
 
-                //init kategori model
-                kategori = new Kategori();
+                //cek duplikasi dulu
+                ada = cekNamaKategori(datum.getName());
 
-                //setting nilai
-                kategori.setName_category(datum.getName());
-                kategori.setCode_category(datum.getCode_category());
-                kategori.setKode_id(datum.getId());
-                kategori.setSync_insert(Constants.STATUS_BELUM_SYNC);
-                kategori.setSync_update(Constants.STATUS_SUDAH_SYNC);
-                kategori.setSync_delete(Constants.STATUS_SUDAH_SYNC);
+                //jika ada, jangan masukkan ke database
+                if (ada){
 
-                //commit perubahan
-                kategoriDAO.insert(kategori);
+                }else{
+
+                    //init kategori model
+                    kategori = new Kategori();
+
+                    //setting nilai
+                    kategori.setName_category(datum.getName());
+                    kategori.setCode_category(datum.getCode_category());
+                    kategori.setKode_id(datum.getId());
+                    kategori.setSync_insert(Constants.STATUS_BELUM_SYNC);
+                    kategori.setSync_update(Constants.STATUS_SUDAH_SYNC);
+                    kategori.setSync_delete(Constants.STATUS_SUDAH_SYNC);
+
+                    //commit perubahan
+                    kategoriDAO.insert(kategori);
+                }
 
             }
 

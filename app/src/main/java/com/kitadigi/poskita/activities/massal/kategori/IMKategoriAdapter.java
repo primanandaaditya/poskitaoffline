@@ -201,7 +201,7 @@ public class IMKategoriAdapter extends BaseAdapter {
                 //masukkan ke dalam array
                 datums = new Datum();
                 datums.setName(datum.getName());
-                datums.setCode_category(datum.getCode_category());
+                datums.setCode_category(datum.getCode_category()==null?"":datum.getCode_category());
                 datums.setAdditional(datum.getAdditional());
                 datums.setBusiness_id(datum.getBusiness_id());
                 datums.setId(datum.getId());
