@@ -3,7 +3,10 @@ package com.kitadigi.poskita.dao.unit;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 
+import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.dao.database.Db;
+import com.kitadigi.poskita.fragment.unit.UnitData;
+import com.kitadigi.poskita.util.Constants;
 import com.kitadigi.poskita.util.SessionManager;
 
 import java.util.List;
@@ -96,6 +99,56 @@ public class UnitHelper {
             hasil=false;
         }else{
             hasil=true;
+        }
+
+        return hasil;
+    }
+
+    public String inputMassal(List<UnitData> unitDataList){
+
+        String hasil = "";
+
+        //jika parameter null
+        if (unitDataList == null || unitDataList.size() == 0){
+
+            hasil = context.getResources().getString(R.string.tidak_ada_input);
+        }else{
+
+            //boolean untuk cek duplikasi
+            boolean ada;
+
+            //buat variabel kategori model
+            Unit unit;
+
+            //looping array
+            for (UnitData unitData: unitDataList){
+
+                //cek duplikasi dulu
+                ada = cekNamaUnit(unitData.getName());
+
+                //jika ada, jangan masukkan ke database
+                if (ada){
+
+                }else{
+
+                    //init unit model
+                    unit = new Unit();
+
+                    //setting nilai
+                    unit.setName(unitData.getName());
+                    unit.setSingkatan(unitData.getShort_name());
+                    unit.setKode_id(unitData.getId());
+                    unit.setSync_insert(Constants.STATUS_BELUM_SYNC);
+                    unit.setSync_update(Constants.STATUS_SUDAH_SYNC);
+                    unit.setSync_delete(Constants.STATUS_SUDAH_SYNC);
+
+                    //commit perubahan
+                    unitDAO.insert(unit);
+                }
+
+            }
+
+            hasil = context.getResources().getString(R.string.input_telah_tersimpan);
         }
 
         return hasil;

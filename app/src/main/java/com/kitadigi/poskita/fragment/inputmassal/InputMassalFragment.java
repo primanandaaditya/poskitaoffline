@@ -13,6 +13,7 @@ import android.widget.ListView;
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.activities.massal.brand.InputMassalBrandActivity;
 import com.kitadigi.poskita.activities.massal.kategori.InputMassalKategoriActivity;
+import com.kitadigi.poskita.activities.massal.unit.InputMassalUnitActivity;
 import com.kitadigi.poskita.fragment.report.list.DaftarReportAdapter;
 
 import java.util.ArrayList;
@@ -80,6 +81,9 @@ public class InputMassalFragment extends Fragment {
 
                         break;
                     case 2:
+
+                        Intent imUnit = new Intent(getActivity(), InputMassalUnitActivity.class);
+                        startActivity(imUnit);
 
                         break;
                     case 3:
