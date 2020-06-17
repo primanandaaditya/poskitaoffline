@@ -19,6 +19,32 @@ public class StringUtil {
 
 
 
+    // fungsi untuk generate string random berdasarkan jumlah n
+    public static String getRandomString(int n) {
+
+        //pilih random karakter dari string ini
+        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                + "0123456789"
+                + "abcdefghijklmnopqrstuvxyz";
+
+        //buat stringbuffer
+        StringBuilder sb = new StringBuilder(n);
+
+        for (int i = 0; i < n; i++) {
+
+            // generate nomor acak antara 0 sampai n
+            int index
+                    = (int) (AlphaNumericString.length()
+                    * Math.random());
+
+            //tambahkan karakter satupersatu dalam akhir
+            sb.append(AlphaNumericString
+                    .charAt(index));
+        }
+
+        return sb.toString();
+    }
+
 
     public static String timeMilis(){
         return String.valueOf(System.currentTimeMillis());

@@ -13,6 +13,7 @@
 
         <TextView
             android:layout_weight="9"
+            android:textSize="@dimen/dimen_20"
             android:text="1."
             android:id="@+id/tv_nomor"
             android:layout_width="match_parent"
@@ -29,7 +30,6 @@
             <EditText
                 android:padding="@dimen/dimen_5"
                 android:background="@drawable/button_rounded_white"
-                android:layout_marginTop="@dimen/dimen_10"
                 android:hint="@string/nama_kategori"
                 android:id="@+id/et_nama_kategori"
                 android:layout_width="match_parent"
@@ -37,6 +37,11 @@
 
             </EditText>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_2">
+
+            </View>
 
             <EditText
                 android:padding="@dimen/dimen_5"

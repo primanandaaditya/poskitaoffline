@@ -69,82 +69,67 @@ public class IMKategoriAdapter extends BaseAdapter {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.im_kategori, null);
 
+
+            //find id dari control
             viewHolder.etNamaKategori = (EditText) convertView
                     .findViewById(R.id.et_nama_kategori);
             viewHolder.etKodeKategori = (EditText) convertView
                     .findViewById(R.id.et_kode_kategori);
 
+
+            //pasang tag dengan index list dari model
             viewHolder.etNamaKategori.setTag(position);
-//            viewHolder.etKodeKategori.setTag(position);
+            viewHolder.etKodeKategori.setTag(position);
 
+            //set teks dari tiap model
             viewHolder.etNamaKategori.setText(datumList.get(position).getName());
-//            viewHolder.etKodeKategori.setText(datumList.get(position).getCode_category());
-
+            viewHolder.etKodeKategori.setText(datumList.get(position).getCode_category());
 
             convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
+        //buat var integer
         int tag_position_nama=(Integer) viewHolder.etNamaKategori.getTag();
-//        int tag_position_kode = (Integer) viewHolder.etKodeKategori.getTag();
+        int tag_position_kode = (Integer) viewHolder.etKodeKategori.getTag();
 
         viewHolder.etNamaKategori.setId(tag_position_nama);
-//        viewHolder.etKodeKategori.setId(tag_position_kode);
+        viewHolder.etKodeKategori.setId(tag_position_kode);
 
-//        if (inflater == null)
-//            inflater = (LayoutInflater) context
-//                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        if (convertView == null)
-//            convertView = inflater.inflate(R.layout.im_kategori, null);
-//
-//
-//        //find id
-//        final EditText etNamaKategori= (EditText) convertView.findViewById(R.id.et_nama_kategori);
-//        final EditText etKodeKategori = (EditText) convertView.findViewById(R.id.et_kode_kategori);
+
+        //find id untuk teks nomor urut
         TextView tvNomor = (TextView) convertView.findViewById(R.id.tv_nomor);
-
-
 
         //setting font
         Typeface fonts              = Typeface.createFromAsset(context.getAssets(), "fonts/OpenSans-Regular.ttf");
 
-        //setting font
-//        etNamaKategori.setTypeface(fonts);
-//        etKodeKategori.setTypeface(fonts);
-
-        //set tag
-//        etNamaKategori.setTag(position);
-//        etKodeKategori.setTag(position);
-
-
-
-        // getting movie data for the row
-
-
-        //tampilkan nilai
-//        etNamaKategori.setText(datum.getName());
-//        etKodeKategori.setText(datum.getCode_category());
-
         //tampilkana nomor urut
-        tvNomor.setText(String.valueOf(position+1));
+        tvNomor.setText(String.valueOf(position+1) + ".");
         tvNomor.setTypeface(fonts);
 
 
+        //saat edittext berubah, kirim juga perubahan ke model ybs
+        //nama kategori
         viewHolder.etNamaKategori.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before,
                                       int count) {
 
+
+                //var integer
                 final int position2 = viewHolder.etNamaKategori.getId();
-                final EditText Caption = (EditText) viewHolder.etNamaKategori;
-                if(Caption.getText().toString().length()>0){
-//                    datumList.set(position2,Integer.parseInt(Caption.getText().toString()));
+
+                //init id
+                final EditText et_Nama_Kategori = (EditText) viewHolder.etNamaKategori;
+
+                if(et_Nama_Kategori.getText().toString().length()>0){
+
                    Datum datum = datumList.get(position2);
-                    datum.setName(Caption.getText().toString());
+                   datum.setName(et_Nama_Kategori.getText().toString());
                 }else{
-                    Toast.makeText(context, "Please enter some value", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "Please enter some value", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -159,57 +144,41 @@ public class IMKategoriAdapter extends BaseAdapter {
 
         });
 
-        //tambahkan event untuk listen perubahan
-        //semua perubahan akan dikirim di var di index masing-masing
-//        etNamaKategori.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//                if (etNamaKategori.hasFocus()){
-//                    datum.setName(s.toString());
-//                    Log.d(  " nama kategori" + String.valueOf(position), s.toString());
-//                }
-////
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
-//        etNamaKategori.setText(datum.getName());
-//
+
+        //saat edittext berubah, kirim juga perubahan ke model ybs
+        //kode kategori
+        viewHolder.etKodeKategori.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
 
 
-        //tambahkan event untuk listen perubahan
-        //semua perubahan akan dikirim di var di index masing-masing
-//        etKodeKategori.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                if (etKodeKategori.hasFocus()){
-//                    datum.setCode_category(s.toString());
-//                    Log.d("kode kategori" + String.valueOf(position), s.toString());
-//
-//                }
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
-//        etKodeKategori.setText(datum.getCode_category());
+                //var integer
+                final int position2 = viewHolder.etKodeKategori.getId();
+
+                //init id
+                final EditText et_Kode_Kategori = (EditText) viewHolder.etKodeKategori;
+
+                if(et_Kode_Kategori.getText().toString().length()>0){
+
+                    Datum datum = datumList.get(position2);
+                    datum.setCode_category(et_Kode_Kategori.getText().toString());
+                }else{
+//                    Toast.makeText(context, "Please enter some value", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+
+        });
 
         return convertView;
     }
@@ -220,13 +189,13 @@ public class IMKategoriAdapter extends BaseAdapter {
 
         for (Datum datum : datumList){
 
-            if (datum.getName()==null || datum.getName() == ""){
+            if (datum.getName()==null || datum.getName().matches("")){
 
             }else{
                 jsonObject = new JSONObject();
                 try {
                     jsonObject.put("nama", datum.getName());
-                    jsonObject.put("mobile_id", StringUtil.timeMilis());
+                    jsonObject.put("mobile_id", StringUtil.getRandomString(20));
                     jsonObject.put("business_id","1");
                     jsonObject.put("short_code",datum.getCode_category());
                     jsonObject.put("parent_id","0");
@@ -236,8 +205,6 @@ public class IMKategoriAdapter extends BaseAdapter {
                     e.printStackTrace();
                 }
             }
-
-
 
         }
         return  hasil;
