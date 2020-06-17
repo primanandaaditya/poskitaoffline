@@ -21,6 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 import android.content.Context;
 import android.text.Editable;
@@ -181,6 +182,36 @@ public class IMKategoriAdapter extends BaseAdapter {
         });
 
         return convertView;
+    }
+
+    //fungsi ini untuk membuat array model
+    public List<Datum> getList(){
+
+        //buat array list baru
+        List<Datum> hasil = new ArrayList<>();
+        Datum datums;
+
+        //looping model
+        for (Datum datum : datumList){
+
+            //jika nama kosong
+            if (datum.getName()==null || datum.getName().matches("")){
+
+            }else{
+                //masukkan ke dalam array
+                datums = new Datum();
+                datums.setName(datum.getName());
+                datums.setCode_category(datum.getCode_category());
+                datums.setAdditional(datum.getAdditional());
+                datums.setBusiness_id(datum.getBusiness_id());
+                datums.setId(datum.getId());
+                datums.setMobile_id(StringUtil.getRandomString(20));
+
+                hasil.add(datums);
+            }
+
+        }
+        return  hasil;
     }
 
     public JSONArray createJSONArray(){

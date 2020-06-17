@@ -8,10 +8,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.activities.massal.kategori.IMKategoriAdapter;
 import com.kitadigi.poskita.base.BaseActivity;
+import com.kitadigi.poskita.dao.kategori.KategoriHelper;
 import com.kitadigi.poskita.fragment.kategori.Datum;
 import com.kitadigi.poskita.util.Constants;
 
@@ -20,7 +22,9 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InputMassalKategoriActivity extends BaseActivity {
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
+public class InputMassalKategoriActivity extends BaseActivity implements IInputMassalKategori {
 
     //var untuk nampung list datum/kategori
     List<Datum> datumList;
@@ -42,7 +46,8 @@ public class InputMassalKategoriActivity extends BaseActivity {
         findID();
     }
 
-    void findID(){
+    @Override
+    public void findID(){
 
         lv=(ListView)findViewById(R.id.lv);
         lv.setItemsCanFocus(true);
@@ -60,7 +65,6 @@ public class InputMassalKategoriActivity extends BaseActivity {
             }
         });
 
-
         //buat inputan sebanyak 100
         buatInput();
 
@@ -70,15 +74,17 @@ public class InputMassalKategoriActivity extends BaseActivity {
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                JSONArray jsonArray = imKategoriAdapter.createJSONArray();
-                Log.d("json", jsonArray.toString());
+
+                //simpan semua inputan
+                simpanSemua();
             }
         });
 
 
     }
 
-    void buatInput(){
+    @Override
+    public void buatInput(){
         datumList = new ArrayList<>();
         Integer counter = 0;
 
@@ -90,10 +96,42 @@ public class InputMassalKategoriActivity extends BaseActivity {
             counter = counter + 1;
         }
 
-
         //pasangkan di listview
         imKategoriAdapter = new IMKategoriAdapter(InputMassalKategoriActivity.this, datumList);
 
+        //tampilkan di listview
         lv.setAdapter(imKategoriAdapter);
+    }
+
+    @Override
+    public void simpanSemua() {
+
+        //String untuk pemberitahuan hasil input
+        String hasil;
+
+        //dialog untuk nyimpen
+        SweetAlertDialog sweetAlertDialog;
+
+        sweetAlertDialog = new SweetAlertDialog(InputMassalKategoriActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+        sweetAlertDialog.setTitleText(getResources().getString(R.string.now_loading));
+        sweetAlertDialog.setCancelable(false);
+        sweetAlertDialog.show();
+
+        //tampung array datum dalam var
+        List<Datum> datumList = imKategoriAdapter.getList();
+        Log.d("jumlah", String.valueOf(datumList.size()));
+
+        //init sqlite
+        KategoriHelper kategoriHelper = new KategoriHelper(InputMassalKategoriActivity.this);
+        hasil = kategoriHelper.inputMassal(datumList);
+
+        sweetAlertDialog.dismissWithAnimation();
+
+        //tampilkan pesan
+        Toast.makeText(InputMassalKategoriActivity.this, hasil ,Toast.LENGTH_SHORT).show();
+
+        //tutup
+        finish();
+
     }
 }

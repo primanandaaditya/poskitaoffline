@@ -3,7 +3,9 @@ package com.kitadigi.poskita.dao.kategori;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 
+import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.dao.database.Db;
+import com.kitadigi.poskita.fragment.kategori.Datum;
 import com.kitadigi.poskita.util.Constants;
 import com.kitadigi.poskita.util.SessionManager;
 import com.kitadigi.poskita.util.StringUtil;
@@ -73,6 +75,44 @@ public class KategoriHelper {
         kategoriDAO.insert(kategori);
     }
 
+
+    public String inputMassal(List<Datum> datumList){
+
+        String hasil = "";
+
+        //jika parameter null
+        if (datumList == null || datumList.size() == 0){
+
+            hasil = context.getResources().getString(R.string.tidak_ada_input);
+        }else{
+
+            //buat variabel kategori model
+            Kategori kategori;
+
+            //looping array
+            for (Datum datum : datumList){
+
+                //init kategori model
+                kategori = new Kategori();
+
+                //setting nilai
+                kategori.setName_category(datum.getName());
+                kategori.setCode_category(datum.getCode_category());
+                kategori.setKode_id(datum.getId());
+                kategori.setSync_insert(Constants.STATUS_BELUM_SYNC);
+                kategori.setSync_update(Constants.STATUS_SUDAH_SYNC);
+                kategori.setSync_delete(Constants.STATUS_SUDAH_SYNC);
+
+                //commit perubahan
+                kategoriDAO.insert(kategori);
+
+            }
+
+            hasil = context.getResources().getString(R.string.input_telah_tersimpan);
+        }
+
+        return hasil;
+    }
 
     public void addKategori(Kategori kategori){
         kategoriDAO.insert(kategori);

@@ -30,7 +30,9 @@
     <string name="ya">Ya</string>
     <string name="tidak">Tidak</string>
     <string name="simpan">Simpan</string>
+    <string name="tidak_ada_input" translatable="false">Tidak ada input</string>
     <string name="simpan_semua" translatable="false">Simpan semua</string>
+    <string name="input_telah_tersimpan" translatable="false">Input telah tersimpan</string>
     <string name="edit">Edit</string>
     <string name="ubah">Ubah</string>
     <string name="batal">Batal</string>
