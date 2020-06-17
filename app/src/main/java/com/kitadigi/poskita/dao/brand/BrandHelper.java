@@ -3,8 +3,11 @@ package com.kitadigi.poskita.dao.brand;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 
+import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.dao.database.Db;
 import com.kitadigi.poskita.dao.kategori.Kategori;
+import com.kitadigi.poskita.fragment.brand.BrandData;
+import com.kitadigi.poskita.util.Constants;
 import com.kitadigi.poskita.util.SessionManager;
 
 import java.util.List;
@@ -96,6 +99,57 @@ public class BrandHelper {
             hasil=false;
         }else{
             hasil=true;
+        }
+
+        return hasil;
+    }
+
+
+    public String inputMassal(List<BrandData> brandDataList){
+
+        String hasil = "";
+
+        //jika parameter null
+        if (brandDataList == null || brandDataList.size() == 0){
+
+            hasil = context.getResources().getString(R.string.tidak_ada_input);
+        }else{
+
+            //boolean untuk cek duplikasi
+            boolean ada;
+
+            //buat variabel kategori model
+            Brand brand;
+
+            //looping array
+            for (BrandData brandData: brandDataList){
+
+                //cek duplikasi dulu
+                ada = cekNamaBrand(brandData.getName());
+
+                //jika ada, jangan masukkan ke database
+                if (ada){
+
+                }else{
+
+                    //init kategori model
+                    brand = new Brand();
+
+                    //setting nilai
+                    brand.setName(brandData.getName());
+                    brand.setDescription(brandData.getDescription());
+                    brand.setKode_id(brandData.getId());
+                    brand.setSync_insert(Constants.STATUS_BELUM_SYNC);
+                    brand.setSync_update(Constants.STATUS_SUDAH_SYNC);
+                    brand.setSync_delete(Constants.STATUS_SUDAH_SYNC);
+
+                    //commit perubahan
+                    brandDAO.insert(brand);
+                }
+
+            }
+
+            hasil = context.getResources().getString(R.string.input_telah_tersimpan);
         }
 
         return hasil;

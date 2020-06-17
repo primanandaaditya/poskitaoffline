@@ -27,7 +27,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.massal.kategori.InputMassalKategoriActivity"></activity>
+        <activity android:name=".activities.massal.brand.InputMassalBrandActivity"></activity>
+        <activity android:name=".activities.massal.kategori.InputMassalKategoriActivity" />
         <activity android:name=".activities.sinkron.PengaturanSinkronActivity" />
         <activity android:name=".activities.reportoffline.analisa.ROAnalisaActivity" />
         <activity android:name=".activities.reportoffline.terlaris.ROTerlarisActivity" />

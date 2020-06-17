@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.kitadigi.poskita.R;
+import com.kitadigi.poskita.activities.massal.brand.InputMassalBrandActivity;
 import com.kitadigi.poskita.activities.massal.kategori.InputMassalKategoriActivity;
 import com.kitadigi.poskita.fragment.report.list.DaftarReportAdapter;
 
@@ -73,6 +74,9 @@ public class InputMassalFragment extends Fragment {
 
                         break;
                     case 1:
+
+                        Intent imBrand = new Intent(getActivity(), InputMassalBrandActivity.class);
+                        startActivity(imBrand);
 
                         break;
                     case 2:

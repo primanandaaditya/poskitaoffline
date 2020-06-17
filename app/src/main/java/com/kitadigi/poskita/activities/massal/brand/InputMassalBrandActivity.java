@@ -1,5 +1,6 @@
-package com.kitadigi.poskita.activities.massal.kategori;
+package com.kitadigi.poskita.activities.massal.brand;
 
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,8 +13,8 @@ import android.widget.Toast;
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.activities.massal.IInputMassalKategori;
 import com.kitadigi.poskita.base.BaseActivity;
-import com.kitadigi.poskita.dao.kategori.KategoriHelper;
-import com.kitadigi.poskita.fragment.kategori.Datum;
+import com.kitadigi.poskita.dao.brand.BrandHelper;
+import com.kitadigi.poskita.fragment.brand.BrandData;
 import com.kitadigi.poskita.util.Constants;
 
 import java.util.ArrayList;
@@ -21,11 +22,11 @@ import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class InputMassalKategoriActivity extends BaseActivity implements IInputMassalKategori {
+public class InputMassalBrandActivity extends BaseActivity implements IInputMassalKategori {
 
     //var untuk nampung list datum/kategori
-    List<Datum> datumList;
-    Datum datum;
+    List<BrandData> brandDataList;
+    BrandData brandData;
 
     //init view
     ListView lv;
@@ -33,18 +34,19 @@ public class InputMassalKategoriActivity extends BaseActivity implements IInputM
     ImageView iv_back;
     Button btnSimpan;
 
-    IMKategoriAdapter imKategoriAdapter;
+    IMBrandAdapter imBrandAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_input_massal_kategori);
+        setContentView(R.layout.activity_input_massal_brand);
 
         findID();
     }
 
     @Override
-    public void findID(){
+    public void findID() {
+
 
         lv=(ListView)findViewById(R.id.lv);
         lv.setItemsCanFocus(true);
@@ -77,27 +79,27 @@ public class InputMassalKategoriActivity extends BaseActivity implements IInputM
             }
         });
 
-
     }
 
     @Override
-    public void buatInput(){
-        datumList = new ArrayList<>();
+    public void buatInput() {
+
+        brandDataList = new ArrayList<>();
         Integer counter = 0;
 
         //looping buat 100 inputan
         while (counter < Constants.maxInput){
 
-            datum = new Datum();
-            datumList.add(datum);
+            brandData = new BrandData();
+            brandDataList.add(brandData);
             counter = counter + 1;
         }
 
         //pasangkan di listview
-        imKategoriAdapter = new IMKategoriAdapter(InputMassalKategoriActivity.this, datumList);
+        imBrandAdapter = new IMBrandAdapter(InputMassalBrandActivity.this, brandDataList);
 
         //tampilkan di listview
-        lv.setAdapter(imKategoriAdapter);
+        lv.setAdapter(imBrandAdapter);
     }
 
     @Override
@@ -109,23 +111,23 @@ public class InputMassalKategoriActivity extends BaseActivity implements IInputM
         //dialog untuk nyimpen
         SweetAlertDialog sweetAlertDialog;
 
-        sweetAlertDialog = new SweetAlertDialog(InputMassalKategoriActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+        sweetAlertDialog = new SweetAlertDialog(InputMassalBrandActivity.this, SweetAlertDialog.PROGRESS_TYPE);
         sweetAlertDialog.setTitleText(getResources().getString(R.string.now_loading));
         sweetAlertDialog.setCancelable(false);
         sweetAlertDialog.show();
 
         //tampung array datum dalam var
-        List<Datum> datumList = imKategoriAdapter.getList();
-        Log.d("jumlah", String.valueOf(datumList.size()));
+        List<BrandData> brandDataList = imBrandAdapter.getList();
+        Log.d("jumlah", String.valueOf(brandDataList.size()));
 
         //init sqlite
-        KategoriHelper kategoriHelper = new KategoriHelper(InputMassalKategoriActivity.this);
-        hasil = kategoriHelper.inputMassal(datumList);
+        BrandHelper brandHelper = new BrandHelper(InputMassalBrandActivity.this);
+        hasil = brandHelper.inputMassal(brandDataList);
 
         sweetAlertDialog.dismissWithAnimation();
 
         //tampilkan pesan
-        Toast.makeText(InputMassalKategoriActivity.this, hasil ,Toast.LENGTH_SHORT).show();
+        Toast.makeText(InputMassalBrandActivity.this, hasil ,Toast.LENGTH_SHORT).show();
 
         //tutup
         finish();
