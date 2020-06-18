@@ -34,7 +34,7 @@ public class LoginActivityImpl implements GetLoginResultIntractor {
             public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
                 onFinishedListener.onFinished(response.body());
                 Log.d("URL", call.request().url().toString());
-                Log.d("Sampel", response.body().message);
+//                Log.d("Sampel", response.body().message);
             }
 
             @Override

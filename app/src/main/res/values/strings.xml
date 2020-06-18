@@ -94,11 +94,16 @@
     <string name="openDrawer">Buka drawer</string>
     <string name="closeDrawer">Tutup drawer</string>
     <string name="tambah_kategori">Tambah kategori</string>
+    <string name="tambah_produk" translatable="false">Tambah produk</string>
     <string name="tambah_brand">Tambah brand</string>
     <string name="pilih_barang" translatable="false">Pilih barang</string>
     <string name="grafik_penjualan_harian" translatable="false">Grafik Penjualan Harian</string>
     <string name="pengaturan_printer" translatable="false">Pengaturan Printer</string>
     <string name="cetak_struk_lama" translatable="false">Cetak struk lama</string>
+    <string name="tidak_dapat_terhubung_dengan_server" translatable="false">Tidak dapat terhubung dengan server</string>
+    <string name="register" translatable="false">REGISTER</string>
+    <string name="terimakasih_sudah_melakukan_register" translatable="false">Terima kasih telah melakukan register</string>
+    <string name="mohon_menunggu_konfirmasi_dari_admin_kami" translatable="false">Mohon menunggu konfirmasi dari admin kami</string>
     <string name="print_preview">Print preview</string>
     <string name="tambah_unit">Tambah unit</string>
     <string name="edit_unit">Edit unit</string>

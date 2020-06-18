@@ -67,6 +67,19 @@
         android:layout_centerVertical="true"/>
 
 
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/register"
+        android:textColor="@color/colorWhite"
+        style="@style/dialog_red_button"
+        android:layout_marginTop="@dimen/dimen_10"
+        android:layout_marginStart="@dimen/dimen_10"
+        android:layout_marginEnd="@dimen/dimen_10"
+        android:layout_centerVertical="true"/>
+
+
     <TextView
         android:textStyle="bold"
         android:layout_marginTop="@dimen/dimen_30"

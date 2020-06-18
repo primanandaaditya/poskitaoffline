@@ -27,7 +27,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.massal.unit.InputMassalUnitActivity"></activity>
+        <activity android:name=".activities.massal.item.InputMassalProdukActivity"></activity>
+        <activity android:name=".activities.massal.unit.InputMassalUnitActivity" />
         <activity android:name=".activities.massal.brand.InputMassalBrandActivity" />
         <activity android:name=".activities.massal.kategori.InputMassalKategoriActivity" />
         <activity android:name=".activities.sinkron.PengaturanSinkronActivity" />

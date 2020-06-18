@@ -30,7 +30,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
     SimpleMD5 simpleMD5;
     EditText etUserName,etPassword;
-    Button btnLogin;
+    Button btnLogin, btnRegister;
 
     Context context;
 
@@ -48,9 +48,13 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
         context=this;
 
+
+        //cek koneksi internet
         if (new InternetChecker().haveNetwork(context)){
 
         } else {
+            //jika tidak ada koneksi internet,
+
             Toast.makeText(LoginActivity.this, context.getResources().getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
         }
 
@@ -59,16 +63,30 @@ public class LoginActivity extends BaseActivity implements LoginView {
         progressDialog=new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.PROGRESS_TYPE);
         progressDialog.setTitleText(getString(R.string.now_loading));
 
+
+        //find id
         etUserName=(EditText)findViewById(R.id.etUserName);
         etPassword=(EditText)findViewById(R.id.etPassword);
         btnLogin=(Button)findViewById(R.id.btnLogin);
+        btnRegister=(Button)findViewById(R.id.btnRegister);
 
 
         /* init fonts */
         this.applyFontBoldToButton(btnLogin);
+        this.applyFontBoldToButton(btnRegister);
         this.applyFontRegularToEditText(etUserName);
         this.applyFontRegularToEditText(etPassword);
 
+        //jika tombol register ditekan
+        //muncul layar register
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
+
+        //jika tomobol login ditekan
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,22 +116,36 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
     @Override
     public void setDataToView(LoginResult loginResult) {
-       if (loginResult.getMessage().equals(getString(R.string.login_true))){
+        try{
 
-           //simpan full_name dan email di session
-           sessionManager.createLoginSession(loginResult.getData_user().full_name, loginResult.getData_user().email);
-           sessionManager.createIdUsers(loginResult.data_user.id_users);
+            if (loginResult.getMessage()==null){
 
-           //buat bussiness id
-           sessionManager.createBussinessId(loginResult.getData_user().getBusiness_id());
+            }else{
+                if (loginResult.getMessage().equals(getString(R.string.login_true))){
 
-           //pindah ke Main Activity setelah login sukses
-           Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-           startActivity(intent);
-           finish();
-       }else{
-           Toast.makeText(LoginActivity.this, loginResult.getMessage(), Toast.LENGTH_SHORT).show();
-       }
+                    //simpan full_name dan email di session
+                    sessionManager.createLoginSession(loginResult.getData_user().full_name, loginResult.getData_user().email);
+                    sessionManager.createIdUsers(loginResult.data_user.id_users);
+
+                    //buat bussiness id
+                    sessionManager.createBussinessId(loginResult.getData_user().getBusiness_id());
+
+                    //pindah ke Main Activity setelah login sukses
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    Toast.makeText(LoginActivity.this, loginResult.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        }catch (Exception e){
+
+            Toast.makeText(LoginActivity.this, getResources().getString(R.string.tidak_dapat_terhubung_dengan_server),Toast.LENGTH_SHORT).show();
+        }
+
+
+
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.kitadigi.poskita.util;
 
 public class Url {
 
-
+//
     public static final String DIKI_URL = "http://192.168.1.17:4444/api/";
     public static final String DIKI_IMAGE_URL = "http://192.168.1.17:4444/upload_api/master_product/media/";
 

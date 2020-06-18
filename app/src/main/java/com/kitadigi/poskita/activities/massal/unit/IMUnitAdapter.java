@@ -58,7 +58,7 @@ public class IMUnitAdapter extends BaseAdapter {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.im_kategori, null);
+            convertView = inflater.inflate(R.layout.im_unit, null);
 
 
             //find id dari control
