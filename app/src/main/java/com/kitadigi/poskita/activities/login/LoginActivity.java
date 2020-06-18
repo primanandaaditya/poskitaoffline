@@ -82,7 +82,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
             }
         });
 
