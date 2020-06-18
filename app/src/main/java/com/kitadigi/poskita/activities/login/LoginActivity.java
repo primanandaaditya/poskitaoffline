@@ -13,6 +13,7 @@ import com.kitadigi.poskita.MainActivity;
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.activities.login.LoginActivityContract.LoginView;
 import com.kitadigi.poskita.activities.login.LoginActivityContract.Presenter;
+import com.kitadigi.poskita.activities.registrasi.RegistrasiActivity;
 import com.kitadigi.poskita.base.BaseActivity;
 import com.kitadigi.poskita.util.InternetChecker;
 import com.kitadigi.poskita.util.SessionManager;
@@ -83,6 +84,8 @@ public class LoginActivity extends BaseActivity implements LoginView {
             @Override
             public void onClick(View v) {
 
+                Intent intent = new Intent(LoginActivity.this, RegistrasiActivity.class);
+                startActivity(intent);
             }
         });
 

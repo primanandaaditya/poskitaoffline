@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/rl_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50"
+        android:background="@color/colorRed">
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/dimen_30"
+            android:layout_height="@dimen/dimen_30"
+            android:src="@drawable/ic_baseline_arrow_back_24px"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:tint="@color/colorWhite"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_centerVertical="true"
+            tools:ignore="contentDescription"/>
+
+        <TextView
+            android:id="@+id/tv_nav_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_16"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:text="@string/registrasi"/>
+    </RelativeLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/rl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBg"
+        android:orientation="vertical">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+
+                <TextView
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:text="@string/nama"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:id="@+id/tv_nama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGreyText_2"
+                    android:textSize="@dimen/text_9" />
+
+                <EditText android:id="@+id/et_nama"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_40"
+                    android:padding="@dimen/dimen_5"
+                    android:textColor="@color/colorRed"
+                    android:hint="@string/nama"
+                    android:textSize="@dimen/text_12"
+                    android:layout_gravity="center"
+                    android:inputType="textCapWords"
+                    android:imeOptions="actionNext"
+                    android:background="@drawable/button_rounded_white"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:textColorHint="@color/colorRed"
+                    />
+
+
+
+
+                <TextView
+                    android:id="@+id/tv_alamat_pemilik"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:text="@string/alamat_pemilik"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGreyText_2"
+                    android:textSize="@dimen/text_9" />
+
+
+                <EditText android:id="@+id/et_alamat_pemilik"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_40"
+                    android:padding="@dimen/dimen_5"
+                    android:textColor="@color/colorRed"
+                    android:hint="@string/alamat_pemilik"
+                    android:textSize="@dimen/text_12"
+                    android:layout_gravity="center"
+                    android:inputType="textCapWords"
+                    android:imeOptions="actionNext"
+                    android:background="@drawable/button_rounded_white"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:textColorHint="@color/colorRed"
+                    />
+
+
+
+
+
+
+                <TextView
+                    android:id="@+id/tv_telepon"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:text="@string/telepon"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGreyText_2"
+                    android:textSize="@dimen/text_9" />
+
+
+                <EditText android:id="@+id/et_telepon"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_40"
+                    android:padding="@dimen/dimen_5"
+                    android:textColor="@color/colorRed"
+                    android:hint="@string/telepon"
+                    android:textSize="@dimen/text_12"
+                    android:layout_gravity="center"
+                    android:inputType="textCapWords"
+                    android:imeOptions="actionNext"
+                    android:background="@drawable/button_rounded_white"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:textColorHint="@color/colorRed"
+                    />
+
+
+
+
+
+
+                <TextView
+                    android:id="@+id/tv_nama_toko"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:text="@string/nama_toko"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGreyText_2"
+                    android:textSize="@dimen/text_9" />
+
+
+                <EditText android:id="@+id/et_nama_toko"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_40"
+                    android:padding="@dimen/dimen_5"
+                    android:textColor="@color/colorRed"
+                    android:hint="@string/nama_toko"
+                    android:textSize="@dimen/text_12"
+                    android:layout_gravity="center"
+                    android:inputType="textCapWords"
+                    android:imeOptions="actionNext"
+                    android:background="@drawable/button_rounded_white"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:textColorHint="@color/colorRed"
+                    />
+
+
+
+                <TextView
+                    android:id="@+id/tv_alamat_toko"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:text="@string/alamat_toko"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGreyText_2"
+                    android:textSize="@dimen/text_9" />
+
+
+                <EditText android:id="@+id/et_alamat_toko"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_40"
+                    android:padding="@dimen/dimen_5"
+                    android:textColor="@color/colorRed"
+                    android:hint="@string/alamat_toko"
+                    android:textSize="@dimen/text_12"
+                    android:layout_gravity="center"
+                    android:inputType="textCapWords"
+                    android:imeOptions="actionNext"
+                    android:background="@drawable/button_rounded_white"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:textColorHint="@color/colorRed"
+                    />
+
+
+
+                <TextView
+                    android:id="@+id/tv_jenis_toko"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:text="@string/jenis_toko"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGreyText_2"
+                    android:textSize="@dimen/text_9" />
+
+
+                <EditText android:id="@+id/et_jenis_toko"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_40"
+                    android:padding="@dimen/dimen_5"
+                    android:textColor="@color/colorRed"
+                    android:hint="@string/jenis_toko"
+                    android:textSize="@dimen/text_12"
+                    android:layout_gravity="center"
+                    android:inputType="textCapWords"
+                    android:imeOptions="actionNext"
+                    android:background="@drawable/button_rounded_white"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:textColorHint="@color/colorRed"
+                    />
+
+
+
+                <TextView
+                    android:id="@+id/tv_email"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:text="@string/email"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGreyText_2"
+                    android:textSize="@dimen/text_9" />
+
+
+                <EditText android:id="@+id/et_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_40"
+                    android:padding="@dimen/dimen_5"
+                    android:textColor="@color/colorRed"
+                    android:hint="@string/email"
+                    android:textSize="@dimen/text_12"
+                    android:layout_gravity="center"
+                    android:inputType="textCapWords"
+                    android:imeOptions="actionNext"
+                    android:background="@drawable/button_rounded_white"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:textColorHint="@color/colorRed"
+                    />
+
+
+
+                <TextView
+                    android:id="@+id/tv_keterangan"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:text="@string/keterangan"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGreyText_2"
+                    android:textSize="@dimen/text_9" />
+
+
+                <EditText android:id="@+id/et_keterangan"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_40"
+                    android:padding="@dimen/dimen_5"
+                    android:textColor="@color/colorRed"
+                    android:hint="@string/keterangan"
+                    android:textSize="@dimen/text_12"
+                    android:layout_gravity="center"
+                    android:inputType="textCapWords"
+                    android:imeOptions="actionNext"
+                    android:background="@drawable/button_rounded_white"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:textColorHint="@color/colorRed"
+                    />
+
+
+
+                <Button
+                    android:id="@+id/btn_save"
+                    android:enabled="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/registrasi"
+                    android:textColor="@color/colorWhite"
+                    style="@style/dialog_red_button"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:layout_marginBottom="30dp"
+                    android:layout_centerVertical="true"/>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+
+    </LinearLayout>
+
+</LinearLayout>

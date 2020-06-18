@@ -58,6 +58,7 @@
     <string name="nama_unit_harus_diisi">Nama unit harus diisi</string>
     <string name="total_pembelian">Total pembelian (Rp)</string>
     <string name="nama_brand">Nama brand</string>
+    <string name="nama" translatable="false">Nama</string>
     <string name="pilih_tanggal">Pilih tanggal</string>
     <string name="grafik_penjualan" translatable="false">Grafik Penjualan</string>
     <string name="grafik_item_penjualan" translatable="false">Grafik Item Penjualan</string>
@@ -66,6 +67,12 @@
     <string name="grand_total_pembelian" translatable="false">Grand Total Pembelian</string>
     <string name="total_item_penjualan" translatable="false">Total Item Penjualan</string>
     <string name="deskripsi_brand">Deskripsi brand</string>
+    <string name="alamat_pemilik">Alamat pemilik</string>
+    <string name="alamat_toko" translatable="false">Alamat toko</string>
+    <string name="jenis_toko" translatable="false">Jenis toko</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="nama_toko" translatable="false">Nama toko</string>
+    <string name="telepon" translatable="false">Telepon</string>
     <string name="nama_brand_harus_diisi">Nama brand harus diisi</string>
     <string name="insert_ok">Data telah ditambahkan</string>
     <string name="update_ok">Data telah diupdate</string>
@@ -102,6 +109,7 @@
     <string name="cetak_struk_lama" translatable="false">Cetak struk lama</string>
     <string name="tidak_dapat_terhubung_dengan_server" translatable="false">Tidak dapat terhubung dengan server</string>
     <string name="register" translatable="false">REGISTER</string>
+    <string name="registrasi" translatable="false">REGISTRASI</string>
     <string name="terimakasih_sudah_melakukan_register" translatable="false">Terima kasih telah melakukan register</string>
     <string name="mohon_menunggu_konfirmasi_dari_admin_kami" translatable="false">Mohon menunggu konfirmasi dari admin kami</string>
     <string name="print_preview">Print preview</string>

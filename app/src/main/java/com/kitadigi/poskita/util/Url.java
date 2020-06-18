@@ -77,6 +77,8 @@ public class Url {
     public static final String SINKRON_PENJUALAN = "jual/insert.php";
     public static final String SINKRON_PEMBELIAN = "beli/insert.php";
 
+    public static final String SINKRON_REGISTRASI = "register/register.php";
+
 
     //========================================
 
