@@ -1,5 +1,6 @@
 package com.kitadigi.poskita.activities.registrasi;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -69,7 +70,7 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
         etKeterangan=(EditText)findViewById(R.id.et_keterangan);
 
 
-        this.applyFontRegularToTextView(tv_nav_header);
+        this.applyFontBoldToTextView(tv_nav_header);
         this.applyFontRegularToTextView(tvAlamatPemilik);
         this.applyFontRegularToTextView(tvAlamatToko);
         this.applyFontRegularToTextView(tvEmail);
@@ -88,6 +89,8 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
         this.applyFontRegularToTextView(etNamaToko);
         this.applyFontRegularToTextView(etTelepon);
 
+        this.applyFontBoldToButton(btnSave);
+
 
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,13 +104,16 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
             @Override
             public void onClick(View v) {
 
-                registrasi();
+                //lakukan registrasi
+                doRegistrasi();
             }
         });
 
     }
 
-    void registrasi(){
+
+    @Override
+    public void doRegistrasi() {
 
         //tampung edittext dalam variabel
         String alamatPemilik = etAlamatPemilik.getText().toString();
@@ -120,12 +126,23 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
         String telepon = etTelepon.getText().toString();
 
 
-        presenter = new RegistrasiActivityPresenter(this, new RegistrasiActivityImpl(email,nama,telepon,jenisToko,namaToko,alamtToko,alamatPemilik,keterangan));
-        presenter.requestDataFromServer();
+        //jika masih ada yang kosong
+        if (alamatPemilik.matches("") ||
+            alamtToko.matches("") ||
+                jenisToko.matches("") ||
+                nama.matches("") ||
+                namaToko.matches("") ||
+                telepon.matches("")
+        ){
+            this.showToast(getResources().getString(R.string.masih_ada_yang_kosong));
+        }else{
+            //presenter untuk nembak API registrasi
+            presenter = new RegistrasiActivityPresenter(this, new RegistrasiActivityImpl(email,nama,telepon,jenisToko,namaToko,alamtToko,alamatPemilik,keterangan));
+            presenter.requestDataFromServer();
+        }
+
 
     }
-
-
 
     @Override
     public void showProgress() {
@@ -142,8 +159,17 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
 
     @Override
     public void setDataToView(RegistrasiRespon registrasiRespon) {
+        //jika registrasi OK
         if (registrasiRespon.status==1){
 
+            //tampilkan layar sukses
+            Intent intent = new Intent(RegistrasiActivity.this, RegistrasiSuksesActivity.class);
+            startActivity(intent);
+
+            //tutup screen
+            finish();
+        }else{
+            this.showToast(registrasiRespon.getMessage());
         }
     }
 

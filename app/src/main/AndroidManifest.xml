@@ -27,7 +27,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.registrasi.RegistrasiActivity"></activity>
+        <activity android:name=".activities.registrasi.RegistrasiSuksesActivity"></activity>
+        <activity android:name=".activities.registrasi.RegistrasiActivity" />
         <activity android:name=".activities.register.RegisterActivity" />
         <activity android:name=".activities.massal.item.InputMassalProdukActivity" />
         <activity android:name=".activities.massal.unit.InputMassalUnitActivity" />

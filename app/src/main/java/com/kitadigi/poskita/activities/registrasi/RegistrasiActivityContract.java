@@ -15,6 +15,7 @@ public interface RegistrasiActivityContract {
      * while the setDataToRecyclerView and onResponseFailure is fetched from the GetNoticeInteractorImpl class
      **/
     public interface RegistrasiView {
+        void doRegistrasi();
         void showProgress();
         void hideProgress();
         void setDataToView(RegistrasiRespon registrasiRespon);

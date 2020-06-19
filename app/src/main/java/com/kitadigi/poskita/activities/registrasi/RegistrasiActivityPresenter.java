@@ -51,4 +51,6 @@ public class RegistrasiActivityPresenter implements Presenter,OnFinishedListener
             registrasiView.hideProgress();
         }
     }
+
+
 }
