@@ -56,7 +56,8 @@ public class Url {
     //========================================
     //url ini untuk percobaan
 
-    public static final String SINKRON_BASE_URL = "http://10.0.3.2/sync/";
+//    public static final String SINKRON_BASE_URL = "http://10.0.3.2/sync/";
+    public static final String SINKRON_BASE_URL = "http://192.168.1.17/sync/";
 //    public static final String SINKRON_BASE_URL = "http://192.168.1.15/sync/";
     public static final String SINKRON_INSERT_KATEGORI = "kategori/insert.php";
     public static final String SINKRON_UPDATE_KATEGORI = "kategori/update.php";

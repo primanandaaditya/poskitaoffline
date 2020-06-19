@@ -5,7 +5,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -30,7 +32,10 @@ import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.kitadigi.poskita.MainActivity;
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.activities.pembelian.SubPembelianActivity;
@@ -51,6 +56,7 @@ import com.kitadigi.poskita.util.SessionManager;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -89,6 +95,7 @@ public class PembelianFragment extends BaseFragment implements IBarangResult {
     private RecyclerView recycler_view;
     private EditText et_search;
     private RelativeLayout rl_content, rl_button, rl_cart;
+    private FloatingActionButton fab;
 
     /* Shimmer */
     private ShimmerFrameLayout mShimmerViewContainer;
@@ -233,6 +240,7 @@ public class PembelianFragment extends BaseFragment implements IBarangResult {
         rl_content                      = view.findViewById(R.id.rl_content);
         rl_button                       = view.findViewById(R.id.rl_button);
         rl_cart                         = view.findViewById(R.id.rl_cartBeli);
+        fab                             = view.findViewById(R.id.fab);
 
         /* Shimmer */
         mShimmerViewContainer           = view.findViewById(R.id.shimmer_view_container);
@@ -362,6 +370,18 @@ public class PembelianFragment extends BaseFragment implements IBarangResult {
 
                 onResume();
 
+            }
+        });
+
+
+        //tombol untuk scan barkode
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //scan barkode
+//                intentIntegrator.initiateScan();
+                IntentIntegrator.forSupportFragment(PembelianFragment.this).initiateScan();
             }
         });
 
@@ -539,5 +559,70 @@ public class PembelianFragment extends BaseFragment implements IBarangResult {
         alertDialog.show();
     }
 
+
+
+    //onActivityResult untuk callback barkode scanner
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        //semua kode dibawah sebagai hasil tangkapan barkode scanner
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+
+        //cek apakah ada hasil scan
+        if (result == null){
+
+            //jika null/tidak ada
+
+
+        }else {
+
+            //tampung dalam variabel
+            String barcode = result.getContents();
+
+            //cari dalam sqlite, barkode yang di-scan
+            //init dulu sqlite-nya
+            ItemHelper itemHelper = new ItemHelper(getActivity());
+
+            //tampung dalam class
+            if (itemHelper.getItemByBarkode(barcode) == null){
+
+                //jika tidak ada data barang yang sesuai barkode
+                Toast.makeText(getActivity(),getActivity().getResources().getString(R.string.barkode_tidak_ditemukan) + ":" + barcode, Toast.LENGTH_SHORT).show();
+            }else{
+
+                //jika ada data yang sesuai
+                //tampung dalam variabel
+                Item item = itemHelper.getItemByBarkode(barcode);
+
+                //tampung semua properti item dalam variabel
+                String kodeId = item.getKode_id().toString();
+                String namaItem = item.getName_product().toString();
+                String hargaJual = item.getSell_price().toString();
+                String tipe = item.getTypes().toString();
+                String pathFoto = item.getImage();
+                Bitmap bitmap=null;
+
+                //buat file baru dari pathFoto
+                File imgFile = new File(pathFoto);
+//
+                //cek apakah ada file tersebut, buat jaga-jaga
+                if(imgFile.exists()){
+                    bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                }
+
+
+
+                //tampilkan popup dari pembelianfragment.java
+                //lihat fungsi addItems()
+                //untuk parameter id pada fungsi pembelianfragment.addItems(), diganti dengan kode_id
+                //sehubungan dengan sinkronisasi tabel penjualan
+//                    jualFragment.addItems(stok.getKode_id(),stok.getName_product(),stok.getSell_price(), bitmap,"", qty_available);
+                addItems(kodeId,namaItem,hargaJual,bitmap,tipe,1000);
+            }
+        }
+
+    }
 
 }

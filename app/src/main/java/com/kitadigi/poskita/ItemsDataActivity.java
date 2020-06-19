@@ -409,10 +409,15 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
                 inputMethodManager.showSoftInput(et_price_sell, InputMethodManager.SHOW_IMPLICIT);
             }
         });
+
+        //tombol ambil foto dari kamera/galeri
         btn_photo.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
+
+                //waktu diklik, harus dapat izin dari user dulu
+                //ask permission
                 if(ContextCompat.checkSelfPermission(ItemsDataActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
 
                     //,munculkan dialog kepada user
@@ -454,8 +459,27 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
                 qrScan.initiateScan();
             }
         });
+
+
+
+        mintaPermission();
     }
 
+
+    void mintaPermission(){
+        //minta izin user untuk ambil kamera/galeri
+        //waktu diklik, harus dapat izin dari user dulu
+        //ask permission
+        if(ContextCompat.checkSelfPermission(ItemsDataActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
+
+        }
+        else{
+            if(shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)){
+                Toast.makeText(getApplicationContext(), "Permission Needed.", Toast.LENGTH_LONG).show();
+            }
+            requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, CAMERA_RESULT);
+        }
+    }
     void dialogKameraGaleri(){
         //,munculkan dialog kepada user
         // apakah memilih kamera atau galeri?
