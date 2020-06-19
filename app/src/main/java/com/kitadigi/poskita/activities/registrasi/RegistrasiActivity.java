@@ -2,16 +2,24 @@ package com.kitadigi.poskita.activities.registrasi;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.base.BaseActivity;
+import com.kitadigi.poskita.activities.registrasi.RegistrasiActivityContract.GetRegistrasiResultIntractor;
+import com.kitadigi.poskita.activities.registrasi.RegistrasiActivityContract.RegistrasiView;
+import com.kitadigi.poskita.activities.registrasi.RegistrasiActivityContract.Presenter;
+import com.kitadigi.poskita.base.BaseResponse;
 
-public class RegistrasiActivity extends BaseActivity {
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
+public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
 
     TextView tv_nav_header,tvEmail,tvNama,tvTelepon,
     tvJenisToko,tvNamaToko,tvAlamatToko,tvAlamatPemilik,tvKeterangan;
@@ -22,6 +30,9 @@ public class RegistrasiActivity extends BaseActivity {
     Button btnSave;
 
     ImageView iv_back;
+
+    Presenter presenter;
+    SweetAlertDialog sweetAlertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,5 +96,59 @@ public class RegistrasiActivity extends BaseActivity {
             }
         });
 
+        //jika tombol ditekan
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                registrasi();
+            }
+        });
+
+    }
+
+    void registrasi(){
+
+        //tampung edittext dalam variabel
+        String alamatPemilik = etAlamatPemilik.getText().toString();
+        String alamtToko = etAlamatToko.getText().toString();
+        String email = etEmail.getText().toString();
+        String jenisToko = etJenisToko.getText().toString();
+        String keterangan = etKeterangan.getText().toString();
+        String nama = etNama.getText().toString();
+        String namaToko = etNamaToko.getText().toString();
+        String telepon = etTelepon.getText().toString();
+
+
+        presenter = new RegistrasiActivityPresenter(this, new RegistrasiActivityImpl(email,nama,telepon,jenisToko,namaToko,alamtToko,alamatPemilik,keterangan));
+        presenter.requestDataFromServer();
+
+    }
+
+
+
+    @Override
+    public void showProgress() {
+        sweetAlertDialog=new SweetAlertDialog(RegistrasiActivity.this, SweetAlertDialog.PROGRESS_TYPE);
+        sweetAlertDialog.setTitleText(getResources().getString(R.string.now_loading));
+        sweetAlertDialog.show();
+
+    }
+
+    @Override
+    public void hideProgress() {
+        sweetAlertDialog.dismissWithAnimation();
+    }
+
+    @Override
+    public void setDataToView(RegistrasiRespon registrasiRespon) {
+        if (registrasiRespon.status==1){
+
+        }
+    }
+
+    @Override
+    public void onResponseFailure(Throwable throwable) {
+        this.showToast(throwable.getMessage());
     }
 }

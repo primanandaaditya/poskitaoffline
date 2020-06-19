@@ -22,7 +22,7 @@ public class RegistrasiActivityPresenter implements Presenter,OnFinishedListener
     }
 
     @Override
-    public void onLoginButtonClick() {
+    public void onRegistrasiButtonClick() {
         if(registrasiView != null){
             registrasiView.showProgress();
         }
@@ -36,7 +36,7 @@ public class RegistrasiActivityPresenter implements Presenter,OnFinishedListener
     }
 
     @Override
-    public void onFinished(BaseResponse baseResponse) {
+    public void onFinished(RegistrasiRespon baseResponse) {
         if(registrasiView != null){
             registrasiView.setDataToView(baseResponse);
             registrasiView.hideProgress();

@@ -6,7 +6,7 @@ public interface RegistrasiActivityContract {
 
     public interface Presenter{
         void onDestroy();
-        void onLoginButtonClick();
+        void onRegistrasiButtonClick();
         void requestDataFromServer();
     }
 
@@ -17,7 +17,7 @@ public interface RegistrasiActivityContract {
     public interface RegistrasiView {
         void showProgress();
         void hideProgress();
-        void setDataToView(BaseResponse baseResponse);
+        void setDataToView(RegistrasiRespon registrasiRespon);
         void onResponseFailure(Throwable throwable);
     }
 
@@ -27,7 +27,7 @@ public interface RegistrasiActivityContract {
     interface GetRegistrasiResultIntractor {
 
         interface OnFinishedListener {
-            void onFinished(BaseResponse baseResponse);
+            void onFinished(RegistrasiRespon registrasiRespon);
             void onFailure(Throwable t);
         }
 

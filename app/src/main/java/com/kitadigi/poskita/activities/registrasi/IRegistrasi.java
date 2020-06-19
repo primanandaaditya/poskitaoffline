@@ -16,7 +16,7 @@ public interface IRegistrasi {
 
     @FormUrlEncoded
     @POST(Url.SINKRON_REGISTRASI)
-    Call<BaseResponse> doRegistrasi(
+    Call<RegistrasiRespon> doRegistrasi(
             @Field("email") String email,
             @Field("nama") String nama,
             @Field("telepon") String telepon,

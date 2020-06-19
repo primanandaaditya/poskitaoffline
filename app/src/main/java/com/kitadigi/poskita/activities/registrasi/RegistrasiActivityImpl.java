@@ -39,14 +39,14 @@ public class RegistrasiActivityImpl implements GetRegistrasiResultIntractor {
     public void getResultModel(final OnFinishedListener onFinishedListener) {
 
         iRegistrasi = RegistrasiUtil.getInterface();
-        iRegistrasi.doRegistrasi(email,nama,telepon,jenis_toko,nama_toko,alamat_toko,alamat_pemilik,keterangan).enqueue(new Callback<BaseResponse>() {
+        iRegistrasi.doRegistrasi(email,nama,telepon,jenis_toko,nama_toko,alamat_toko,alamat_pemilik,keterangan).enqueue(new Callback<RegistrasiRespon>() {
             @Override
-            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+            public void onResponse(Call<RegistrasiRespon> call, Response<RegistrasiRespon> response) {
                 onFinishedListener.onFinished(response.body());
             }
 
             @Override
-            public void onFailure(Call<BaseResponse> call, Throwable t) {
+            public void onFailure(Call<RegistrasiRespon> call, Throwable t) {
                 onFinishedListener.onFailure(t);
             }
         });
