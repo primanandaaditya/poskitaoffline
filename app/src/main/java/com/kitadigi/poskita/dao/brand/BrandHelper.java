@@ -138,7 +138,7 @@ public class BrandHelper {
                     //setting nilai
                     brand.setName(brandData.getName());
                     brand.setDescription(brandData.getDescription());
-                    brand.setKode_id(brandData.getId());
+                    brand.setKode_id(brandData.getMobile_id());
                     brand.setSync_insert(Constants.STATUS_BELUM_SYNC);
                     brand.setSync_update(Constants.STATUS_SUDAH_SYNC);
                     brand.setSync_delete(Constants.STATUS_SUDAH_SYNC);

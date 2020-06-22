@@ -109,7 +109,7 @@ public class KategoriHelper {
                     //setting nilai
                     kategori.setName_category(datum.getName());
                     kategori.setCode_category(datum.getCode_category());
-                    kategori.setKode_id(datum.getId());
+                    kategori.setKode_id(datum.getMobile_id());
                     kategori.setSync_insert(Constants.STATUS_BELUM_SYNC);
                     kategori.setSync_update(Constants.STATUS_SUDAH_SYNC);
                     kategori.setSync_delete(Constants.STATUS_SUDAH_SYNC);

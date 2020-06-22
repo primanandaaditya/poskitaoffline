@@ -208,6 +208,8 @@ public class IMKategoriAdapter extends BaseAdapter {
                 datums.setMobile_id(StringUtil.getRandomString(20));
 
                 hasil.add(datums);
+
+
             }
 
         }

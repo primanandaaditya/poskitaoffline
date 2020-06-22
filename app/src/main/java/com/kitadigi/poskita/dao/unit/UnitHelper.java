@@ -137,7 +137,7 @@ public class UnitHelper {
                     //setting nilai
                     unit.setName(unitData.getName());
                     unit.setSingkatan(unitData.getShort_name());
-                    unit.setKode_id(unitData.getId());
+                    unit.setKode_id(unitData.getMobile_id());
                     unit.setSync_insert(Constants.STATUS_BELUM_SYNC);
                     unit.setSync_update(Constants.STATUS_SUDAH_SYNC);
                     unit.setSync_delete(Constants.STATUS_SUDAH_SYNC);

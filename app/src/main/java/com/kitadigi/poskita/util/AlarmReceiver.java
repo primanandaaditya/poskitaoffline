@@ -69,28 +69,36 @@ public class AlarmReceiver extends BroadcastReceiver implements ISinkronizer {
 
         }else{
 
-            //coba buat notifikasi
-            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
+            try{
 
-            //pasang icon pada notifikasi
-            mBuilder.setSmallIcon(R.drawable.ic_shopping_cart);
+                //coba buat notifikasi
+                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
 
-
-            //pasang icon large/besar
-            Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
-                    R.drawable.ic_shopping_cart);
-            mBuilder.setLargeIcon(icon);
+                //pasang icon pada notifikasi
+                mBuilder.setSmallIcon(R.drawable.ic_shopping_cart);
 
 
-            //pasang title
-            mBuilder.setContentTitle(context.getResources().getString(R.string.kitadigi_poskita));
+                //pasang icon large/besar
+                Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
+                        R.drawable.ic_shopping_cart);
+                mBuilder.setLargeIcon(icon);
 
-            //pasang subtitle
-            mBuilder.setContentText(context.getResources().getString(R.string.tidak_ada_koneksi_internet));
 
-            //mulai create notifikasi dan tampilkan di HP
-            mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            mNotificationManager.notify(0, mBuilder.build());
+                //pasang title
+                mBuilder.setContentTitle(context.getResources().getString(R.string.kitadigi_poskita));
+
+                //pasang subtitle
+                mBuilder.setContentText(context.getResources().getString(R.string.tidak_ada_koneksi_internet));
+
+                //mulai create notifikasi dan tampilkan di HP
+                mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                mNotificationManager.notify(0, mBuilder.build());
+
+            }catch (Exception e){
+
+            }
+
+
 
         }
 
@@ -134,7 +142,7 @@ public class AlarmReceiver extends BroadcastReceiver implements ISinkronizer {
 
                 mNotificationManager.cancel(0);
             }
-        }, 5000);   //5
+        }, 3000);   //5
 
     }
 }
