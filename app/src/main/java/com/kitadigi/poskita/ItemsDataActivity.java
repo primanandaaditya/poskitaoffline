@@ -90,6 +90,13 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
         IUnitResult
 {
 
+    //variabel boolean
+    //untuk deteksi apakah button pilih image di-klik atau tidak
+    //karena kalau aplikasi baru pertama kali diinstal
+    //saat activity ini dibuka -> dialog 'pilih kamera/galeri?' langsung muncul
+    //padahal dialog itu hanya boleh muncul saat button 'pilih image' diklik
+    boolean klik=false;
+
     //qr code scanner object
     private IntentIntegrator qrScan;
 
@@ -218,10 +225,6 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
         sp_unit_id = findViewById(R.id.sp_unit_id);
         sp_brand_id = findViewById(R.id.sp_brand_id);
         sp_kategori = findViewById(R.id.sp_kategori);
-
-
-
-
 
 
         /* init imageview */
@@ -416,6 +419,10 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
             @Override
             public void onClick(View v) {
 
+                //saat diklik, var 'klik' bertipe boolean
+                //harus value = true
+                klik = true;
+
                 //waktu diklik, harus dapat izin dari user dulu
                 //ask permission
                 if(ContextCompat.checkSelfPermission(ItemsDataActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
@@ -539,12 +546,7 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
                 // When the request to enable Bluetooth returns
                 if (resultCode == Activity.RESULT_OK) {
                     iv_preview_photo.setVisibility(View.VISIBLE);
-//                    rl_save.setVisibility(View.VISIBLE);
 
-//                    Blocked by Prima
-//                    ==================================================================
-//                    ==================================================================
-//
                     Glide.with(this).load(imageFilePath).into(iv_preview_photo);
                     Log.d(TAG, "imageFilePath " + imageFilePath);
                 } else {
@@ -585,6 +587,8 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
                 break;
         }
 
+
+        //intent untuk scan barkode
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             //if qrcode has nothing in it
@@ -603,7 +607,15 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if(requestCode == CAMERA_RESULT){
             if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED){
-                dialogKameraGaleri();
+
+                //cek dulu apakah btn 'pilih galeri/kamera' diklik
+                if (klik){
+                    //jika btn diklik, tampilkan dialog kamera/galeri
+                    dialogKameraGaleri();
+                }else{
+
+                }
+
             }
             else{
                 Toast.makeText(getApplicationContext(), "Permission Needed.", Toast.LENGTH_LONG).show();

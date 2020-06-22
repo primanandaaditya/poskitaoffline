@@ -8,7 +8,7 @@ public class Url {
 
 //    public static final String DIKI_URL = "https://poskita.monstercode.net/api/";
 //    public static final String DIKI_IMAGE_URL = "https://poskita.monstercode.net/upload_api/master_product/media/";
-
+//
 
     public static final String DIKI_ITEM_URL = "master_product/";
     public static final String DIKI_ITEM_LIST_URL = "get_data";
