@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.activities.massal.brand.InputMassalBrandActivity;
+import com.kitadigi.poskita.activities.massal.item.InputMassalProdukActivity;
 import com.kitadigi.poskita.activities.massal.kategori.InputMassalKategoriActivity;
 import com.kitadigi.poskita.activities.massal.unit.InputMassalUnitActivity;
 import com.kitadigi.poskita.fragment.report.list.DaftarReportAdapter;
@@ -53,7 +54,7 @@ public class InputMassalFragment extends Fragment {
         daftarReport.add("Kategori");
         daftarReport.add("Brand");
         daftarReport.add("Unit");
-        daftarReport.add("Produk");
+
 
         //init adapter untuk listview
         daftarReportAdapter=new DaftarReportAdapter(getActivity(),daftarReport);
@@ -86,9 +87,7 @@ public class InputMassalFragment extends Fragment {
                         startActivity(imUnit);
 
                         break;
-                    case 3:
 
-                        break;
 
                     default:
                         // code block

@@ -34,7 +34,7 @@
             android:layout_marginStart="@dimen/dimen_10"
             android:gravity="center"
             android:layout_centerInParent="true"
-            android:text="@string/tambah_kategori"/>
+            android:text="@string/tambah_unit"/>
     </RelativeLayout>
 
     <ListView
