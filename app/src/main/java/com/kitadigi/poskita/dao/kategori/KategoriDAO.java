@@ -53,4 +53,6 @@ public interface KategoriDAO {
     //untuk validasi duplikasi
     @Query("SELECT * FROM kategori WHERE  name_category = :name_category AND sync_delete = 1")
     public List<Kategori> cekNamaKategori(String name_category);
+
+
 }
