@@ -470,7 +470,7 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
                 //kalau true, yang muncul dialog ambil foto kamera/galeri
                 klik=false;
 
-                
+
                 //scan barkode
                 //minta izin user untuk ambil kamera/galeri
                 //waktu diklik, harus dapat izin dari user dulu
