@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -453,6 +454,8 @@ public class JualFragment extends BaseFragment implements IStokResult {
                     requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, CAMERA_RESULT);
                 }
 
+                //kode lanjut ke requestPermission
+
             }
         });
 
@@ -462,20 +465,7 @@ public class JualFragment extends BaseFragment implements IStokResult {
 
     }
 
-    void mintaPermission(){
-        //minta izin user untuk ambil kamera/galeri
-        //waktu diklik, harus dapat izin dari user dulu
-        //ask permission
-        if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
 
-        }
-        else{
-            if(shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)){
-                Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.izin_akses_kamera_diperlukan), Toast.LENGTH_LONG).show();
-            }
-            requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, CAMERA_RESULT);
-        }
-    }
 
     void refreshData(){
         stokController=new StokController(this,getActivity(), true);
@@ -949,5 +939,22 @@ public class JualFragment extends BaseFragment implements IStokResult {
 
     }
 
+    //jika user mengizinkan akses kamera
+    //maka scan barkode
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
+        if(requestCode == CAMERA_RESULT){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED){
+                IntentIntegrator.forSupportFragment(JualFragment.this).initiateScan();
+            }
+            else{
+                Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.izin_akses_kamera_diperlukan), Toast.LENGTH_LONG).show();
+            }
+        }
+        else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
 }

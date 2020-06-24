@@ -463,13 +463,29 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
         ib_barkode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                qrScan.initiateScan();
+
+                //var klik harus diset false
+                //soalnya tombol ib_barkode diklik
+                //supaya di onRequestPermission-nya langsung scan barkode
+                //kalau true, yang muncul dialog ambil foto kamera/galeri
+                klik=false;
+
+                
+                //scan barkode
+                //minta izin user untuk ambil kamera/galeri
+                //waktu diklik, harus dapat izin dari user dulu
+                //ask permission
+               mintaPermission();
+
+                //kode lanjut ke requestPermission
+
+
             }
         });
 
 
 
-        mintaPermission();
+//        mintaPermission();
     }
 
 
@@ -478,7 +494,7 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
         //waktu diklik, harus dapat izin dari user dulu
         //ask permission
         if(ContextCompat.checkSelfPermission(ItemsDataActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
-
+            qrScan.initiateScan();
         }
         else{
             if(shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)){
@@ -613,7 +629,7 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
                     //jika btn diklik, tampilkan dialog kamera/galeri
                     dialogKameraGaleri();
                 }else{
-
+                    qrScan.initiateScan();
                 }
 
             }

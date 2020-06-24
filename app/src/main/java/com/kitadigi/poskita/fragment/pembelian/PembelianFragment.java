@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -380,6 +381,8 @@ public class PembelianFragment extends BaseFragment implements IBarangResult {
             @Override
             public void onClick(View v) {
 
+
+                //minta pada user untuk izin akses kamera dulu
                 if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
                     IntentIntegrator.forSupportFragment(PembelianFragment.this).initiateScan();
                 }
@@ -390,6 +393,8 @@ public class PembelianFragment extends BaseFragment implements IBarangResult {
                     requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, CAMERA_RESULT);
                 }
             }
+
+            //kode lanjut di requestPermission
         });
 
         //tarik data produk dari server
@@ -632,4 +637,20 @@ public class PembelianFragment extends BaseFragment implements IBarangResult {
 
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if(requestCode == CAMERA_RESULT){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED){
+                IntentIntegrator.forSupportFragment(PembelianFragment.this).initiateScan();
+            }
+            else{
+                Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.izin_akses_kamera_diperlukan), Toast.LENGTH_LONG).show();
+            }
+        }
+        else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
 }
