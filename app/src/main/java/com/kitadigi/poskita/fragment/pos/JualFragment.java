@@ -1,9 +1,11 @@
 package com.kitadigi.poskita.fragment.pos;
 
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -90,6 +92,8 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  */
 public class JualFragment extends BaseFragment implements IStokResult {
 
+
+    private final int CAMERA_RESULT = 101;
 
     private static final String TAG = POSFragment.class.getSimpleName();
     // TODO: Rename parameter arguments, choose names that match
@@ -436,8 +440,19 @@ public class JualFragment extends BaseFragment implements IStokResult {
             public void onClick(View v) {
 
                 //scan barkode
-//                intentIntegrator.initiateScan();
-                IntentIntegrator.forSupportFragment(JualFragment.this).initiateScan();
+                //minta izin user untuk ambil kamera/galeri
+                //waktu diklik, harus dapat izin dari user dulu
+                //ask permission
+                if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
+                    IntentIntegrator.forSupportFragment(JualFragment.this).initiateScan();
+                }
+                else{
+                    if(shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)){
+                        Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.izin_akses_kamera_diperlukan), Toast.LENGTH_LONG).show();
+                    }
+                    requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, CAMERA_RESULT);
+                }
+
             }
         });
 
@@ -445,6 +460,21 @@ public class JualFragment extends BaseFragment implements IStokResult {
         refreshData();
 
 
+    }
+
+    void mintaPermission(){
+        //minta izin user untuk ambil kamera/galeri
+        //waktu diklik, harus dapat izin dari user dulu
+        //ask permission
+        if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
+
+        }
+        else{
+            if(shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)){
+                Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.izin_akses_kamera_diperlukan), Toast.LENGTH_LONG).show();
+            }
+            requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, CAMERA_RESULT);
+        }
     }
 
     void refreshData(){
@@ -918,4 +948,6 @@ public class JualFragment extends BaseFragment implements IStokResult {
         }
 
     }
+
+
 }

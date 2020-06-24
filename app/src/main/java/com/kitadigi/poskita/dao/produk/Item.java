@@ -17,11 +17,37 @@ public class Item {
     private String name_product;
     private String types;
     private String brand_name,category_name,unit_name;
+    private String brand_mobile_id, category_mobile_id, unit_mobile_id;
     private String additional;
     private Integer brand_id;
     private Integer category_id;
     private Integer unit_id;
     private Integer purchase_price;
+
+    public String getBrand_mobile_id() {
+        return brand_mobile_id;
+    }
+
+    public void setBrand_mobile_id(String brand_mobile_id) {
+        this.brand_mobile_id = brand_mobile_id;
+    }
+
+    public String getCategory_mobile_id() {
+        return category_mobile_id;
+    }
+
+    public void setCategory_mobile_id(String category_mobile_id) {
+        this.category_mobile_id = category_mobile_id;
+    }
+
+    public String getUnit_mobile_id() {
+        return unit_mobile_id;
+    }
+
+    public void setUnit_mobile_id(String unit_mobile_id) {
+        this.unit_mobile_id = unit_mobile_id;
+    }
+
     private Integer sell_price;
     private String code_product;
     private Integer qty_stock;

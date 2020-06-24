@@ -93,7 +93,8 @@ public class AddUnitController implements AddUnitRequest {
                         Unit unit=new Unit();
                         unit.setName(name_unit);
                         unit.setSingkatan(code_unit);
-                        unit.setKode_id(bussinessId);
+//                        unit.setKode_id(bussinessId);
+                        unit.setKode_id(StringUtil.getRandomString(Constants.randomString));
                         unit.setSync_delete(Constants.STATUS_SUDAH_SYNC);
                         unit.setSync_insert(Constants.STATUS_SUDAH_SYNC);
                         unit.setSync_update(Constants.STATUS_SUDAH_SYNC);
@@ -138,7 +139,8 @@ public class AddUnitController implements AddUnitRequest {
             Unit unit=new Unit();
             unit.setName(name_unit);
             unit.setSingkatan(code_unit);
-            unit.setKode_id(bussinessId);
+//            unit.setKode_id(bussinessId);
+            unit.setKode_id(StringUtil.getRandomString(Constants.randomString));
             unit.setSync_delete(Constants.STATUS_SUDAH_SYNC);
             unit.setSync_insert(Constants.STATUS_BELUM_SYNC);
             unit.setSync_update(Constants.STATUS_SUDAH_SYNC);
@@ -150,9 +152,6 @@ public class AddUnitController implements AddUnitRequest {
             //jika ada duplikasi
             addUnitResult.onAddUnitError(context.getResources().getString(R.string.duplikasi_unit));
         }
-
-
-
 
     }
 }

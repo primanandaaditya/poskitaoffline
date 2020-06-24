@@ -90,7 +90,8 @@ public class AddBrandController implements IAddBrandRequest {
                                 Brand brand = new Brand();
                                 brand.setName(name);
                                 brand.setDescription(description);
-                                brand.setKode_id(bussinessId);
+//                                brand.setKode_id(bussinessId);
+                                brand.setKode_id(StringUtil.getRandomString(Constants.randomString));
                                 brand.setSync_delete(Constants.STATUS_SUDAH_SYNC);
                                 brand.setSync_insert(Constants.STATUS_SUDAH_SYNC);
                                 brand.setSync_delete(Constants.STATUS_SUDAH_SYNC);
@@ -133,7 +134,8 @@ public class AddBrandController implements IAddBrandRequest {
             Brand brand = new Brand();
             brand.setName(nama);
             brand.setDescription(deskripsi);
-            brand.setKode_id(bussinessId);
+//            brand.setKode_id(bussinessId);
+            brand.setKode_id(StringUtil.getRandomString(Constants.randomString));
             brand.setSync_delete(Constants.STATUS_SUDAH_SYNC);
             brand.setSync_insert(Constants.STATUS_BELUM_SYNC);
             brand.setSync_delete(Constants.STATUS_SUDAH_SYNC);

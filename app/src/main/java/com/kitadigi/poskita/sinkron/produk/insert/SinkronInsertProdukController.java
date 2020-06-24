@@ -191,9 +191,9 @@ public class SinkronInsertProdukController implements ISinkronAddProdukRequest {
                     jsonObject.put("nama", item.getName_product());
                     jsonObject.put("mobile_id", item.getKode_id());
                     jsonObject.put("business_id",business_id);
-                    jsonObject.put("brand_id", item.getBrand_id().toString());
-                    jsonObject.put("category_id",item.getCategory_id().toString());
-                    jsonObject.put("unit_id",item.getUnit_id().toString());
+                    jsonObject.put("category_mobile_id", item.getCategory_mobile_id());
+                    jsonObject.put("brand_mobile_id", item.getBrand_mobile_id());
+                    jsonObject.put("unit_mobile_id", item.getUnit_id());
                     jsonObject.put("sell_price",item.getSell_price().toString());
                     jsonObject.put("purchase_price",item.getPurchase_price().toString());
 
@@ -242,7 +242,7 @@ public class SinkronInsertProdukController implements ISinkronAddProdukRequest {
             hasil = "";
         }else{
             hasil =  jsonArray.toString();
-
+            Log.d("jsonarray item", hasil);
         }
 
         return hasil;

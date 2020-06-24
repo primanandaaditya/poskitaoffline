@@ -1,14 +1,17 @@
 package com.kitadigi.poskita.fragment.pembelian;
 
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -72,6 +75,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  */
 public class PembelianFragment extends BaseFragment implements IBarangResult {
 
+    private final int CAMERA_RESULT = 101;
 
     private static final String TAG = PembelianFragment.class.getSimpleName();
     // TODO: Rename parameter arguments, choose names that match
@@ -265,9 +269,6 @@ public class PembelianFragment extends BaseFragment implements IBarangResult {
         });
 
 
-
-
-
         rl_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -379,9 +380,15 @@ public class PembelianFragment extends BaseFragment implements IBarangResult {
             @Override
             public void onClick(View v) {
 
-                //scan barkode
-//                intentIntegrator.initiateScan();
-                IntentIntegrator.forSupportFragment(PembelianFragment.this).initiateScan();
+                if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
+                    IntentIntegrator.forSupportFragment(PembelianFragment.this).initiateScan();
+                }
+                else{
+                    if(shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)){
+                        Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.izin_akses_kamera_diperlukan), Toast.LENGTH_LONG).show();
+                    }
+                    requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, CAMERA_RESULT);
+                }
             }
         });
 

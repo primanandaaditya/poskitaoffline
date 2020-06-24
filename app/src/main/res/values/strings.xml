@@ -66,6 +66,7 @@
     <string name="grand_total_penjualan" translatable="false">Grand Total Penjualan</string>
     <string name="grand_total_pembelian" translatable="false">Grand Total Pembelian</string>
     <string name="total_item_penjualan" translatable="false">Total Item Penjualan</string>
+    <string name="izin_akses_kamera_diperlukan" translatable="false">Izin akses kamera diperlukan</string>
     <string name="deskripsi_brand">Deskripsi brand</string>
     <string name="alamat_pemilik">Alamat pemilik</string>
     <string name="alamat_toko" translatable="false">Alamat toko</string>

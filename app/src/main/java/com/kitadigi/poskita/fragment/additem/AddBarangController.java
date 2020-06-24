@@ -6,8 +6,13 @@ import android.util.Log;
 
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.dao.brand.Brand;
+import com.kitadigi.poskita.dao.brand.BrandHelper;
+import com.kitadigi.poskita.dao.kategori.Kategori;
+import com.kitadigi.poskita.dao.kategori.KategoriHelper;
 import com.kitadigi.poskita.dao.produk.Item;
 import com.kitadigi.poskita.dao.produk.ItemHelper;
+import com.kitadigi.poskita.dao.unit.Unit;
+import com.kitadigi.poskita.dao.unit.UnitHelper;
 import com.kitadigi.poskita.util.Constants;
 import com.kitadigi.poskita.util.InternetChecker;
 import com.kitadigi.poskita.util.SessionManager;
@@ -36,6 +41,15 @@ public class AddBarangController implements IAddBarangRequest {
     ItemHelper itemHelper;
     String businessId;
     Item item;
+
+    //init sqlite untuk mencari mobile_id dari kategori,brand dan unit
+    KategoriHelper kategoriHelper;
+    BrandHelper brandHelper;
+    UnitHelper unitHelper;
+
+    //var string untuk nampung mobile_id dari query berdasarkan id
+    String kategori_mobile_id,brand_mobile_id,unit_mobile_id;
+
 
     //var string ini untuk nama produk
     //karena dalam interface retrofitnya diharuskan @Part, bukan @Field
@@ -138,6 +152,7 @@ public class AddBarangController implements IAddBarangRequest {
                         item.setBrand_id(brand_id);
                         item.setCategory_id(category_id);
                         item.setUnit_id(unit_id);
+
                         item.setPurchase_price(purchase_price);
                         item.setSell_price(sell_price);
                         item.setQty_stock(qty_stock);
@@ -203,13 +218,29 @@ public class AddBarangController implements IAddBarangRequest {
         //jika tidak ada duplikasi
         if (adaRow==false){
 
+            //yang harus diperhatikan:
+            //pada tabel item di sqlite ada kolom category_mobile_id,unit_mobile_id dan brand_mobile_id
+            //ketiga kolom tersebut harus diisi dengan mobile_id dari kategori,unit dan brand
+            //karena saat insert data produk, dropdown yang ada hanya diketahui id-nya saja
+            //id-id tersebut berasal dari ketiga spinner yang ada di activity ItemsDataActivity.java
+            //jadi kita harus mencari mobile_id lewat query
+
+            //jalankan fungsi cariMobileId
+            //dan lemparkan tiap nilai
+            // ke variabel kategori_mobile_id,brand_mobile_id,unit_mobile_id
+            cariMobileId(brand_id,category_id,unit_id);
+
             item=new Item();
-            item.setKode_id(businessId);
+//            item.setKode_id(businessId);
+            item.setKode_id(StringUtil.getRandomString(Constants.randomString));
             item.setName_product(nama_produk);
             item.setCode_product(code_product);
             item.setBrand_id(brand_id);
             item.setCategory_id(category_id);
             item.setUnit_id(unit_id);
+            item.setBrand_mobile_id(brand_mobile_id);
+            item.setCategory_mobile_id(kategori_mobile_id);
+            item.setUnit_mobile_id(unit_mobile_id);
             item.setPurchase_price(purchase_price);
             item.setSell_price(sell_price);
             item.setQty_stock(qty_stock);
@@ -241,10 +272,28 @@ public class AddBarangController implements IAddBarangRequest {
             iAddBarangResult.onError(context.getResources().getString(R.string.duplikasi_item));
         }
 
+    }
 
 
+    //fungsi ini untuk mencari mobile_id
+    //dari kategori,brand dan unit
+    //lalu dilempar ke variabel
+    void cariMobileId(Integer brand_id,Integer category_id,Integer unit_id){
 
+        //init sqlite dulu
+        kategoriHelper = new KategoriHelper(context);
+        brandHelper = new BrandHelper(context);
+        unitHelper = new UnitHelper(context);
 
+        //cari dulu mobile_id di tiap tabel
+        Kategori kategori = kategoriHelper.getKategoriById(Long.parseLong(category_id.toString()));
+        kategori_mobile_id = kategori.getKode_id();
+
+        Brand brand = brandHelper.getBrandById(Long.parseLong(brand_id.toString()));
+        brand_mobile_id = brand.getKode_id();
+
+        Unit unit = unitHelper.getUnitById(Long.parseLong(unit_id.toString()));
+        unit_mobile_id = unit.getKode_id();
 
     }
 

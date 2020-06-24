@@ -482,7 +482,7 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
         }
         else{
             if(shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)){
-                Toast.makeText(getApplicationContext(), "Permission Needed.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.izin_akses_kamera_diperlukan), Toast.LENGTH_LONG).show();
             }
             requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, CAMERA_RESULT);
         }
@@ -1012,20 +1012,34 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
             int counter = 0;
             HashMap<Integer,Integer> hashKategori = new HashMap<>();
 
+            //buat array string
             List<String> listKategori = new ArrayList<String>();
+
+            //buat array integer
             final List<Integer> idKategoriList=new ArrayList<Integer>();
+
+            //looping kategori dari sqlite
+            //masukkan ke array
             for(Datum datum:kategoriModel.getData()){
 
+                //var listKategori berisi list nama
                 listKategori.add(datum.getName());
+
+                //var idKategoriList berisi list id
                 idKategoriList.add(Integer.parseInt(datum.getId()));
+
+                //hashmap dapat id dan counter
                 hashKategori.put(Integer.parseInt(datum.getId()), counter);
+
                 counter = counter + 1;
             }
+
             MySpinnerAdapter kategoriAdapter = new MySpinnerAdapter(
                     ItemsDataActivity.this,
                     R.layout.myspinner,
                     listKategori
             );
+
             sp_kategori.setAdapter(kategoriAdapter);
             sp_kategori.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override

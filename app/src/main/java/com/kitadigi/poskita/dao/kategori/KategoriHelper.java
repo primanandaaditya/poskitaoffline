@@ -59,14 +59,16 @@ public class KategoriHelper {
         if (sudahSync==true){
             kategori.setName_category(nama_kategori);
             kategori.setCode_category(kode_kategori);
-            kategori.setKode_id(bussiness_id + StringUtil.timeMilis());
+//            kategori.setKode_id(bussiness_id + StringUtil.timeMilis());
+            kategori.setKode_id(StringUtil.getRandomString(Constants.randomString));
             kategori.setSync_insert(Constants.STATUS_SUDAH_SYNC);
             kategori.setSync_update(Constants.STATUS_SUDAH_SYNC);
             kategori.setSync_delete(Constants.STATUS_SUDAH_SYNC);
         }else{
             kategori.setName_category(nama_kategori);
             kategori.setCode_category(kode_kategori);
-            kategori.setKode_id(bussiness_id + StringUtil.timeMilis());
+//            kategori.setKode_id(bussiness_id + StringUtil.timeMilis());
+            kategori.setKode_id(StringUtil.getRandomString(Constants.randomString));
             kategori.setSync_insert(Constants.STATUS_BELUM_SYNC);
             kategori.setSync_update(Constants.STATUS_SUDAH_SYNC);
             kategori.setSync_delete(Constants.STATUS_SUDAH_SYNC);
