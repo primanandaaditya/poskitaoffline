@@ -69,6 +69,7 @@
     <string name="izin_akses_kamera_diperlukan" translatable="false">Izin akses kamera diperlukan</string>
     <string name="deskripsi_brand">Deskripsi brand</string>
     <string name="alamat_pemilik">Alamat pemilik</string>
+    <string name="data_tidak_dapat_dihapus" translatable="false">Data tidak dapat dihapus, karena sudah dipakai</string>
     <string name="alamat_toko" translatable="false">Alamat toko</string>
     <string name="jenis_toko" translatable="false">Jenis toko</string>
     <string name="email" translatable="false">Email</string>

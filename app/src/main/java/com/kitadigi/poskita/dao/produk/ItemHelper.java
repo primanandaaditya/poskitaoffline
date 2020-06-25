@@ -2,6 +2,7 @@ package com.kitadigi.poskita.dao.produk;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.util.Log;
 
 import com.kitadigi.poskita.dao.brand.Brand;
 import com.kitadigi.poskita.dao.database.Db;
@@ -104,4 +105,81 @@ public class ItemHelper {
         return itemDAO.getItemByBarkode(barkode);
     }
 
+    public List<Item> getItemByCategoryMobileId(String categoryMobileId){
+        return itemDAO.getItemByCategoryMobileId(categoryMobileId);
+    }
+
+    public List<Item> getItemByBrandMobileId(String brandMobileId){
+        return itemDAO.getItemByBrandMobileId(brandMobileId);
+    }
+
+    public List<Item> getItemByUnitMobileId(String unitMobileId){
+        return itemDAO.getItemByUnitMobileId(unitMobileId);
+    }
+
+    public boolean adaItemByCategoryMobileId(String categoryMobileId){
+
+        boolean hasil;
+
+        //query list item yang punya mobile id sesuai param
+        List<Item> items = getItemByCategoryMobileId(categoryMobileId);
+
+        //jika jumlahnya 0
+        if (items.size()==0){
+
+            //berarti belum ada yang pakai
+            hasil = false;
+        }else{
+
+            //sudah ada yang pakai
+            hasil = true;
+        }
+
+        Log.d("ada", String.valueOf(hasil));
+        return hasil;
+    }
+
+    public boolean adaItemByBrandMobileId(String brandMobileId){
+
+        boolean hasil;
+
+        //query list item yang punya mobile id sesuai param
+        List<Item> items = getItemByBrandMobileId(brandMobileId);
+
+        //jika jumlahnya 0
+        if (items.size()==0){
+
+            //berarti belum ada yang pakai
+            hasil = false;
+        }else{
+
+            //sudah ada yang pakai
+            hasil = true;
+        }
+
+        Log.d("ada", String.valueOf(hasil));
+        return hasil;
+    }
+
+    public boolean adaItemByUnitMobileId(String unitMobileId){
+
+        boolean hasil;
+
+        //query list item yang punya mobile id sesuai param
+        List<Item> items = getItemByUnitMobileId(unitMobileId);
+
+        //jika jumlahnya 0
+        if (items.size()==0){
+
+            //berarti belum ada yang pakai
+            hasil = false;
+        }else{
+
+            //sudah ada yang pakai
+            hasil = true;
+        }
+
+        Log.d("ada", String.valueOf(hasil));
+        return hasil;
+    }
 }

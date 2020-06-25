@@ -9,11 +9,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.base.BaseResponse;
 import com.kitadigi.poskita.dao.kategori.Kategori;
 import com.kitadigi.poskita.dao.kategori.KategoriEditDAO;
+import com.kitadigi.poskita.dao.produk.ItemHelper;
 import com.kitadigi.poskita.fragment.addkategori.AddKategoriActivity;
 import com.kitadigi.poskita.fragment.deletekategori.DeleteKategoriController;
 import com.kitadigi.poskita.fragment.deletekategori.IDeleteResult;
@@ -31,7 +33,8 @@ public class KategoriSyncAdapter extends BaseAdapter implements IDeleteResult {
     private List<Kategori> kategoris;
     private ArrayList<Kategori> arraylist;
 
-
+    //init sqlite
+    ItemHelper itemHelper;
 
     //init untuk mengedit status hapus kategori
     KategoriEditDAO kategoriEditDAO;
@@ -125,37 +128,54 @@ public class KategoriSyncAdapter extends BaseAdapter implements IDeleteResult {
             @Override
             public void onClick(View v) {
 
-                new SweetAlertDialog( primaKategoriFragment.getActivity(), SweetAlertDialog.WARNING_TYPE)
-                        .setTitleText( primaKategoriFragment.getActivity().getResources().getString(R.string.hapus))
-                        .setContentText( primaKategoriFragment.getActivity().getResources().getString(R.string.data_tidak_dapat_dikembalikan))
-                        .setConfirmText( primaKategoriFragment.getActivity().getResources().getString(R.string.ya))
-                        .setCancelText( primaKategoriFragment.getActivity().getResources().getString(R.string.tidak))
-                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                sweetAlertDialog.dismissWithAnimation();
+                //cek dulu apakah sudah dipakai di tabel item
+                //init sqlite
+                itemHelper = new ItemHelper(primaKategoriFragment.getActivity());
+
+                //tampung var, apakah ada item yang memakainya
+                boolean ada = itemHelper.adaItemByCategoryMobileId(kategori.getKode_id());
+
+                if (ada){
+
+                    Toast.makeText(primaKategoriFragment.getActivity(), primaKategoriFragment.getActivity().getResources().getString(R.string.data_tidak_dapat_dihapus), Toast.LENGTH_SHORT).show();
+
+                }else{
+
+                    new SweetAlertDialog( primaKategoriFragment.getActivity(), SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText( primaKategoriFragment.getActivity().getResources().getString(R.string.hapus))
+                            .setContentText( primaKategoriFragment.getActivity().getResources().getString(R.string.data_tidak_dapat_dikembalikan))
+                            .setConfirmText( primaKategoriFragment.getActivity().getResources().getString(R.string.ya))
+                            .setCancelText( primaKategoriFragment.getActivity().getResources().getString(R.string.tidak))
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismissWithAnimation();
 
 //                                kategori.setSync_delete(Constants.STATUS_BELUM_SYNC);
 //                                kategoriEditDAO.editKategori(kategori);
 //                                kategoriDeleteDAO.deleteKategori(kategori);
 
-                                //sebelum hapus data, yang menjadi param URL
-                                //bukanlah id yang sudah dienkrip, tapi id yang masih berupa Long/integer
-                                //nanti enkrip-nya dilakukan di DeleteKategoriController-nya
-                                deleteKategoriController.deleteKategori(kategori.getId().toString());
+                                    //sebelum hapus data, yang menjadi param URL
+                                    //bukanlah id yang sudah dienkrip, tapi id yang masih berupa Long/integer
+                                    //nanti enkrip-nya dilakukan di DeleteKategoriController-nya
+                                    deleteKategoriController.deleteKategori(kategori.getId().toString());
 
-                                //refresh list
-                                primaKategoriFragment.onResume();
+                                    //refresh list
+                                    primaKategoriFragment.onResume();
 
-                            }
-                        })
-                        .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                sweetAlertDialog.dismissWithAnimation();
-                            }
-                        })
-                        .show();
+                                }
+                            })
+                            .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismissWithAnimation();
+                                }
+                            })
+                            .show();
+
+                }
+
+
 
             }
         });

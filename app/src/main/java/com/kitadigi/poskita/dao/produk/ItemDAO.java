@@ -60,4 +60,13 @@ public interface ItemDAO {
 
     @Query("SELECT * FROM item WHERE code_product = :code_product")
     public Item getItemByBarkode(String code_product);
+
+    @Query("SELECT * FROM item WHERE category_mobile_id =:category_mobile_id")
+    public List<Item> getItemByCategoryMobileId(String category_mobile_id);
+
+    @Query("SELECT * FROM item WHERE brand_mobile_id =:brand_mobile_id")
+    public List<Item> getItemByBrandMobileId(String brand_mobile_id);
+
+    @Query("SELECT * FROM item WHERE unit_mobile_id =:unit_mobile_id")
+    public  List<Item> getItemByUnitMobileId(String unit_mobile_id);
 }

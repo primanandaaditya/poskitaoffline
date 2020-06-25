@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.base.BaseResponse;
 import com.kitadigi.poskita.dao.brand.Brand;
+import com.kitadigi.poskita.dao.produk.ItemHelper;
 import com.kitadigi.poskita.fragment.addbrand.AddBrandActivity;
 import com.kitadigi.poskita.fragment.deletebrand.DeleteBrandController;
 import com.kitadigi.poskita.fragment.deletebrand.IDeleteResult;
@@ -25,6 +26,9 @@ import java.util.Locale;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class BrandAdapter extends BaseAdapter implements IDeleteResult {
+
+    //init sqlite
+    ItemHelper itemHelper;
 
     private BrandFragment activity;
     private LayoutInflater inflater;
@@ -118,36 +122,51 @@ public class BrandAdapter extends BaseAdapter implements IDeleteResult {
             @Override
             public void onClick(View v) {
 
-                //tampilkan dialog yes-no untuk hapus data
-                new SweetAlertDialog(activity.getActivity(), SweetAlertDialog.WARNING_TYPE)
-                        .setTitleText(activity.getResources().getString(R.string.hapus))
-                        .setContentText(activity.getResources().getString(R.string.data_tidak_dapat_dikembalikan))
-                        .setConfirmText(activity.getResources().getString(R.string.ya))
-                        .setCancelText(activity.getResources().getString(R.string.tidak))
-                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                sweetAlertDialog.dismissWithAnimation();
+                //sebelum hapus, cek dulu apakah sudah dipakai di tabel item
+                itemHelper=new ItemHelper(activity.getActivity());
 
-                                //sebelum hapus data, yang menjadi param URL
-                                //bukanlah id yang sudah dienkrip, tapi id yang masih berupa Long/integer
-                                //nanti enkrip-nya dilakukan di DeleteBrandController-nya
-                                deleteBrandController.deleteBrand(brand.getId().toString());
+                boolean ada = itemHelper.adaItemByBrandMobileId(brand.getKode_id());
 
-                                //list refreesh
-                                activity.onResume();
+                //jika ada, tidak boleh dihapus
+                if (ada){
+                    Toast.makeText(activity.getActivity(), activity.getActivity().getResources().getString(R.string.data_tidak_dapat_dihapus),Toast.LENGTH_SHORT).show();
+                }else{
+
+                    //jika tidak ada yang pakai, boleh dihapus
+                    //tampilkan dialog yes-no untuk hapus data
+                    new SweetAlertDialog(activity.getActivity(), SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText(activity.getResources().getString(R.string.hapus))
+                            .setContentText(activity.getResources().getString(R.string.data_tidak_dapat_dikembalikan))
+                            .setConfirmText(activity.getResources().getString(R.string.ya))
+                            .setCancelText(activity.getResources().getString(R.string.tidak))
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismissWithAnimation();
+
+                                    //sebelum hapus data, yang menjadi param URL
+                                    //bukanlah id yang sudah dienkrip, tapi id yang masih berupa Long/integer
+                                    //nanti enkrip-nya dilakukan di DeleteBrandController-nya
+                                    deleteBrandController.deleteBrand(brand.getId().toString());
+
+                                    //list refreesh
+                                    activity.onResume();
 //                                deleteBrandController.deleteBrand(brandData.getAdditional());
 //                                deleteKategoriController.deleteKategori(datum.getAdditional());
 
-                            }
-                        })
-                        .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                sweetAlertDialog.dismissWithAnimation();
-                            }
-                        })
-                        .show();
+                                }
+                            })
+                            .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismissWithAnimation();
+                                }
+                            })
+                            .show();
+
+                }
+
+
             }
         });
         return convertView;

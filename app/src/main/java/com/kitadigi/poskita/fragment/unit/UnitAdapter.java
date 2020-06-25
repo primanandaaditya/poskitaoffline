@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.base.BaseResponse;
+import com.kitadigi.poskita.dao.produk.ItemHelper;
 import com.kitadigi.poskita.fragment.addunit.AddUnitActivity;
 import com.kitadigi.poskita.fragment.deleteunit.DeleteUnitController;
 import com.kitadigi.poskita.fragment.deleteunit.IDeleteUnitResult;
@@ -21,6 +22,8 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class UnitAdapter extends BaseAdapter implements IDeleteUnitResult {
 
+    //init sqlite
+    ItemHelper itemHelper;
 
     private UnitFragment activity;
     private LayoutInflater inflater;
@@ -103,25 +106,43 @@ public class UnitAdapter extends BaseAdapter implements IDeleteUnitResult {
             @Override
             public void onClick(View v) {
 
-                new SweetAlertDialog(activity.getActivity(), SweetAlertDialog.WARNING_TYPE)
-                        .setTitleText(activity.getResources().getString(R.string.hapus))
-                        .setContentText(activity.getResources().getString(R.string.data_tidak_dapat_dikembalikan))
-                        .setConfirmText(activity.getResources().getString(R.string.ya))
-                        .setCancelText(activity.getResources().getString(R.string.tidak))
-                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                sweetAlertDialog.dismissWithAnimation();
-                                deleteUnitController.deleteKategori(unitData.getAdditional());
-                            }
-                        })
-                        .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                sweetAlertDialog.dismissWithAnimation();
-                            }
-                        })
-                        .show();
+                //sebelum dihapus, cek dulu apakah data ini dipakai di tabel item
+                itemHelper = new ItemHelper(activity.getActivity());
+
+                boolean ada = itemHelper.adaItemByUnitMobileId(unitData.getMobile_id());
+
+                //jika ada, jangan dihapus
+                if (ada){
+
+                    Toast.makeText(activity.getActivity(),activity.getActivity().getResources().getString(R.string.data_tidak_dapat_dihapus),Toast.LENGTH_SHORT).show();
+                }else{
+
+
+                    //kalau tidak ada yang pakai
+                    //boleh dihapus
+
+                    new SweetAlertDialog(activity.getActivity(), SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText(activity.getResources().getString(R.string.hapus))
+                            .setContentText(activity.getResources().getString(R.string.data_tidak_dapat_dikembalikan))
+                            .setConfirmText(activity.getResources().getString(R.string.ya))
+                            .setCancelText(activity.getResources().getString(R.string.tidak))
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismissWithAnimation();
+                                    deleteUnitController.deleteKategori(unitData.getAdditional());
+                                }
+                            })
+                            .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismissWithAnimation();
+                                }
+                            })
+                            .show();
+                }
+
+
             }
         });
         return convertView;
