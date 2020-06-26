@@ -205,15 +205,20 @@ public class PilihPrinterFragment extends BaseFragment {
         }
 
         if(requestCode == REQUEST_ENABLE_BT){
-            if(myBluetoothAdapter.isEnabled()) {
+            try {
+                if(myBluetoothAdapter.isEnabled()) {
 
-                //jika bluetooth di-enable
-                //maka cari nama printer
-                cariNamaPrinter();
-            } else {
+                    //jika bluetooth di-enable
+                    //maka cari nama printer
+                    cariNamaPrinter();
+                } else {
 
-                this.showToast(getResources().getString(R.string.izin_bluetooth_diperlukan_untuk_akses_printer));
+                    this.showToast(getResources().getString(R.string.izin_bluetooth_diperlukan_untuk_akses_printer));
+                }
+            }catch (Exception e){
+                Toast.makeText(getActivity(),getActivity().getResources().getString(R.string.perangkat_tidak_mendukung_bluetooth),Toast.LENGTH_SHORT).show();
             }
+
         }
     }
 
@@ -241,13 +246,17 @@ public class PilihPrinterFragment extends BaseFragment {
 
         if (remoteDevice == null){
 
-//            toastText = "Starting discovery for remote devices...";
-//            Toast.makeText(ScanActivity.this, toastText, Toast.LENGTH_SHORT).show();
-            if (btAdapter.startDiscovery()){
-                toastText = getResources().getString(R.string.memulai_scan);
-                Toast.makeText(getActivity(), toastText, Toast.LENGTH_SHORT).show();
-                getActivity().registerReceiver(discoveryResult, new IntentFilter(BluetoothDevice.ACTION_FOUND));
+            try{
+                if (btAdapter.startDiscovery()){
+                    toastText = getResources().getString(R.string.memulai_scan);
+                    Toast.makeText(getActivity(), toastText, Toast.LENGTH_SHORT).show();
+                    getActivity().registerReceiver(discoveryResult, new IntentFilter(BluetoothDevice.ACTION_FOUND));
+                }
+            }catch (Exception e){
+                Toast.makeText(getActivity(),getActivity().getResources().getString(R.string.perangkat_tidak_mendukung_bluetooth), Toast.LENGTH_SHORT).show();
             }
+
+
 
         }
     }
@@ -280,15 +289,22 @@ public class PilihPrinterFragment extends BaseFragment {
 
         btAdapter=BluetoothAdapter.getDefaultAdapter();
 
-        if (btAdapter.isEnabled()){
-            String address = btAdapter.getAddress();
-            String name = btAdapter.getName();
-            String statusText = getResources().getString(R.string.nama_bluetooth) + " : " + name;
-            statusUpdate.setText(statusText);
-        }else{
-            connect.setVisibility(View.VISIBLE);
-            statusUpdate.setText(getResources().getString(R.string.bluetooth_sedang_dimatikan));
+        try{
+
+            if (btAdapter.isEnabled()){
+                String address = btAdapter.getAddress();
+                String name = btAdapter.getName();
+                String statusText = getResources().getString(R.string.nama_bluetooth) + " : " + name;
+                statusUpdate.setText(statusText);
+            }else{
+                connect.setVisibility(View.VISIBLE);
+                statusUpdate.setText(getResources().getString(R.string.bluetooth_sedang_dimatikan));
+            }
+
+        }catch (Exception e){
+            Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.perangkat_tidak_mendukung_bluetooth), Toast.LENGTH_SHORT).show();
         }
+
 
         connect.setOnClickListener(new View.OnClickListener() {
 

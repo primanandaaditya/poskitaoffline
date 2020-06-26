@@ -85,11 +85,16 @@ public class PrintingActivity extends BaseActivity {
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         //minta user untuk nyalakan BT
-        if (!mBluetoothAdapter.isEnabled()) {
-            Intent enableIntent = new Intent(
-                    BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
-            // Otherwise, setup the session
+        try {
+            if (!mBluetoothAdapter.isEnabled()) {
+                Intent enableIntent = new Intent(
+                        BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
+                // Otherwise, setup the session
+            }
+
+        }catch (Exception e){
+            Toast.makeText(PrintingActivity.this, getResources().getString(R.string.perangkat_tidak_mendukung_bluetooth), Toast.LENGTH_SHORT).show();
         }
 
 
