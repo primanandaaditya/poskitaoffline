@@ -30,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kitadigi.poskita.adapter.ItemsTransactionsFixAdapter;
+import com.kitadigi.poskita.base.BaseActivity;
 import com.kitadigi.poskita.database.Database;
 import com.kitadigi.poskita.model.TransactionsDetail;
 import com.kitadigi.poskita.util.DividerItemDecoration;
@@ -49,17 +50,18 @@ import java.util.TimeZone;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class ItemsPaymentMethodActivity extends AppCompatActivity{
+public class ItemsPaymentMethodActivity extends BaseActivity {
 
     private static final String TAG = ItemsPaymentMethodActivity.class.getName();
     Context context;
+
 
     /* init ui */
     TextView tv_nav_header, tv_header, tv_remark_payment;
     ImageView iv_back;
     RecyclerView rv_items;
     RadioGroup rb_group;
-    RadioButton rb_cash, rb_soon;
+    RadioButton rb_cash, rb_soon, rb_gopay;
     RelativeLayout rl_save, rl_payment, rl_payment_data;
     Button btn_save;
 
@@ -82,13 +84,15 @@ public class ItemsPaymentMethodActivity extends AppCompatActivity{
     Animation fadeIn, fadeOut;
 
     /* Shimmer */
-    private ShimmerFrameLayout mShimmerViewContainer;
+//    private ShimmerFrameLayout mShimmerViewContainer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_method);
         context = this;
+
+        Log.d("tag", TAG);
 
 
         /* init sqlite db */
@@ -122,12 +126,13 @@ public class ItemsPaymentMethodActivity extends AppCompatActivity{
         btn_save                    = findViewById(R.id.btn_save);
 
         /* Shimmer */
-        mShimmerViewContainer       = findViewById(R.id.shimmer_view_container);
+//        mShimmerViewContainer       = findViewById(R.id.shimmer_view_container);
 
         /* Radio */
         rb_group                    = findViewById(R.id.rb_group);
         rb_cash                     = findViewById(R.id.rb_cash);
         rb_soon                     = findViewById(R.id.rb_soon);
+        rb_gopay                    = findViewById(R.id.rb_gopay);
 
 
         /* animation */
@@ -151,17 +156,28 @@ public class ItemsPaymentMethodActivity extends AppCompatActivity{
         tv_remark_payment.setTypeface(fonts);
         rb_cash.setTypeface(fonts);
         rb_soon.setTypeface(fonts);
+        rb_gopay.setTypeface(fonts);
         btn_save.setTypeface(fontsBold);
-        btn_save.setText("SELANJUTNYA");
+        btn_save.setText(getResources().getString(R.string.selanjutnya));
 
         int selectedId = rb_group.getCheckedRadioButtonId();
 
         if(selectedId == rb_cash.getId()){
+
             rb_cash.setTypeface(fontsBold);
             rb_soon.setTypeface(fonts);
+            rb_gopay.setTypeface(fonts);
+
         }else if(selectedId == rb_soon.getId()){
+
+            rb_gopay.setTypeface(fonts);
             rb_cash.setTypeface(fonts);
             rb_soon.setTypeface(fontsBold);
+        }else if(selectedId == rb_gopay.getId()){
+
+            rb_gopay.setTypeface(fontsBold);
+            rb_cash.setTypeface(fonts);
+            rb_soon.setTypeface(fonts);
         }
 
         iv_back.setOnClickListener(new View.OnClickListener() {
@@ -177,11 +193,20 @@ public class ItemsPaymentMethodActivity extends AppCompatActivity{
                 int selectedId = rb_group.getCheckedRadioButtonId();
 
                 if(selectedId == rb_cash.getId()){
+
+                    //kalau yang dipilih adalah radio tunai
                     Intent payment = new Intent(ItemsPaymentMethodActivity.this, ItemsPaymentActivity.class);
                     payment.putExtra("total", totalBayar);
                     startActivity(payment);
+
                 }else if(selectedId == rb_soon.getId()){
+
+                    //kalau yang dipilih adalah radio bayar nanti
                     new IntentIntegrator(ItemsPaymentMethodActivity.this).setCaptureActivity(ScannerActivity.class).initiateScan();
+                }else if (selectedId == rb_gopay.getId()){
+
+                    //kalau yang dipilih adalah gopay
+
                 }
 
             }
@@ -194,16 +219,30 @@ public class ItemsPaymentMethodActivity extends AppCompatActivity{
         switch(view.getId()){
 
             case R.id.rb_cash:
-                if(checked)
+                if(checked){
                     rb_cash.setTypeface(fontsBold);
                     rb_soon.setTypeface(fonts);
+                    rb_gopay.setTypeface(fonts);
+                }
+
                 break;
 
             case R.id.rb_soon:
-                if(checked)
-                    rb_soon.setTypeface(fontsBold);
+                if(checked){
                     rb_cash.setTypeface(fonts);
+                    rb_soon.setTypeface(fontsBold);
+                    rb_gopay.setTypeface(fonts);
+                }
+
                 break;
+
+            case R.id.rb_gopay:
+                if (checked){
+
+                    rb_cash.setTypeface(fonts);
+                    rb_soon.setTypeface(fonts);
+                    rb_gopay.setTypeface(fontsBold);
+                }
         }
     }
 
@@ -217,8 +256,8 @@ public class ItemsPaymentMethodActivity extends AppCompatActivity{
         rl_payment.setVisibility(View.GONE);
         rl_payment_data.setVisibility(View.GONE);
         btn_save.setEnabled(false);
-        mShimmerViewContainer.setVisibility(View.VISIBLE);
-        mShimmerViewContainer.startShimmerAnimation();
+//        mShimmerViewContainer.setVisibility(View.VISIBLE);
+//        mShimmerViewContainer.startShimmerAnimation();
         setData(jsonlistTransactionsDetail);
 
     }
@@ -229,7 +268,7 @@ public class ItemsPaymentMethodActivity extends AppCompatActivity{
             public void run() {
                 fetchListItems(json);
             }
-        }, 200);
+        }, 0);
 
     }
 
@@ -259,8 +298,8 @@ public class ItemsPaymentMethodActivity extends AppCompatActivity{
             String price            = formatter.format(total);
 
             totalBayar              = String.valueOf(total);
-            mShimmerViewContainer.stopShimmerAnimation();
-            mShimmerViewContainer.setVisibility(View.GONE);
+//            mShimmerViewContainer.stopShimmerAnimation();
+//            mShimmerViewContainer.setVisibility(View.GONE);
             rv_items.setVisibility(View.VISIBLE);
             rl_save.setVisibility(View.VISIBLE);
             rl_payment.setVisibility(View.VISIBLE);
@@ -336,27 +375,6 @@ public class ItemsPaymentMethodActivity extends AppCompatActivity{
                 .show();
     }
 
-
-    private void setLoadingDialog(String message){
-        //Loading dialog
-        sweetAlertDialog = new SweetAlertDialog(ItemsPaymentMethodActivity.this, SweetAlertDialog.PROGRESS_TYPE);
-        sweetAlertDialog.setTitleText(message);
-        sweetAlertDialog.setCancelable(false);
-    }
-
-    private void setSuccessDialog(){
-        sweetAlertDialog = new SweetAlertDialog(ItemsPaymentMethodActivity.this, SweetAlertDialog.SUCCESS_LARGE_TYPE)
-                .setTitleText("TRANSAKSI SUKSES")
-                .setConfirmText("TUTUP")
-                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        hideAlertDialog();
-                        ItemsPaymentMethodActivity.super.onBackPressed();
-                    }
-                });
-        sweetAlertDialog.setCancelable(false);
-    }
 
     public void showAlertDialog(){
         if(!sweetAlertDialog.isShowing()){

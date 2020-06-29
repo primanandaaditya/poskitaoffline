@@ -165,7 +165,33 @@
                             android:layout_marginBottom="@dimen/dimen_5"
                             android:onClick="onClickedRadioButton"
                             android:padding="@dimen/dimen_10" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="@dimen/dimen_5"
+                            android:background="@color/colorBg" />
+                        <RadioButton
+                            android:id="@+id/rb_gopay"
+                            android:visibility="visible"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dimen_50"
+                            android:background="@color/colorWhite"
+                            android:text="@string/bayar_dengan_gopay"
+                            android:textSize="@dimen/text_15"
+                            android:layout_marginStart="@dimen/dimen_10"
+                            android:layout_marginBottom="@dimen/dimen_5"
+                            android:onClick="onClickedRadioButton"
+                            android:padding="@dimen/dimen_10" />
+
+                        <ImageView
+                            android:id="@+id/iv"
+                            android:layout_width="@dimen/dimen_50"
+                            android:layout_height="@dimen/dimen_50">
+
+                        </ImageView>
                     </RadioGroup>
+
+
                 </RelativeLayout>
             </LinearLayout>
         </ScrollView>

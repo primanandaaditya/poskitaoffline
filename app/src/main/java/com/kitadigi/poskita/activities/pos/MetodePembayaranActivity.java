@@ -3,6 +3,7 @@ package com.kitadigi.poskita.activities.pos;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
@@ -20,6 +21,11 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.kitadigi.poskita.ItemsPaymentActivity;
 import com.kitadigi.poskita.ItemsPaymentMethodActivity;
 import com.kitadigi.poskita.R;
@@ -35,6 +41,7 @@ import com.kitadigi.poskita.util.SessionManager;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
+import com.kitadigi.poskita.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +64,7 @@ public class MetodePembayaranActivity extends BaseActivity {
     ImageView iv_back;
     RecyclerView rv_items;
     RadioGroup rb_group;
-    RadioButton rb_cash, rb_soon;
+    RadioButton rb_cash, rb_soon, rb_gopay;
     RelativeLayout rl_save, rl_payment, rl_payment_data;
     Button btn_save;
 
@@ -125,6 +132,7 @@ public class MetodePembayaranActivity extends BaseActivity {
         rb_group                    = findViewById(R.id.rb_group);
         rb_cash                     = findViewById(R.id.rb_cash);
         rb_soon                     = findViewById(R.id.rb_soon);
+        rb_gopay                    = findViewById(R.id.rb_gopay);
 
 
         /* animation */
@@ -147,6 +155,7 @@ public class MetodePembayaranActivity extends BaseActivity {
         this.applyFontRegularToTextView(tv_remark_payment);
         this.applyFontRegularToRadioButton(rb_cash);
         this.applyFontRegularToRadioButton(rb_soon);
+        this.applyFontRegularToRadioButton(rb_gopay);
         this.applyFontBoldToButton(btn_save);
 
         btn_save.setText(getResources().getString(R.string.selanjutnya));
@@ -156,9 +165,15 @@ public class MetodePembayaranActivity extends BaseActivity {
         if(selectedId == rb_cash.getId()){
             this.applyFontBoldToRadioButton(rb_cash);
             this.applyFontRegularToRadioButton(rb_soon);
+            this.applyFontRegularToRadioButton(rb_gopay);
         }else if(selectedId == rb_soon.getId()){
             this.applyFontBoldToRadioButton(rb_soon);
             this.applyFontRegularToRadioButton(rb_cash);
+            this.applyFontRegularToRadioButton(rb_gopay);
+        }else if(selectedId == rb_gopay.getId()){
+            this.applyFontBoldToRadioButton(rb_gopay);
+            this.applyFontRegularToRadioButton(rb_cash);
+            this.applyFontRegularToRadioButton(rb_soon);
         }
 
         iv_back.setOnClickListener(new View.OnClickListener() {
@@ -185,7 +200,23 @@ public class MetodePembayaranActivity extends BaseActivity {
                     payment.putExtra("total", totalBayar);
                     startActivity(payment);
                 }else if(selectedId == rb_soon.getId()){
+
+                    //munculkan layar scan
                     new IntentIntegrator(MetodePembayaranActivity.this).setCaptureActivity(ScannerActivity.class).initiateScan();
+
+
+                }else if (selectedId == rb_gopay.getId()){
+
+                    //jika pakai gopay
+                    //sebelum ganti layar ke QrGopayActivity
+                    //cari total penjualan offline dari session
+
+                    SubTotalModel subTotalModel= sessionManager.sumTotalPenjualanOffline();
+                    totalBayar=String.valueOf(subTotalModel.getSum_total());
+
+                    Intent payment = new Intent(MetodePembayaranActivity.this, QrGopayActivity.class);
+                    payment.putExtra("total", totalBayar);
+                    startActivity(payment);
                 }
 
             }
@@ -234,13 +265,25 @@ public class MetodePembayaranActivity extends BaseActivity {
                 if(checked)
                     this.applyFontBoldToRadioButton(rb_cash);
                     this.applyFontRegularToRadioButton(rb_soon);
+                    this.applyFontRegularToRadioButton(rb_gopay);
                 break;
 
             case R.id.rb_soon:
                 if(checked)
                     this.applyFontBoldToRadioButton(rb_soon);
                     this.applyFontRegularToRadioButton(rb_cash);
+                    this.applyFontRegularToRadioButton(rb_gopay);
                 break;
+
+            case R.id.rb_gopay:
+                if (checked){
+                    this.applyFontBoldToRadioButton(rb_gopay);
+                    this.applyFontRegularToRadioButton(rb_cash);
+                    this.applyFontRegularToRadioButton(rb_soon);
+                }
+
+
+                    break;
         }
     }
 }

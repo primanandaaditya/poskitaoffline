@@ -30,6 +30,7 @@
     <string name="ya">Ya</string>
     <string name="tidak">Tidak</string>
     <string name="simpan">Simpan</string>
+    <string name="saya_sudah_bayar" translatable="false">Saya sudah bayar</string>
     <string name="tidak_ada_input" translatable="false">Tidak ada input</string>
     <string name="simpan_semua" translatable="false">Simpan semua</string>
     <string name="input_telah_tersimpan" translatable="false">Input telah tersimpan</string>
@@ -105,6 +106,7 @@
     <string name="tambah_kategori">Tambah kategori</string>
     <string name="tambah_produk" translatable="false">Tambah produk</string>
     <string name="tambah_brand">Tambah brand</string>
+    <string name="scan_qrcode_gopay" translatable="false">Scan Kode QR Gopay</string>
     <string name="pilih_barang" translatable="false">Pilih barang</string>
     <string name="grafik_penjualan_harian" translatable="false">Grafik Penjualan Harian</string>
     <string name="pengaturan_printer" translatable="false">Pengaturan Printer</string>
@@ -150,6 +152,7 @@
     <string name="remark_payment_choose">Pilih Metode Pembayaran</string>
     <string name="remark_payment_cash">Tunai</string>
     <string name="remark_payment_soon">Bayar Nanti</string>
+    <string name="bayar_dengan_gopay" translatable="false">Bayar dengan Gopay</string>
     <string name="remark_payment_detail">Detail Pembayaran</string>
     <string name="remark_payment_subtotal">Subtotal</string>
     <string name="remark_payment_total">Total</string>
@@ -172,8 +175,8 @@
     <string name="pembelian_berhasil">Pembelian berhasil</string>
     <string name="add_purchase_order_true">add_purchase_order_true</string>
     <string name="message">Scan QR Code</string>
-    <string name="turn_off_flashlight">Matikan Flash</string>
-    <string name="turn_on_flashlight">Nyalakan Flash</string>
+    <string name="turn_off_flashlight" translatable="false">Matikan flash</string>
+    <string name="turn_on_flashlight" translatable="false">Nyalakan flash</string>
     <string name="remark_balance_header">Saldo Anda</string>
     <string name="input_pin">Masukkan Pin Anda</string>
     <string name="remark_shipping_address">Alamat Pengiriman</string>

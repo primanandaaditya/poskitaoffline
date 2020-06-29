@@ -71,35 +71,7 @@
                     android:id="@+id/rl_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <com.facebook.shimmer.ShimmerFrameLayout
-                        android:id="@+id/shimmer_view_container"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:orientation="vertical"
-                        android:visibility="visible"
-                        shimmer:duration="800">
 
-                        <!-- Adding 3 rows of placeholders -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <include layout="@layout/placeholder_items" />
-                            <include layout="@layout/placeholder_items" />
-                            <include layout="@layout/placeholder_items" />
-                            <include layout="@layout/placeholder_items" />
-                            <include layout="@layout/placeholder_items" />
-                            <include layout="@layout/placeholder_items" />
-                            <include layout="@layout/placeholder_items" />
-                            <include layout="@layout/placeholder_items" />
-                            <include layout="@layout/placeholder_items" />
-
-
-                        </LinearLayout>
-
-                    </com.facebook.shimmer.ShimmerFrameLayout>
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rv_items"
                         android:layout_below="@+id/shimmer_view_container"
@@ -127,7 +99,7 @@
                 </RelativeLayout>
                 <RelativeLayout
                     android:id="@+id/rl_payment_data"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <RadioGroup
@@ -160,6 +132,23 @@
                             android:layout_height="@dimen/dimen_50"
                             android:background="@color/colorWhite"
                             android:text="@string/remark_payment_soon"
+                            android:textSize="@dimen/text_15"
+                            android:layout_marginStart="@dimen/dimen_10"
+                            android:layout_marginBottom="@dimen/dimen_5"
+                            android:onClick="onClickedRadioButton"
+                            android:padding="@dimen/dimen_10" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="@dimen/dimen_5"
+                            android:background="@color/colorBg" />
+                        <RadioButton
+                            android:id="@+id/rb_gopay"
+                            android:visibility="visible"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dimen_50"
+                            android:background="@color/colorWhite"
+                            android:text="@string/bayar_dengan_gopay"
                             android:textSize="@dimen/text_15"
                             android:layout_marginStart="@dimen/dimen_10"
                             android:layout_marginBottom="@dimen/dimen_5"

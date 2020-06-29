@@ -92,8 +92,8 @@ public class ScannerActivity extends AppCompatActivity implements
         switchFlashlightButton.setTypeface(fonts);
         finishButton.setTypeface(fonts);
 
-        // if the device does not have flashlight in its camera,
-        // then remove the switch flashlight button...
+        // jika hpnya tidak ada flashlight,
+        // tombol flash di-hide
         if (!hasFlash()) {
             switchFlashlightButton.setVisibility(View.GONE);
         } else {
@@ -136,11 +136,7 @@ public class ScannerActivity extends AppCompatActivity implements
     }
 
 
-    /**
-     * Check if the device's camera has a Flashlight.
-     *
-     * @return true if there is Flashlight, otherwise false.
-     */
+   //fungsi untuk cek apakah HP punya flash atau tidak
     private boolean hasFlash() {
         return getApplicationContext().getPackageManager()
                 .hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);

@@ -1,9 +1,19 @@
 package com.kitadigi.poskita.util;
 
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
+import com.kitadigi.poskita.R;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -17,6 +27,22 @@ import java.util.Locale;
 
 public class StringUtil {
 
+
+    //fungsi ini untuk membuat qrcode
+    //lalu menampilkannya pada ImageView
+    public static void generateQrCode(String teks, ImageView imageView){
+
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+        try {
+            BitMatrix bitMatrix = multiFormatWriter.encode(teks, BarcodeFormat.QR_CODE,200,200);
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+            imageView.setImageBitmap(bitmap);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
     // fungsi untuk generate string random berdasarkan jumlah n

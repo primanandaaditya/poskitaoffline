@@ -189,7 +189,6 @@ public class ScanActivity extends BaseActivity {
     protected void onStop() {
         super.onStop();
 
-
     }
 
     @Override
@@ -207,6 +206,8 @@ public class ScanActivity extends BaseActivity {
         try {
             unregisterReceiver(bluetoothState);
             unregisterReceiver(discoveryResult);
+
+
         }catch (Exception e){
 
         }
