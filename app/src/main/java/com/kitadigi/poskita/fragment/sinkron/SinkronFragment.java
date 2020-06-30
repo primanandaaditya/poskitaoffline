@@ -193,23 +193,6 @@ public class SinkronFragment extends BaseFragment implements
 
 
 
-
-//        lv=(ListView)getActivity().findViewById(R.id.lv);
-//
-//
-//
-//        datum=new Datum();
-//        datumList.add(datum);
-//
-//        datum=new Datum();
-//        datumList.add(datum);
-//
-//        datum=new Datum();
-//        datumList.add(datum);
-//
-//        final IMKategoriAdapter imKategoriAdapter = new IMKategoriAdapter(getActivity(), datumList);
-//        lv.setAdapter(imKategoriAdapter);
-
         //tampilkan tanggal terakhir sync
         tvLastSync=(TextView)getActivity().findViewById(R.id.tvLastSync);
         this.applyFontRegularToTextView(tvLastSync);

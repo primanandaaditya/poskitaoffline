@@ -185,6 +185,7 @@ public class SinkronInsertJualController implements ISinkronAddJualRequest {
                     jsonObject.put("tanggal", jualMaster.getTanggal());
                     jsonObject.put("nomor_trx", jualMaster.getNomor());
                     jsonObject.put("contact_id",jualMaster.getContact_id());
+                    jsonObject.put("total_item", jualMaster.getTotal_item().toString());
                     jsonObject.put("total_pay",jualMaster.getTotal_pay().toString());
                     jsonObject.put("total_price",jualMaster.getTotal_price().toString());
                     jsonObject.put("detail", jsonJualDetail);
