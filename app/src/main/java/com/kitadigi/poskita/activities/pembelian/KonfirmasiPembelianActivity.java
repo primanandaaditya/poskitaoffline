@@ -192,6 +192,19 @@ public class KonfirmasiPembelianActivity extends BaseActivity implements IAddPem
 
         //textbox tanggal
         //jika diklik, muncul datepicker
+        et_tanggal.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus){
+
+                    //untuk memunculkan dialog date picker
+                    DateUtil dateUtil=new DateUtil();
+                    dateUtil.dateDialog(KonfirmasiPembelianActivity.this, et_tanggal);
+
+                }
+            }
+        });
+
         et_tanggal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
