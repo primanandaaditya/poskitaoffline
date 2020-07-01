@@ -32,6 +32,9 @@ import com.kitadigi.poskita.sinkron.brand.insert.ISinkronAddBrandResult;
 import com.kitadigi.poskita.sinkron.brand.insert.SinkronInsertBrandController;
 import com.kitadigi.poskita.sinkron.brand.update.ISinkronUpdateBrandResult;
 import com.kitadigi.poskita.sinkron.brand.update.SinkronUpdateBrandController;
+import com.kitadigi.poskita.sinkron.jual.get_master.GetJualMasterController;
+import com.kitadigi.poskita.sinkron.jual.get_master.IGetJualMasterResult;
+import com.kitadigi.poskita.sinkron.jual.get_master.MasterModel;
 import com.kitadigi.poskita.sinkron.jual.insert.ISinkronAddJualResult;
 import com.kitadigi.poskita.sinkron.jual.insert.SinkronInsertJualController;
 import com.kitadigi.poskita.sinkron.kategori.delete.ISinkronDeleteKategoriResult;
@@ -64,7 +67,7 @@ public class Sinkronizer implements
         ISinkronAddProdukResult, ISinkronUpdateProdukResult, ISinkronDeleteProdukResult,
         ISinkronAddJualResult, ISinkronAddBeliResult,
         IKategoriResult, IBrandResult, IUnitResult, IBarangResult,
-        IStokResult {
+        IStokResult, IGetJualMasterResult {
 
     //cek internet koneksi
     InternetChecker internetChecker;
@@ -108,6 +111,8 @@ public class Sinkronizer implements
     //init controller untuk stok atau untuk layar POS/jualfragment.java
     StokController stokController;
 
+    //init controller untuk get jual master
+    GetJualMasterController getJualMasterController;
 
     public Sinkronizer(Context context, ISinkronizer iSinkronizer) {
         this.context = context;
@@ -158,6 +163,7 @@ public class Sinkronizer implements
 
             stokController                  = new StokController(this, context);
 
+            getJualMasterController         = new GetJualMasterController(context, this);
 
             //mulai sinkron
             sinkronInsertKategoriController.insert_kategori();
@@ -461,21 +467,36 @@ public class Sinkronizer implements
     public void onStokSuccess(StokModel stokModel, List<Stok> stokOffline) {
 
         //simpan tanggal sekarang di session
-        sessionManager.createLasySync();
+//        sessionManager.createLasySync();
 //        Toast.makeText(context, "Sinkron OK", Toast.LENGTH_SHORT).show();
 
         //interface sudah selesai
-        iSinkronizer.onFinish(context.getResources().getString(R.string.proses_sinkron_telah_selesai));
+//        iSinkronizer.onFinish(context.getResources().getString(R.string.proses_sinkron_telah_selesai));
 
+        //lanjut ke get jual master
+        getJualMasterController.getJualMaster();
     }
 
     @Override
     public void onStokError(String error, List<Stok> stoksOffline) {
 
         //simpan tanggal di session
-        sessionManager.createLasySync();
+//        sessionManager.createLasySync();
 
         //interface sudah selesai
+        iSinkronizer.onFinish(error);
+    }
+
+    @Override
+    public void onGetJualMasterSuccess(MasterModel masterModel) {
+        if (masterModel.isStatus()){
+
+        }
+    }
+
+    @Override
+    public void onGetJualMasterError(String error) {
+
         iSinkronizer.onFinish(error);
     }
 }

@@ -3,8 +3,8 @@ package com.kitadigi.poskita.util;
 public class Url {
 
 
-    public static final String DIKI_URL = "http://192.168.1.17:4444/api/";
-    public static final String DIKI_IMAGE_URL = "http://192.168.1.17:4444/upload_api/master_product/media/";
+    public static final String DIKI_URL = "http://192.168.1.15:4444/api/";
+    public static final String DIKI_IMAGE_URL = "http://192.168.1.15:4444/upload_api/master_product/media/";
 
 //    public static final String DIKI_URL = "https://poskita.monstercode.net/api/";
 //    public static final String DIKI_IMAGE_URL = "https://poskita.monstercode.net/upload_api/master_product/media/";
@@ -77,6 +77,11 @@ public class Url {
 
     public static final String SINKRON_PENJUALAN = "jual/insert.php";
     public static final String SINKRON_PEMBELIAN = "beli/insert.php";
+    public static final String SINKRON_PENJUALAN_GET_MASTER = "jual/get_master.php";
+    public static final String SINKRON_PENJUALAN_GET_DETAIL = "jual/get_detail.php";
+    public static final String SINKRON_PEMBELIAN_GET_MASTER = "beli/get_master.php";
+    public static final String SINKRON_PEMBELIAN_GET_DETAIL = "beli/get_detail.php";
+
 
     public static final String SINKRON_REGISTRASI = "register/register.php";
 

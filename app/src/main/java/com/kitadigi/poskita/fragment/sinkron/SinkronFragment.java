@@ -51,6 +51,9 @@ import com.kitadigi.poskita.sinkron.brand.insert.ISinkronAddBrandResult;
 import com.kitadigi.poskita.sinkron.brand.insert.SinkronInsertBrandController;
 import com.kitadigi.poskita.sinkron.brand.update.ISinkronUpdateBrandResult;
 import com.kitadigi.poskita.sinkron.brand.update.SinkronUpdateBrandController;
+import com.kitadigi.poskita.sinkron.jual.get_master.GetJualMasterController;
+import com.kitadigi.poskita.sinkron.jual.get_master.IGetJualMasterResult;
+import com.kitadigi.poskita.sinkron.jual.get_master.MasterModel;
 import com.kitadigi.poskita.sinkron.jual.insert.ISinkronAddJualResult;
 import com.kitadigi.poskita.sinkron.jual.insert.SinkronInsertJualController;
 import com.kitadigi.poskita.sinkron.kategori.delete.ISinkronDeleteKategoriResult;
@@ -95,7 +98,7 @@ public class SinkronFragment extends BaseFragment implements
         ISinkronAddProdukResult, ISinkronUpdateProdukResult, ISinkronDeleteProdukResult,
         ISinkronAddJualResult, ISinkronAddBeliResult,
         IKategoriResult, IBrandResult, IUnitResult, IBarangResult,
-        IStokResult
+        IStokResult, IGetJualMasterResult
 
 {
 
@@ -145,6 +148,9 @@ public class SinkronFragment extends BaseFragment implements
     //init controller untuk stok atau untuk layar POS/jualfragment.java
     StokController stokController;
 
+    //init controller untuk get jual master
+    GetJualMasterController getJualMasterController;
+
 //    List<Datum> datumList;
 //    Datum datum;
 
@@ -190,6 +196,8 @@ public class SinkronFragment extends BaseFragment implements
         barangController                = new BarangController(this,getActivity());
 
         stokController                  = new StokController(this, getActivity());
+
+        getJualMasterController         = new GetJualMasterController(getActivity(),this);
 
 
 
@@ -527,6 +535,22 @@ public class SinkronFragment extends BaseFragment implements
 
     @Override
     public void onStokSuccess(StokModel stokModel, List<Stok> stokOffline) {
+       //lanjut ke get jual controller
+        //master
+        getJualMasterController.getJualMaster();
+    }
+
+    @Override
+    public void onStokError(String error, List<Stok> stoksOffline) {
+        //this.showToast(error);
+
+        abortProses(error);
+    }
+
+
+
+    @Override
+    public void onGetJualMasterSuccess(MasterModel masterModel) {
         //this.showToast(stokModel.getMessage());
         sweetAlertDialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
         sweetAlertDialog.setTitleText(getActivity().getResources().getString(R.string.sinkron_berhasil));
@@ -539,11 +563,14 @@ public class SinkronFragment extends BaseFragment implements
     }
 
     @Override
-    public void onStokError(String error, List<Stok> stoksOffline) {
-        //this.showToast(error);
+    public void onGetJualMasterError(String error) {
 
         abortProses(error);
     }
+
+
+
+
 
     void abortProses(String error){
 
