@@ -32,6 +32,9 @@ import com.kitadigi.poskita.sinkron.brand.insert.ISinkronAddBrandResult;
 import com.kitadigi.poskita.sinkron.brand.insert.SinkronInsertBrandController;
 import com.kitadigi.poskita.sinkron.brand.update.ISinkronUpdateBrandResult;
 import com.kitadigi.poskita.sinkron.brand.update.SinkronUpdateBrandController;
+import com.kitadigi.poskita.sinkron.jual.get_detail.GetDetailModel;
+import com.kitadigi.poskita.sinkron.jual.get_detail.GetJualDetailController;
+import com.kitadigi.poskita.sinkron.jual.get_detail.IGetJualDetailResult;
 import com.kitadigi.poskita.sinkron.jual.get_master.GetJualMasterController;
 import com.kitadigi.poskita.sinkron.jual.get_master.IGetJualMasterResult;
 import com.kitadigi.poskita.sinkron.jual.get_master.MasterModel;
@@ -67,7 +70,7 @@ public class Sinkronizer implements
         ISinkronAddProdukResult, ISinkronUpdateProdukResult, ISinkronDeleteProdukResult,
         ISinkronAddJualResult, ISinkronAddBeliResult,
         IKategoriResult, IBrandResult, IUnitResult, IBarangResult,
-        IStokResult, IGetJualMasterResult {
+        IStokResult, IGetJualMasterResult, IGetJualDetailResult {
 
     //cek internet koneksi
     InternetChecker internetChecker;
@@ -113,6 +116,9 @@ public class Sinkronizer implements
 
     //init controller untuk get jual master
     GetJualMasterController getJualMasterController;
+
+    //init controller untuk get jual detail
+    GetJualDetailController getJualDetailController;
 
     public Sinkronizer(Context context, ISinkronizer iSinkronizer) {
         this.context = context;
@@ -165,6 +171,7 @@ public class Sinkronizer implements
 
             getJualMasterController         = new GetJualMasterController(context, this);
 
+            getJualDetailController         = new GetJualDetailController(context, this);
             //mulai sinkron
             sinkronInsertKategoriController.insert_kategori();
 
@@ -491,11 +498,26 @@ public class Sinkronizer implements
     public void onGetJualMasterSuccess(MasterModel masterModel) {
         if (masterModel.isStatus()){
 
+            getJualDetailController.getJualDetail();
         }
     }
 
     @Override
     public void onGetJualMasterError(String error) {
+
+        iSinkronizer.onFinish(error);
+    }
+
+    @Override
+    public void onGetJualDetailSuccess(GetDetailModel getDetailModel) {
+        if (getDetailModel.isStatus()){
+
+
+        }
+    }
+
+    @Override
+    public void onGetJualDetailError(String error) {
 
         iSinkronizer.onFinish(error);
     }
