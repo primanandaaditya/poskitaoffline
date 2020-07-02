@@ -43,6 +43,9 @@ import com.kitadigi.poskita.fragment.pos.StokModel;
 import com.kitadigi.poskita.fragment.unit.IUnitResult;
 import com.kitadigi.poskita.fragment.unit.UnitController;
 import com.kitadigi.poskita.fragment.unit.UnitModel;
+import com.kitadigi.poskita.sinkron.beli.get_master.GetBeliMasterController;
+import com.kitadigi.poskita.sinkron.beli.get_master.GetBeliMasterModel;
+import com.kitadigi.poskita.sinkron.beli.get_master.IGetBeliMasterResult;
 import com.kitadigi.poskita.sinkron.beli.insert.ISinkronAddBeliResult;
 import com.kitadigi.poskita.sinkron.beli.insert.SinkronInsertBeliController;
 import com.kitadigi.poskita.sinkron.brand.delete.ISinkronDeleteBrandResult;
@@ -101,7 +104,7 @@ public class SinkronFragment extends BaseFragment implements
         ISinkronAddProdukResult, ISinkronUpdateProdukResult, ISinkronDeleteProdukResult,
         ISinkronAddJualResult, ISinkronAddBeliResult,
         IKategoriResult, IBrandResult, IUnitResult, IBarangResult,
-        IStokResult, IGetJualMasterResult, IGetJualDetailResult
+        IStokResult, IGetJualMasterResult, IGetJualDetailResult, IGetBeliMasterResult
 
 {
 
@@ -157,6 +160,9 @@ public class SinkronFragment extends BaseFragment implements
     //init controller get jual detail
     GetJualDetailController getJualDetailController;
 
+    //init controller get belimaster
+    GetBeliMasterController getBeliMasterController;
+
 //    List<Datum> datumList;
 //    Datum datum;
 
@@ -205,6 +211,7 @@ public class SinkronFragment extends BaseFragment implements
 
         getJualMasterController         = new GetJualMasterController(getActivity(),this);
         getJualDetailController         = new GetJualDetailController(getActivity(),this);
+        getBeliMasterController         = new GetBeliMasterController(getActivity(), this);
 
 
         //tampilkan tanggal terakhir sync
@@ -571,9 +578,6 @@ public class SinkronFragment extends BaseFragment implements
     }
 
 
-
-
-
     void abortProses(String error){
 
         tvLastSync.setText(getActivity().getResources().getString(R.string.sinkron_data_terakhir) + sessionManager.getLastSync());
@@ -585,20 +589,37 @@ public class SinkronFragment extends BaseFragment implements
 
     @Override
     public void onGetJualDetailSuccess(GetDetailModel getDetailModel) {
-
-        //this.showToast(stokModel.getMessage());
-        sweetAlertDialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
-        sweetAlertDialog.setTitleText(getActivity().getResources().getString(R.string.sinkron_berhasil));
-        //sweetAlertDialog.dismissWithAnimation();
-
-        //simpan tanggal sekarang di session
-        sessionManager.createLasySync();
-        tvLastSync.setText(getActivity().getResources().getString(R.string.sinkron_data_terakhir) + sessionManager.getLastSync());
-
+        //lanjut ke sinkron pembelian master
+        getBeliMasterController.getBeliMaster();
     }
 
     @Override
     public void onGetJualDetailError(String error) {
+        abortProses(error);
+    }
+
+    @Override
+    public void onGetBeliMasterSuccess(GetBeliMasterModel getBeliMasterModel) {
+
+        if (getBeliMasterModel.getStatus()){
+
+
+            //this.showToast(stokModel.getMessage());
+            sweetAlertDialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+            sweetAlertDialog.setTitleText(getActivity().getResources().getString(R.string.sinkron_berhasil));
+            //sweetAlertDialog.dismissWithAnimation();
+
+            //simpan tanggal sekarang di session
+            sessionManager.createLasySync();
+            tvLastSync.setText(getActivity().getResources().getString(R.string.sinkron_data_terakhir) + sessionManager.getLastSync());
+
+        }
+
+    }
+
+    @Override
+    public void onGetBeliMasterError(String error) {
+
         abortProses(error);
     }
 }
