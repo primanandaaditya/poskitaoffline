@@ -24,6 +24,9 @@ import com.kitadigi.poskita.fragment.pos.StokModel;
 import com.kitadigi.poskita.fragment.unit.IUnitResult;
 import com.kitadigi.poskita.fragment.unit.UnitController;
 import com.kitadigi.poskita.fragment.unit.UnitModel;
+import com.kitadigi.poskita.sinkron.beli.get_detail.GetBeliDetailController;
+import com.kitadigi.poskita.sinkron.beli.get_detail.GetBeliDetailModel;
+import com.kitadigi.poskita.sinkron.beli.get_detail.IGetBeliDetailResult;
 import com.kitadigi.poskita.sinkron.beli.get_master.GetBeliMasterController;
 import com.kitadigi.poskita.sinkron.beli.get_master.GetBeliMasterModel;
 import com.kitadigi.poskita.sinkron.beli.get_master.IGetBeliMasterResult;
@@ -73,7 +76,7 @@ public class Sinkronizer implements
         ISinkronAddProdukResult, ISinkronUpdateProdukResult, ISinkronDeleteProdukResult,
         ISinkronAddJualResult, ISinkronAddBeliResult,
         IKategoriResult, IBrandResult, IUnitResult, IBarangResult,
-        IStokResult, IGetJualMasterResult, IGetJualDetailResult, IGetBeliMasterResult {
+        IStokResult, IGetJualMasterResult, IGetJualDetailResult, IGetBeliMasterResult, IGetBeliDetailResult {
 
     //cek internet koneksi
     InternetChecker internetChecker;
@@ -125,6 +128,9 @@ public class Sinkronizer implements
 
     //init controller untuk get beli master
     GetBeliMasterController getBeliMasterController;
+
+    //init controller untuk get beli detail
+    GetBeliDetailController getBeliDetailController;
 
     public Sinkronizer(Context context, ISinkronizer iSinkronizer) {
         this.context = context;
@@ -180,6 +186,8 @@ public class Sinkronizer implements
             getJualDetailController         = new GetJualDetailController(context, this);
 
             getBeliMasterController         = new GetBeliMasterController(context, this);
+
+            getBeliDetailController         = new GetBeliDetailController(context, this);
 
 
             //mulai sinkron
@@ -537,12 +545,22 @@ public class Sinkronizer implements
     public void onGetBeliMasterSuccess(GetBeliMasterModel getBeliMasterModel) {
 
         if (getBeliMasterModel.getStatus()){
-
+            getBeliDetailController.getBeliDetail();
         }
     }
 
     @Override
     public void onGetBeliMasterError(String error) {
+        iSinkronizer.onFinish(error);
+    }
+
+    @Override
+    public void onGetBeliDetailSuccess(GetBeliDetailModel getBeliDetailModel) {
+
+    }
+
+    @Override
+    public void onGetBeliDetailError(String error) {
         iSinkronizer.onFinish(error);
     }
 }
