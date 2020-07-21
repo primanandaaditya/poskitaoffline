@@ -700,13 +700,13 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
     @Override
     public void onSuccess(AddBarangResult addBarangResult) {
         if (this.sessionExpired(addBarangResult.getMessage()) == 0){
-            Toast.makeText(ItemsDataActivity.this, addBarangResult.getMessage(),Toast.LENGTH_SHORT).show();
+//            Toast.makeText(ItemsDataActivity.this, addBarangResult.getMessage(),Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void onError(String error) {
-         Toast.makeText(ItemsDataActivity.this, error,Toast.LENGTH_LONG).show();
+//         Toast.makeText(ItemsDataActivity.this, error,Toast.LENGTH_LONG).show();
          //kalau duplikasi, jangan finish()
          if (error.equals(getResources().getString(R.string.duplikasi_item))){
 

@@ -142,7 +142,7 @@ public class AddBrandActivity extends BaseActivity implements IAddBrandResult, I
         }else{
 
             if (this.sessionExpired(baseResponse.getMessage())==0 ){
-                this.showToast(getResources().getString(R.string.insert_ok));
+//                this.showToast(getResources().getString(R.string.insert_ok));
             }else{
 
             }
@@ -153,7 +153,7 @@ public class AddBrandActivity extends BaseActivity implements IAddBrandResult, I
 
     @Override
     public void onBrandError(String error) {
-        Toast.makeText(AddBrandActivity.this,error,Toast.LENGTH_LONG).show();
+//        Toast.makeText(AddBrandActivity.this,error,Toast.LENGTH_LONG).show();
         kosongkanEdit();
         finish();
 
@@ -162,7 +162,7 @@ public class AddBrandActivity extends BaseActivity implements IAddBrandResult, I
     @Override
     public void onEditSuccess(BaseResponse baseResponse) {
         if (this.sessionExpired(baseResponse.getMessage())==0){
-            this.showToast(baseResponse.getMessage());
+//            this.showToast(baseResponse.getMessage());
             kosongkanEdit();
         }
 
@@ -170,7 +170,7 @@ public class AddBrandActivity extends BaseActivity implements IAddBrandResult, I
 
     @Override
     public void onEditError(String error) {
-        Toast.makeText(AddBrandActivity.this,error,Toast.LENGTH_LONG).show();
+//        Toast.makeText(AddBrandActivity.this,error,Toast.LENGTH_LONG).show();
         kosongkanEdit();
         finish();
     }

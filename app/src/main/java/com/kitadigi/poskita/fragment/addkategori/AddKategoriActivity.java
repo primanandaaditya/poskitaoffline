@@ -128,7 +128,7 @@ public class AddKategoriActivity extends BaseActivity implements IAddKategoriRes
     public void onSuccess(BaseResponse baseResponse) {
         kosongkanEditText();
         if(this.sessionExpired(baseResponse.getMessage())==0){
-            this.showToast(baseResponse.getMessage());
+//            this.showToast(baseResponse.getMessage());
 
         }
 //        kosongkanEditText();
@@ -139,7 +139,7 @@ public class AddKategoriActivity extends BaseActivity implements IAddKategoriRes
     @Override
     public void onError(String error) {
 //        this.showToast(error);
-        Toast.makeText(AddKategoriActivity.this,error, Toast.LENGTH_LONG).show();
+//        Toast.makeText(AddKategoriActivity.this,error, Toast.LENGTH_LONG).show();
         kosongkanEditText();
         finish();
     }
@@ -207,7 +207,7 @@ public class AddKategoriActivity extends BaseActivity implements IAddKategoriRes
 
         }else{
             this.sessionExpired(baseResponse.getMessage());
-            this.showToast(getResources().getString(R.string.update_ok));
+//            this.showToast(getResources().getString(R.string.update_ok));
         }
 //        this.showToast(baseResponse.getMessage());
 //        this.finish();

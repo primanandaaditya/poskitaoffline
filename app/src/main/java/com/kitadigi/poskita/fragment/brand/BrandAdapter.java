@@ -18,6 +18,7 @@ import com.kitadigi.poskita.dao.produk.ItemHelper;
 import com.kitadigi.poskita.fragment.addbrand.AddBrandActivity;
 import com.kitadigi.poskita.fragment.deletebrand.DeleteBrandController;
 import com.kitadigi.poskita.fragment.deletebrand.IDeleteResult;
+import com.kitadigi.poskita.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,12 +90,21 @@ public class BrandAdapter extends BaseAdapter implements IDeleteResult {
         Typeface fontsItalic        = Typeface.createFromAsset(activity.getActivity().getAssets(), "fonts/OpenSans-Italic.ttf");
         Typeface fontsBold          = Typeface.createFromAsset(activity.getActivity().getAssets(), "fonts/OpenSans-Bold.ttf");
 
-        tv_name.setTypeface(fontsBold);
-        tv_code_category.setTypeface(fonts);
+
 
         final Brand brand = brands.get(position);
 
 
+        //jika belum sinkron,
+        //hurufnya bold
+        //jika sudah sinkron, hurufnya biasa
+        if (brand.getSync_insert() == Constants.STATUS_BELUM_SYNC){
+            tv_name.setTypeface(fontsBold);
+            tv_code_category.setTypeface(fontsBold);
+        }else{
+            tv_name.setTypeface(fonts);
+            tv_code_category.setTypeface(fonts);
+        }
 
         //nama kategori
         tv_name.setText(brand.getName());
@@ -174,13 +184,13 @@ public class BrandAdapter extends BaseAdapter implements IDeleteResult {
 
     @Override
     public void onDeleteSuccess(BaseResponse baseResponse) {
-        Toast.makeText(activity.getActivity(),baseResponse.getMessage(),Toast.LENGTH_SHORT).show();
+//        Toast.makeText(activity.getActivity(),baseResponse.getMessage(),Toast.LENGTH_SHORT).show();
         activity.onResume();
     }
 
     @Override
     public void onDeleteError(String error) {
-        Toast.makeText(activity.getActivity(), error,Toast.LENGTH_SHORT).show();
+//        Toast.makeText(activity.getActivity(), error,Toast.LENGTH_SHORT).show();
     }
 
 

@@ -19,6 +19,7 @@ import com.kitadigi.poskita.dao.produk.Item;
 import com.kitadigi.poskita.fragment.additem.AddBarangResult;
 import com.kitadigi.poskita.fragment.deleteitem.DeleteBarangController;
 import com.kitadigi.poskita.fragment.edititem.IEditResult;
+import com.kitadigi.poskita.util.Constants;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -100,10 +101,21 @@ public class BarangAdapter extends RecyclerView.Adapter<BarangAdapter.DataViewHo
         Typeface fontsBold          = Typeface.createFromAsset(mContext.getAssets(), "fonts/OpenSans-Bold.ttf");
 
 
+        //jika belum sinkron,
+        //hurufnya bold
+        //jika sudah sinkron, hurufnya biasa
+        if (item.getSync_insert() == Constants.STATUS_BELUM_SYNC){
+            holder.tv_title.setTypeface(fontsBold);
+            holder.tv_price.setTypeface(fontsBold);
+            holder.tv_price_sell.setTypeface(fontsBold);
+        }else{
+            holder.tv_title.setTypeface(fonts);
+            holder.tv_price.setTypeface(fonts);
+            holder.tv_price_sell.setTypeface(fonts);
+        }
 
-        holder.tv_title.setTypeface(fontsBold);
-        holder.tv_price.setTypeface(fonts);
-        holder.tv_price_sell.setTypeface(fonts);
+
+
 
         holder.tv_title.setText(item.getName_product());
         holder.tv_price.setText("Harga beli " + item.getPurchase_price().toString());

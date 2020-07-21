@@ -49,6 +49,8 @@ public class PrimaItemListAdapter extends RecyclerView.Adapter<com.kitadigi.posk
 
     @Override
     public void onBindViewHolder(com.kitadigi.poskita.fragment.item.PrimaItemListAdapter.DataViewHolder holder, int position) {
+
+
         final Datum barang     = dataList.getData().get(position);
 
 
@@ -59,6 +61,9 @@ public class PrimaItemListAdapter extends RecyclerView.Adapter<com.kitadigi.posk
         Typeface fonts              = Typeface.createFromAsset(mContext.getAssets(), "fonts/OpenSans-Regular.ttf");
         Typeface fontsItalic        = Typeface.createFromAsset(mContext.getAssets(), "fonts/OpenSans-Italic.ttf");
         Typeface fontsBold          = Typeface.createFromAsset(mContext.getAssets(), "fonts/OpenSans-Bold.ttf");
+
+
+
 
         holder.tv_title.setTypeface(fontsBold);
         holder.tv_price.setTypeface(fonts);

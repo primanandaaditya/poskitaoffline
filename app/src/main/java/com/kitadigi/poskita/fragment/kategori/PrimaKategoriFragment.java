@@ -102,13 +102,7 @@ public class PrimaKategoriFragment extends BaseFragment implements IKategoriResu
     public void onResume() {
         super.onResume();
 
-//        kategoriController.kategoriInsertBelumSync();
         kategoriController.getKategoriList();
-
-//        AsyncTaskRunner asyncTaskRunner=new AsyncTaskRunner();
-//        asyncTaskRunner.execute("");
-
-//        kategoriListDAO.getKategoriList();
 
     }
 

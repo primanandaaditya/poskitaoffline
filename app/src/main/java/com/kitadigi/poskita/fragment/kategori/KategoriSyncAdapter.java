@@ -19,6 +19,7 @@ import com.kitadigi.poskita.dao.produk.ItemHelper;
 import com.kitadigi.poskita.fragment.addkategori.AddKategoriActivity;
 import com.kitadigi.poskita.fragment.deletekategori.DeleteKategoriController;
 import com.kitadigi.poskita.fragment.deletekategori.IDeleteResult;
+import com.kitadigi.poskita.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,11 +97,23 @@ public class KategoriSyncAdapter extends BaseAdapter implements IDeleteResult {
         Typeface fontsItalic        = Typeface.createFromAsset( primaKategoriFragment.getActivity().getAssets(), "fonts/OpenSans-Italic.ttf");
         Typeface fontsBold          = Typeface.createFromAsset( primaKategoriFragment.getActivity().getAssets(), "fonts/OpenSans-Bold.ttf");
 
-        tv_name.setTypeface(fontsBold);
-        tv_code_category.setTypeface(fonts);
+
 
         // getting movie data for the row
         final Kategori kategori = kategoris.get(position);
+
+
+        //jika belum sinkron,
+        //hurufnya bold
+        //jika sudah sinkron, hurufnya biasa
+        if (kategori.getSync_insert() == Constants.STATUS_BELUM_SYNC){
+            tv_name.setTypeface(fontsBold);
+            tv_code_category.setTypeface(fontsBold);
+        }else{
+            tv_name.setTypeface(fonts);
+            tv_code_category.setTypeface(fonts);
+        }
+
 
 
         //nama kategori

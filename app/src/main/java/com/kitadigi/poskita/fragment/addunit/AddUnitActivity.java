@@ -149,7 +149,7 @@ public class AddUnitActivity extends BaseActivity implements AddUnitResult, IEdi
 
     @Override
     public void onAddUnitError(String error) {
-        Toast.makeText(AddUnitActivity.this,error,Toast.LENGTH_LONG).show();
+//        Toast.makeText(AddUnitActivity.this,error,Toast.LENGTH_LONG).show();
         kosongkanEdit();
         finish();
     }
@@ -157,7 +157,7 @@ public class AddUnitActivity extends BaseActivity implements AddUnitResult, IEdi
     @Override
     public void onEditUnitSuccess(BaseResponse baseResponse) {
         if (this.sessionExpired(baseResponse.getMessage())==0){
-            this.showToast(getResources().getString(R.string.update_ok));
+//            this.showToast(getResources().getString(R.string.update_ok));
         }
         kosongkanEdit();
     }
@@ -165,7 +165,7 @@ public class AddUnitActivity extends BaseActivity implements AddUnitResult, IEdi
     @Override
     public void onEditUnitError(String error) {
 
-        Toast.makeText(AddUnitActivity.this,error,Toast.LENGTH_LONG).show();
+//        Toast.makeText(AddUnitActivity.this,error,Toast.LENGTH_LONG).show();
         kosongkanEdit();
         finish();
     }

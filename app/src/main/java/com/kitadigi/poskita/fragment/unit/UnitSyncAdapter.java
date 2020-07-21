@@ -18,6 +18,7 @@ import com.kitadigi.poskita.dao.unit.Unit;
 import com.kitadigi.poskita.fragment.addunit.AddUnitActivity;
 import com.kitadigi.poskita.fragment.deleteunit.DeleteUnitController;
 import com.kitadigi.poskita.fragment.deleteunit.IDeleteUnitResult;
+import com.kitadigi.poskita.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,12 +85,20 @@ public class UnitSyncAdapter extends BaseAdapter implements IDeleteUnitResult {
         Typeface fontsItalic        = Typeface.createFromAsset(activity.getActivity().getAssets(), "fonts/OpenSans-Italic.ttf");
         Typeface fontsBold          = Typeface.createFromAsset(activity.getActivity().getAssets(), "fonts/OpenSans-Bold.ttf");
 
-        tv_name.setTypeface(fontsBold);
-        tv_code_category.setTypeface(fonts);
 
-        // getting movie data for the row
-//        final UnitData unitData = unitModel.getData().get(position);
+
         final Unit unit = units.get(position);
+
+        //jika belum sinkron,
+        //hurufnya bold
+        //jika sudah sinkron, hurufnya biasa
+        if (unit.getSync_insert() == Constants.STATUS_BELUM_SYNC){
+            tv_name.setTypeface(fontsBold);
+            tv_code_category.setTypeface(fontsBold);
+        }else{
+            tv_name.setTypeface(fonts);
+            tv_code_category.setTypeface(fonts);
+        }
 
         //nama kategori
         tv_name.setText(unit.getName());
@@ -160,7 +169,7 @@ public class UnitSyncAdapter extends BaseAdapter implements IDeleteUnitResult {
 
     @Override
     public void onDeleteUnitSuccess(BaseResponse baseResponse) {
-        Toast.makeText(activity.getActivity(),activity.getActivity().getResources().getString(R.string.delete_ok),Toast.LENGTH_SHORT).show();
+//        Toast.makeText(activity.getActivity(),activity.getActivity().getResources().getString(R.string.delete_ok),Toast.LENGTH_SHORT).show();
 
         //refresh listview di fragment unit
         activity.onResume();
