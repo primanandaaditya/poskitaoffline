@@ -1,8 +1,10 @@
 package com.kitadigi.poskita;
 
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -29,7 +31,9 @@ import android.view.SubMenu;
 import android.view.View;
 import android.widget.TextClock;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.kitadigi.poskita.activities.coba.CobaActivity;
 import com.kitadigi.poskita.activities.printer.PrintingActivity;
 import com.kitadigi.poskita.adapter.ItemsAdapter;
 import com.kitadigi.poskita.database.Database;
@@ -44,6 +48,7 @@ import com.kitadigi.poskita.fragment.report.list.ReportFragment;
 import com.kitadigi.poskita.fragment.sinkron.SinkronFragment;
 import com.kitadigi.poskita.fragment.unit.UnitFragment;
 import com.kitadigi.poskita.model.Items;
+import com.kitadigi.poskita.util.AlarmReceiver;
 import com.kitadigi.poskita.util.CustomTypefaceSpan;
 import com.kitadigi.poskita.util.OnFragmentInteractionListener;
 import com.kitadigi.poskita.util.SessionManager;
@@ -449,7 +454,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                         CURRENT_TAG = TAG_REPORTS;
                         break;
                     case R.id.nav_printer:
-                        Intent intent = new Intent(MainActivity.this,PrintingActivity.class);
+                        Intent intent = new Intent(MainActivity.this, CobaActivity.class);
                         startActivity(intent);
                         navItemIndex = 7;
                         CURRENT_TAG = TAG_POS;
@@ -476,6 +481,15 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                                     @Override
                                     public void onClick(SweetAlertDialog sDialog) {
                                         sessionManager.logoutUser();
+
+                                        //saat logout, matikan juga alarm sinkronsisasi
+                                        PackageManager pm  = getPackageManager();
+                                        ComponentName componentName = new ComponentName(MainActivity.this, AlarmReceiver.class);
+                                        pm.setComponentEnabledSetting(componentName,PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                                                PackageManager.DONT_KILL_APP);
+//                                        Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.alarm_dimatikan), Toast.LENGTH_LONG).show();
+
+
                                         finish();
 
                                     }

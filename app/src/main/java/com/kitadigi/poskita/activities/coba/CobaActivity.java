@@ -2,16 +2,26 @@ package com.kitadigi.poskita.activities.coba;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kitadigi.poskita.R;
+import com.kitadigi.poskita.dao.kategori.Kategori;
+import com.kitadigi.poskita.fragment.kategori.dengan_header.Datum;
+import com.kitadigi.poskita.fragment.kategori.dengan_header.IKategoriResult;
+import com.kitadigi.poskita.fragment.kategori.dengan_header.KategoriController;
 
-public class CobaActivity extends AppCompatActivity implements ICobaResult {
+import java.util.List;
 
-    CobaController cobaController;
+public class CobaActivity extends AppCompatActivity implements IKategoriResult {
+
+    KategoriController kategoriHeaderController;
     Button button;
+    TextView textView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +29,8 @@ public class CobaActivity extends AppCompatActivity implements ICobaResult {
         setContentView(R.layout.activity_coba);
 
         button=(Button)findViewById(R.id.button);
+        textView=(TextView)findViewById(R.id.textView);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,19 +40,25 @@ public class CobaActivity extends AppCompatActivity implements ICobaResult {
     }
 
     void coba(){
-        cobaController=new CobaController(this,CobaActivity.this);
-        cobaController.getUser();
 
+        kategoriHeaderController = new KategoriController(CobaActivity.this, this);
+        kategoriHeaderController.getKategoriList();
 
     }
+
+
+
     @Override
-    public void onSuccess(CobaModel cobaModel) {
-      Toast.makeText(CobaActivity.this, cobaModel.getPage().toString(),Toast.LENGTH_SHORT).show();
-        Toast.makeText(CobaActivity.this, cobaModel.getData().toString(),Toast.LENGTH_SHORT).show();
+    public void onKategoriSuccess(com.kitadigi.poskita.fragment.kategori.dengan_header.KategoriModel kategoriModel, List<Kategori> kategoriOffline) {
+
+        for (Datum datum: kategoriModel.getData()){
+            Log.d("datum" , datum.getName());
+        }
     }
 
     @Override
-    public void onError(String error) {
-        Toast.makeText(CobaActivity.this, "Error : " + error.toString(),Toast.LENGTH_SHORT).show();
+    public void onKategoriError(String error, List<Kategori> kategoriOffline) {
+        Toast.makeText(CobaActivity.this, error, Toast.LENGTH_SHORT).show();
+
     }
 }

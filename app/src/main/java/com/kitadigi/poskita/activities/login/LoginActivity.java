@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -132,6 +133,10 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
                     //buat bussiness id
                     sessionManager.createBussinessId(loginResult.getData_user().getBusiness_id());
+
+                    //simpan auth_token
+                    Log.d("auth_token", loginResult.getAuth_token_mobile());
+                    sessionManager.createAuthToken(loginResult.getAuth_token_mobile().toString());
 
                     //pindah ke Main Activity setelah login sukses
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);

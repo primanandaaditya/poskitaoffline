@@ -4,10 +4,19 @@ public class Data_User {
 
     String id_users;
     String business_id;
+    String business_code;
     String surname;
     String username;
     String full_name;
     String email;
+
+    public String getBusiness_code() {
+        return business_code;
+    }
+
+    public void setBusiness_code(String business_code) {
+        this.business_code = business_code;
+    }
 
     public String getId_users() {
         return id_users;

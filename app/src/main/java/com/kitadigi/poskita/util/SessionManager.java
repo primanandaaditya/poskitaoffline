@@ -40,7 +40,7 @@ public class SessionManager {
     // All Shared Preferences Keys
     private static final String IS_LOGIN = "IsLoggedIn";
 
-
+    private static final String KEY_AUTH_TOKEN = "auth_token";
     //untuk nyimpan interval sinkron
     public static final String KEY_INTERVAL_SINKRON = "interval_sinkron";
 
@@ -102,6 +102,11 @@ public class SessionManager {
         editor.commit();
     }
 
+    public void createAuthToken(String auth_token){
+        editor.putString(KEY_AUTH_TOKEN, auth_token);
+        editor.commit();
+    }
+
     public void createIdUsers(String id_users){
         editor.putString(KEY_ID_USERS, id_users);
         editor.commit();
@@ -133,6 +138,11 @@ public class SessionManager {
 
     public String getLastSync(){
         String hasil = pref.getString(KEY_LAST_SYNC, "");
+        return hasil;
+    }
+
+    public String getAuthToken(){
+        String hasil = pref.getString(KEY_AUTH_TOKEN,"");
         return hasil;
     }
 
