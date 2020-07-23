@@ -40,6 +40,7 @@ public class Constants {
     public static Integer STATUS_BELUM_SYNC=0;
 
     public static String poskita = "poskita";
+    public final static String auth_token = "auth_token";
 
     public static Integer maxInput = 100;
     public static Integer maxInput50 = 50;

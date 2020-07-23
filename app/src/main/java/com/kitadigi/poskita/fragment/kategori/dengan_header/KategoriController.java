@@ -94,7 +94,7 @@ public class KategoriController implements IKategoriRequest {
                         //untuk batalkan panggilan HTTP
                         kategoriModelCall=call;
 
-                        if (response.body() == null){
+                        if (response.body().getData() == null){
 
                         }else{
 

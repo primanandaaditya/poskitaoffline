@@ -9,16 +9,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kitadigi.poskita.R;
+import com.kitadigi.poskita.dao.brand.Brand;
 import com.kitadigi.poskita.dao.kategori.Kategori;
+import com.kitadigi.poskita.dao.unit.Unit;
+import com.kitadigi.poskita.fragment.brand.BrandData;
+import com.kitadigi.poskita.fragment.brand.dengan_header.BrandController;
+import com.kitadigi.poskita.fragment.brand.BrandModel;
+import com.kitadigi.poskita.fragment.brand.IBrandResult;
 import com.kitadigi.poskita.fragment.kategori.dengan_header.Datum;
 import com.kitadigi.poskita.fragment.kategori.dengan_header.IKategoriResult;
 import com.kitadigi.poskita.fragment.kategori.dengan_header.KategoriController;
+import com.kitadigi.poskita.fragment.unit.UnitData;
+import com.kitadigi.poskita.fragment.unit.dengan_header.IUnitResult;
+import com.kitadigi.poskita.fragment.unit.dengan_header.UnitController;
+import com.kitadigi.poskita.fragment.unit.dengan_header.UnitModel;
 
 import java.util.List;
 
-public class CobaActivity extends AppCompatActivity implements IKategoriResult {
+public class CobaActivity extends AppCompatActivity implements IUnitResult {
 
-    KategoriController kategoriHeaderController;
+    UnitController unitController;
     Button button;
     TextView textView;
 
@@ -41,24 +51,21 @@ public class CobaActivity extends AppCompatActivity implements IKategoriResult {
 
     void coba(){
 
-        kategoriHeaderController = new KategoriController(CobaActivity.this, this);
-        kategoriHeaderController.getKategoriList();
-
+       unitController = new UnitController(CobaActivity.this, this);
+       unitController.getUnitList();
     }
 
 
 
     @Override
-    public void onKategoriSuccess(com.kitadigi.poskita.fragment.kategori.dengan_header.KategoriModel kategoriModel, List<Kategori> kategoriOffline) {
-
-        for (Datum datum: kategoriModel.getData()){
-            Log.d("datum" , datum.getName());
+    public void onUnitSuccess(UnitModel unitModel, List<Unit> units) {
+        for (UnitData unitData: unitModel.getData()){
+            Log.d("unit", unitData.getName());
         }
     }
 
     @Override
-    public void onKategoriError(String error, List<Kategori> kategoriOffline) {
-        Toast.makeText(CobaActivity.this, error, Toast.LENGTH_SHORT).show();
+    public void onUnitError(String error, List<Unit> units) {
 
     }
 }

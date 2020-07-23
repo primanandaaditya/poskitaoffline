@@ -1,6 +1,6 @@
-package com.kitadigi.poskita.fragment.kategori.dengan_header;
+package com.kitadigi.poskita.fragment.unit.dengan_header;
 
-import com.kitadigi.poskita.fragment.kategori.dengan_header.KategoriModel;
+import com.kitadigi.poskita.fragment.unit.dengan_header.UnitModel;
 import com.kitadigi.poskita.util.Constants;
 import com.kitadigi.poskita.util.Url;
 
@@ -9,10 +9,10 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Path;
 
-public interface IKategori {
+public interface IUnit {
 
-    @GET(Url.DIKI_MASTER_KATEGORI)
-    Call<KategoriModel> getKategoriList(
+    @GET(Url.DIKI_MASTER_UNIT)
+    Call<UnitModel> getUnitList(
             @Header(Constants.auth_token) String auth_token
     );
 }
