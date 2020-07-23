@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.media.Image;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -27,6 +28,23 @@ import java.util.Locale;
 
 public class StringUtil {
 
+    public static String getFileNameFromURL(String fileName){
+
+        if (fileName == null || fileName.matches("")){
+
+            return "";
+        }else{
+
+            // full file name
+            String[] parts = fileName.split("/"); // String array, each element is text between dots
+
+            int jml = parts.length;
+
+            String hasil = parts[jml-1].toString();
+            return  hasil;
+        }
+
+    }
 
     //fungsi ini untuk membuat qrcode
     //lalu menampilkannya pada ImageView

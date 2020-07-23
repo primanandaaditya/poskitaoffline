@@ -23,6 +23,7 @@ import com.kitadigi.poskita.fragment.unit.UnitData;
 import com.kitadigi.poskita.fragment.unit.dengan_header.IUnitResult;
 import com.kitadigi.poskita.fragment.unit.dengan_header.UnitController;
 import com.kitadigi.poskita.fragment.unit.dengan_header.UnitModel;
+import com.kitadigi.poskita.util.StringUtil;
 
 import java.util.List;
 
@@ -37,6 +38,7 @@ public class CobaActivity extends AppCompatActivity implements IUnitResult {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coba);
+
 
         button=(Button)findViewById(R.id.button);
         textView=(TextView)findViewById(R.id.textView);
