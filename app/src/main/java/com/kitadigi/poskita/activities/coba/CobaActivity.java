@@ -11,12 +11,16 @@ import android.widget.Toast;
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.dao.brand.Brand;
 import com.kitadigi.poskita.dao.kategori.Kategori;
+import com.kitadigi.poskita.dao.produk.Item;
 import com.kitadigi.poskita.dao.unit.Unit;
 import com.kitadigi.poskita.fragment.brand.BrandData;
 import com.kitadigi.poskita.fragment.brand.dengan_header.BrandController;
 import com.kitadigi.poskita.fragment.brand.BrandModel;
 import com.kitadigi.poskita.fragment.brand.IBrandResult;
-import com.kitadigi.poskita.fragment.kategori.dengan_header.Datum;
+import com.kitadigi.poskita.fragment.item.BarangResult;
+import com.kitadigi.poskita.fragment.item.Datum;
+import com.kitadigi.poskita.fragment.item.IBarangResult;
+import com.kitadigi.poskita.fragment.item.dengan_header.BarangController;
 import com.kitadigi.poskita.fragment.kategori.dengan_header.IKategoriResult;
 import com.kitadigi.poskita.fragment.kategori.dengan_header.KategoriController;
 import com.kitadigi.poskita.fragment.unit.UnitData;
@@ -27,9 +31,9 @@ import com.kitadigi.poskita.util.StringUtil;
 
 import java.util.List;
 
-public class CobaActivity extends AppCompatActivity implements IUnitResult {
+public class CobaActivity extends AppCompatActivity implements IBarangResult {
 
-    UnitController unitController;
+    BarangController barangController;
     Button button;
     TextView textView;
 
@@ -52,22 +56,20 @@ public class CobaActivity extends AppCompatActivity implements IUnitResult {
     }
 
     void coba(){
-
-       unitController = new UnitController(CobaActivity.this, this);
-       unitController.getUnitList();
+        barangController = new BarangController(this,CobaActivity.this);
+        barangController.getBarang();
     }
 
 
 
+
     @Override
-    public void onUnitSuccess(UnitModel unitModel, List<Unit> units) {
-        for (UnitData unitData: unitModel.getData()){
-            Log.d("unit", unitData.getName());
-        }
+    public void onSuccess(BarangResult barangResult, List<Item> items) {
+        Log.d("jml barang", String.valueOf(barangResult.getData().size()));
     }
 
     @Override
-    public void onUnitError(String error, List<Unit> units) {
-
+    public void onError(String error, List<Item> items) {
+        Toast.makeText(CobaActivity.this, error, Toast.LENGTH_SHORT).show();
     }
 }

@@ -120,11 +120,27 @@ public class BarangController implements IBarangRequest {
 
                                 item=new Item();
 
-                                item.setBrand_id(Integer.parseInt(datum.getBrands_id()));
-                                item.setCategory_id(Integer.parseInt(datum.getCategory_id()));
-                                item.setUnit_id(Integer.parseInt(datum.getUnits_id()));
+                                if (datum.getBrands_id()==null || datum.getBrands_id().matches("")){
+                                    item.setBrand_id(0);
+                                }else{
+                                    item.setBrand_id(Integer.parseInt(datum.getBrands_id()));
+                                }
+
+                                if (datum.getCategory_id()==null || datum.getCategory_id().matches("")){
+                                    item.setCategory_id(0);
+                                }else{
+                                    item.setCategory_id(Integer.parseInt(datum.getCategory_id()));
+                                }
+
+                                if (datum.getUnits_id()==null || datum.getUnits_id().matches("")){
+                                    item.setUnit_id(0);
+                                }else{
+                                    item.setUnit_id(Integer.parseInt(datum.getUnits_id()));
+                                }
+
+
                                 item.setCode_product(datum.getCode_product());
-                                item.setId(Long.parseLong(datum.getId().toString()));
+//                                item.setId(Long.parseLong(datum.getId().toString()));
                                 item.setName_product(datum.getName_product());
                                 item.setPurchase_price(Integer.parseInt(datum.getPurchase_price()));
                                 item.setQty_minimum(Integer.parseInt(datum.getQty_minimum()));
@@ -148,10 +164,15 @@ public class BarangController implements IBarangRequest {
                                 //datum.getImage nilainya berupa URL (seperti http://localhost:8888/upload_api//default/icon_stock.png)
                                 //sedangkan yang kita butuhkan cuma icon_stock.png-nya saja
                                 //jadi kita pisah dulu, lalu di-set ke datum.getImage-nya lagi
-                                namaFile = StringUtil.getFileNameFromURL(datum.getImage());
-                                datum.setImage(namaFile);
 
-                                item.setImage(lokasi + datum.getImage());
+                                namaFile = StringUtil.getFileNameFromURL(datum.getImage());
+                                Log.d("namaFile", namaFile);
+
+//                                datum.setImage(namaFile);
+
+                                item.setImage(lokasi + namaFile);
+                                Log.d("lokasi + namaFile", lokasi + namaFile);
+
 
                                 //commit insert di sqlite
                                 itemHelper.addItem(item);
@@ -160,10 +181,8 @@ public class BarangController implements IBarangRequest {
                                 //simpan gambar di hp user lewat picasso
                                 //dengan nama file-nya = datum.getImage()
                                 Picasso.with(context)
-                                        .load( Url.DIKI_IMAGE_URL + datum.getImage())
-                                        .into(FileUtil.picassoImageTarget(context,datum.getImage()));
-
-
+                                        .load(datum.getImage())
+                                        .into(FileUtil.picassoImageTarget(context,namaFile));
                             }
 
                         }
