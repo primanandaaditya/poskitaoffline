@@ -15,16 +15,18 @@ import android.widget.Toast;
 import com.kitadigi.poskita.R;
 
 import java.util.Calendar;
+import java.util.Random;
 
 public class AlarmReceiver extends BroadcastReceiver implements ISinkronizer {
 
     InternetChecker internetChecker;
     Calendar calendar = Calendar.getInstance();
-    Sinkronizer sinkronizer;
+//    Sinkronizer sinkronizer;
+    SinkronizerHeader sinkronizer;
     RemoteViews remoteViews;
 
     String selesai;
-
+    int random = getRandomNumberUsingNextInt(100,10000);
     NotificationManager mNotificationManager;
 
     @Override
@@ -60,11 +62,12 @@ public class AlarmReceiver extends BroadcastReceiver implements ISinkronizer {
             mBuilder.setStyle(new NotificationCompat.DecoratedCustomViewStyle());
 
             //mulai create notifikasi dan tampilkan di HP
+
             mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            mNotificationManager.notify(0, mBuilder.build());
+            mNotificationManager.notify(random, mBuilder.build());
 
             //mulai proses sinkronisasi ke server
-            sinkronizer = new Sinkronizer(context, this);
+            sinkronizer = new SinkronizerHeader(context, this);
             sinkronizer.doSinkron();
 
         }else{
@@ -92,7 +95,7 @@ public class AlarmReceiver extends BroadcastReceiver implements ISinkronizer {
 
                 //mulai create notifikasi dan tampilkan di HP
                 mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-                mNotificationManager.notify(0, mBuilder.build());
+                mNotificationManager.notify(random, mBuilder.build());
 
             }catch (Exception e){
 
@@ -115,7 +118,7 @@ public class AlarmReceiver extends BroadcastReceiver implements ISinkronizer {
         handler.postDelayed(new Runnable() {
             public void run() {
 
-                mNotificationManager.cancel(0);
+                mNotificationManager.cancel(random);
             }
         }, 3000);   //3 detik
     }
@@ -140,9 +143,14 @@ public class AlarmReceiver extends BroadcastReceiver implements ISinkronizer {
         handler.postDelayed(new Runnable() {
             public void run() {
 
-                mNotificationManager.cancel(0);
+                mNotificationManager.cancel(random);
             }
-        }, 3000);   //5
+        }, 3000);   //3
 
+    }
+
+    int getRandomNumberUsingNextInt(int min, int max) {
+        Random random = new Random();
+        return random.nextInt(max - min) + min;
     }
 }

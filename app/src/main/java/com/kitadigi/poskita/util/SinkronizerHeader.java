@@ -1,27 +1,7 @@
-package com.kitadigi.poskita.fragment.sinkron;
+package com.kitadigi.poskita.util;
 
+import android.content.Context;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.ComponentName;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.kitadigi.poskita.R;
-import com.kitadigi.poskita.activities.massal.kategori.IMKategoriAdapter;
-import com.kitadigi.poskita.activities.sinkron.PengaturanSinkronActivity;
-import com.kitadigi.poskita.base.BaseFragment;
 import com.kitadigi.poskita.dao.brand.Brand;
 import com.kitadigi.poskita.dao.kategori.Kategori;
 import com.kitadigi.poskita.dao.produk.Item;
@@ -33,7 +13,6 @@ import com.kitadigi.poskita.fragment.brand.IBrandResult;
 import com.kitadigi.poskita.fragment.item.dengan_header.BarangController;
 import com.kitadigi.poskita.fragment.item.BarangResult;
 import com.kitadigi.poskita.fragment.item.IBarangResult;
-import com.kitadigi.poskita.fragment.kategori.Datum;
 import com.kitadigi.poskita.fragment.kategori.dengan_header.IKategoriResult;
 import com.kitadigi.poskita.fragment.kategori.dengan_header.KategoriController;
 import com.kitadigi.poskita.fragment.kategori.dengan_header.KategoriModel;
@@ -78,51 +57,32 @@ import com.kitadigi.poskita.sinkron.produk.insert.SinkronInsertProdukController;
 import com.kitadigi.poskita.sinkron.produk.update.ISinkronUpdateProdukResult;
 import com.kitadigi.poskita.sinkron.produk.update.SinkronUpdateProdukController;
 import com.kitadigi.poskita.sinkron.retrofit.SinkronResponse;
-import com.kitadigi.poskita.sinkron.unit.delete.ISinkronDeleteUnit;
 import com.kitadigi.poskita.sinkron.unit.delete.ISinkronDeleteUnitResult;
 import com.kitadigi.poskita.sinkron.unit.delete.SinkronDeleteUnitController;
 import com.kitadigi.poskita.sinkron.unit.insert.ISinkronAddUnitResult;
 import com.kitadigi.poskita.sinkron.unit.insert.SinkronInsertUnitController;
 import com.kitadigi.poskita.sinkron.unit.update.ISinkronUpdateUnitResult;
 import com.kitadigi.poskita.sinkron.unit.update.SinkronUpdateUnitController;
-import com.kitadigi.poskita.util.AlarmReceiver;
-import com.kitadigi.poskita.util.InternetChecker;
-import com.kitadigi.poskita.util.SessionManager;
-import com.kitadigi.poskita.util.Sinkronizer;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
-
-import static android.content.Context.ALARM_SERVICE;
-
-/**
- * A simple {@link Fragment} subclass.
- */
-public class SinkronFragment extends BaseFragment implements
+public class SinkronizerHeader implements
         ISinkronAddKategoriResult, ISinkronUpdateKategoriResult, ISinkronDeleteKategoriResult,
         ISinkronAddBrandResult, ISinkronUpdateBrandResult, ISinkronDeleteBrandResult,
         ISinkronAddUnitResult, ISinkronUpdateUnitResult, ISinkronDeleteUnitResult,
         ISinkronAddProdukResult, ISinkronUpdateProdukResult, ISinkronDeleteProdukResult,
         ISinkronAddJualResult, ISinkronAddBeliResult,
         IKategoriResult, IBrandResult, IUnitResult, IBarangResult,
-        IGetJualMasterResult, IGetJualDetailResult, IGetBeliMasterResult, IGetBeliDetailResult
+        IGetJualMasterResult, IGetJualDetailResult, IGetBeliMasterResult, IGetBeliDetailResult {
 
-{
-
-    //buat cek internet
+    //cek internet koneksi
     InternetChecker internetChecker;
+
+    Context context;
+    ISinkronizer iSinkronizer;
 
     //init session, untuk menampilkan tanggal last sync
     SessionManager sessionManager;
-
-    //init widget
-    TextView tvLastSync;
-    Button btnSinkron, btnPengaturan, btnMatikanAlarm;
-    SweetAlertDialog sweetAlertDialog;
-//    ListView lv;
-
 
     //init controller kategori
     SinkronInsertKategoriController sinkronInsertKategoriController;
@@ -160,144 +120,83 @@ public class SinkronFragment extends BaseFragment implements
     //init controller untuk get jual master
     GetJualMasterController getJualMasterController;
 
-    //init controller get jual detail
+    //init controller untuk get jual detail
     GetJualDetailController getJualDetailController;
 
-    //init controller get belimaster
+    //init controller untuk get beli master
     GetBeliMasterController getBeliMasterController;
 
-    //init controller get belidetail
+    //init controller untuk get beli detail
     GetBeliDetailController getBeliDetailController;
 
-//    List<Datum> datumList;
-//    Datum datum;
+    public SinkronizerHeader(Context context, ISinkronizer iSinkronizer) {
+        this.context = context;
+        this.iSinkronizer = iSinkronizer;
 
-    public SinkronFragment() {
-        // Required empty public constructor
+        //interface menyatakan mulai
+        iSinkronizer.onBegin();
     }
 
+    public void doSinkron(){
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        //init cek internet
+        //cek apakah ada internet atau tidak?
         internetChecker = new InternetChecker();
+        if (internetChecker.haveNetwork(context)){
 
-        //init session, untuk menampilkan tanggal di tvLastSync
-        sessionManager=new SessionManager(getActivity());
+            //jika ada internet, langsungkan sinkron
 
+            //interface menyatakan sedang dalam progress
+            iSinkronizer.onProgress();
 
-        //init controller
-        sinkronInsertKategoriController =new SinkronInsertKategoriController(getActivity(),this);
-        sinkronUpdateKategoriController =new SinkronUpdateKategoriController(getActivity(),this);
-        sinkronDeleteKategoriController =new SinkronDeleteKategoriController(getActivity(),this);
+            //init session, untuk menampilkan tanggal di tvLastSync
+            sessionManager=new SessionManager(context);
 
-        sinkronInsertBrandController    = new SinkronInsertBrandController(getActivity(),this);
-        sinkronUpdateBrandController    = new SinkronUpdateBrandController(getActivity(),this);
-        sinkronDeleteBrandController    = new SinkronDeleteBrandController(getActivity(),this);
+            //init controller
+            sinkronInsertKategoriController =new SinkronInsertKategoriController(context,this);
+            sinkronUpdateKategoriController =new SinkronUpdateKategoriController(context,this);
+            sinkronDeleteKategoriController =new SinkronDeleteKategoriController(context,this);
 
-        sinkronInsertUnitController     = new SinkronInsertUnitController(getActivity(),this);
-        sinkronUpdateUnitController     = new SinkronUpdateUnitController(getActivity(),this);
-        sinkronDeleteUnitController     = new SinkronDeleteUnitController(getActivity(),this);
+            sinkronInsertBrandController    = new SinkronInsertBrandController(context,this);
+            sinkronUpdateBrandController    = new SinkronUpdateBrandController(context,this);
+            sinkronDeleteBrandController    = new SinkronDeleteBrandController(context,this);
 
-        sinkronInsertProdukController   = new SinkronInsertProdukController(getActivity(),this);
-        sinkronUpdateProdukController   = new SinkronUpdateProdukController(getActivity(), this);
-        sinkronDeleteProdukController   = new SinkronDeleteProdukController(getActivity(), this);
+            sinkronInsertUnitController     = new SinkronInsertUnitController(context,this);
+            sinkronUpdateUnitController     = new SinkronUpdateUnitController(context,this);
+            sinkronDeleteUnitController     = new SinkronDeleteUnitController(context,this);
 
-        sinkronInsertJualController     = new SinkronInsertJualController(getActivity(),this);
-        sinkronInsertBeliController     = new SinkronInsertBeliController(getActivity(), this);
+            sinkronInsertProdukController   = new SinkronInsertProdukController(context,this);
+            sinkronUpdateProdukController   = new SinkronUpdateProdukController(context, this);
+            sinkronDeleteProdukController   = new SinkronDeleteProdukController(context, this);
 
-        kategoriController              = new KategoriController(getActivity(),this);
-        brandController                 = new BrandController(getActivity(), this);
-        unitController                  = new UnitController(getActivity(), this);
-        barangController                = new BarangController(this,getActivity());
+            sinkronInsertJualController     = new SinkronInsertJualController(context,this);
+            sinkronInsertBeliController     = new SinkronInsertBeliController(context, this);
 
-//        stokController                  = new StokController(this, getActivity());
+            kategoriController              = new KategoriController(context,this);
+            brandController                 = new BrandController(context, this);
+            unitController                  = new UnitController(context, this);
+            barangController                = new BarangController(this,context);
 
-        getJualMasterController         = new GetJualMasterController(getActivity(),this);
-        getJualDetailController         = new GetJualDetailController(getActivity(),this);
-        getBeliMasterController         = new GetBeliMasterController(getActivity(), this);
-        getBeliDetailController         = new GetBeliDetailController(getActivity(), this);
+//            stokController                  = new StokController(this, context);
 
+            getJualMasterController         = new GetJualMasterController(context, this);
 
-        //tampilkan tanggal terakhir sync
-        tvLastSync=(TextView)getActivity().findViewById(R.id.tvLastSync);
-        this.applyFontRegularToTextView(tvLastSync);
-        tvLastSync.setText(getActivity().getResources().getString(R.string.sinkron_data_terakhir) + sessionManager.getLastSync());
+            getJualDetailController         = new GetJualDetailController(context, this);
 
-        //tombol untuk panggil activity pengaturan sinkon
-        btnPengaturan=(Button)getActivity().findViewById(R.id.btnPengaturan);
-        this.applyFontBoldToButton(btnPengaturan);
-        btnPengaturan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), PengaturanSinkronActivity.class);
-                startActivity(intent);
-            }
-        });
+            getBeliMasterController         = new GetBeliMasterController(context, this);
+
+            getBeliDetailController         = new GetBeliDetailController(context, this);
 
 
-        btnSinkron=(Button)getActivity().findViewById(R.id.btnSinkron);
-        this.applyFontBoldToButton(btnSinkron);
-        btnSinkron.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //sinkron mulai dari insert kategori dulu
-                syncInsertKategori();
-            }
-        });
-
-        btnMatikanAlarm = (Button)getActivity().findViewById(R.id.btnMatikanAlarm);
-        this.applyFontBoldToButton(btnMatikanAlarm);
-        btnMatikanAlarm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PackageManager pm  = getActivity().getPackageManager();
-                ComponentName componentName = new ComponentName(getActivity(), AlarmReceiver.class);
-                pm.setComponentEnabledSetting(componentName,PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                        PackageManager.DONT_KILL_APP);
-                Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.alarm_dimatikan), Toast.LENGTH_LONG).show();
-            }
-        });
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sinkron, container, false);
-
-
-
-    }
-
-    void syncInsertKategori(){
-
-        //cek dulu apakah ada internet atau tidak?
-        if (internetChecker.haveNetwork(getActivity())){
-
-            //tampikan sweet dialog
-            //init sweet dialog
-            sweetAlertDialog = new SweetAlertDialog(getActivity(),SweetAlertDialog.PROGRESS_TYPE);
-            sweetAlertDialog.setTitleText(getActivity().getResources().getString(R.string.now_loading));
-            sweetAlertDialog.setCancelable(false);
-
-            sweetAlertDialog.show();
-
-            //tembak API
+            //mulai sinkron
             sinkronInsertKategoriController.insert_kategori();
+
         }else{
 
-            //jika tidak ada internet, munculkan pesan
-            this.showToast(getActivity().getResources().getString(R.string.tidak_ada_koneksi_internet));
+            //jika tidak ada internet, loncat ke interface onNoInternet()
+            iSinkronizer.onNoInternet();
         }
 
-
     }
-
     @Override
     public void onSinkronAddKategoriSuccess(SinkronResponse sinkronResponse) {
 
@@ -308,14 +207,17 @@ public class SinkronFragment extends BaseFragment implements
 
     @Override
     public void onSinkronAddKategoriError(String error) {
-
-        abortProses(error);
+//        this.showToast(error);
 //        sinkronUpdateKategoriController.update_kategori();
+
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
     public void onSinkronUpdateKategoriSuccess(SinkronResponse sinkronResponse) {
-       //lanjutkan delete
+        //lanjutkan delete
         sinkronDeleteKategoriController.delete_kategori();
     }
 
@@ -323,9 +225,10 @@ public class SinkronFragment extends BaseFragment implements
     public void onSinkronUpdateKategoriError(String error) {
         //lanjutkan delete
 //        sinkronDeleteKategoriController.delete_kategori();
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
 
-
-        abortProses(error);
     }
 
     @Override
@@ -338,8 +241,9 @@ public class SinkronFragment extends BaseFragment implements
     public void onSinkronDeleteKategoriError(String error) {
 
 //        sinkronInsertBrandController.insert_brand();
-
-        abortProses(error);
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -353,7 +257,9 @@ public class SinkronFragment extends BaseFragment implements
         //lanjutkan ke sinkron update brand
 //        sinkronUpdateBrandController.update_brand();
 
-        abortProses(error);
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -367,7 +273,9 @@ public class SinkronFragment extends BaseFragment implements
         //lanjutkan ke sinkron delete brand
 //        sinkronDeleteBrandController.delete_brand();
 
-        abortProses(error);
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -381,8 +289,9 @@ public class SinkronFragment extends BaseFragment implements
     public void onSinkronDeleteBrandError(String error) {
         //lanjut ke sync insert unit
 //        sinkronInsertUnitController.insert_unit();
-
-        abortProses(error);
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -396,7 +305,9 @@ public class SinkronFragment extends BaseFragment implements
 //lanjut ke sync update unit
 //        sinkronUpdateUnitController.update_unit();
 
-        abortProses(error);
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -410,21 +321,24 @@ public class SinkronFragment extends BaseFragment implements
         //lanjut ke sync delete unit
 //        sinkronDeleteUnitController.delete_unit();
 
-        abortProses(error);
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
     public void onSinkronDeleteUnitSuccess(SinkronResponse sinkronResponse) {
         //lanjut ke sync insert produk
-       sinkronInsertProdukController.insert_produk();
+        sinkronInsertProdukController.insert_produk();
     }
 
     @Override
     public void onSinkronDeleteUnitError(String error) {
         //lanjut ke sync insert produk
 //        sinkronInsertProdukController.insert_produk();
-
-        abortProses(error);
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -438,7 +352,9 @@ public class SinkronFragment extends BaseFragment implements
         //lanjut ke sync update produk
 //        sinkronUpdateProdukController.update_produk();
 
-        abortProses(error);
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -452,7 +368,9 @@ public class SinkronFragment extends BaseFragment implements
         //lanjut ke sync delete produk
 //        sinkronDeleteProdukController.delete_produk();
 
-        abortProses(error);
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -466,7 +384,9 @@ public class SinkronFragment extends BaseFragment implements
         //lanjut ke sync jual
 //        sinkronInsertJualController.insert_jual();
 
-        abortProses(error);
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -480,7 +400,9 @@ public class SinkronFragment extends BaseFragment implements
         //lanjutkan ke sync pembelian
 //        sinkronInsertBeliController.insert_beli();
 
-        abortProses(error);
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -494,7 +416,9 @@ public class SinkronFragment extends BaseFragment implements
         //lanjut ke get kategori
 //        kategoriController.getKategoriList();
 
-        abortProses(error);
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -508,7 +432,9 @@ public class SinkronFragment extends BaseFragment implements
         //lanjut ke get brand
 //        brandController.getBrandList();
 
-        abortProses(error);
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -522,15 +448,16 @@ public class SinkronFragment extends BaseFragment implements
         //lanjut ke get unit
 //        unitController.getUnitList();
 
-        abortProses(error);
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
     public void onSuccess(BarangResult barangResult, List<Item> items) {
-        //lanjut ke sync stok
+        //lanjut ke sync penjualan master
 //        stokController.getStok();
         getJualMasterController.getJualMaster();
-
     }
 
     @Override
@@ -538,7 +465,9 @@ public class SinkronFragment extends BaseFragment implements
         //lanjut ke sync stok
 //        stokController.getStok();
 
-        abortProses(error);
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
     @Override
@@ -552,30 +481,39 @@ public class SinkronFragment extends BaseFragment implements
         //lanjut ke get produk
 //        barangController.getBarang();
 
-        abortProses(error);
+        //kalau sinkron ini gagal, langsung abort!!
+        //interface sudah selesai
+        iSinkronizer.onFinish(error);
     }
 
 //    @Override
 //    public void onStokSuccess(StokModel stokModel, List<Stok> stokOffline) {
-//       //lanjut ke get jual controller
-//        //master
+//
+//        //simpan tanggal sekarang di session
+////        sessionManager.createLasySync();
+////        Toast.makeText(context, "Sinkron OK", Toast.LENGTH_SHORT).show();
+//
+//        //interface sudah selesai
+////        iSinkronizer.onFinish(context.getResources().getString(R.string.proses_sinkron_telah_selesai));
+//
+//        //lanjut ke get jual master
 //        getJualMasterController.getJualMaster();
 //    }
 //
 //    @Override
 //    public void onStokError(String error, List<Stok> stoksOffline) {
-//        //this.showToast(error);
 //
-//        abortProses(error);
+//        //simpan tanggal di session
+////        sessionManager.createLasySync();
+//
+//        //interface sudah selesai
+//        iSinkronizer.onFinish(error);
 //    }
-
-
 
     @Override
     public void onGetJualMasterSuccess(MasterModel masterModel) {
-
         if (masterModel.isStatus()){
-            //lanjut ke get jual detai
+
             getJualDetailController.getJualDetail();
         }
     }
@@ -583,64 +521,44 @@ public class SinkronFragment extends BaseFragment implements
     @Override
     public void onGetJualMasterError(String error) {
 
-        abortProses(error);
-    }
-
-
-    void abortProses(String error){
-
-        tvLastSync.setText(getActivity().getResources().getString(R.string.sinkron_data_terakhir) + sessionManager.getLastSync());
-
-        sessionManager.createLasySync();
-        sweetAlertDialog.dismissWithAnimation();
-
+        iSinkronizer.onFinish(error);
     }
 
     @Override
     public void onGetJualDetailSuccess(GetDetailModel getDetailModel) {
-        //lanjut ke sinkron pembelian master
-        getBeliMasterController.getBeliMaster();
+        if (getDetailModel.isStatus()){
+
+            //lanjut ke sinkron pembelian master
+            getBeliMasterController.getBeliMaster();
+        }
     }
 
     @Override
     public void onGetJualDetailError(String error) {
-        abortProses(error);
+
+        iSinkronizer.onFinish(error);
     }
 
     @Override
     public void onGetBeliMasterSuccess(GetBeliMasterModel getBeliMasterModel) {
 
         if (getBeliMasterModel.getStatus()){
-
-            //lanjut ke pembelian detail
             getBeliDetailController.getBeliDetail();
         }
-
     }
 
     @Override
     public void onGetBeliMasterError(String error) {
-
-        abortProses(error);
+        iSinkronizer.onFinish(error);
     }
 
     @Override
     public void onGetBeliDetailSuccess(GetBeliDetailModel getBeliDetailModel) {
-        if (getBeliDetailModel.getStatus()){
-            //this.showToast(stokModel.getMessage());
-            sweetAlertDialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
-            sweetAlertDialog.setTitleText(getActivity().getResources().getString(R.string.sinkron_berhasil));
-            //sweetAlertDialog.dismissWithAnimation();
 
-            //simpan tanggal sekarang di session
-            sessionManager.createLasySync();
-            tvLastSync.setText(getActivity().getResources().getString(R.string.sinkron_data_terakhir) + sessionManager.getLastSync());
-
-        }
     }
 
     @Override
     public void onGetBeliDetailError(String error) {
-        abortProses(error);
+        iSinkronizer.onFinish(error);
     }
 }

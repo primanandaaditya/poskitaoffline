@@ -217,13 +217,6 @@ public class BarangController implements IBarangRequest {
                 iBarangResult.onError("", itemHelper.getAllItem());
             }
 
-
-
         }
-
-
-
     }
-
-
 }
