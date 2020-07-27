@@ -103,7 +103,7 @@ public class ItemsPaymentResultActivity extends BaseActivity implements IAddTran
     int pairedBT;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_results);
         context                     = this;
@@ -169,9 +169,10 @@ public class ItemsPaymentResultActivity extends BaseActivity implements IAddTran
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent homeActivity = new Intent(ItemsPaymentResultActivity.this, MainActivity.class);
-                startActivity(homeActivity);
-                finish();
+//                Intent homeActivity = new Intent(ItemsPaymentResultActivity.this, MainActivity.class);
+//                startActivity(homeActivity);
+//                finish();
+                save();
             }
         });
 
@@ -798,6 +799,9 @@ public class ItemsPaymentResultActivity extends BaseActivity implements IAddTran
 
         //cetak 'selamat belanja kembali'
         msg+=StringUtil.center(getResources().getString(R.string.selamat_belanja_kembali),32);
+
+        //cetak 'POWERED BY POSKITA'
+        msg+=StringUtil.center(getResources().getString(R.string.powered_by_poskita),32);
 
         //diberi escapa, spy kasih mudah nyobek struk
         msg+="\n";

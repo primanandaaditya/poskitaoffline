@@ -27,7 +27,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.pos.QrGopayActivity"></activity>
+        <activity android:name=".activities.propinsi.PilihPropinsiActivity"></activity>
+        <activity android:name=".activities.pos.QrGopayActivity" />
         <activity android:name=".activities.registrasi.RegistrasiSuksesActivity" />
         <activity android:name=".activities.registrasi.RegistrasiActivity" />
         <activity android:name=".activities.register.RegisterActivity" />

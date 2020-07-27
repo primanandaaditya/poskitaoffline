@@ -6,7 +6,9 @@ import com.kitadigi.poskita.MainActivity;
 import com.kitadigi.poskita.base.BaseActivity;
 import com.kitadigi.poskita.dao.printer.PrinterHelper;
 import com.kitadigi.poskita.printer.BluetoothService;
+import com.kitadigi.poskita.printer.Command;
 import com.kitadigi.poskita.printer.DeviceListActivity;
+import com.kitadigi.poskita.printer.PrintPicture;
 import com.kitadigi.poskita.util.Constants;
 import com.kitadigi.poskita.util.SessionManager;
 
@@ -18,6 +20,9 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -339,6 +344,10 @@ public class PrintPreviewActivity extends BaseActivity {
         String lang = getString(R.string.strLang);
         if((lang.compareTo("en")) == 0){
 
+            //cetak gambar logo dulu
+            Print_BMP();
+
+            //cetak string struk
             String data = struk;
             SendDataByte(PrinterCommand.POS_Print_Text(data, CHINESE, 0, 0, 0, 0));
             SendDataByte(PrinterCommand.POS_Set_Cut(1));
@@ -517,5 +526,39 @@ public class PrintPreviewActivity extends BaseActivity {
 
     }
 
+
+    private void Print_BMP(){
+
+        Bitmap icon = BitmapFactory.decodeResource(getResources(),
+                R.drawable.ic_launcher);
+
+        //	byte[] buffer = PrinterCommand.POS_Set_PrtInit();
+//        Bitmap mBitmap = ((BitmapDrawable) imageViewPicture.getDrawable())
+//                .getBitmap();
+        int nMode = 0;
+        int nPaperWidth = 384;
+//        if(width_58mm.isChecked())
+//            nPaperWidth = 384;
+//        else if (width_80.isChecked())
+//            nPaperWidth = 576;
+        if(icon != null)
+        {
+            /**
+             * Parameters:
+             * mBitmap  要打印的图片
+             * nWidth   打印宽度（58和80）
+             * nMode    打印模式
+             * Returns: byte[]
+             */
+            byte[] data = PrintPicture.POS_PrintBMP(icon, nPaperWidth, nMode);
+            //	SendDataByte(buffer);
+            SendDataByte(Command.ESC_Init);
+            SendDataByte(Command.LF);
+            SendDataByte(data);
+            SendDataByte(PrinterCommand.POS_Set_PrtAndFeedPaper(30));
+            SendDataByte(PrinterCommand.POS_Set_Cut(1));
+            SendDataByte(PrinterCommand.POS_Set_PrtInit());
+        }
+    }
 
 }

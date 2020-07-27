@@ -1,6 +1,8 @@
 package com.kitadigi.poskita.activities.registrasi;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kitadigi.poskita.R;
+import com.kitadigi.poskita.activities.propinsi.PilihPropinsiActivity;
 import com.kitadigi.poskita.base.BaseActivity;
 import com.kitadigi.poskita.activities.registrasi.RegistrasiActivityContract.GetRegistrasiResultIntractor;
 import com.kitadigi.poskita.activities.registrasi.RegistrasiActivityContract.RegistrasiView;
@@ -23,12 +26,15 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
 
     TextView tv_nav_header,tvEmail,tvNama,tvTelepon,
-    tvJenisToko,tvNamaToko,tvAlamatToko,tvAlamatPemilik,tvKeterangan;
+    tvJenisToko,tvNamaToko,tvAlamatToko,tvAlamatPemilik,tvKeterangan,
+    tvPropinsi,tvKota,tvKecamatan;
 
     EditText etEmail,etNama,etTelepon,etJenisToko,
-    etNamaToko,etAlamatToko,etAlamatPemilik,etKeterangan;
+    etNamaToko,etAlamatToko,etAlamatPemilik,etKeterangan,
+    etPropinsi,etKota,etKecamatan;
 
     Button btnSave;
+    Integer Pilih_Propinsi = 1;
 
     ImageView iv_back;
 
@@ -59,6 +65,9 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
         tvAlamatToko=(TextView)findViewById(R.id.tv_alamat_toko);
         tvAlamatPemilik=(TextView)findViewById(R.id.tv_alamat_pemilik);
         tvKeterangan=(TextView)findViewById(R.id.tv_keterangan);
+        tvPropinsi=(TextView)findViewById(R.id.tv_propinsi);
+        tvKecamatan=(TextView)findViewById(R.id.tv_kecamatan);
+        tvKota=(TextView)findViewById(R.id.tv_kota);
 
         etEmail=(EditText)findViewById(R.id.et_email);
         etNama=(EditText)findViewById(R.id.et_nama);
@@ -68,6 +77,9 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
         etAlamatToko=(EditText)findViewById(R.id.et_alamat_toko);
         etAlamatPemilik=(EditText)findViewById(R.id.et_alamat_pemilik);
         etKeterangan=(EditText)findViewById(R.id.et_keterangan);
+        etPropinsi = (EditText)findViewById(R.id.et_propinsi);
+        etKecamatan=(EditText)findViewById(R.id.et_kecamatan);
+        etKota=(EditText)findViewById(R.id.et_kota);
 
 
         this.applyFontBoldToTextView(tv_nav_header);
@@ -79,6 +91,9 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
         this.applyFontRegularToTextView(tvNama);
         this.applyFontRegularToTextView(tvNamaToko);
         this.applyFontRegularToTextView(tvTelepon);
+        this.applyFontRegularToTextView(tvPropinsi);
+        this.applyFontRegularToTextView(tvKota);
+        this.applyFontRegularToTextView(tvKecamatan);
 
         this.applyFontRegularToTextView(etAlamatPemilik);
         this.applyFontRegularToTextView(etAlamatToko);
@@ -88,9 +103,32 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
         this.applyFontRegularToTextView(etNama);
         this.applyFontRegularToTextView(etNamaToko);
         this.applyFontRegularToTextView(etTelepon);
+        this.applyFontRegularToEditText(etPropinsi);
+        this.applyFontRegularToEditText(etKota);
+        this.applyFontRegularToEditText(etKecamatan);
 
         this.applyFontBoldToButton(btnSave);
 
+
+        //pilih propinsi
+        etPropinsi.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus){
+                    Intent intent = new Intent(RegistrasiActivity.this, PilihPropinsiActivity.class);
+                    startActivityForResult(intent,Pilih_Propinsi);
+                }
+
+            }
+        });
+
+        etPropinsi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegistrasiActivity.this, PilihPropinsiActivity.class);
+                startActivityForResult(intent,Pilih_Propinsi);
+            }
+        });
 
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,6 +151,22 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
 
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode== Pilih_Propinsi){
+
+            if (resultCode== Activity.RESULT_OK){
+
+                String nama_propinsi = data.getStringExtra("propinsi");
+
+
+            }
+
+        }
+    }
+
+    @Override
     public void doRegistrasi() {
 
         //tampung edittext dalam variabel
@@ -124,6 +178,9 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
         String nama = etNama.getText().toString();
         String namaToko = etNamaToko.getText().toString();
         String telepon = etTelepon.getText().toString();
+        String propinsi = etPropinsi.getText().toString();
+        String kecamatan = etKecamatan.getText().toString();
+        String kota = etKota.getText().toString();
 
 
         //jika masih ada yang kosong
@@ -132,7 +189,10 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
                 jenisToko.matches("") ||
                 nama.matches("") ||
                 namaToko.matches("") ||
-                telepon.matches("")
+                telepon.matches("") ||
+                propinsi.matches("") ||
+                kecamatan.matches("") ||
+                kota.matches("")
         ){
             this.showToast(getResources().getString(R.string.masih_ada_yang_kosong));
         }else{

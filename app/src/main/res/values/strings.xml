@@ -69,12 +69,12 @@
     <string name="total_item_penjualan" translatable="false">Total Item Penjualan</string>
     <string name="izin_akses_kamera_diperlukan" translatable="false">Izin akses kamera diperlukan</string>
     <string name="deskripsi_brand">Deskripsi brand</string>
-    <string name="alamat_pemilik">Alamat pemilik</string>
+    <string name="alamat_pemilik" translatable="false">Alamat pemilik (wajib diisi)</string>
     <string name="data_tidak_dapat_dihapus" translatable="false">Data tidak dapat dihapus, karena sudah dipakai</string>
-    <string name="alamat_toko" translatable="false">Alamat toko</string>
-    <string name="jenis_toko" translatable="false">Jenis toko</string>
+    <string name="alamat_toko" translatable="false">Alamat toko (wajib diisi)</string>
+    <string name="jenis_toko" translatable="false">Jenis toko (wajib diisi)</string>
     <string name="email" translatable="false">Email</string>
-    <string name="nama_toko" translatable="false">Nama toko</string>
+    <string name="nama_toko" translatable="false">Nama toko (wajib diisi)</string>
     <string name="telepon" translatable="false">Telepon</string>
     <string name="nama_brand_harus_diisi">Nama brand harus diisi</string>
     <string name="insert_ok">Data telah ditambahkan</string>
@@ -106,6 +106,7 @@
     <string name="tambah_kategori">Tambah kategori</string>
     <string name="tambah_produk" translatable="false">Tambah produk</string>
     <string name="tambah_brand">Tambah brand</string>
+    <string name="pilih_propinsi" translatable="false">Pilih propinsi</string>
     <string name="scan_qrcode_gopay" translatable="false">Scan Kode QR Gopay</string>
     <string name="pilih_barang" translatable="false">Pilih barang</string>
     <string name="grafik_penjualan_harian" translatable="false">Grafik Penjualan Harian</string>
@@ -164,7 +165,7 @@
     <string name="remark_payment_change_amount">Kembalian</string>
     <string name="remark_payment_success">Pembayaran Sukses</string>
     <string name="data_tersimpan">Data tersimpan</string>
-    <string name="masih_ada_yang_kosong">Masih ada yang harus diisi</string>
+    <string name="masih_ada_yang_kosong">Harap mengisi semua kolom yang ada</string>
     <string name="remark_items_add">Tambah Items</string>
     <string name="remark_history_remark">History</string>
     <string name="remark_app_filter_riwayat_header">Filter Report</string>
@@ -300,6 +301,7 @@
     <string name="harga" translatable="false">Harga</string>
     <string name="tunai" translatable="false">Tunai </string>
     <string name="terima_kasih" translatable="false">TERIMA KASIH</string>
+    <string name="powered_by_poskita" translatable="false">POWERED BY POSKITA</string>
     <string name="selamat_belanja_kembali" translatable="false">SELAMAT BELANJA KEMBALI</string>
     <string name="sinkron_berhasil" translatable="false">Sinkron berhasil</string>
     <string name="sinkron_data_terakhir" translatable="false">Sinkron data terakhir : </string>

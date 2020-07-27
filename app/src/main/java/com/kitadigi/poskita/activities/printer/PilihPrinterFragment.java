@@ -185,8 +185,9 @@ public class PilihPrinterFragment extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
 
-        btAdapter.cancelDiscovery();
+
         try {
+            btAdapter.cancelDiscovery();
             getActivity().unregisterReceiver(bluetoothState);
             getActivity().unregisterReceiver(discoveryResult);
         }catch (Exception e){

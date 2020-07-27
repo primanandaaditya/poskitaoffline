@@ -454,7 +454,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                         CURRENT_TAG = TAG_REPORTS;
                         break;
                     case R.id.nav_printer:
-                        Intent intent = new Intent(MainActivity.this, CobaActivity.class);
+                        Intent intent = new Intent(MainActivity.this, PrintingActivity.class);
                         startActivity(intent);
                         navItemIndex = 7;
                         CURRENT_TAG = TAG_POS;

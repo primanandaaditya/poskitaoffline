@@ -1,5 +1,7 @@
 package com.kitadigi.poskita.util;
 
+import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.media.Image;
 import android.text.Editable;
@@ -16,6 +18,8 @@ import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.kitadigi.poskita.R;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -27,6 +31,24 @@ import java.util.List;
 import java.util.Locale;
 
 public class StringUtil {
+
+    public static String loadJSONFromAsset(Context context, String jsonFileName) {
+        String json = null;
+        InputStream is = null;
+        try {
+            AssetManager manager = context.getAssets();
+            is = manager.open(jsonFileName);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+    }
 
     public static String getFileNameFromURL(String fileName){
 

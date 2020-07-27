@@ -56,7 +56,7 @@
                 <TextView
                     android:layout_marginStart="@dimen/dimen_10"
                     android:layout_marginEnd="@dimen/dimen_10"
-                    android:text="@string/nama"
+                    android:text="Nama (wajib diisi)"
                     android:layout_marginTop="@dimen/dimen_10"
                     android:id="@+id/tv_nama"
                     android:layout_width="match_parent"
@@ -82,7 +82,6 @@
 
 
 
-
                 <TextView
                     android:id="@+id/tv_alamat_pemilik"
                     android:layout_marginStart="@dimen/dimen_10"
@@ -97,10 +96,106 @@
 
                 <EditText android:id="@+id/et_alamat_pemilik"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dimen_5"
+                    android:gravity="left|top"
+                    android:textColor="@color/colorRed"
+                    android:hint="@string/alamat_pemilik"
+                    android:minLines="6"
+                    android:maxLines="10"
+                    android:textSize="@dimen/text_12"
+                    android:layout_gravity="center"
+                    android:inputType="textMultiLine"
+                    android:imeOptions="actionNext"
+                    android:background="@drawable/button_rounded_white"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:textColorHint="@color/colorRed"
+                    />
+
+
+
+
+                <TextView
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:text="Propinsi (wajib diisi)"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:id="@+id/tv_propinsi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGreyText_2"
+                    android:textSize="@dimen/text_9" />
+
+                <EditText android:id="@+id/et_propinsi"
+                    android:editable="false"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen_40"
                     android:padding="@dimen/dimen_5"
                     android:textColor="@color/colorRed"
-                    android:hint="@string/alamat_pemilik"
+                    android:hint="Propinsi"
+                    android:textSize="@dimen/text_12"
+                    android:layout_gravity="center"
+                    android:inputType="textCapWords"
+                    android:imeOptions="actionNext"
+                    android:background="@drawable/button_rounded_white"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:textColorHint="@color/colorRed"
+                    />
+
+
+
+                <TextView
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:text="Kota (wajib diisi)"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:id="@+id/tv_kota"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGreyText_2"
+                    android:textSize="@dimen/text_9" />
+
+                <EditText android:id="@+id/et_kota"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_40"
+                    android:padding="@dimen/dimen_5"
+                    android:textColor="@color/colorRed"
+                    android:hint="Kota"
+                    android:textSize="@dimen/text_12"
+                    android:layout_gravity="center"
+                    android:inputType="textCapWords"
+                    android:imeOptions="actionNext"
+                    android:background="@drawable/button_rounded_white"
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:textColorHint="@color/colorRed"
+                    />
+
+
+
+                <TextView
+                    android:layout_marginStart="@dimen/dimen_10"
+                    android:layout_marginEnd="@dimen/dimen_10"
+                    android:text="Kecamatan (wajib diisi)"
+                    android:layout_marginTop="@dimen/dimen_10"
+                    android:id="@+id/tv_kecamatan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorGreyText_2"
+                    android:textSize="@dimen/text_9" />
+
+                <EditText android:id="@+id/et_kecamatan"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_40"
+                    android:padding="@dimen/dimen_5"
+                    android:textColor="@color/colorRed"
+                    android:hint="Kecamatan"
                     android:textSize="@dimen/text_12"
                     android:layout_gravity="center"
                     android:inputType="textCapWords"
@@ -116,11 +211,12 @@
 
 
 
+
                 <TextView
                     android:id="@+id/tv_telepon"
                     android:layout_marginStart="@dimen/dimen_10"
                     android:layout_marginEnd="@dimen/dimen_10"
-                    android:text="@string/telepon"
+                    android:text="Nomor telepon (wajib diisi)"
                     android:layout_marginTop="@dimen/dimen_10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -136,7 +232,7 @@
                     android:hint="@string/telepon"
                     android:textSize="@dimen/text_12"
                     android:layout_gravity="center"
-                    android:inputType="textCapWords"
+                    android:inputType="number"
                     android:imeOptions="actionNext"
                     android:background="@drawable/button_rounded_white"
                     android:layout_marginStart="@dimen/dimen_10"
@@ -193,13 +289,16 @@
 
                 <EditText android:id="@+id/et_alamat_toko"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen_40"
+                    android:layout_height="wrap_content"
                     android:padding="@dimen/dimen_5"
                     android:textColor="@color/colorRed"
                     android:hint="@string/alamat_toko"
+                    android:gravity="left|top"
                     android:textSize="@dimen/text_12"
                     android:layout_gravity="center"
-                    android:inputType="textCapWords"
+                    android:inputType="textMultiLine"
+                    android:maxLines="10"
+                    android:minLines="6"
                     android:imeOptions="actionNext"
                     android:background="@drawable/button_rounded_white"
                     android:layout_marginStart="@dimen/dimen_10"
@@ -243,7 +342,7 @@
                     android:id="@+id/tv_email"
                     android:layout_marginStart="@dimen/dimen_10"
                     android:layout_marginEnd="@dimen/dimen_10"
-                    android:text="@string/email"
+                    android:text="Email (wajib diisi)"
                     android:layout_marginTop="@dimen/dimen_10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -259,7 +358,7 @@
                     android:hint="@string/email"
                     android:textSize="@dimen/text_12"
                     android:layout_gravity="center"
-                    android:inputType="textCapWords"
+                    android:inputType="textEmailAddress"
                     android:imeOptions="actionNext"
                     android:background="@drawable/button_rounded_white"
                     android:layout_marginStart="@dimen/dimen_10"
