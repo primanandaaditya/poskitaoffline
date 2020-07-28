@@ -54,24 +54,29 @@ public class PilihPropinsiActivity extends BaseActivity implements IPropinsiResu
 
 
     @Override
-    public void onGetPropinsiSuccess(List<String> strings) {
-        listView.setAdapter(new ArrayAdapter<String>(this, R.layout.daerah, R.id.label, strings ));
+    public void onGetPropinsiSuccess(PropinsiModel propinsiModel) {
+
+        PropinsiAdapter propinsiAdapter = new PropinsiAdapter(PilihPropinsiActivity.this, propinsiModel);
+        listView.setAdapter(propinsiAdapter);
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-//                Datum datum=
-//
-//
-//                Intent intent = new Intent();
-//
-//                intent.putExtra("nama_propinsi", datum.getProvince());
-//                intent.putExtra("id_propinsi", datum.getProvinceId());
-//
-//                ((Activity)view.getContext()).setResult(Activity.RESULT_OK, intent);
-//                ((Activity) view.getContext()).finish();
+
+                //jika diklik, maka akan mengirimkan nama propinsi dan idpropinsi
+                Datum datum = (Datum)parent.getAdapter().getItem(position);
+
+                Intent intent = new Intent();
+
+                intent.putExtra("nama_propinsi", datum.getProvince());
+                intent.putExtra("id_propinsi", datum.getProvince_id());
+                Log.d("nama_propinsi", datum.getProvince());
+                Log.d("id_propinsi", datum.getProvince_id());
+
+                ((Activity)view.getContext()).setResult(Activity.RESULT_OK, intent);
+                ((Activity) view.getContext()).finish();
 
             }
         });

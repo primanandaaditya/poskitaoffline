@@ -32,12 +32,8 @@ public class PropinsiController implements IPropinsiRequest {
             Log.d("json", isiPropinsi);
             PropinsiModel propinsiModel = gson.fromJson(isiPropinsi, PropinsiModel.class);
 
-            //looping untuk nampung list propinsi
-            for (Datum datum: propinsiModel.getData()){
-                propinsi.add(datum.getProvince());
-            }
 
-            result.onGetPropinsiSuccess(propinsi);
+            result.onGetPropinsiSuccess(propinsiModel);
 
         }catch (Exception e){
             result.onGetPropinsiError(e.getLocalizedMessage());

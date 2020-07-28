@@ -41,6 +41,9 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
     Presenter presenter;
     SweetAlertDialog sweetAlertDialog;
 
+    String nama_propinsi,nama_kecamatan,nama_kota;
+    Integer id_propinsi,id_kecamatan,id_kota;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,14 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
     }
 
     void findID(){
+
+        //waktu create, buat default untuk var wilayah
+        id_kecamatan=0;
+        id_kota = 0;
+        id_propinsi = 0;
+        nama_kecamatan="";
+        nama_kota="";
+        nama_propinsi="";
 
         btnSave=(Button)findViewById(R.id.btn_save);
 
@@ -154,13 +165,19 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        //jika dialog pilih propinsi dipilih dan OK
         if (requestCode== Pilih_Propinsi){
 
             if (resultCode== Activity.RESULT_OK){
 
-                String nama_propinsi = data.getStringExtra("propinsi");
+                //get variabel dari propinsi
+                nama_propinsi = data.getStringExtra("nama_propinsi");
+                id_propinsi = Integer.parseInt(data.getStringExtra("id_propinsi"));
 
+                //nama propinsi ditaruh di edittext
+                etPropinsi.setText(nama_propinsi);
 
+                Log.d("propinsi", nama_propinsi + id_propinsi.toString());
             }
 
         }

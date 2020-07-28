@@ -5,7 +5,7 @@ import java.util.Map;
 public class Datum {
 
     private String province;
-    private String provinceId;
+    private String province_id;
 
     public String getProvince() {
         return province;
@@ -15,13 +15,11 @@ public class Datum {
         this.province = province;
     }
 
-    public String getProvinceId() {
-        return provinceId;
+    public String getProvince_id() {
+        return province_id;
     }
 
-    public void setProvinceId(String provinceId) {
-        this.provinceId = provinceId;
+    public void setProvince_id(String province_id) {
+        this.province_id = province_id;
     }
-
-
 }
