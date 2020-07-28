@@ -14,12 +14,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kitadigi.poskita.R;
+import com.kitadigi.poskita.activities.kecamatan.KecamatanActivity;
+import com.kitadigi.poskita.activities.kota.KotaActivity;
 import com.kitadigi.poskita.activities.propinsi.PilihPropinsiActivity;
 import com.kitadigi.poskita.base.BaseActivity;
 import com.kitadigi.poskita.activities.registrasi.RegistrasiActivityContract.GetRegistrasiResultIntractor;
 import com.kitadigi.poskita.activities.registrasi.RegistrasiActivityContract.RegistrasiView;
 import com.kitadigi.poskita.activities.registrasi.RegistrasiActivityContract.Presenter;
 import com.kitadigi.poskita.base.BaseResponse;
+import com.kitadigi.poskita.util.StringUtil;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -35,6 +38,8 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
 
     Button btnSave;
     Integer Pilih_Propinsi = 1;
+    Integer Pilih_Kota = 2;
+    Integer Pilih_Kecamatan = 3;
 
     ImageView iv_back;
 
@@ -126,8 +131,7 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus){
-                    Intent intent = new Intent(RegistrasiActivity.this, PilihPropinsiActivity.class);
-                    startActivityForResult(intent,Pilih_Propinsi);
+                    pilihPropinsi();
                 }
 
             }
@@ -136,8 +140,41 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
         etPropinsi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegistrasiActivity.this, PilihPropinsiActivity.class);
-                startActivityForResult(intent,Pilih_Propinsi);
+              pilihPropinsi();
+            }
+        });
+
+        etKota.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+
+                if (hasFocus){
+                  pilihKota();
+                }
+
+            }
+        });
+
+        etKota.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pilihKota();
+            }
+        });
+
+        etKecamatan.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus){
+                    pilihKecamatan();
+                }
+            }
+        });
+
+        etKecamatan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pilihKecamatan();
             }
         });
 
@@ -160,6 +197,37 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
 
     }
 
+    void pilihPropinsi(){
+        Intent intent = new Intent(RegistrasiActivity.this, PilihPropinsiActivity.class);
+        startActivityForResult(intent,Pilih_Propinsi);
+
+        etKota.setText("");
+        etKecamatan.setText("");
+        id_kota=0;
+        id_kecamatan=0;
+
+    }
+
+    void pilihKota(){
+        Intent intent = new Intent(RegistrasiActivity.this, KotaActivity.class);
+        intent.putExtra("idPropinsi", id_propinsi.toString());
+        startActivityForResult(intent,Pilih_Kota);
+    }
+
+    void pilihKecamatan(){
+
+//        //get class dari json/kota.json di asset
+//        String json = "json/Kecamatan.json";
+//        String isi = StringUtil.loadJSONFromAsset(RegistrasiActivity.this, json);
+//        Log.d("isi kecamatan", isi);
+
+        Log.d("id_kota", id_kota.toString());
+        Intent intent = new Intent(RegistrasiActivity.this, KecamatanActivity.class);
+        intent.putExtra("idKota", id_kota.toString());
+        startActivityForResult(intent,Pilih_Kecamatan);
+    }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -180,6 +248,32 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
                 Log.d("propinsi", nama_propinsi + id_propinsi.toString());
             }
 
+            //jika dialog pilih kota dipilih OK
+        } else if (requestCode == Pilih_Kota){
+
+            if (resultCode== Activity.RESULT_OK){
+
+                //get variabel dari kota
+                nama_kota = data.getStringExtra("nama_kota");
+                id_kota = Integer.parseInt(data.getStringExtra("id_kota"));
+
+                //nama propinsi ditaruh di edittext
+                etKota.setText(nama_kota);
+                Log.d("id_kota", id_kota.toString());
+
+            }
+        } else if (requestCode == Pilih_Kecamatan){
+
+            if (resultCode== Activity.RESULT_OK){
+
+                //get variabel dari kota
+                nama_kecamatan = data.getStringExtra("nama_kecamatan");
+                id_kecamatan = Integer.parseInt(data.getStringExtra("id_kecamatan"));
+
+                //nama propinsi ditaruh di edittext
+                etKecamatan.setText(nama_kecamatan);
+
+            }
         }
     }
 
@@ -250,8 +344,12 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
         }
     }
 
+
+
     @Override
     public void onResponseFailure(Throwable throwable) {
         this.showToast(throwable.getMessage());
     }
+
+
 }

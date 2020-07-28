@@ -107,6 +107,8 @@
     <string name="tambah_produk" translatable="false">Tambah produk</string>
     <string name="tambah_brand">Tambah brand</string>
     <string name="pilih_propinsi" translatable="false">Pilih propinsi</string>
+    <string name="pilih_kota" translatable="false">Pilih kota</string>
+    <string name="pilih_kecamatan" translatable="false">Pilih kecamatan</string>
     <string name="scan_qrcode_gopay" translatable="false">Scan Kode QR Gopay</string>
     <string name="pilih_barang" translatable="false">Pilih barang</string>
     <string name="grafik_penjualan_harian" translatable="false">Grafik Penjualan Harian</string>
