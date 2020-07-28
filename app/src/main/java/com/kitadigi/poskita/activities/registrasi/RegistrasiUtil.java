@@ -9,7 +9,7 @@ public class RegistrasiUtil {
 
     private RegistrasiUtil() {}
 
-    public static final String BASE_URL = Url.SINKRON_BASE_URL;
+    public static final String BASE_URL = Url.DIKI_URL;
 
     public static IRegistrasi getInterface() {
         return RetrofitClient.getClient(BASE_URL).create(IRegistrasi.class);

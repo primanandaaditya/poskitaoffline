@@ -5,6 +5,7 @@ import com.kitadigi.poskita.activities.registrasi.RegistrasiActivityContract.Get
 import com.kitadigi.poskita.activities.registrasi.RegistrasiActivityContract.GetRegistrasiResultIntractor.OnFinishedListener;
 import com.kitadigi.poskita.activities.registrasi.RegistrasiActivityContract.RegistrasiView;
 import com.kitadigi.poskita.base.BaseResponse;
+import com.kitadigi.poskita.model.Status;
 
 public class RegistrasiActivityPresenter implements Presenter,OnFinishedListener {
 
@@ -36,9 +37,9 @@ public class RegistrasiActivityPresenter implements Presenter,OnFinishedListener
     }
 
     @Override
-    public void onFinished(RegistrasiRespon baseResponse) {
+    public void onFinished(Status status) {
         if(registrasiView != null){
-            registrasiView.setDataToView(baseResponse);
+            registrasiView.setDataToView(status);
             registrasiView.hideProgress();
         }
 

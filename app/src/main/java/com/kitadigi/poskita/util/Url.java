@@ -45,6 +45,8 @@ public class Url {
     public static final String DIKI_REPORT_STOK = "report/stock";
     public static final String DIKI_REPORT_STOK_DETAIL = "report/stock/detail";
 
+    public static final String DIKI_REGISTER = "register";
+
     public static final String LOGIN = "login";
     public static final String ALL_ITEM="all_barang";
 

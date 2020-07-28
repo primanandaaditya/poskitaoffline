@@ -1,6 +1,7 @@
 package com.kitadigi.poskita.activities.registrasi;
 import com.kitadigi.poskita.activities.login.LoginResult;
 import com.kitadigi.poskita.base.BaseResponse;
+import com.kitadigi.poskita.model.Status;
 
 public interface RegistrasiActivityContract {
 
@@ -18,7 +19,7 @@ public interface RegistrasiActivityContract {
         void doRegistrasi();
         void showProgress();
         void hideProgress();
-        void setDataToView(RegistrasiRespon registrasiRespon);
+        void setDataToView(Status status);
         void onResponseFailure(Throwable throwable);
     }
 
@@ -28,7 +29,7 @@ public interface RegistrasiActivityContract {
     interface GetRegistrasiResultIntractor {
 
         interface OnFinishedListener {
-            void onFinished(RegistrasiRespon registrasiRespon);
+            void onFinished(Status status);
             void onFailure(Throwable t);
         }
 

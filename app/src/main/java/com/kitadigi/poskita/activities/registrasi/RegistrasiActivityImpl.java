@@ -15,23 +15,44 @@ import retrofit2.Response;
 
 import com.kitadigi.poskita.activities.registrasi.RegistrasiActivityContract.GetRegistrasiResultIntractor;
 import com.kitadigi.poskita.base.BaseResponse;
+import com.kitadigi.poskita.model.Status;
 
 public class RegistrasiActivityImpl implements GetRegistrasiResultIntractor {
 
 
-    String email,nama,telepon,jenis_toko,nama_toko,alamat_toko,alamat_pemilik,keterangan;
+    String name;
+    String province_id;
+    String city_id;
+    String subdistrict_id;
+    String landmark;
+    String telephone;
+    String store_name;
+    String type_store;
+    String email;
+    String annotation;
     IRegistrasi iRegistrasi;
 
 
-    public RegistrasiActivityImpl(String email, String nama, String telepon, String jenis_toko, String nama_toko, String alamat_toko, String alamat_pemilik, String keterangan) {
+    public RegistrasiActivityImpl(String name,
+                                  String province_id,
+                                  String city_id,
+                                  String subdistrict_id,
+                                  String landmark,
+                                  String telephone,
+                                  String store_name,
+                                  String type_store,
+                                  String email,
+                                  String annotation) {
         this.email = email;
-        this.nama = nama;
-        this.telepon = telepon;
-        this.jenis_toko = jenis_toko;
-        this.nama_toko = nama_toko;
-        this.alamat_toko = alamat_toko;
-        this.alamat_pemilik = alamat_pemilik;
-        this.keterangan = keterangan;
+        this.name = name;
+        this.province_id = province_id;
+        this.city_id = city_id;
+        this.subdistrict_id = subdistrict_id;
+        this.landmark = landmark;
+        this.telephone = telephone;
+        this.store_name = store_name;
+        this.type_store = type_store;
+        this.annotation = annotation;
 
     }
 
@@ -39,17 +60,21 @@ public class RegistrasiActivityImpl implements GetRegistrasiResultIntractor {
     public void getResultModel(final OnFinishedListener onFinishedListener) {
 
         iRegistrasi = RegistrasiUtil.getInterface();
-        iRegistrasi.doRegistrasi(email,nama,telepon,jenis_toko,nama_toko,alamat_toko,alamat_pemilik,keterangan).enqueue(new Callback<RegistrasiRespon>() {
+        iRegistrasi.doRegistrasi(email,name,province_id,city_id,subdistrict_id,telephone,type_store,store_name,landmark,annotation).enqueue(new Callback<Status>() {
             @Override
-            public void onResponse(Call<RegistrasiRespon> call, Response<RegistrasiRespon> response) {
+            public void onResponse(Call<Status> call, Response<Status> response) {
+                Log.d("url register ok", call.request().url().toString());
                 onFinishedListener.onFinished(response.body());
             }
 
             @Override
-            public void onFailure(Call<RegistrasiRespon> call, Throwable t) {
+            public void onFailure(Call<Status> call, Throwable t) {
+                Log.d("url register gagal", call.request().url().toString());
                 onFinishedListener.onFailure(t);
             }
         });
+
+
 
 
     }

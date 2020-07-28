@@ -22,6 +22,7 @@ import com.kitadigi.poskita.activities.registrasi.RegistrasiActivityContract.Get
 import com.kitadigi.poskita.activities.registrasi.RegistrasiActivityContract.RegistrasiView;
 import com.kitadigi.poskita.activities.registrasi.RegistrasiActivityContract.Presenter;
 import com.kitadigi.poskita.base.BaseResponse;
+import com.kitadigi.poskita.model.Status;
 import com.kitadigi.poskita.util.StringUtil;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -216,11 +217,6 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
 
     void pilihKecamatan(){
 
-//        //get class dari json/kota.json di asset
-//        String json = "json/Kecamatan.json";
-//        String isi = StringUtil.loadJSONFromAsset(RegistrasiActivity.this, json);
-//        Log.d("isi kecamatan", isi);
-
         Log.d("id_kota", id_kota.toString());
         Intent intent = new Intent(RegistrasiActivity.this, KecamatanActivity.class);
         intent.putExtra("idKota", id_kota.toString());
@@ -308,7 +304,9 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
             this.showToast(getResources().getString(R.string.masih_ada_yang_kosong));
         }else{
             //presenter untuk nembak API registrasi
-            presenter = new RegistrasiActivityPresenter(this, new RegistrasiActivityImpl(email,nama,telepon,jenisToko,namaToko,alamtToko,alamatPemilik,keterangan));
+            presenter = new RegistrasiActivityPresenter(this, new RegistrasiActivityImpl(
+                    nama,id_propinsi.toString(),id_kota.toString(),id_kecamatan.toString(),alamatPemilik,telepon,namaToko, jenisToko,email,keterangan
+            ));
             presenter.requestDataFromServer();
         }
 
@@ -329,18 +327,19 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
     }
 
     @Override
-    public void setDataToView(RegistrasiRespon registrasiRespon) {
+    public void setDataToView(Status status) {
         //jika registrasi OK
-        if (registrasiRespon.status==1){
+        try {
 
-            //tampilkan layar sukses
+            //pindah ke layar Registrasi sukses
             Intent intent = new Intent(RegistrasiActivity.this, RegistrasiSuksesActivity.class);
             startActivity(intent);
 
-            //tutup screen
             finish();
-        }else{
-            this.showToast(registrasiRespon.getMessage());
+        }catch (Exception e){
+
+            //jika registrasi gagal, munculkan pesan
+            this.showToast(getResources().getString(R.string.registrasi_gagal));
         }
     }
 
