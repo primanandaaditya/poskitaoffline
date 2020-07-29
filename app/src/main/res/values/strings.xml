@@ -83,6 +83,7 @@
     <string name="new_transactions_header">Transaksi Baru</string>
     <string name="find_items_header">Cari Barang</string>
     <string name="remark_pos">POS</string>
+    <string name="dashboard" translatable="false">Dashboard</string>
     <string name="remark_pembelian">Pembelian</string>
     <string name="remark_report">Report</string>
     <string name="remark_items">Items</string>
@@ -151,6 +152,7 @@
     <string name="remark_sub_pembelian">Konfirmasi Pembelian</string>
     <string name="remark_transactions_detail_orders">Penjualan Anda</string>
     <string name="pembelian_anda">Pembelian Anda</string>
+    <string name="pembelian" translatable="false">Pembelian</string>
     <string name="remark_payment">Metode Pembayaran</string>
     <string name="remark_payment_choose">Pilih Metode Pembayaran</string>
     <string name="remark_payment_cash">Tunai</string>
@@ -200,6 +202,8 @@
     <string name="label_qty_penjualan">Jumlah : </string>
     <string name="kamera">Kamera</string>
     <string name="galeri">Galeri</string>
+    <string name="penjualan" translatable="false">Penjualan</string>
+    <string name="kategori" translatable="false">Kategori</string>
     <string name="penjualan_telah_tersimpan">Penjualan telah tersimpan</string>
     <string name="konfirmasi_pembelian">Konfirmasi Pembelian</string>
     <string name="report_transaction" translatable="false">Report Transaction</string>
@@ -364,6 +368,7 @@
 
     <!-- Toolbar titles when navigation menu item is selected -->
     <string-array name="nav_item_activity_titles">
+        <item>Dashboard</item>
         <item>Transaksi Baru</item>
         <item>Pembelian</item>
         <item>Produk/Item</item>
@@ -376,6 +381,7 @@
         <item>Input massal</item>
         <item>Wholesale</item>
         <item>Profil</item>
+
     </string-array>
 
     <string-array name="dummy_supplier">

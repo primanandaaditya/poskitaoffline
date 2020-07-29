@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    tools:context=".fragment.dashboard.DashboardFragment">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <TableLayout
+            android:layout_marginTop="@dimen/dimen_50"
+            android:padding="@dimen/dimen_20"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:gravity="center_vertical|center_horizontal"
+                >
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_80">
+
+                    <ImageView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_50"
+                        android:id="@+id/iv_pos"
+                        android:src="@drawable/ic_pos">
+                    </ImageView>
+
+
+                    <TextView
+                        android:textColor="@color/white"
+                        android:id="@+id/tv_pos"
+                        android:textAlignment="center"
+                        android:text="@string/penjualan"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_20">
+
+                    </TextView>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_80">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_50"
+                        android:id="@+id/iv_pembelian"
+                        android:src="@drawable/ic_shopping_cart">
+                    </ImageView>
+
+                    <TextView
+                        android:textColor="@color/white"
+                        android:id="@+id/tv_pembelian"
+                        android:textAlignment="center"
+                        android:text="@string/pembelian"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_20">
+
+                    </TextView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_80">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_50"
+                        android:id="@+id/iv_produk"
+                        android:src="@drawable/ic_items">
+                    </ImageView>
+
+                    <TextView
+                        android:textColor="@color/white"
+                        android:id="@+id/tv_produk"
+                        android:textAlignment="center"
+                        android:text="@string/item"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_20">
+
+                    </TextView>
+
+                </LinearLayout>
+
+
+            </TableRow>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_30"
+                ></View>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:gravity="center_vertical|center_horizontal"
+                >
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_80">
+
+                    <ImageView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_50"
+                        android:id="@+id/iv_kategori"
+                        android:src="@drawable/ic_invoice">
+                    </ImageView>
+
+
+                    <TextView
+                        android:textColor="@color/white"
+                        android:id="@+id/tv_kategori"
+                        android:textAlignment="center"
+                        android:text="@string/kategori"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_20">
+
+                    </TextView>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_80">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_50"
+                        android:id="@+id/iv_brand"
+                        android:src="@drawable/ic_invoice">
+                    </ImageView>
+
+                    <TextView
+                        android:textColor="@color/white"
+                        android:id="@+id/tv_brand"
+                        android:textAlignment="center"
+                        android:text="@string/remark_item_brand"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_20">
+
+                    </TextView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_80">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_50"
+                        android:id="@+id/iv_unit"
+                        android:src="@drawable/ic_invoice">
+                    </ImageView>
+
+                    <TextView
+                        android:textColor="@color/white"
+                        android:id="@+id/tv_unit"
+                        android:textAlignment="center"
+                        android:text="@string/remark_items_unit"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_20">
+
+                    </TextView>
+
+                </LinearLayout>
+
+
+            </TableRow>
+
+
+        </TableLayout>
+
+
+
+
+    </LinearLayout>
+
+
+
+</FrameLayout>

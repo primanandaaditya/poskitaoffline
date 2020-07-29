@@ -39,6 +39,7 @@ import com.kitadigi.poskita.adapter.ItemsAdapter;
 import com.kitadigi.poskita.database.Database;
 import com.kitadigi.poskita.fragment.POSFragment;
 import com.kitadigi.poskita.fragment.brand.BrandFragment;
+import com.kitadigi.poskita.fragment.dashboard.DashboardFragment;
 import com.kitadigi.poskita.fragment.inputmassal.InputMassalFragment;
 import com.kitadigi.poskita.fragment.item.PrimaItemFragment;
 import com.kitadigi.poskita.fragment.kategori.PrimaKategoriFragment;
@@ -102,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     private static final String TAG_PRINTER     = "printer";
     private static final String TAG_SINKRON     = "sinkron";
     private static final String TAG_INPUT_MASSAL = "inputmassal";
+    private static final String TAG_DASHBOARD   = "dashboard";
     public static String CURRENT_TAG            = TAG_POS;
 
     // toolbar titles respected to selected nav menu item
@@ -231,7 +233,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
 
         if (savedInstanceState == null) {
             navItemIndex = 0;
-            CURRENT_TAG = TAG_POS;
+            CURRENT_TAG = TAG_DASHBOARD;
             loadHomeFragment();
         }
 
@@ -360,40 +362,43 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     private Fragment getHomeFragment() {
         switch (navItemIndex) {
             case 0:
+                DashboardFragment dashboardFragment = new DashboardFragment();
+                return dashboardFragment;
+            case 1:
 //                POSFragment homeFragment = new POSFragment();
 //                return homeFragment;
                 JualFragment jualFragment=new JualFragment();
                 return jualFragment;
-            case 1:
+            case 2:
                 PembelianFragment pembelianFragment =new PembelianFragment();
                 return pembelianFragment;
-            case 2:
+            case 3:
                 PrimaItemFragment primaItemFragment=new PrimaItemFragment();
                 return primaItemFragment;
-            case 3:
+            case 4:
                 PrimaKategoriFragment primaKategoriFragment=new PrimaKategoriFragment();
                 return primaKategoriFragment;
-            case 4:
+            case 5:
                 BrandFragment brandFragment=new BrandFragment();
                 return brandFragment;
-            case 5:
+            case 6:
                 UnitFragment unitFragment=new UnitFragment();
                 return unitFragment;
-            case 6:
+            case 7:
 //                HistoryFragment historyFragment = new HistoryFragment();
 //                return historyFragment;
                 ReportFragment reportFragment = new ReportFragment();
                 return reportFragment;
-            case 7:
+            case 8:
 
                 JualFragment jualFragment2=new JualFragment();
                 return jualFragment2;
-            case 8:
+            case 9:
 //                Intent syncKategori = new Intent(MainActivity.this, SyncKategoriActivity.class);
 //                startActivity(syncKategori);
                 SinkronFragment sinkronFragment=new SinkronFragment();
                 return sinkronFragment;
-            case 9:
+            case 10:
 //                AddressFragment addressFragment = new AddressFragment();
 //                return addressFragment;
 
@@ -425,32 +430,37 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                 //Check to see which item was being clicked and perform appropriate action
                 switch (menuItem.getItemId()) {
                     //Replacing the main content with ContentFragment Which is our Inbox View;
-                    case R.id.nav_pos:
+
+                    case R.id.nav_dashboard:
                         navItemIndex = 0;
+                        CURRENT_TAG = TAG_DASHBOARD;
+                        break;
+                    case R.id.nav_pos:
+                        navItemIndex = 1;
                         CURRENT_TAG = TAG_POS;
                         break;
                     case R.id.nav_pembelian:
-                        navItemIndex = 1;
+                        navItemIndex = 2;
                         CURRENT_TAG = TAG_PEMBELIAN;
                         break;
                     case R.id.nav_items:
-                        navItemIndex = 2;
+                        navItemIndex = 3;
                         CURRENT_TAG = TAG_ITEMS;
                         break;
                     case R.id.nav_kategori:
-                        navItemIndex = 3;
+                        navItemIndex = 4;
                         CURRENT_TAG = TAG_KATEGORI;
                         break;
                     case R.id.nav_brand:
-                        navItemIndex = 4;
+                        navItemIndex = 5;
                         CURRENT_TAG = TAG_BRAND;
                         break;
                     case R.id.nav_unit:
-                        navItemIndex = 5;
+                        navItemIndex = 6;
                         CURRENT_TAG = TAG_UNIT;
                         break;
                     case R.id.nav_report:
-                        navItemIndex = 6;
+                        navItemIndex = 7;
                         CURRENT_TAG = TAG_REPORTS;
                         break;
                     case R.id.nav_printer:
