@@ -42,6 +42,7 @@ public class Constants {
     public static String poskita = "poskita";
     public final static String auth_token = "auth_token";
     public final static String token_key = "085B7120909C0DB4FBC3C9C568975E6F";
+    public final static String KODE_200 = "200";
 
     public static Integer maxInput = 100;
     public static Integer maxInput50 = 50;

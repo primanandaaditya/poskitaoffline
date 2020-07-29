@@ -154,7 +154,7 @@ public class SinkronDeleteBrandController implements ISinkronDeleteBrandRequest 
         if (jumlah == 0){
             //jika tidak ada data yang di-sync
             //return String kosongan
-            hasil = "";
+            hasil = "[]";
         }else{
             hasil =  jsonArray.toString();
         }

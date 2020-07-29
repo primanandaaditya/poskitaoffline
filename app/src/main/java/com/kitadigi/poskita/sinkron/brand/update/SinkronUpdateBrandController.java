@@ -155,7 +155,7 @@ public class SinkronUpdateBrandController implements ISinkronUpdateBrandRequest 
         if (jumlah == 0){
             //jika tidak ada data yang di-sync
             //return String kosongan
-            hasil = "";
+            hasil = "[]";
         }else{
             hasil =  jsonArray.toString();
         }

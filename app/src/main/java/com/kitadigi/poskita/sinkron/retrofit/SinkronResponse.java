@@ -2,22 +2,14 @@ package com.kitadigi.poskita.sinkron.retrofit;
 
 public class SinkronResponse {
 
-    Integer status;
-    String message;
 
-    public Integer getStatus() {
+    private Status status;
+
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 }

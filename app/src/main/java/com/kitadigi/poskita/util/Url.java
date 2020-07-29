@@ -58,20 +58,20 @@ public class Url {
     //========================================
     //url ini untuk percobaan
 
-    public static final String SINKRON_BASE_URL = "http://10.0.3.2/sync/";
+    public static final String SINKRON_BASE_URL = "http://192.168.1.16:5555/sync/";
 //    public static final String SINKRON_BASE_URL = "http://192.168.1.17/sync/";
 //    public static final String SINKRON_BASE_URL = "http://192.168.1.15/sync/";
-    public static final String SINKRON_INSERT_KATEGORI = "kategori/insert.php";
-    public static final String SINKRON_UPDATE_KATEGORI = "kategori/update.php";
-    public static final String SINKRON_DELETE_KATEGORI = "kategori/delete.php";
+    public static final String SINKRON_INSERT_KATEGORI = "category/insert/";
+    public static final String SINKRON_UPDATE_KATEGORI = "category/update/";
+    public static final String SINKRON_DELETE_KATEGORI = "category/delete/";
 
-    public static final String SINKRON_INSERT_BRAND = "brand/insert.php";
-    public static final String SINKRON_UPDATE_BRAND = "brand/update.php";
-    public static final String SINKRON_DELETE_BRAND = "brand/delete.php";
+    public static final String SINKRON_INSERT_BRAND = "brands/insert/";
+    public static final String SINKRON_UPDATE_BRAND = "brands/update/";
+    public static final String SINKRON_DELETE_BRAND = "brands/delete/";
 
-    public static final String SINKRON_INSERT_UNIT = "unit/insert.php";
-    public static final String SINKRON_UPDATE_UNIT = "unit/update.php";
-    public static final String SINKRON_DELETE_UNIT = "unit/delete.php";
+    public static final String SINKRON_INSERT_UNIT = "units/insert/";
+    public static final String SINKRON_UPDATE_UNIT = "units/update/";
+    public static final String SINKRON_DELETE_UNIT = "units/delete/";
 
     public static final String SINKRON_INSERT_PRODUK = "produk/insert.php";
     public static final String SINKRON_UPDATE_PRODUK = "produk/update.php";

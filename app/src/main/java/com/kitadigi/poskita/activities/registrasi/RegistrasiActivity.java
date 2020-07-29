@@ -199,17 +199,23 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
     }
 
     void pilihPropinsi(){
-        Intent intent = new Intent(RegistrasiActivity.this, PilihPropinsiActivity.class);
-        startActivityForResult(intent,Pilih_Propinsi);
 
         etKota.setText("");
         etKecamatan.setText("");
         id_kota=0;
         id_kecamatan=0;
 
+        //tampilkan dialog untuk milih propinsi
+        Intent intent = new Intent(RegistrasiActivity.this, PilihPropinsiActivity.class);
+        startActivityForResult(intent,Pilih_Propinsi);
+
     }
 
     void pilihKota(){
+        etKecamatan.setText("");
+        id_kecamatan=0;
+
+        //tampilkan dialog untuk milih kota
         Intent intent = new Intent(RegistrasiActivity.this, KotaActivity.class);
         intent.putExtra("idPropinsi", id_propinsi.toString());
         startActivityForResult(intent,Pilih_Kota);
@@ -299,15 +305,24 @@ public class RegistrasiActivity extends BaseActivity implements RegistrasiView {
                 telepon.matches("") ||
                 propinsi.matches("") ||
                 kecamatan.matches("") ||
-                kota.matches("")
+                kota.matches("") ||
+                email.matches("")
         ){
             this.showToast(getResources().getString(R.string.masih_ada_yang_kosong));
         }else{
-            //presenter untuk nembak API registrasi
-            presenter = new RegistrasiActivityPresenter(this, new RegistrasiActivityImpl(
-                    nama,id_propinsi.toString(),id_kota.toString(),id_kecamatan.toString(),alamatPemilik,telepon,namaToko, jenisToko,email,keterangan
-            ));
-            presenter.requestDataFromServer();
+
+            //cek apakah email valid
+            if (StringUtil.isEmailValid(email)){
+                //presenter untuk nembak API registrasi
+                presenter = new RegistrasiActivityPresenter(this, new RegistrasiActivityImpl(
+                        nama,id_propinsi.toString(),id_kota.toString(),id_kecamatan.toString(),alamatPemilik,telepon,namaToko, jenisToko,email,keterangan
+                ));
+                presenter.requestDataFromServer();
+            }else{
+                this.showToast(getResources().getString(R.string.email_tidak_sah));
+            }
+
+
         }
 
 

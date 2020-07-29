@@ -305,6 +305,7 @@
     <string name="terima_kasih" translatable="false">TERIMA KASIH</string>
     <string name="powered_by_poskita" translatable="false">POWERED BY POSKITA</string>
     <string name="registrasi_gagal" translatable="false">Registrasi gagal</string>
+    <string name="email_tidak_sah" translatable="false">Email tidak sah</string>
     <string name="selamat_belanja_kembali" translatable="false">SELAMAT BELANJA KEMBALI</string>
     <string name="sinkron_berhasil" translatable="false">Sinkron berhasil</string>
     <string name="sinkron_data_terakhir" translatable="false">Sinkron data terakhir : </string>
