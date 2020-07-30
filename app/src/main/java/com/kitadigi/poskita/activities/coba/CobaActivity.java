@@ -47,6 +47,7 @@ import com.kitadigi.poskita.sinkron.kategori.insert.SinkronInsertKategoriControl
 import com.kitadigi.poskita.sinkron.kategori.update.ISinkronUpdateKategoriResult;
 import com.kitadigi.poskita.sinkron.kategori.update.SinkronUpdateKategoriController;
 import com.kitadigi.poskita.sinkron.produk.delete.SinkronDeleteProdukController;
+import com.kitadigi.poskita.sinkron.produk.insert.ISinkronAddProdukResult;
 import com.kitadigi.poskita.sinkron.produk.insert.SinkronInsertProdukController;
 import com.kitadigi.poskita.sinkron.produk.update.SinkronUpdateProdukController;
 import com.kitadigi.poskita.sinkron.retrofit.SinkronResponse;
@@ -64,7 +65,8 @@ import java.util.List;
 public class CobaActivity extends BaseActivity implements
         ISinkronAddKategoriResult, ISinkronUpdateKategoriResult, ISinkronDeleteKategoriResult,
         ISinkronAddBrandResult, ISinkronUpdateBrandResult, ISinkronDeleteBrandResult,
-        ISinkronAddUnitResult, ISinkronUpdateUnitResult, ISinkronDeleteUnitResult
+        ISinkronAddUnitResult, ISinkronUpdateUnitResult, ISinkronDeleteUnitResult,
+        ISinkronAddProdukResult
 
 {
 
@@ -234,14 +236,28 @@ public class CobaActivity extends BaseActivity implements
     public void onSinkronDeleteUnitSuccess(SinkronResponse sinkronResponse) {
 
         if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
-            this.showToast(sinkronResponse.getStatus().getMessage());
-//            sinkronDeleteUnitController.delete_unit();
-//            sinkronDeleteUnitController = new SinkronDeleteUnitController(CobaActivity.this, this);
+//            this.showToast(sinkronResponse.getStatus().getMessage());
+            sinkronInsertProdukController = new SinkronInsertProdukController(CobaActivity.this, this);
+            sinkronInsertProdukController.insert_produk();
         }
     }
 
     @Override
     public void onSinkronDeleteUnitError(String error) {
+        this.showToast(error);
+    }
+
+    @Override
+    public void onSinkronAddProdukSuccess(SinkronResponse sinkronResponse) {
+        if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
+            this.showToast(sinkronResponse.getStatus().getMessage());
+//            sinkronInsertProdukController = new SinkronInsertProdukController(CobaActivity.this, this);
+//            sinkronInsertProdukController.insert_produk();
+        }
+    }
+
+    @Override
+    public void onSinkronAddProdukError(String error) {
         this.showToast(error);
     }
 }

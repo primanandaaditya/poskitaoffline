@@ -73,9 +73,9 @@ public class Url {
     public static final String SINKRON_UPDATE_UNIT = "units/update/";
     public static final String SINKRON_DELETE_UNIT = "units/delete/";
 
-    public static final String SINKRON_INSERT_PRODUK = "produk/insert.php";
-    public static final String SINKRON_UPDATE_PRODUK = "produk/update.php";
-    public static final String SINKRON_DELETE_PRODUK= "produk/delete.php";
+    public static final String SINKRON_INSERT_PRODUK = "product/insert/";
+    public static final String SINKRON_UPDATE_PRODUK = "product/update/";
+    public static final String SINKRON_DELETE_PRODUK= "product/delete/";
 
     public static final String SINKRON_PENJUALAN = "jual/insert.php";
     public static final String SINKRON_PEMBELIAN = "beli/insert.php";

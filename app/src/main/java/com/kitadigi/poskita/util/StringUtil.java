@@ -3,6 +3,9 @@ package com.kitadigi.poskita.util;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,8 +21,12 @@ import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.kitadigi.poskita.R;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -54,6 +61,69 @@ public class StringUtil {
         else
             return false;
     }
+
+    public static String createFileFromDrawable(Context context) {
+
+        String hasil = "";
+
+        Drawable drawable = context.getResources().getDrawable(R.drawable.ic_printer);
+        if (drawable != null) {
+            Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            final byte[] bitmapdata = stream.toByteArray();
+
+            hasil = Constants.ICON_STOCK;
+
+        }
+
+        return hasil;
+    }
+
+    public static Bitmap getBitmapFromAsset(Context context, String filePath) {
+        AssetManager assetManager = context.getAssets();
+
+        InputStream istr;
+        Bitmap bitmap = null;
+        try {
+            istr = assetManager.open(filePath);
+            bitmap = BitmapFactory.decodeStream(istr);
+        } catch (IOException e) {
+            // handle exception
+        }
+
+        return bitmap;
+    }
+
+    public static void fileFromAsset(Context context) {
+
+        File f = new File(context.getCacheDir(), Constants.ICON_STOCK);
+
+        try {
+
+            f.createNewFile();
+
+
+//Convert bitmap to byte array
+            Bitmap bitmap = getBitmapFromAsset(context, Constants.ICON_STOCK_PATH);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
+            byte[] bitmapdata = bos.toByteArray();
+
+//write the bytes in file
+            FileOutputStream fos = new FileOutputStream(f);
+            fos.write(bitmapdata);
+            fos.flush();
+            fos.close();
+
+
+        }catch (Exception e){
+
+        }
+
+
+    }
+
 
     public static String loadJSONFromAsset(Context context, String jsonFileName) {
         String json = null;
