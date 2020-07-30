@@ -35,6 +35,7 @@ public class SinkronDeleteBrandController implements ISinkronDeleteBrandRequest 
 
     SessionManager sessionManager;
     String business_id;
+    String auth_token;
 
 
     public SinkronDeleteBrandController(Context context, ISinkronDeleteBrandResult iSinkronDeleteBrandResult) {
@@ -44,6 +45,7 @@ public class SinkronDeleteBrandController implements ISinkronDeleteBrandRequest 
 
         sessionManager=new SessionManager(context);
         business_id = sessionManager.getBussinessId();
+        auth_token = sessionManager.getAuthToken();
     }
 
 
@@ -76,7 +78,7 @@ public class SinkronDeleteBrandController implements ISinkronDeleteBrandRequest 
 
                 //kumpulkan data yang mau di-sync
                 iSinkronDeleteBrand = SinkronDeleteBrandUtil.getInterface();
-                iSinkronDeleteBrand.delete_brand(data).enqueue(new Callback<SinkronResponse>() {
+                iSinkronDeleteBrand.delete_brand(data, auth_token).enqueue(new Callback<SinkronResponse>() {
                     @Override
                     public void onResponse(Call<SinkronResponse> call, Response<SinkronResponse> response) {
                         Log.d("sukses", call.request().url().toString());

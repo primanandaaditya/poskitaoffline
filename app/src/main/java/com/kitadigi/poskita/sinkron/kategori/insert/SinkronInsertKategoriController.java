@@ -34,6 +34,7 @@ public class SinkronInsertKategoriController implements ISinkronAddKategoriReque
     //untuk get business id
     SessionManager sessionManager;
     String business_id;
+    String auth_token;
 
     public SinkronInsertKategoriController(Context context, ISinkronAddKategoriResult iSinkronAddKategoriResult) {
         this.context = context;
@@ -42,6 +43,7 @@ public class SinkronInsertKategoriController implements ISinkronAddKategoriReque
         internetChecker=new InternetChecker();
         sessionManager = new SessionManager(context);
         business_id = sessionManager.getBussinessId();
+        auth_token = sessionManager.getAuthToken();
     }
 
     @Override
@@ -70,7 +72,7 @@ public class SinkronInsertKategoriController implements ISinkronAddKategoriReque
 
                 //kumpulkan data yang mau di-sync
                 iAddKategori = AddKategoriUtil.getLoginInterface();
-                iAddKategori.insert_kategori(data).enqueue(new Callback<SinkronResponse>() {
+                iAddKategori.insert_kategori(data, auth_token).enqueue(new Callback<SinkronResponse>() {
                     @Override
                     public void onResponse(Call<SinkronResponse> call, Response<SinkronResponse> response) {
 
@@ -100,58 +102,7 @@ public class SinkronInsertKategoriController implements ISinkronAddKategoriReque
     }
 
 
-    public void insert_kategori(String data) {
 
-        //cek apakah ada koneksi internet
-        if (internetChecker.haveNetwork(context)){
-
-            //jika ada koneksi internet
-            //cek apakah ada data yang di-sync atau tidak
-            //kumpulkan data yang mau di-sync
-
-            if (data==""){
-                //jika tidak ada data sama sekali
-                //langsung result-kan error
-                iSinkronAddKategoriResult.onSinkronAddKategoriError(context.getResources().getString(R.string.tidak_ada_data_sinkroni));
-
-            }else{
-                //jika ada data yg mau di-sync
-                //munculkan progress
-                sweetAlertDialog=new SweetAlertDialog(context,SweetAlertDialog.PROGRESS_TYPE);
-                sweetAlertDialog.setTitleText(context.getResources().getString(R.string.now_loading));
-//                sweetAlertDialog.show();
-
-
-                //kumpulkan data yang mau di-sync
-                iAddKategori = AddKategoriUtil.getLoginInterface();
-                iAddKategori.insert_kategori(data).enqueue(new Callback<SinkronResponse>() {
-                    @Override
-                    public void onResponse(Call<SinkronResponse> call, Response<SinkronResponse> response) {
-
-                        iSinkronAddKategoriResult.onSinkronAddKategoriSuccess(response.body());
-                        Log.d("sukses",call.request().url().toString());
-                        ubahStatusSudahSync();
-//                        sweetAlertDialog.dismissWithAnimation();
-                    }
-
-                    @Override
-                    public void onFailure(Call<SinkronResponse> call, Throwable t) {
-
-                        iSinkronAddKategoriResult.onSinkronAddKategoriError(t.getMessage());
-//                        sweetAlertDialog.dismissWithAnimation();
-                    }
-                });
-            }
-
-        }else{
-
-            //jika tidak ada koneksi internet
-            //langsung result error
-            iSinkronAddKategoriResult.onSinkronAddKategoriError(context.getResources().getString(R.string.tidak_ada_koneksi_internet));
-        }
-
-
-    }
 
     @Override
     public String kumpulkan_data() {

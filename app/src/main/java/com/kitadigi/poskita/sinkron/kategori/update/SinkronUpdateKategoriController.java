@@ -32,6 +32,7 @@ public class SinkronUpdateKategoriController implements ISinkronUpdateKategoriRe
     InternetChecker internetChecker;
     SessionManager sessionManager;
     String business_id;
+    String auth_token;
 
 
     public SinkronUpdateKategoriController(Context context, ISinkronUpdateKategoriResult iSinkronUpdateKategoriResult) {
@@ -40,6 +41,7 @@ public class SinkronUpdateKategoriController implements ISinkronUpdateKategoriRe
         internetChecker=new InternetChecker();
         sessionManager=new SessionManager(context);
         business_id=sessionManager.getBussinessId();
+        auth_token = sessionManager.getAuthToken();
 
     }
 
@@ -74,7 +76,7 @@ public class SinkronUpdateKategoriController implements ISinkronUpdateKategoriRe
 
                 //kumpulkan data yang mau di-sync
                 iSinkronUpdateKategori = SinkronUpdateKategoriUtil.getInterface();
-                iSinkronUpdateKategori.update_kategori(data).enqueue(new Callback<SinkronResponse>() {
+                iSinkronUpdateKategori.update_kategori(data, auth_token).enqueue(new Callback<SinkronResponse>() {
                     @Override
                     public void onResponse(Call<SinkronResponse> call, Response<SinkronResponse> response) {
                         Log.d("sukses", call.request().url().toString());

@@ -36,6 +36,7 @@ public class SinkronInsertBrandController implements ISinkronAddBrandRequest {
     //untuk get business id
     SessionManager sessionManager;
     String business_id;
+    String auth_token;
 
     public SinkronInsertBrandController(Context context, ISinkronAddBrandResult iSinkronAddBrandResult) {
         this.context = context;
@@ -44,6 +45,7 @@ public class SinkronInsertBrandController implements ISinkronAddBrandRequest {
         internetChecker=new InternetChecker();
         sessionManager = new SessionManager(context);
         business_id = sessionManager.getBussinessId();
+        auth_token = sessionManager.getAuthToken();
     }
 
     @Override
@@ -74,7 +76,7 @@ public class SinkronInsertBrandController implements ISinkronAddBrandRequest {
 
                 //kumpulkan data yang mau di-sync
                 iSinkronInsertBrand = AddBrandUtil.getInterface();
-                iSinkronInsertBrand.insert_brand(data).enqueue(new Callback<SinkronResponse>() {
+                iSinkronInsertBrand.insert_brand(data, auth_token).enqueue(new Callback<SinkronResponse>() {
                     @Override
                     public void onResponse(Call<SinkronResponse> call, Response<SinkronResponse> response) {
 

@@ -34,6 +34,7 @@ public class SinkronUpdateBrandController implements ISinkronUpdateBrandRequest 
     InternetChecker internetChecker;
     SessionManager sessionManager;
     String business_id;
+    String auth_token;
 
 
     public SinkronUpdateBrandController(Context context, ISinkronUpdateBrandResult iSinkronUpdateBrandResult) {
@@ -42,6 +43,7 @@ public class SinkronUpdateBrandController implements ISinkronUpdateBrandRequest 
         internetChecker=new InternetChecker();
         sessionManager=new SessionManager(context);
         business_id = sessionManager.getBussinessId();
+        auth_token = sessionManager.getAuthToken();
     }
 
 
@@ -75,7 +77,7 @@ public class SinkronUpdateBrandController implements ISinkronUpdateBrandRequest 
 
                 //kumpulkan data yang mau di-sync
                 iSinkronUpdateBrand = SinkronUpdateBrandUtil.getInterface();
-                iSinkronUpdateBrand.update_brand(data).enqueue(new Callback<SinkronResponse>() {
+                iSinkronUpdateBrand.update_brand(data, auth_token).enqueue(new Callback<SinkronResponse>() {
                     @Override
                     public void onResponse(Call<SinkronResponse> call, Response<SinkronResponse> response) {
                         Log.d("sukses", call.request().url().toString());

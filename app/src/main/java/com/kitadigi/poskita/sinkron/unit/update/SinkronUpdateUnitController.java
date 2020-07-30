@@ -35,6 +35,7 @@ public class SinkronUpdateUnitController implements ISinkronUpdateUnitRequest {
     InternetChecker internetChecker;
     SessionManager sessionManager;
     String business_id;
+    String auth_token;
 
 
     public SinkronUpdateUnitController(Context context, ISinkronUpdateUnitResult iSinkronUpdateUnitResult) {
@@ -43,6 +44,7 @@ public class SinkronUpdateUnitController implements ISinkronUpdateUnitRequest {
         internetChecker=new InternetChecker();
         sessionManager=new SessionManager(context);
         business_id = sessionManager.getBussinessId();
+        auth_token = sessionManager.getAuthToken();
     }
 
 
@@ -76,7 +78,7 @@ public class SinkronUpdateUnitController implements ISinkronUpdateUnitRequest {
 
                 //kumpulkan data yang mau di-sync
                 iSinkronUpdateUnit = SinkronUpdateUnitUtil.getInterface();
-                iSinkronUpdateUnit.update_unit(data).enqueue(new Callback<SinkronResponse>() {
+                iSinkronUpdateUnit.update_unit(data, auth_token).enqueue(new Callback<SinkronResponse>() {
                     @Override
                     public void onResponse(Call<SinkronResponse> call, Response<SinkronResponse> response) {
                         Log.d("sukses", call.request().url().toString());
@@ -137,10 +139,10 @@ public class SinkronUpdateUnitController implements ISinkronUpdateUnitRequest {
                     //nama json
                     jsonObject.put("actual_name", unit.getName());
                     jsonObject.put("mobile_id", unit.getKode_id());
-                    jsonObject.put("business_id",business_id);
+//                    jsonObject.put("business_id",business_id);
                     jsonObject.put("short_name", unit.getSingkatan());
-                    jsonObject.put("created_by","1");
-                    jsonObject.put("allow_decimal",0);
+//                    jsonObject.put("created_by","1");
+                    jsonObject.put("allow_decimal","1");
 
                     //tambahkan ke JSON
                     jsonArray.put(jsonObject);

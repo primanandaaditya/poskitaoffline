@@ -32,6 +32,7 @@ public class SinkronDeleteKategoriController implements ISinkronDeleteKategoriRe
     InternetChecker internetChecker;
     SessionManager sessionManager;
     String business_id;
+    String auth_token;
 
     public SinkronDeleteKategoriController(Context context, ISinkronDeleteKategoriResult iSinkronDeleteKategoriResult) {
         this.context = context;
@@ -40,6 +41,7 @@ public class SinkronDeleteKategoriController implements ISinkronDeleteKategoriRe
 
         sessionManager=new SessionManager(context);
         business_id = sessionManager.getBussinessId();
+        auth_token = sessionManager.getAuthToken();
     }
 
 
@@ -72,7 +74,7 @@ public class SinkronDeleteKategoriController implements ISinkronDeleteKategoriRe
 
                 //kumpulkan data yang mau di-sync
                 iSinkronDeleteKategori = SinkronDeleteKategoriUtil.getInterface();
-                iSinkronDeleteKategori.delete_kategori(data).enqueue(new Callback<SinkronResponse>() {
+                iSinkronDeleteKategori.delete_kategori(data, auth_token).enqueue(new Callback<SinkronResponse>() {
                     @Override
                     public void onResponse(Call<SinkronResponse> call, Response<SinkronResponse> response) {
                         Log.d("sukses", call.request().url().toString());

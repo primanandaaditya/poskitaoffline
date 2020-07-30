@@ -35,6 +35,7 @@ public class SinkronDeleteUnitController implements ISinkronDeleteUnitRequest {
 
     SessionManager sessionManager;
     String business_id;
+    String auth_token;
 
 
     public SinkronDeleteUnitController(Context context, ISinkronDeleteUnitResult iSinkronDeleteUnitResult) {
@@ -44,6 +45,7 @@ public class SinkronDeleteUnitController implements ISinkronDeleteUnitRequest {
 
         sessionManager=new SessionManager(context);
         business_id = sessionManager.getBussinessId();
+        auth_token = sessionManager.getAuthToken();
     }
 
 
@@ -76,7 +78,7 @@ public class SinkronDeleteUnitController implements ISinkronDeleteUnitRequest {
 
                 //kumpulkan data yang mau di-sync
                 iSinkronDeleteUnit = SinkronDeleteUnitUtil.getInterface();
-                iSinkronDeleteUnit.delete_unit(data).enqueue(new Callback<SinkronResponse>() {
+                iSinkronDeleteUnit.delete_unit(data, auth_token).enqueue(new Callback<SinkronResponse>() {
                     @Override
                     public void onResponse(Call<SinkronResponse> call, Response<SinkronResponse> response) {
                         Log.d("sukses", call.request().url().toString());
@@ -133,12 +135,12 @@ public class SinkronDeleteUnitController implements ISinkronDeleteUnitRequest {
                 jsonObject=new JSONObject();
                 try {
                     //nama json
-                    jsonObject.put("actual_name", unit.getName());
+//                    jsonObject.put("actual_name", unit.getName());
                     jsonObject.put("mobile_id", unit.getKode_id());
-                    jsonObject.put("business_id",business_id);
-                    jsonObject.put("short_name", unit.getSingkatan());
-                    jsonObject.put("created_by","1");
-                    jsonObject.put("allow_decimal",0);
+//                    jsonObject.put("business_id",business_id);
+//                    jsonObject.put("short_name", unit.getSingkatan());
+//                    jsonObject.put("created_by","1");
+//                    jsonObject.put("allow_decimal",0);
 
                     //tambahkan ke JSON
                     jsonArray.put(jsonObject);
