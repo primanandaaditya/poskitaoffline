@@ -1,6 +1,7 @@
 package com.kitadigi.poskita.sinkron.produk.update;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.kitadigi.poskita.R;
@@ -15,12 +16,15 @@ import com.kitadigi.poskita.util.Constants;
 import com.kitadigi.poskita.util.InternetChecker;
 import com.kitadigi.poskita.util.ResizeImage;
 import com.kitadigi.poskita.util.SessionManager;
+import com.kitadigi.poskita.util.StringUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +38,19 @@ import retrofit2.Response;
 
 public class SinkronUpdateProdukController implements ISinkronUpdateProdukRequest {
 
+
+
+    //CATATAN PENTING dari backend:
+    //untuk jumlah produk yang akan diupdate harus sama dengan jumlah gambar yang diupload
+    //jadi misalnya ada 2 produk yang akan diupdate
+
+    //ambil contoh: Miegoreng dan Aqua
+    //Miegoreng ada gambarnya, tapi Aqua tidak ada gambarnya
+    //nanti gambarnya tetap ada 2 yang diupload
+    //yang satu gambar Miegoreng, yang satunya harus buat sendiri
+    //gambarnya buat dari asset/image/icon_stock.png, (lihat fungsi kumpulkan data, yang dikomentar : //jika file gambar tidak ditemukan/dihapus)
+
+
     Context context;
     SweetAlertDialog sweetAlertDialog;
     ISinkronUpdateProdukResult iSinkronUpdateProdukResult;
@@ -44,6 +61,7 @@ public class SinkronUpdateProdukController implements ISinkronUpdateProdukReques
     //untuk get business id
     SessionManager sessionManager;
     String business_id;
+    String auth_token;
 
     //untuk multiple image
     File file, file_image_ready;
@@ -59,6 +77,7 @@ public class SinkronUpdateProdukController implements ISinkronUpdateProdukReques
         internetChecker=new InternetChecker();
         sessionManager = new SessionManager(context);
         business_id = sessionManager.getBussinessId();
+        auth_token = sessionManager.getAuthToken();
     }
 
     @Override
@@ -94,12 +113,14 @@ public class SinkronUpdateProdukController implements ISinkronUpdateProdukReques
                 //kumpulkan data yang mau di-sync
                 iSinkronUpdateProduk = UpdateProdukUtil.getInterface();
                 Log.d("nas", String.valueOf(multipartBodies.size()));
-                iSinkronUpdateProduk.update_produk("token",dataRequest,multipartBodies.size() == 0 ? null : multipartBodies).enqueue(new Callback<SinkronResponse>() {
+                iSinkronUpdateProduk.update_produk(auth_token,dataRequest,multipartBodies.size() == 0 ? null : multipartBodies).enqueue(new Callback<SinkronResponse>() {
                     @Override
                     public void onResponse(Call<SinkronResponse> call, Response<SinkronResponse> response) {
 
-                        iSinkronUpdateProdukResult.onSinkronUpdateProdukSuccess(response.body());
                         Log.d("sukses",call.request().url().toString());
+                        Log.d("kanaeru", String.valueOf(response.code()) + response.toString());
+
+                        iSinkronUpdateProdukResult.onSinkronUpdateProdukSuccess(response.body());
                         ubahStatusSudahSync();
 //                        sweetAlertDialog.dismissWithAnimation();
                     }
@@ -153,8 +174,12 @@ public class SinkronUpdateProdukController implements ISinkronUpdateProdukReques
 
             //cek dulu apakah ada path gambar di sqlite
             if (item.getImage()==null || item.getImage().matches("")){
+
                 //jika tidak ada gambar
-                image = "";
+                //isi dengan 'image/icon_stock'
+                //artinya diisi dengan gambar yang terletak di folder /assets/image/icon_stock.png
+                //lihat project folde
+                image = Constants.ICON_STOCK;
             }else{
                 //jika ada gambar
                 image = item.getImage();
@@ -171,19 +196,66 @@ public class SinkronUpdateProdukController implements ISinkronUpdateProdukReques
                     //siapkan file baru berdasarkan path image
                     file = new File(image);
 
-                    //resize image
-                    image_ready= ResizeImage.resizeAndCompressImageBeforeSend(context, file.getPath(), kode_id + ".jpg");
 
-                    //gambar baru yang sudah dikompress
-                    file_image_ready = new File(image_ready);
+                    //cek dulu apakah ada gambarnya di hp user
+                    if (file.exists()){
 
-                    //buat request body di retrofit
-                    RequestBody imageBody = RequestBody.create(MediaType.parse("image/*"), file_image_ready);
+                        //resize image
+                        image_ready= ResizeImage.resizeAndCompressImageBeforeSend(context, file.getPath(), kode_id + ".jpg");
 
-                    //bentuk array image yang akan diupload
-                    multipartBodies.add(MultipartBody.Part.createFormData("upload[]", file_image_ready.getName(), imageBody));
+                        //gambar baru yang sudah dikompress
+                        file_image_ready = new File(image_ready);
 
-                    //persiapan upload image SELESAI sampai baris diatas
+                        //buat request body di retrofit
+                        RequestBody imageBody = RequestBody.create(MediaType.parse("image/*"), file_image_ready);
+
+                        //bentuk array image yang akan diupload
+                        multipartBodies.add(MultipartBody.Part.createFormData("upload[]", file_image_ready.getName(), imageBody));
+
+                        //persiapan upload image SELESAI sampai baris diatas
+
+                    }else{
+
+                        //jika file gambar tidak ditemukan/dihapus
+                        //buat file dulu, namanya 'icon_stock.png'
+                        File f = new File(context.getCacheDir(), Constants.ICON_STOCK);
+
+                        try {
+
+                            //buat file baru
+                            f.createNewFile();
+
+                            //get bitmap dari asset/image/icon_stock.png
+                            Bitmap bitmap = StringUtil.getBitmapFromAsset(context, Constants.ICON_STOCK_PATH);
+                            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
+                            byte[] bitmapdata = bos.toByteArray();
+
+                            //write the bytes in file
+                            FileOutputStream fos = new FileOutputStream(f);
+                            fos.write(bitmapdata);
+                            fos.flush();
+                            fos.close();
+
+                            //resize image
+                            image_ready= ResizeImage.resizeAndCompressImageBeforeSend(context, f.getPath(), Constants.ICON_STOCK);
+
+                            //gambar baru yang sudah dikompress
+                            file_image_ready = new File(image_ready);
+
+                            //buat request body di retrofit
+                            RequestBody imageBody = RequestBody.create(MediaType.parse("image/*"), file_image_ready);
+
+                            //bentuk array image yang akan diupload
+                            multipartBodies.add(MultipartBody.Part.createFormData("upload[]", file_image_ready.getName(), imageBody));
+
+                            //persiapan upload image SELESAI sampai baris diatas
+
+                        }catch (Exception e){
+
+                        }
+
+                    }
                 }
 
                 jumlah = jumlah + 1;
@@ -194,10 +266,10 @@ public class SinkronUpdateProdukController implements ISinkronUpdateProdukReques
                     //nama json
                     jsonObject.put("nama", item.getName_product());
                     jsonObject.put("mobile_id", item.getKode_id());
-                    jsonObject.put("business_id",business_id);
-                    jsonObject.put("brand_id", item.getBrand_id().toString());
-                    jsonObject.put("category_id",item.getCategory_id().toString());
-                    jsonObject.put("unit_id",item.getUnit_id().toString());
+//                    jsonObject.put("business_id",business_id);
+                    jsonObject.put("category_mobile_id", item.getCategory_mobile_id());
+                    jsonObject.put("brand_mobile_id", item.getBrand_mobile_id());
+                    jsonObject.put("unit_mobile_id", item.getUnit_mobile_id());
                     jsonObject.put("sell_price",item.getSell_price().toString());
                     jsonObject.put("purchase_price",item.getPurchase_price().toString());
 
@@ -208,11 +280,11 @@ public class SinkronUpdateProdukController implements ISinkronUpdateProdukReques
                     jsonObject.put("qty_stock",item.getQty_stock().toString());
                     jsonObject.put("qty_minimum",item.getQty_minimum().toString());
                     jsonObject.put("tax_type","inclusive");
-                    jsonObject.put("enable_stock","0");
-                    jsonObject.put("sku","");
-                    jsonObject.put("enable_sr_no","0");
-                    jsonObject.put("is_inactive","0");
-                    jsonObject.put("not_for_selling","0");
+//                    jsonObject.put("enable_stock","0");
+//                    jsonObject.put("sku","");
+//                    jsonObject.put("enable_sr_no","0");
+//                    jsonObject.put("is_inactive","0");
+//                    jsonObject.put("not_for_selling","0");
                     jsonObject.put("created_by","1");
 
                     //khusus untuk gambar
@@ -223,7 +295,7 @@ public class SinkronUpdateProdukController implements ISinkronUpdateProdukReques
                     //tujuannya adalah supaya sinkron dengan looping dengan array file (variabel  upload[jumlah] ) diatas
                     //dalam variabel 'upload[jumlah]', nama file sudah disesuaikan dengan kode_id
                     if (image ==""){
-                        jsonObject.put("image","");
+                        jsonObject.put("image",Constants.ICON_STOCK);
                     }else {
                         jsonObject.put("image",kode_id + ".jpg");
                     }
@@ -234,6 +306,7 @@ public class SinkronUpdateProdukController implements ISinkronUpdateProdukReques
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
             }
         }
 
@@ -243,7 +316,7 @@ public class SinkronUpdateProdukController implements ISinkronUpdateProdukReques
         if (jumlah == 0){
             //jika tidak ada data yang di-sync
             //return String kosongan
-            hasil = "";
+            hasil = "[]";
         }else{
             hasil =  jsonArray.toString();
 
@@ -264,9 +337,9 @@ public class SinkronUpdateProdukController implements ISinkronUpdateProdukReques
         //looping unit list
         for (Item item : items){
 
-            //jika ada yg belum sync insert
-            if (item.getSync_insert() == Constants.STATUS_BELUM_SYNC){
-                item.setSync_insert(Constants.STATUS_SUDAH_SYNC);
+            //jika ada yg belum sync update
+            if (item.getSync_update() == Constants.STATUS_BELUM_SYNC){
+                item.setSync_update(Constants.STATUS_SUDAH_SYNC);
                 //commit perubahan
                 itemHelper.updateItem(item);
             }

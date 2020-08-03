@@ -39,6 +39,7 @@ public class SinkronDeleteProdukController implements ISinkronDeleteProdukReques
 
     SessionManager sessionManager;
     String business_id;
+    String auth_token;
 
 
     public SinkronDeleteProdukController(Context context, ISinkronDeleteProdukResult iSinkronDeleteProdukResult ) {
@@ -48,6 +49,7 @@ public class SinkronDeleteProdukController implements ISinkronDeleteProdukReques
 
         sessionManager=new SessionManager(context);
         business_id = sessionManager.getBussinessId();
+        auth_token = sessionManager.getAuthToken();
     }
 
 
@@ -80,12 +82,12 @@ public class SinkronDeleteProdukController implements ISinkronDeleteProdukReques
 
                 //kumpulkan data yang mau di-sync
                 iSinkronDeleteProduk = DeleteProdukUtil.getInterface();
-                iSinkronDeleteProduk.delete_produk(data).enqueue(new Callback<SinkronResponse>() {
+                iSinkronDeleteProduk.delete_produk(auth_token,data).enqueue(new Callback<SinkronResponse>() {
                     @Override
                     public void onResponse(Call<SinkronResponse> call, Response<SinkronResponse> response) {
                         Log.d("sukses", call.request().url().toString());
                         iSinkronDeleteProdukResult.onSinkronDeleteProdukSuccess(response.body());
-//                        ubahStatusSudahSync();
+                        ubahStatusSudahSync();
 //                        sweetAlertDialog.dismissWithAnimation();
                     }
 
@@ -153,7 +155,7 @@ public class SinkronDeleteProdukController implements ISinkronDeleteProdukReques
         if (jumlah == 0){
             //jika tidak ada data yang di-sync
             //return String kosongan
-            hasil = "";
+            hasil = "[]";
         }else{
             hasil =  jsonArray.toString();
         }
@@ -164,5 +166,21 @@ public class SinkronDeleteProdukController implements ISinkronDeleteProdukReques
     @Override
     public void ubahStatusSudahSync() {
 
+        //init sqlite
+        itemHelper = new ItemHelper(context);
+
+        //get semua brand
+        List<Item> items = itemHelper.semuaItem();
+
+        //looping unit list
+        for (Item item : items){
+
+            //jika ada yg belum sync insert
+            if (item.getSync_delete() == Constants.STATUS_BELUM_SYNC){
+                item.setSync_delete(Constants.STATUS_SUDAH_SYNC);
+                //commit perubahan
+                itemHelper.updateItem(item);
+            }
+        }
     }
 }

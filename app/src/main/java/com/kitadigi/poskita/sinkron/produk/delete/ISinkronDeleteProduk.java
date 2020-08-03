@@ -1,6 +1,7 @@
 package com.kitadigi.poskita.sinkron.produk.delete;
 
 import com.kitadigi.poskita.sinkron.retrofit.SinkronResponse;
+import com.kitadigi.poskita.util.Constants;
 import com.kitadigi.poskita.util.Url;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public interface ISinkronDeleteProduk {
     @FormUrlEncoded
     @POST(Url.SINKRON_DELETE_PRODUK)
     Call<SinkronResponse> delete_produk(
+            @Header(Constants.auth_token) String auth_token,
             @Field("data") String data
     );
 }

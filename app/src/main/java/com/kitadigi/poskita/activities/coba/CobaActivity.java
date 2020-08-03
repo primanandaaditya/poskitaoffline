@@ -46,9 +46,11 @@ import com.kitadigi.poskita.sinkron.kategori.insert.ISinkronAddKategoriResult;
 import com.kitadigi.poskita.sinkron.kategori.insert.SinkronInsertKategoriController;
 import com.kitadigi.poskita.sinkron.kategori.update.ISinkronUpdateKategoriResult;
 import com.kitadigi.poskita.sinkron.kategori.update.SinkronUpdateKategoriController;
+import com.kitadigi.poskita.sinkron.produk.delete.ISinkronDeleteProdukResult;
 import com.kitadigi.poskita.sinkron.produk.delete.SinkronDeleteProdukController;
 import com.kitadigi.poskita.sinkron.produk.insert.ISinkronAddProdukResult;
 import com.kitadigi.poskita.sinkron.produk.insert.SinkronInsertProdukController;
+import com.kitadigi.poskita.sinkron.produk.update.ISinkronUpdateProdukResult;
 import com.kitadigi.poskita.sinkron.produk.update.SinkronUpdateProdukController;
 import com.kitadigi.poskita.sinkron.retrofit.SinkronResponse;
 import com.kitadigi.poskita.sinkron.unit.delete.ISinkronDeleteUnitResult;
@@ -66,7 +68,7 @@ public class CobaActivity extends BaseActivity implements
         ISinkronAddKategoriResult, ISinkronUpdateKategoriResult, ISinkronDeleteKategoriResult,
         ISinkronAddBrandResult, ISinkronUpdateBrandResult, ISinkronDeleteBrandResult,
         ISinkronAddUnitResult, ISinkronUpdateUnitResult, ISinkronDeleteUnitResult,
-        ISinkronAddProdukResult
+        ISinkronAddProdukResult, ISinkronUpdateProdukResult, ISinkronDeleteProdukResult
 
 {
 
@@ -250,14 +252,45 @@ public class CobaActivity extends BaseActivity implements
     @Override
     public void onSinkronAddProdukSuccess(SinkronResponse sinkronResponse) {
         if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
-            this.showToast(sinkronResponse.getStatus().getMessage());
-//            sinkronInsertProdukController = new SinkronInsertProdukController(CobaActivity.this, this);
-//            sinkronInsertProdukController.insert_produk();
+//            this.showToast(sinkronResponse.getStatus().getMessage());
+
+            sinkronUpdateProdukController = new SinkronUpdateProdukController(CobaActivity.this,this);
+            sinkronUpdateProdukController.update_produk();
         }
     }
 
     @Override
     public void onSinkronAddProdukError(String error) {
+        this.showToast(error);
+    }
+
+    @Override
+    public void onSinkronUpdateProdukSuccess(SinkronResponse sinkronResponse) {
+        if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
+//            this.showToast(sinkronResponse.getStatus().getMessage());
+
+            sinkronDeleteProdukController =new SinkronDeleteProdukController(CobaActivity.this, this);
+            sinkronDeleteProdukController.delete_produk();
+        }
+    }
+
+    @Override
+    public void onSinkronUpdateProdukError(String error) {
+        this.showToast(error);
+    }
+
+    @Override
+    public void onSinkronDeleteProdukSuccess(SinkronResponse sinkronResponse) {
+        if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
+            this.showToast(sinkronResponse.getStatus().getMessage());
+
+//            sinkronDeleteProdukController =new SinkronDeleteProdukController(CobaActivity.this, this);
+//            sinkronDeleteProdukController.delete_produk();
+        }
+    }
+
+    @Override
+    public void onSinkronDeleteProdukError(String error) {
         this.showToast(error);
     }
 }

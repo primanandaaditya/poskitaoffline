@@ -140,7 +140,7 @@ public class SinkronDeleteUnitController implements ISinkronDeleteUnitRequest {
 //                    jsonObject.put("business_id",business_id);
 //                    jsonObject.put("short_name", unit.getSingkatan());
 //                    jsonObject.put("created_by","1");
-//                    jsonObject.put("allow_decimal",0);
+//                    jsonObject.put("allow_decimal","0");
 
                     //tambahkan ke JSON
                     jsonArray.put(jsonObject);

@@ -251,12 +251,7 @@ public class SinkronInsertProdukController implements ISinkronAddProdukRequest {
 
                         }
 
-
-
-
                     }
-
-
                 }
 
                 jumlah = jumlah + 1;

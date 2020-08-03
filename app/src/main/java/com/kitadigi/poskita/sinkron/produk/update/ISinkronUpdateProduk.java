@@ -1,6 +1,7 @@
 package com.kitadigi.poskita.sinkron.produk.update;
 
 import com.kitadigi.poskita.sinkron.retrofit.SinkronResponse;
+import com.kitadigi.poskita.util.Constants;
 import com.kitadigi.poskita.util.Url;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface ISinkronUpdateProduk {
     @Multipart
     @POST(Url.SINKRON_UPDATE_PRODUK)
     Call<SinkronResponse> update_produk(
-            @Header("Authorization") String Authorization,
+            @Header(Constants.auth_token) String auth_token,
             @Part("data") RequestBody data,
             @Part List<MultipartBody.Part> upload
     );
