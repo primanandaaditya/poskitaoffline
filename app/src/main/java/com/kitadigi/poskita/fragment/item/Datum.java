@@ -5,11 +5,38 @@ public class Datum {
 
     String id,category_id,sub_category_id,units_id,brands_id,types,code_product,name_product,brands_name,name_category;
     String name_sub_category,units_name,image,purchase_price,sell_price,qty_stock,qty_minimum,additional;
+    String category_mobile_id, brand_mobile_id, unit_mobile_id;
 
     String mobile_id;
 
     public Datum(){
 
+    }
+
+
+    public Datum(String id, String category_id, String sub_category_id, String units_id, String brands_id, String types, String code_product, String name_product, String brands_name, String name_category, String name_sub_category, String units_name, String image, String purchase_price, String sell_price, String qty_stock, String qty_minimum, String additional, String category_mobile_id, String brand_mobile_id, String unit_mobile_id, String mobile_id) {
+        this.id = id;
+        this.category_id = category_id;
+        this.sub_category_id = sub_category_id;
+        this.units_id = units_id;
+        this.brands_id = brands_id;
+        this.types = types;
+        this.code_product = code_product;
+        this.name_product = name_product;
+        this.brands_name = brands_name;
+        this.name_category = name_category;
+        this.name_sub_category = name_sub_category;
+        this.units_name = units_name;
+        this.image = image;
+        this.purchase_price = purchase_price;
+        this.sell_price = sell_price;
+        this.qty_stock = qty_stock;
+        this.qty_minimum = qty_minimum;
+        this.additional = additional;
+        this.category_mobile_id = category_mobile_id;
+        this.brand_mobile_id = brand_mobile_id;
+        this.unit_mobile_id = unit_mobile_id;
+        this.mobile_id = mobile_id;
     }
 
     public Datum(String id, String category_id, String sub_category_id, String units_id, String brands_id, String types, String code_product, String name_product, String brands_name, String name_category, String name_sub_category, String units_name, String image, String purchase_price, String sell_price, String qty_stock, String qty_minimum, String additional) {
@@ -31,6 +58,30 @@ public class Datum {
         this.qty_stock = qty_stock;
         this.qty_minimum = qty_minimum;
         this.additional = additional;
+    }
+
+    public String getCategory_mobile_id() {
+        return category_mobile_id;
+    }
+
+    public void setCategory_mobile_id(String category_mobile_id) {
+        this.category_mobile_id = category_mobile_id;
+    }
+
+    public String getBrand_mobile_id() {
+        return brand_mobile_id;
+    }
+
+    public void setBrand_mobile_id(String brand_mobile_id) {
+        this.brand_mobile_id = brand_mobile_id;
+    }
+
+    public String getUnit_mobile_id() {
+        return unit_mobile_id;
+    }
+
+    public void setUnit_mobile_id(String unit_mobile_id) {
+        this.unit_mobile_id = unit_mobile_id;
     }
 
     public String getMobile_id() {

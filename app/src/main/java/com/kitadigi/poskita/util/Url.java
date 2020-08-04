@@ -77,7 +77,7 @@ public class Url {
     public static final String SINKRON_UPDATE_PRODUK = "product/update/";
     public static final String SINKRON_DELETE_PRODUK= "product/delete/";
 
-    public static final String SINKRON_PENJUALAN = "jual/insert.php";
+    public static final String SINKRON_PENJUALAN = "transaksi_penjualan/insert/";
     public static final String SINKRON_PEMBELIAN = "beli/insert.php";
     public static final String SINKRON_PENJUALAN_GET_MASTER = "jual/get_master.php";
     public static final String SINKRON_PENJUALAN_GET_DETAIL = "jual/get_detail.php";

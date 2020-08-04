@@ -45,6 +45,7 @@ public class Constants {
     public final static String KODE_200 = "200";
     public final static String ICON_STOCK = "icon_stock.png";
     public final static String ICON_STOCK_PATH = "image/icon_stock.png";
+    public final static String KEY_SUCCESS = "success";
 
     public static Integer maxInput = 100;
     public static Integer maxInput50 = 50;

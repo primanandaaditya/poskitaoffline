@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.base.BaseActivity;
 import com.kitadigi.poskita.dao.brand.Brand;
@@ -22,8 +24,10 @@ import com.kitadigi.poskita.fragment.item.BarangResult;
 import com.kitadigi.poskita.fragment.item.Datum;
 import com.kitadigi.poskita.fragment.item.IBarangResult;
 import com.kitadigi.poskita.fragment.item.dengan_header.BarangController;
+import com.kitadigi.poskita.fragment.kategori.dengan_header.IKategori;
 import com.kitadigi.poskita.fragment.kategori.dengan_header.IKategoriResult;
 import com.kitadigi.poskita.fragment.kategori.dengan_header.KategoriController;
+import com.kitadigi.poskita.fragment.kategori.dengan_header.KategoriModel;
 import com.kitadigi.poskita.fragment.unit.UnitData;
 import com.kitadigi.poskita.fragment.unit.dengan_header.IUnitResult;
 import com.kitadigi.poskita.fragment.unit.dengan_header.UnitController;
@@ -61,6 +65,7 @@ import com.kitadigi.poskita.sinkron.unit.update.ISinkronUpdateUnitResult;
 import com.kitadigi.poskita.sinkron.unit.update.SinkronUpdateUnitController;
 import com.kitadigi.poskita.util.Constants;
 import com.kitadigi.poskita.util.StringUtil;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -68,10 +73,14 @@ public class CobaActivity extends BaseActivity implements
         ISinkronAddKategoriResult, ISinkronUpdateKategoriResult, ISinkronDeleteKategoriResult,
         ISinkronAddBrandResult, ISinkronUpdateBrandResult, ISinkronDeleteBrandResult,
         ISinkronAddUnitResult, ISinkronUpdateUnitResult, ISinkronDeleteUnitResult,
-        ISinkronAddProdukResult, ISinkronUpdateProdukResult, ISinkronDeleteProdukResult
+        ISinkronAddProdukResult, ISinkronUpdateProdukResult, ISinkronDeleteProdukResult,
+        IKategoriResult, IBrandResult, IUnitResult, IBarangResult
 
 {
 
+    ImageView iv;
+
+    //sinkronisasi upload (insert,update,delete)
     SinkronInsertKategoriController sinkronInsertKategoriController;
     SinkronUpdateKategoriController sinkronUpdateKategoriController;
     SinkronDeleteKategoriController sinkronDeleteKategoriController;
@@ -92,6 +101,13 @@ public class CobaActivity extends BaseActivity implements
     GetBeliDetailController getBeliDetailController;
 
 
+    //sinkronisasi download/get
+    KategoriController kategoriController;
+    BrandController brandController;
+    UnitController unitController;
+    BarangController barangController;
+
+
     Button button;
     TextView textView;
 
@@ -104,6 +120,13 @@ public class CobaActivity extends BaseActivity implements
 
         button=(Button)findViewById(R.id.button);
         textView=(TextView)findViewById(R.id.textView);
+        iv=(ImageView)findViewById(R.id.iv);
+
+
+
+        Picasso.with(CobaActivity.this)
+                .load("http://192.168.1.16:8888/upload_api//master_product/img/1/83/1596440187_cache3KO3ansxT3B5xSBVkLYh.jpg")
+                .into(iv);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -282,15 +305,76 @@ public class CobaActivity extends BaseActivity implements
     @Override
     public void onSinkronDeleteProdukSuccess(SinkronResponse sinkronResponse) {
         if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
-            this.showToast(sinkronResponse.getStatus().getMessage());
+//            this.showToast(sinkronResponse.getStatus().getMessage());
 
-//            sinkronDeleteProdukController =new SinkronDeleteProdukController(CobaActivity.this, this);
-//            sinkronDeleteProdukController.delete_produk();
+            kategoriController = new KategoriController(CobaActivity.this,this);
+            kategoriController.getKategoriList();
+
         }
     }
 
     @Override
     public void onSinkronDeleteProdukError(String error) {
+        this.showToast(error);
+    }
+
+    @Override
+    public void onKategoriSuccess(KategoriModel kategoriModel, List<Kategori> kategoriOffline) {
+        if (kategoriModel.getStatus().getCode().equals(Constants.KODE_200)){
+//            this.showToast(kategoriModel.getStatus().getMessage());
+
+            brandController = new BrandController(CobaActivity.this, this);
+            brandController.getBrandList();
+        }
+    }
+
+    @Override
+    public void onKategoriError(String error, List<Kategori> kategoriOffline) {
+        this.showToast(error);
+    }
+
+    @Override
+    public void onBrandSuccess(BrandModel brandModel, List<Brand> brandOffline) {
+        if (brandModel.getMessage().equals("success")){
+//            this.showToast(kategoriModel.getStatus().getMessage());
+
+           unitController = new UnitController(CobaActivity.this,this);
+           unitController.getUnitList();
+        }
+    }
+
+    @Override
+    public void onBrandError(String error, List<Brand> brandOffline) {
+        this.showToast(error);
+    }
+
+    @Override
+    public void onUnitSuccess(UnitModel unitModel, List<Unit> units) {
+        if (unitModel.getStatus().getCode().equals(Constants.KODE_200)){
+//            this.showToast(unitModel.getStatus().getMessage());
+
+            barangController = new BarangController(CobaActivity.this, this);
+            barangController.getBarang();
+        }
+    }
+
+    @Override
+    public void onUnitError(String error, List<Unit> units) {
+        this.showToast(error);
+    }
+
+    @Override
+    public void onSuccess(BarangResult barangResult, List<Item> items) {
+        if (barangResult.getMessage().equals(Constants.KEY_SUCCESS)){
+            this.showToast(barangResult.getMessage());
+
+//            barangController = new BarangController(CobaActivity.this, this);
+//            barangController.getBarang();
+        }
+    }
+
+    @Override
+    public void onError(String error, List<Item> items) {
         this.showToast(error);
     }
 }

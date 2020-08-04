@@ -45,6 +45,7 @@ public class SinkronInsertJualController implements ISinkronAddJualRequest {
     SessionManager sessionManager;
     String business_id;
     String nomorJualMaster, nomorJualDetail;
+    String auth_token;
 
     public SinkronInsertJualController(Context context, ISinkronAddJualResult iSinkronAddJualResult) {
         this.context = context;
@@ -53,6 +54,7 @@ public class SinkronInsertJualController implements ISinkronAddJualRequest {
         internetChecker=new InternetChecker();
         sessionManager = new SessionManager(context);
         business_id = sessionManager.getBussinessId();
+        auth_token = sessionManager.getAuthToken();
     }
 
     @Override
@@ -83,7 +85,7 @@ public class SinkronInsertJualController implements ISinkronAddJualRequest {
 
                 //kumpulkan data yang mau di-sync
                 iSinkronInsertJual = AddJualUtil.getInterface();
-                iSinkronInsertJual.insert_jual(data).enqueue(new Callback<SinkronResponse>() {
+                iSinkronInsertJual.insert_jual(auth_token,data).enqueue(new Callback<SinkronResponse>() {
                     @Override
                     public void onResponse(Call<SinkronResponse> call, Response<SinkronResponse> response) {
 
@@ -204,7 +206,7 @@ public class SinkronInsertJualController implements ISinkronAddJualRequest {
         if (jumlah == 0){
             //jika tidak ada data yang di-sync
             //return String kosongan
-            hasil = "";
+            hasil = "[]";
         }else{
             hasil =  jsonJualMaster.toString();
             Log.d("penjualan", hasil);

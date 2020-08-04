@@ -24,4 +24,14 @@
         tools:layout_editor_absoluteX="12dp"
         tools:layout_editor_absoluteY="110dp" />
 
+    <ImageView
+        android:visibility="visible"
+        android:src="@drawable/spinner"
+        android:id="@+id/iv"
+        android:layout_width="@dimen/dimen_80"
+        android:layout_height="@dimen/dimen_80"
+        android:scaleType="fitXY">
+
+    </ImageView>
+
 </LinearLayout>

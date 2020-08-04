@@ -150,7 +150,7 @@ public class BarangAdapter extends RecyclerView.Adapter<BarangAdapter.DataViewHo
 
             }else{
                 //tidak ada gambar
-
+                Log.d("gambar adapter","file tidak ada " + item.getImage());
             }
 
 

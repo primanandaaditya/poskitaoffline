@@ -1,8 +1,14 @@
 package com.kitadigi.poskita.fragment.item.dengan_header;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.util.Log;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.kitadigi.poskita.R;
 import com.kitadigi.poskita.dao.produk.Item;
 import com.kitadigi.poskita.dao.produk.ItemHelper;
@@ -19,6 +25,9 @@ import com.kitadigi.poskita.util.SessionManager;
 import com.kitadigi.poskita.util.StringUtil;
 import com.kitadigi.poskita.util.Url;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
+import java.net.URL;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Call;
@@ -43,6 +52,7 @@ public class BarangController implements IBarangRequest {
     String lokasi;
     boolean showDialog=true;
     String namaFile;
+    String genymotionHost;
 
     boolean offlineMode;
 
@@ -74,6 +84,7 @@ public class BarangController implements IBarangRequest {
         //isi string lokasi dengan path
         //lihat fungsi picassoImageTarget di FileUtil.java
         lokasi=FileUtil.getFotoProduk(context);
+
     }
 
     @Override
@@ -165,8 +176,9 @@ public class BarangController implements IBarangRequest {
                                 //sedangkan yang kita butuhkan cuma icon_stock.png-nya saja
                                 //jadi kita pisah dulu, lalu di-set ke datum.getImage-nya lagi
 
+//                                Log.d("url gambar upload", datum.getImage());
                                 namaFile = StringUtil.getFileNameFromURL(datum.getImage());
-                                Log.d("namaFile", namaFile);
+//                                Log.d("namaFile", namaFile);
 
 //                                datum.setImage(namaFile);
 
@@ -180,9 +192,27 @@ public class BarangController implements IBarangRequest {
                                 //simpan thumbnail gambar di hp user
                                 //simpan gambar di hp user lewat picasso
                                 //dengan nama file-nya = datum.getImage()
-                                Picasso.with(context)
-                                        .load(datum.getImage())
-                                        .into(FileUtil.picassoImageTarget(context,namaFile));
+                                genymotionHost = datum.getImage().replace("localhost","192.168.1.16");
+//                                Log.d("genymotionhost",genymotionHost);
+
+//                                Glide.with(context)
+//                                        .load(genymotionHost)
+//                                        .into(new SimpleTarget<Drawable>() {
+//                                            @Override
+//                                            public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+//
+//                                                FileUtil.glideSaveImage(context,resource, namaFile);
+//
+//                                            }
+//                                        });
+
+//                                Picasso.with(context)
+//                                        .load(genymotionHost)
+//                                        .into(FileUtil.picassoImageTarget(context,namaFile));
+
+
+
+                                FileUtil.downloadFile(context, genymotionHost);
                             }
 
                         }
