@@ -6,6 +6,7 @@ import android.util.Log;
 import com.kitadigi.poskita.dao.jualmaster.JualMaster;
 import com.kitadigi.poskita.dao.jualmaster.JualMasterHelper;
 import com.kitadigi.poskita.util.Constants;
+import com.kitadigi.poskita.util.SessionManager;
 
 import java.util.List;
 
@@ -18,16 +19,24 @@ public class GetJualMasterController implements IGetJualMasterRequest {
     Context context;
     ISinkronGetJualMaster iSinkronGetJualMaster;
     IGetJualMasterResult iGetJualMasterResult;
+    SessionManager sessionManager;
+    String auth_token;
 
     public GetJualMasterController(Context context, IGetJualMasterResult iGetJualMasterResult) {
         this.context = context;
         this.iGetJualMasterResult = iGetJualMasterResult;
+
+
     }
 
     @Override
     public void getJualMaster() {
+
+        sessionManager = new SessionManager(context);
+        auth_token = sessionManager.getAuthToken();
+
         iSinkronGetJualMaster = GetJualMasterUtil.getInterface();
-        iSinkronGetJualMaster.getMasterJual().enqueue(new Callback<MasterModel>() {
+        iSinkronGetJualMaster.getMasterJual(auth_token).enqueue(new Callback<MasterModel>() {
             @Override
             public void onResponse(Call<MasterModel> call, Response<MasterModel> response) {
                 Log.d("sukses", call.request().url().toString());

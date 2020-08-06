@@ -14,6 +14,7 @@ import com.kitadigi.poskita.sinkron.beli.get_master.IGetBeliMasterResult;
 import com.kitadigi.poskita.sinkron.beli.get_master.ISinkronGetBeliMaster;
 import com.kitadigi.poskita.sinkron.beli.get_master.PembelianMaster;
 import com.kitadigi.poskita.util.Constants;
+import com.kitadigi.poskita.util.SessionManager;
 
 import java.util.List;
 
@@ -26,17 +27,23 @@ public class GetBeliDetailController implements IGetBeliDetailRequest {
     Context context;
     ISinkronGetBeliDetail iSinkronGetBeliDetail;
     IGetBeliDetailResult iGetBeliDetailResult;
+    SessionManager sessionManager;
+    String auth_token;
 
     public GetBeliDetailController(Context context, IGetBeliDetailResult iGetBeliDetailResult) {
         this.context = context;
         this.iGetBeliDetailResult = iGetBeliDetailResult;
+
     }
 
     @Override
     public void getBeliDetail() {
 
+        sessionManager =new SessionManager(context);
+        auth_token = sessionManager.getAuthToken();
+
         iSinkronGetBeliDetail = GetBeliDetailUtil.getInterface();
-        iSinkronGetBeliDetail.getBeliDetail().enqueue(new Callback<GetBeliDetailModel>() {
+        iSinkronGetBeliDetail.getBeliDetail(auth_token).enqueue(new Callback<GetBeliDetailModel>() {
             @Override
             public void onResponse(Call<GetBeliDetailModel> call, Response<GetBeliDetailModel> response) {
 

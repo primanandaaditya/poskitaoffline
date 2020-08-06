@@ -14,6 +14,7 @@ import com.kitadigi.poskita.sinkron.jual.get_master.ISinkronGetJualMaster;
 import com.kitadigi.poskita.sinkron.jual.get_master.MasterModel;
 import com.kitadigi.poskita.sinkron.jual.get_master.PenjualanMaster;
 import com.kitadigi.poskita.util.Constants;
+import com.kitadigi.poskita.util.SessionManager;
 
 import java.util.List;
 
@@ -26,19 +27,25 @@ public class GetJualDetailController implements IGetJualDetailRequest {
     Context context;
     ISinkronGetJualDetail iSinkronGetJualDetail;
     IGetJualDetailResult iGetJualDetailResult;
+    SessionManager sessionManager;
+    String auth_token;
 
 
     public GetJualDetailController(Context context, IGetJualDetailResult iGetJualDetailResult) {
         this.context = context;
         this.iGetJualDetailResult = iGetJualDetailResult;
+
     }
 
 
     @Override
     public void getJualDetail() {
 
+        sessionManager = new SessionManager(context);
+        auth_token = sessionManager.getAuthToken();
+
         iSinkronGetJualDetail = GetJualDetailUtil.getInterface();
-        iSinkronGetJualDetail.getDetailJual().enqueue(new Callback<GetDetailModel>() {
+        iSinkronGetJualDetail.getDetailJual(auth_token).enqueue(new Callback<GetDetailModel>() {
             @Override
             public void onResponse(Call<GetDetailModel> call, Response<GetDetailModel> response) {
                 Log.d("sukses", call.request().url().toString());

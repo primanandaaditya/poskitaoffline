@@ -47,6 +47,8 @@ public class SinkronInsertBeliController implements ISinkronAddBeliRequest {
     String business_id;
     String nomorBeliMaster, nomorBeliDetail;
 
+    String auth_token;
+
     public SinkronInsertBeliController(Context context, ISinkronAddBeliResult iSinkronAddBeliResult) {
         this.context = context;
         this.iSinkronAddBeliResult = iSinkronAddBeliResult;
@@ -54,6 +56,7 @@ public class SinkronInsertBeliController implements ISinkronAddBeliRequest {
         internetChecker=new InternetChecker();
         sessionManager = new SessionManager(context);
         business_id = sessionManager.getBussinessId();
+        auth_token = sessionManager.getAuthToken();
     }
 
     @Override
@@ -84,7 +87,7 @@ public class SinkronInsertBeliController implements ISinkronAddBeliRequest {
 
                 //kumpulkan data yang mau di-sync
                 iSinkronInsertBeli = AddBeliUtil.getInterface();
-                iSinkronInsertBeli.insert_beli(data).enqueue(new Callback<SinkronResponse>() {
+                iSinkronInsertBeli.insert_beli(auth_token,data).enqueue(new Callback<SinkronResponse>() {
                     @Override
                     public void onResponse(Call<SinkronResponse> call, Response<SinkronResponse> response) {
 
@@ -170,7 +173,7 @@ public class SinkronInsertBeliController implements ISinkronAddBeliRequest {
 
                     try {
                         //nama json
-                        jsonObject.put("nomor_trx", nomorBeliDetail);
+//                        jsonObject.put("nomor_trx", nomorBeliDetail);
                         jsonObject.put("mobile_id_produk",beliDetail.getKode_id_produk());
                         jsonObject.put("qty",beliDetail.getQty().toString());
                         jsonObject.put("price",beliDetail.getPrice().toString());
@@ -191,13 +194,13 @@ public class SinkronInsertBeliController implements ISinkronAddBeliRequest {
                 try {
 
                     //nama json
-                    jsonObject.put("tanggal", beliMaster.getTanggal());
-                    jsonObject.put("nomor_trx", beliMaster.getNomor());
-                    jsonObject.put("contact_id",beliMaster.getContact_id());
                     jsonObject.put("supplier_id",beliMaster.getSupplier_id());
+                    jsonObject.put("mobile_id", beliMaster.getNomor());
                     jsonObject.put("ref_no",beliMaster.getRef_no());
                     jsonObject.put("total_pay",beliMaster.getTotal_pay().toString());
                     jsonObject.put("total_price",beliMaster.getTotal_price().toString());
+                    jsonObject.put("transaction_date", beliMaster.getTanggal());
+//                    jsonObject.put("contact_id",beliMaster.getContact_id());
                     jsonObject.put("detail", jsonBeliDetail);
                     //tambahkan ke JSON
                     jsonBeliMaster.put(jsonObject);
@@ -214,7 +217,7 @@ public class SinkronInsertBeliController implements ISinkronAddBeliRequest {
         if (jumlah == 0){
             //jika tidak ada data yang di-sync
             //return String kosongan
-            hasil = "";
+            hasil = "[]";
         }else{
             hasil =  jsonBeliMaster.toString();
 

@@ -34,6 +34,7 @@ import com.kitadigi.poskita.fragment.unit.dengan_header.UnitController;
 import com.kitadigi.poskita.fragment.unit.dengan_header.UnitModel;
 import com.kitadigi.poskita.sinkron.beli.get_detail.GetBeliDetailController;
 import com.kitadigi.poskita.sinkron.beli.get_master.GetBeliMasterController;
+import com.kitadigi.poskita.sinkron.beli.insert.ISinkronAddBeliResult;
 import com.kitadigi.poskita.sinkron.beli.insert.SinkronInsertBeliController;
 import com.kitadigi.poskita.sinkron.brand.delete.ISinkronDeleteBrandResult;
 import com.kitadigi.poskita.sinkron.brand.delete.SinkronDeleteBrandController;
@@ -43,6 +44,7 @@ import com.kitadigi.poskita.sinkron.brand.update.ISinkronUpdateBrandResult;
 import com.kitadigi.poskita.sinkron.brand.update.SinkronUpdateBrandController;
 import com.kitadigi.poskita.sinkron.jual.get_detail.GetJualDetailController;
 import com.kitadigi.poskita.sinkron.jual.get_master.GetJualMasterController;
+import com.kitadigi.poskita.sinkron.jual.insert.ISinkronAddJualResult;
 import com.kitadigi.poskita.sinkron.jual.insert.SinkronInsertJualController;
 import com.kitadigi.poskita.sinkron.kategori.delete.ISinkronDeleteKategoriResult;
 import com.kitadigi.poskita.sinkron.kategori.delete.SinkronDeleteKategoriController;
@@ -74,7 +76,9 @@ public class CobaActivity extends BaseActivity implements
         ISinkronAddBrandResult, ISinkronUpdateBrandResult, ISinkronDeleteBrandResult,
         ISinkronAddUnitResult, ISinkronUpdateUnitResult, ISinkronDeleteUnitResult,
         ISinkronAddProdukResult, ISinkronUpdateProdukResult, ISinkronDeleteProdukResult,
+        ISinkronAddJualResult, ISinkronAddBeliResult,
         IKategoriResult, IBrandResult, IUnitResult, IBarangResult
+
 
 {
 
@@ -307,9 +311,8 @@ public class CobaActivity extends BaseActivity implements
         if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
 //            this.showToast(sinkronResponse.getStatus().getMessage());
 
-            kategoriController = new KategoriController(CobaActivity.this,this);
-            kategoriController.getKategoriList();
-
+            sinkronInsertJualController = new SinkronInsertJualController(CobaActivity.this, this);
+            sinkronInsertJualController.insert_jual();
         }
     }
 
@@ -318,14 +321,43 @@ public class CobaActivity extends BaseActivity implements
         this.showToast(error);
     }
 
+
+    @Override
+    public void onSinkronAddJualSuccess(SinkronResponse sinkronResponse) {
+        if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
+
+            sinkronInsertBeliController = new SinkronInsertBeliController(CobaActivity.this,this);
+            sinkronInsertBeliController.insert_beli();
+//            this.showToast(sinkronResponse.getStatus().getMessage());
+        }
+    }
+
+    @Override
+    public void onSinkronAddJualError(String error) {
+        this.showToast(error);
+    }
+
+    @Override
+    public void onSinkronAddBeliSuccess(SinkronResponse sinkronResponse) {
+
+        if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
+
+
+            kategoriController = new KategoriController(CobaActivity.this, this);
+            kategoriController.getKategoriList();
+//            this.showToast(sinkronResponse.getStatus().getMessage());
+        }
+    }
+
+    @Override
+    public void onSinkronAddBeliError(String error) {
+        this.showToast(error);
+    }
+
     @Override
     public void onKategoriSuccess(KategoriModel kategoriModel, List<Kategori> kategoriOffline) {
-        if (kategoriModel.getStatus().getCode().equals(Constants.KODE_200)){
-//            this.showToast(kategoriModel.getStatus().getMessage());
-
-            brandController = new BrandController(CobaActivity.this, this);
-            brandController.getBrandList();
-        }
+       brandController = new BrandController(CobaActivity.this, this);
+       brandController.getBrandList();
     }
 
     @Override
@@ -335,12 +367,8 @@ public class CobaActivity extends BaseActivity implements
 
     @Override
     public void onBrandSuccess(BrandModel brandModel, List<Brand> brandOffline) {
-        if (brandModel.getMessage().equals("success")){
-//            this.showToast(kategoriModel.getStatus().getMessage());
-
-           unitController = new UnitController(CobaActivity.this,this);
-           unitController.getUnitList();
-        }
+        unitController = new UnitController(CobaActivity.this, this);
+        unitController.getUnitList();
     }
 
     @Override
@@ -350,12 +378,8 @@ public class CobaActivity extends BaseActivity implements
 
     @Override
     public void onUnitSuccess(UnitModel unitModel, List<Unit> units) {
-        if (unitModel.getStatus().getCode().equals(Constants.KODE_200)){
-//            this.showToast(unitModel.getStatus().getMessage());
-
-            barangController = new BarangController(CobaActivity.this, this);
-            barangController.getBarang();
-        }
+        barangController = new BarangController(CobaActivity.this, this);
+        barangController.getBarang();
     }
 
     @Override
@@ -365,16 +389,15 @@ public class CobaActivity extends BaseActivity implements
 
     @Override
     public void onSuccess(BarangResult barangResult, List<Item> items) {
-        if (barangResult.getMessage().equals(Constants.KEY_SUCCESS)){
-            this.showToast(barangResult.getMessage());
 
-//            barangController = new BarangController(CobaActivity.this, this);
-//            barangController.getBarang();
-        }
     }
 
     @Override
     public void onError(String error, List<Item> items) {
+
         this.showToast(error);
     }
+
+
+
 }

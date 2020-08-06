@@ -195,22 +195,6 @@ public class BarangController implements IBarangRequest {
                                 genymotionHost = datum.getImage().replace("localhost","192.168.1.16");
 //                                Log.d("genymotionhost",genymotionHost);
 
-//                                Glide.with(context)
-//                                        .load(genymotionHost)
-//                                        .into(new SimpleTarget<Drawable>() {
-//                                            @Override
-//                                            public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
-//
-//                                                FileUtil.glideSaveImage(context,resource, namaFile);
-//
-//                                            }
-//                                        });
-
-//                                Picasso.with(context)
-//                                        .load(genymotionHost)
-//                                        .into(FileUtil.picassoImageTarget(context,namaFile));
-
-
 
                                 FileUtil.downloadFile(context, genymotionHost);
                             }

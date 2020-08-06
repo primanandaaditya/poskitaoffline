@@ -78,11 +78,11 @@ public class Url {
     public static final String SINKRON_DELETE_PRODUK= "product/delete/";
 
     public static final String SINKRON_PENJUALAN = "transaksi_penjualan/insert/";
-    public static final String SINKRON_PEMBELIAN = "beli/insert.php";
-    public static final String SINKRON_PENJUALAN_GET_MASTER = "jual/get_master.php";
-    public static final String SINKRON_PENJUALAN_GET_DETAIL = "jual/get_detail.php";
-    public static final String SINKRON_PEMBELIAN_GET_MASTER = "beli/get_master.php";
-    public static final String SINKRON_PEMBELIAN_GET_DETAIL = "beli/get_detail.php";
+    public static final String SINKRON_PEMBELIAN = "transaksi_pembelian/insert/";
+    public static final String SINKRON_PENJUALAN_GET_MASTER = "transaksi_penjualan/get_data/";
+    public static final String SINKRON_PENJUALAN_GET_DETAIL = "transaksi_penjualan/get_data_detail/";
+    public static final String SINKRON_PEMBELIAN_GET_MASTER = "transaksi_pembelian/get_data/";
+    public static final String SINKRON_PEMBELIAN_GET_DETAIL = "transaksi_pembelian/get_data_detail/";
 
 
     public static final String SINKRON_REGISTRASI = "register/register.php";

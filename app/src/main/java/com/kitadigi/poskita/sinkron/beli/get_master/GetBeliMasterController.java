@@ -15,6 +15,7 @@ import com.kitadigi.poskita.sinkron.jual.get_master.ISinkronGetJualMaster;
 import com.kitadigi.poskita.sinkron.jual.get_master.MasterModel;
 import com.kitadigi.poskita.sinkron.jual.get_master.PenjualanMaster;
 import com.kitadigi.poskita.util.Constants;
+import com.kitadigi.poskita.util.SessionManager;
 
 import java.util.List;
 
@@ -27,17 +28,24 @@ public class GetBeliMasterController implements IGetBeliMasterRequest {
     Context context;
     ISinkronGetBeliMaster iSinkronGetBeliMaster;
     IGetBeliMasterResult iGetBeliMasterResult;
+    SessionManager sessionManager;
+    String auth_token;
 
     public GetBeliMasterController(Context context, IGetBeliMasterResult iGetBeliMasterResult) {
         this.context = context;
         this.iGetBeliMasterResult = iGetBeliMasterResult;
+
+
     }
 
     @Override
     public void getBeliMaster() {
 
+        sessionManager = new SessionManager(context);
+        auth_token = sessionManager.getAuthToken();
+
         iSinkronGetBeliMaster = GetBeliMasterUtil.getInterface();
-        iSinkronGetBeliMaster.getBeliMaster().enqueue(new Callback<GetBeliMasterModel>() {
+        iSinkronGetBeliMaster.getBeliMaster(auth_token).enqueue(new Callback<GetBeliMasterModel>() {
             @Override
             public void onResponse(Call<GetBeliMasterModel> call, Response<GetBeliMasterModel> response) {
 

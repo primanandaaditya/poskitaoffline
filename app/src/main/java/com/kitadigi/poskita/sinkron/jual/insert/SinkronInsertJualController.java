@@ -163,7 +163,7 @@ public class SinkronInsertJualController implements ISinkronAddJualRequest {
 
                     try {
                         //nama json
-                        jsonObject.put("nomor_trx", nomorJualDetail);
+//                        jsonObject.put("nomor_trx", nomorJualDetail);
                         jsonObject.put("mobile_id_produk",jualDetail.getKode_id());
                         jsonObject.put("qty",jualDetail.getQty().toString());
                         jsonObject.put("price",jualDetail.getPrice().toString());
@@ -184,12 +184,15 @@ public class SinkronInsertJualController implements ISinkronAddJualRequest {
                 try {
 
                     //nama json
-                    jsonObject.put("tanggal", jualMaster.getTanggal());
-                    jsonObject.put("nomor_trx", jualMaster.getNomor());
                     jsonObject.put("contact_id",jualMaster.getContact_id());
-                    jsonObject.put("total_item", jualMaster.getTotal_item().toString());
+                    jsonObject.put("mobile_id", jualMaster.getNomor());
                     jsonObject.put("total_pay",jualMaster.getTotal_pay().toString());
                     jsonObject.put("total_price",jualMaster.getTotal_price().toString());
+                    jsonObject.put("transaction_date", jualMaster.getTanggal());
+
+
+//                    jsonObject.put("total_item", jualMaster.getTotal_item().toString());
+
                     jsonObject.put("detail", jsonJualDetail);
                     //tambahkan ke JSON
                     jsonJualMaster.put(jsonObject);
