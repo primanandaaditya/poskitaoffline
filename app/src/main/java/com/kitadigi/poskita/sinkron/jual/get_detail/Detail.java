@@ -5,9 +5,36 @@ public class Detail {
 
     String id;
     String nomor;
+    private String id_transaction_detail;
+    private String id_transaction;
+    private String mobile_id_transaction;
     String mobile_id_produk;
     String qty;
     String price;
+
+    public String getId_transaction_detail() {
+        return id_transaction_detail;
+    }
+
+    public void setId_transaction_detail(String id_transaction_detail) {
+        this.id_transaction_detail = id_transaction_detail;
+    }
+
+    public String getId_transaction() {
+        return id_transaction;
+    }
+
+    public void setId_transaction(String id_transaction) {
+        this.id_transaction = id_transaction;
+    }
+
+    public String getMobile_id_transaction() {
+        return mobile_id_transaction;
+    }
+
+    public void setMobile_id_transaction(String mobile_id_transaction) {
+        this.mobile_id_transaction = mobile_id_transaction;
+    }
 
     public String getId() {
         return id;

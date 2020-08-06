@@ -60,7 +60,7 @@ public class GetJualDetailController implements IGetJualDetailRequest {
                 GetDetailModel getDetailModel = response.body();
                 Log.d("status", String.valueOf(getDetailModel.status));
 
-                if (getDetailModel.status==true){
+                if (getDetailModel.getStatus().getMessage().equals(Constants.OK)){
 
                     //cek jumlah data yang diterima
                     Integer jumlah = getDetailModel.getPenjualan_detail().size();
@@ -91,7 +91,7 @@ public class GetJualDetailController implements IGetJualDetailRequest {
                             jualDetail = new JualDetail();
 
                             jualDetail.setKode_id(penjualanDetail.getDetail().getMobile_id_produk());
-                            jualDetail.setNomor(penjualanDetail.getDetail().getNomor());
+                            jualDetail.setNomor(penjualanDetail.getDetail().getId_transaction());
                             jualDetail.setPrice(Integer.parseInt(penjualanDetail.getDetail().getPrice()));
                             jualDetail.setQty(Integer.parseInt(penjualanDetail.getDetail().getQty()));
 

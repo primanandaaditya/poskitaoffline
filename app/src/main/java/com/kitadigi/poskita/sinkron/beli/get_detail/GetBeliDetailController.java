@@ -55,7 +55,7 @@ public class GetBeliDetailController implements IGetBeliDetailRequest {
                 GetBeliDetailModel getBeliDetailModel = response.body();
 
                 //jika status = true
-                if (getBeliDetailModel.getStatus()){
+                if (getBeliDetailModel.getStatus().getMessage().equals(Constants.OK)){
 
                     //cek jumlah data yang diterima
                     Integer jumlah = getBeliDetailModel.pembelian_detail.size();
@@ -84,7 +84,7 @@ public class GetBeliDetailController implements IGetBeliDetailRequest {
                             beliDetail = new BeliDetail();
 
                             beliDetail.setKode_id_produk(pembelianDetail.getDetail().getMobile_id());
-                            beliDetail.setNomor(pembelianDetail.getDetail().getNomor());
+                            beliDetail.setNomor(pembelianDetail.getDetail().getId_transaction());
                             beliDetail.setPrice(pembelianDetail.getDetail().getPrice());
                             beliDetail.setQty(pembelianDetail.getDetail().getQty());
 

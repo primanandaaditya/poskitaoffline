@@ -49,7 +49,7 @@ public class GetJualMasterController implements IGetJualMasterRequest {
 
                 MasterModel masterModel = response.body();
 
-                if (masterModel.status==true){
+                if (masterModel.getStatus().getMessage().equals(Constants.OK)){
 
                     //cek jumlah data yang diterima
                     Integer jumlah = masterModel.penjualan_master.size();
@@ -78,7 +78,7 @@ public class GetJualMasterController implements IGetJualMasterRequest {
                             jualMaster = new JualMaster();
 
                             jualMaster.setContact_id(penjualanMaster.getMaster().getContact_id());
-                            jualMaster.setNomor(penjualanMaster.getMaster().getNomor());
+                            jualMaster.setNomor(penjualanMaster.getMaster().getId_transaction());
                             jualMaster.setTanggal(penjualanMaster.getMaster().getTanggal());
                             jualMaster.setTotal_item(Integer.parseInt(penjualanMaster.getMaster().getTotal_item()));
                             jualMaster.setTotal_pay(Integer.parseInt(penjualanMaster.getMaster().getTotal_pay()));
@@ -87,7 +87,6 @@ public class GetJualMasterController implements IGetJualMasterRequest {
                             jualMaster.setSync_insert(Constants.STATUS_SUDAH_SYNC);
                             jualMaster.setSync_update(Constants.STATUS_SUDAH_SYNC);
 
-                            //commit insert di sqlite
                             //commit insert di sqlite
                             jualMasterHelper.addJualMaster(jualMaster);
                         }

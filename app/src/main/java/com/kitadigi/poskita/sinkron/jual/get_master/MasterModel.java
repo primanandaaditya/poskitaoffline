@@ -1,17 +1,20 @@
 package com.kitadigi.poskita.sinkron.jual.get_master;
 
+import com.kitadigi.poskita.model.Status;
+
 import java.util.List;
 
 public class MasterModel {
 
-    boolean status;
+    Status status;
     List<PenjualanMaster> penjualan_master;
 
-    public boolean isStatus() {
+
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

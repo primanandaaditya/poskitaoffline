@@ -1,17 +1,19 @@
 package com.kitadigi.poskita.sinkron.beli.get_master;
 
+import com.kitadigi.poskita.model.Status;
+
 import java.util.List;
 
 public class GetBeliMasterModel {
 
-    Boolean status;
+    Status status;
     List<PembelianMaster> pembelian_master = null;
 
-    public Boolean getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

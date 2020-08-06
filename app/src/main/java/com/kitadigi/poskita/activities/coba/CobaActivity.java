@@ -33,7 +33,11 @@ import com.kitadigi.poskita.fragment.unit.dengan_header.IUnitResult;
 import com.kitadigi.poskita.fragment.unit.dengan_header.UnitController;
 import com.kitadigi.poskita.fragment.unit.dengan_header.UnitModel;
 import com.kitadigi.poskita.sinkron.beli.get_detail.GetBeliDetailController;
+import com.kitadigi.poskita.sinkron.beli.get_detail.GetBeliDetailModel;
+import com.kitadigi.poskita.sinkron.beli.get_detail.IGetBeliDetailResult;
 import com.kitadigi.poskita.sinkron.beli.get_master.GetBeliMasterController;
+import com.kitadigi.poskita.sinkron.beli.get_master.GetBeliMasterModel;
+import com.kitadigi.poskita.sinkron.beli.get_master.IGetBeliMasterResult;
 import com.kitadigi.poskita.sinkron.beli.insert.ISinkronAddBeliResult;
 import com.kitadigi.poskita.sinkron.beli.insert.SinkronInsertBeliController;
 import com.kitadigi.poskita.sinkron.brand.delete.ISinkronDeleteBrandResult;
@@ -42,8 +46,12 @@ import com.kitadigi.poskita.sinkron.brand.insert.ISinkronAddBrandResult;
 import com.kitadigi.poskita.sinkron.brand.insert.SinkronInsertBrandController;
 import com.kitadigi.poskita.sinkron.brand.update.ISinkronUpdateBrandResult;
 import com.kitadigi.poskita.sinkron.brand.update.SinkronUpdateBrandController;
+import com.kitadigi.poskita.sinkron.jual.get_detail.GetDetailModel;
 import com.kitadigi.poskita.sinkron.jual.get_detail.GetJualDetailController;
+import com.kitadigi.poskita.sinkron.jual.get_detail.IGetJualDetailResult;
 import com.kitadigi.poskita.sinkron.jual.get_master.GetJualMasterController;
+import com.kitadigi.poskita.sinkron.jual.get_master.IGetJualMasterResult;
+import com.kitadigi.poskita.sinkron.jual.get_master.MasterModel;
 import com.kitadigi.poskita.sinkron.jual.insert.ISinkronAddJualResult;
 import com.kitadigi.poskita.sinkron.jual.insert.SinkronInsertJualController;
 import com.kitadigi.poskita.sinkron.kategori.delete.ISinkronDeleteKategoriResult;
@@ -77,7 +85,8 @@ public class CobaActivity extends BaseActivity implements
         ISinkronAddUnitResult, ISinkronUpdateUnitResult, ISinkronDeleteUnitResult,
         ISinkronAddProdukResult, ISinkronUpdateProdukResult, ISinkronDeleteProdukResult,
         ISinkronAddJualResult, ISinkronAddBeliResult,
-        IKategoriResult, IBrandResult, IUnitResult, IBarangResult
+        IKategoriResult, IBrandResult, IUnitResult, IBarangResult,
+        IGetJualMasterResult, IGetJualDetailResult, IGetBeliMasterResult, IGetBeliDetailResult
 
 
 {
@@ -390,6 +399,9 @@ public class CobaActivity extends BaseActivity implements
     @Override
     public void onSuccess(BarangResult barangResult, List<Item> items) {
 
+        this.showToast(barangResult.getMessage());
+        getJualMasterController = new GetJualMasterController(CobaActivity.this, this);
+        getJualMasterController.getJualMaster();
     }
 
     @Override
@@ -399,5 +411,48 @@ public class CobaActivity extends BaseActivity implements
     }
 
 
+    @Override
+    public void onGetJualMasterSuccess(MasterModel masterModel) {
 
+        getJualDetailController= new GetJualDetailController(CobaActivity.this, this);
+        getJualDetailController.getJualDetail();
+    }
+
+    @Override
+    public void onGetJualMasterError(String error) {
+        this.showToast(error);
+    }
+
+    @Override
+    public void onGetJualDetailSuccess(GetDetailModel getDetailModel) {
+       getBeliMasterController = new GetBeliMasterController(CobaActivity.this, this);
+       getBeliMasterController.getBeliMaster();
+    }
+
+    @Override
+    public void onGetJualDetailError(String error) {
+
+        this.showToast(error);
+    }
+
+    @Override
+    public void onGetBeliMasterSuccess(GetBeliMasterModel getBeliMasterModel) {
+        getBeliDetailController = new GetBeliDetailController(CobaActivity.this,this);
+        getBeliDetailController.getBeliDetail();
+    }
+
+    @Override
+    public void onGetBeliMasterError(String error) {
+        this.showToast(error);
+    }
+
+    @Override
+    public void onGetBeliDetailSuccess(GetBeliDetailModel getBeliDetailModel) {
+        this.showToast(getBeliDetailModel.getStatus().toString());
+    }
+
+    @Override
+    public void onGetBeliDetailError(String error) {
+        this.showToast(error);
+    }
 }

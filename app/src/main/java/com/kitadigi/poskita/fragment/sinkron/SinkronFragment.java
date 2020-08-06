@@ -86,6 +86,7 @@ import com.kitadigi.poskita.sinkron.unit.insert.SinkronInsertUnitController;
 import com.kitadigi.poskita.sinkron.unit.update.ISinkronUpdateUnitResult;
 import com.kitadigi.poskita.sinkron.unit.update.SinkronUpdateUnitController;
 import com.kitadigi.poskita.util.AlarmReceiver;
+import com.kitadigi.poskita.util.Constants;
 import com.kitadigi.poskita.util.InternetChecker;
 import com.kitadigi.poskita.util.SessionManager;
 import com.kitadigi.poskita.util.Sinkronizer;
@@ -574,7 +575,7 @@ public class SinkronFragment extends BaseFragment implements
     @Override
     public void onGetJualMasterSuccess(MasterModel masterModel) {
 
-        if (masterModel.isStatus()){
+        if (masterModel.getStatus().getMessage().equals(Constants.OK)){
             //lanjut ke get jual detai
             getJualDetailController.getJualDetail();
         }
@@ -610,7 +611,7 @@ public class SinkronFragment extends BaseFragment implements
     @Override
     public void onGetBeliMasterSuccess(GetBeliMasterModel getBeliMasterModel) {
 
-        if (getBeliMasterModel.getStatus()){
+        if (getBeliMasterModel.getStatus().getMessage().equals(Constants.OK)){
 
             //lanjut ke pembelian detail
             getBeliDetailController.getBeliDetail();
@@ -626,7 +627,7 @@ public class SinkronFragment extends BaseFragment implements
 
     @Override
     public void onGetBeliDetailSuccess(GetBeliDetailModel getBeliDetailModel) {
-        if (getBeliDetailModel.getStatus()){
+        if (getBeliDetailModel.getStatus().getMessage().equals(Constants.OK)){
             //this.showToast(stokModel.getMessage());
             sweetAlertDialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
             sweetAlertDialog.setTitleText(getActivity().getResources().getString(R.string.sinkron_berhasil));

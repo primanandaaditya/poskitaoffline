@@ -20,6 +20,7 @@ import com.kitadigi.poskita.sinkron.retrofit.SinkronResponse;
 import com.kitadigi.poskita.util.Constants;
 import com.kitadigi.poskita.util.InternetChecker;
 import com.kitadigi.poskita.util.SessionManager;
+import com.kitadigi.poskita.util.StringUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,7 +47,7 @@ public class SinkronInsertBeliController implements ISinkronAddBeliRequest {
     SessionManager sessionManager;
     String business_id;
     String nomorBeliMaster, nomorBeliDetail;
-
+    String mobile_id;
     String auth_token;
 
     public SinkronInsertBeliController(Context context, ISinkronAddBeliResult iSinkronAddBeliResult) {
@@ -194,8 +195,10 @@ public class SinkronInsertBeliController implements ISinkronAddBeliRequest {
                 try {
 
                     //nama json
+                    mobile_id = StringUtil.getRandomString(Constants.randomString);
+
                     jsonObject.put("supplier_id",beliMaster.getSupplier_id());
-                    jsonObject.put("mobile_id", beliMaster.getNomor());
+                    jsonObject.put("mobile_id", mobile_id);
                     jsonObject.put("ref_no",beliMaster.getRef_no());
                     jsonObject.put("total_pay",beliMaster.getTotal_pay().toString());
                     jsonObject.put("total_price",beliMaster.getTotal_price().toString());

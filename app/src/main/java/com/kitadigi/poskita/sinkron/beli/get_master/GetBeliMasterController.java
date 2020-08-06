@@ -55,7 +55,7 @@ public class GetBeliMasterController implements IGetBeliMasterRequest {
                 GetBeliMasterModel getBeliMasterModel = response.body();
 
                 //jika status = true
-                if (getBeliMasterModel.getStatus()){
+                if (getBeliMasterModel.getStatus().getMessage().equals(Constants.OK)){
 
                     //cek jumlah data yang diterima
                     Integer jumlah = getBeliMasterModel.pembelian_master.size();
@@ -84,8 +84,7 @@ public class GetBeliMasterController implements IGetBeliMasterRequest {
                             beliMaster = new BeliMaster();
 
 
-
-                            beliMaster.setNomor(pembelianMaster.getMaster().getNomor());
+                            beliMaster.setNomor(pembelianMaster.getMaster().getId_transaction());
                             beliMaster.setRef_no(pembelianMaster.getMaster().getRef_no());
                             beliMaster.setSupplier_id(pembelianMaster.getMaster().getSupplier_id());
                             beliMaster.setTanggal(pembelianMaster.getMaster().getTanggal());

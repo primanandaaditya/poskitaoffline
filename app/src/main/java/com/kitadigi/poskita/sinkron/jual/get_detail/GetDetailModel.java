@@ -1,17 +1,20 @@
 package com.kitadigi.poskita.sinkron.jual.get_detail;
 
+import com.kitadigi.poskita.model.Status;
+
 import java.util.List;
 
 public class GetDetailModel {
 
-    boolean status;
+    Status status;
     List<PenjualanDetail> penjualan_detail = null;
 
-    public boolean isStatus() {
+
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

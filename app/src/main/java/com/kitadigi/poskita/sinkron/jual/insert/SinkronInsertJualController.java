@@ -19,6 +19,7 @@ import com.kitadigi.poskita.sinkron.retrofit.SinkronResponse;
 import com.kitadigi.poskita.util.Constants;
 import com.kitadigi.poskita.util.InternetChecker;
 import com.kitadigi.poskita.util.SessionManager;
+import com.kitadigi.poskita.util.StringUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +47,7 @@ public class SinkronInsertJualController implements ISinkronAddJualRequest {
     String business_id;
     String nomorJualMaster, nomorJualDetail;
     String auth_token;
+    String mobile_id;
 
     public SinkronInsertJualController(Context context, ISinkronAddJualResult iSinkronAddJualResult) {
         this.context = context;
@@ -184,13 +186,12 @@ public class SinkronInsertJualController implements ISinkronAddJualRequest {
                 try {
 
                     //nama json
+                    mobile_id = StringUtil.getRandomString(Constants.randomString);
                     jsonObject.put("contact_id",jualMaster.getContact_id());
-                    jsonObject.put("mobile_id", jualMaster.getNomor());
+                    jsonObject.put("mobile_id", mobile_id);
                     jsonObject.put("total_pay",jualMaster.getTotal_pay().toString());
                     jsonObject.put("total_price",jualMaster.getTotal_price().toString());
                     jsonObject.put("transaction_date", jualMaster.getTanggal());
-
-
 //                    jsonObject.put("total_item", jualMaster.getTotal_item().toString());
 
                     jsonObject.put("detail", jsonJualDetail);

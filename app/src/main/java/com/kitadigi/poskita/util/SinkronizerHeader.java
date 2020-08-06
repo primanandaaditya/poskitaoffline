@@ -512,7 +512,7 @@ public class SinkronizerHeader implements
 
     @Override
     public void onGetJualMasterSuccess(MasterModel masterModel) {
-        if (masterModel.isStatus()){
+        if (masterModel.getStatus().getMessage().equals(Constants.OK)){
 
             getJualDetailController.getJualDetail();
         }
@@ -526,7 +526,7 @@ public class SinkronizerHeader implements
 
     @Override
     public void onGetJualDetailSuccess(GetDetailModel getDetailModel) {
-        if (getDetailModel.isStatus()){
+        if (getDetailModel.getStatus().getMessage().equals(Constants.OK)){
 
             //lanjut ke sinkron pembelian master
             getBeliMasterController.getBeliMaster();
@@ -542,7 +542,7 @@ public class SinkronizerHeader implements
     @Override
     public void onGetBeliMasterSuccess(GetBeliMasterModel getBeliMasterModel) {
 
-        if (getBeliMasterModel.getStatus()){
+        if (getBeliMasterModel.getStatus().getMessage().equals(Constants.OK)){
             getBeliDetailController.getBeliDetail();
         }
     }

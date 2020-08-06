@@ -11,6 +11,11 @@ public class Master {
     private String total_item;
     private String total_pay;
     private String total_price;
+    private String id_transaction;
+    private String mobile_id;
+
+
+
 
     public String getId() {
         return id;
@@ -66,5 +71,21 @@ public class Master {
 
     public void setTotal_price(String total_price) {
         this.total_price = total_price;
+    }
+
+    public String getId_transaction() {
+        return id_transaction;
+    }
+
+    public void setId_transaction(String id_transaction) {
+        this.id_transaction = id_transaction;
+    }
+
+    public String getMobile_id() {
+        return mobile_id;
+    }
+
+    public void setMobile_id(String mobile_id) {
+        this.mobile_id = mobile_id;
     }
 }
