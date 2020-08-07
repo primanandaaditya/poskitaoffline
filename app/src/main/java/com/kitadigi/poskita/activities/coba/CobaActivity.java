@@ -399,7 +399,6 @@ public class CobaActivity extends BaseActivity implements
     @Override
     public void onSuccess(BarangResult barangResult, List<Item> items) {
 
-        this.showToast(barangResult.getMessage());
         getJualMasterController = new GetJualMasterController(CobaActivity.this, this);
         getJualMasterController.getJualMaster();
     }
@@ -414,8 +413,18 @@ public class CobaActivity extends BaseActivity implements
     @Override
     public void onGetJualMasterSuccess(MasterModel masterModel) {
 
-        getJualDetailController= new GetJualDetailController(CobaActivity.this, this);
-        getJualDetailController.getJualDetail();
+        if (masterModel.getStatus().getCode().equals(Constants.KODE_200)){
+//            this.showToast(masterModel.getStatus().getMessage());
+//                    getJualDetailController= new GetJualDetailController(CobaActivity.this, this);
+//                    getJualDetailController.getJualDetail();
+
+            getBeliMasterController = new GetBeliMasterController(CobaActivity.this, this);
+            getBeliMasterController.getBeliMaster();
+
+
+        }
+
+
     }
 
     @Override
@@ -423,26 +432,35 @@ public class CobaActivity extends BaseActivity implements
         this.showToast(error);
     }
 
-    @Override
-    public void onGetJualDetailSuccess(GetDetailModel getDetailModel) {
-       getBeliMasterController = new GetBeliMasterController(CobaActivity.this, this);
-       getBeliMasterController.getBeliMaster();
-    }
-
-    @Override
-    public void onGetJualDetailError(String error) {
-
-        this.showToast(error);
-    }
 
     @Override
     public void onGetBeliMasterSuccess(GetBeliMasterModel getBeliMasterModel) {
-        getBeliDetailController = new GetBeliDetailController(CobaActivity.this,this);
-        getBeliDetailController.getBeliDetail();
+        if (getBeliMasterModel.getStatus().getCode().equals(Constants.KODE_200)){
+//            this.showToast(getBeliMasterModel.getStatus().getMessage());
+            getJualDetailController = new GetJualDetailController(CobaActivity.this,this);
+            getJualDetailController.getJualDetail();
+        }
+
     }
 
     @Override
     public void onGetBeliMasterError(String error) {
+        this.showToast(error);
+    }
+
+
+    @Override
+    public void onGetJualDetailSuccess(GetDetailModel getDetailModel) {
+        if (getDetailModel.getStatus().getCode().equals(Constants.KODE_200)){
+//            this.showToast(getDetailModel.getStatus().getMessage());
+            getBeliDetailController = new GetBeliDetailController(CobaActivity.this, this);
+            getBeliDetailController.getBeliDetail();
+        }
+
+    }
+
+    public void onGetJualDetailError(String error) {
+
         this.showToast(error);
     }
 

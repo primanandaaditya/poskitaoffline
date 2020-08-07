@@ -90,27 +90,21 @@ public class GetJualDetailController implements IGetJualDetailRequest {
 
                             jualDetail = new JualDetail();
 
-                            jualDetail.setKode_id(penjualanDetail.getDetail().getMobile_id_produk());
-                            jualDetail.setNomor(penjualanDetail.getDetail().getId_transaction());
-                            jualDetail.setPrice(Integer.parseInt(penjualanDetail.getDetail().getPrice()));
-                            jualDetail.setQty(Integer.parseInt(penjualanDetail.getDetail().getQty()));
+                            jualDetail.setKode_id(penjualanDetail.getMobile_id_produk());
+                            jualDetail.setNomor(penjualanDetail.getId_transaction());
+                            jualDetail.setPrice(penjualanDetail.getPrice());
+                            jualDetail.setQty(penjualanDetail.getQty());
 
                             //commit insert di sqlite
                             //commit insert di sqlite
                             jualDetailHelper.addJualDetail(jualDetail);
 
-
                         }
-
                     }
-
-
 
                 }else{
 
                 }
-
-
 
             }
 
@@ -120,7 +114,5 @@ public class GetJualDetailController implements IGetJualDetailRequest {
                 iGetJualDetailResult.onGetJualDetailError(t.getMessage());
             }
         });
-
-
     }
 }

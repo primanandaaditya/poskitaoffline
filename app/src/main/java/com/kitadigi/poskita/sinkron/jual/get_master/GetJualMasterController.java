@@ -59,7 +59,7 @@ public class GetJualMasterController implements IGetJualMasterRequest {
 
                     }else{
 
-                        Log.d("jumlah", jumlah.toString());
+                        Log.d("jumlah penjualan master", jumlah.toString());
                         //
                         JualMaster jualMaster;
 
@@ -73,16 +73,18 @@ public class GetJualMasterController implements IGetJualMasterRequest {
                         //looping dari model
                         List<PenjualanMaster> penjualan_master = masterModel.getPenjualan_master();
 
+                        Log.d("jml penjualn master", String.valueOf(penjualan_master.size()));
+
                         for (PenjualanMaster penjualanMaster: penjualan_master){
 
                             jualMaster = new JualMaster();
 
-                            jualMaster.setContact_id(penjualanMaster.getMaster().getContact_id());
-                            jualMaster.setNomor(penjualanMaster.getMaster().getId_transaction());
-                            jualMaster.setTanggal(penjualanMaster.getMaster().getTanggal());
-                            jualMaster.setTotal_item(Integer.parseInt(penjualanMaster.getMaster().getTotal_item()));
-                            jualMaster.setTotal_pay(Integer.parseInt(penjualanMaster.getMaster().getTotal_pay()));
-                            jualMaster.setTotal_price(Integer.parseInt(penjualanMaster.getMaster().getTotal_price()));
+                            jualMaster.setContact_id(penjualanMaster.getContact_id());
+                            jualMaster.setNomor(penjualanMaster.getId_transaction());
+                            jualMaster.setTanggal(penjualanMaster.getTransaction_date().substring(0,10));
+//                            jualMaster.setTotal_item(Integer.parseInt(penjualanMaster.getTotal_item()));
+                            jualMaster.setTotal_pay(Integer.parseInt(penjualanMaster.getTotal_pay()));
+                            jualMaster.setTotal_price(Integer.parseInt(penjualanMaster.getTotal_price()));
                             jualMaster.setSync_delete(Constants.STATUS_SUDAH_SYNC);
                             jualMaster.setSync_insert(Constants.STATUS_SUDAH_SYNC);
                             jualMaster.setSync_update(Constants.STATUS_SUDAH_SYNC);

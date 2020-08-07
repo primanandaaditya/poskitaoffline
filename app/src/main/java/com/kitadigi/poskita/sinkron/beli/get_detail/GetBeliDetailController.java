@@ -83,10 +83,10 @@ public class GetBeliDetailController implements IGetBeliDetailRequest {
 
                             beliDetail = new BeliDetail();
 
-                            beliDetail.setKode_id_produk(pembelianDetail.getDetail().getMobile_id());
-                            beliDetail.setNomor(pembelianDetail.getDetail().getId_transaction());
-                            beliDetail.setPrice(pembelianDetail.getDetail().getPrice());
-                            beliDetail.setQty(pembelianDetail.getDetail().getQty());
+                            beliDetail.setKode_id_produk(pembelianDetail.getMobile_id_produk());
+                            beliDetail.setNomor(pembelianDetail.getId_transaction());
+                            beliDetail.setPrice(pembelianDetail.getPrice().toString());
+                            beliDetail.setQty(pembelianDetail.getQty().toString());
 
                             //commit insert di sqlite
                             beliDetailHelper.addBeli(beliDetail);

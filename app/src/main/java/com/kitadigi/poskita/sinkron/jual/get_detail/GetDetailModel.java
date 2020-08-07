@@ -9,7 +9,6 @@ public class GetDetailModel {
     Status status;
     List<PenjualanDetail> penjualan_detail = null;
 
-
     public Status getStatus() {
         return status;
     }

@@ -7,7 +7,7 @@ import java.util.List;
 public class MasterModel {
 
     Status status;
-    List<PenjualanMaster> penjualan_master;
+    List<PenjualanMaster> penjualan_master = null;
 
 
     public Status getStatus() {

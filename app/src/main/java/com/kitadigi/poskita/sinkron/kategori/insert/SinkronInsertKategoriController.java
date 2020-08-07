@@ -136,10 +136,10 @@ public class SinkronInsertKategoriController implements ISinkronAddKategoriReque
                     //nama json
                     jsonObject.put("nama", kategori.getName_category());
                     jsonObject.put("mobile_id",kategori.getKode_id());
-                    jsonObject.put("business_id",business_id);
+//                    jsonObject.put("business_id",business_id);
                     jsonObject.put("short_code",kategori.getCode_category());
-                    jsonObject.put("parent_id","0");
-                    jsonObject.put("created_by","1");
+//                    jsonObject.put("parent_id","0");
+//                    jsonObject.put("created_by","1");
 
                     //tambahkan ke JSON
                     jsonArray.put(jsonObject);

@@ -13,9 +13,15 @@ public class Master {
     private String total_price;
     private String id_transaction;
     private String mobile_id;
+    private String transaction_date;
 
+    public String getTransaction_date() {
+        return transaction_date;
+    }
 
-
+    public void setTransaction_date(String transaction_date) {
+        this.transaction_date = transaction_date;
+    }
 
     public String getId() {
         return id;

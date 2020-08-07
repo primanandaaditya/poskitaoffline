@@ -84,12 +84,12 @@ public class GetBeliMasterController implements IGetBeliMasterRequest {
                             beliMaster = new BeliMaster();
 
 
-                            beliMaster.setNomor(pembelianMaster.getMaster().getId_transaction());
-                            beliMaster.setRef_no(pembelianMaster.getMaster().getRef_no());
-                            beliMaster.setSupplier_id(pembelianMaster.getMaster().getSupplier_id());
-                            beliMaster.setTanggal(pembelianMaster.getMaster().getTanggal());
-                            beliMaster.setTotal_pay(Integer.parseInt(pembelianMaster.getMaster().getTotal_pay()));
-                            beliMaster.setTotal_price(Integer.parseInt(pembelianMaster.getMaster().getTotal_price()));
+                            beliMaster.setNomor(pembelianMaster.getId_transaction());
+                            beliMaster.setRef_no(pembelianMaster.getRef_no());
+                            beliMaster.setSupplier_id(pembelianMaster.getSupplier_id());
+                            beliMaster.setTanggal(pembelianMaster.getTransaction_date().substring(0,10));
+                            beliMaster.setTotal_pay(pembelianMaster.getTotal_pay());
+                            beliMaster.setTotal_price(pembelianMaster.getTotal_price());
                             beliMaster.setSync_delete(Constants.STATUS_SUDAH_SYNC);
                             beliMaster.setSync_insert(Constants.STATUS_SUDAH_SYNC);
                             beliMaster.setSync_update(Constants.STATUS_SUDAH_SYNC);
