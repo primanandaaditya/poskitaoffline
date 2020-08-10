@@ -78,7 +78,9 @@ public class EditBarangController implements IEditRequest {
     }
 
     @Override
-    public void editBarang(String id_product, MultipartBody.Part image, final RequestBody name_product, final Integer brand_id, final Integer category_id, final Integer unit_id, final Integer purchase_price, final Integer sell_price, final String code_product, final Integer qty_stock, final Integer qty_minimum) {
+    public void editBarang(String id_product, MultipartBody.Part image, final RequestBody name_product, final Integer brand_id, final Integer category_id, final Integer unit_id, final Integer purchase_price, final Integer sell_price, final String code_product, final Integer qty_stock, final Integer qty_minimum, final String category_mobile_id,
+                           final String brand_mobile_id,
+                           final String unit_mobile_id) {
 
         //temukan record untuk id yang bersangkutan
         item = itemHelper.getItemById(Long.parseLong(id_product));
@@ -88,7 +90,7 @@ public class EditBarangController implements IEditRequest {
 
             //jika gagal nembak API
             //edit barang di sqlite
-            editOffline(code_product, brand_id, category_id, unit_id, purchase_price, sell_price, qty_stock, qty_minimum);
+            editOffline(code_product, brand_id, category_id, unit_id, purchase_price, sell_price, qty_stock, qty_minimum, category_mobile_id,brand_mobile_id, unit_mobile_id);
 
         }else{
 
@@ -136,6 +138,9 @@ public class EditBarangController implements IEditRequest {
                         item.setSell_price(sell_price);
                         item.setQty_stock(qty_stock);
                         item.setQty_minimum(qty_minimum);
+                        item.setCategory_mobile_id(category_mobile_id);
+                        item.setBrand_mobile_id(brand_mobile_id);
+                        item.setUnit_mobile_id(unit_mobile_id);
                         item.setSync_update(Constants.STATUS_SUDAH_SYNC);
                         itemHelper.updateItem(item);
 
@@ -151,7 +156,7 @@ public class EditBarangController implements IEditRequest {
 
                         //jika gagal nembak API
                         //edit barang di sqlite
-                        editOffline(code_product, brand_id, category_id, unit_id, purchase_price, sell_price, qty_stock, qty_minimum);
+                        editOffline(code_product, brand_id, category_id, unit_id, purchase_price, sell_price, qty_stock, qty_minimum, category_mobile_id,brand_mobile_id,unit_mobile_id);
                         sweetAlertDialog.dismissWithAnimation();
                         iAddBarangResult.onError(context.getResources().getString(R.string.tersimpan_offline));
                     }
@@ -163,7 +168,7 @@ public class EditBarangController implements IEditRequest {
 
                 //jika gagal nembak API
                 //edit barang di sqlite
-                editOffline(code_product, brand_id, category_id, unit_id, purchase_price, sell_price, qty_stock, qty_minimum);
+                editOffline(code_product, brand_id, category_id, unit_id, purchase_price, sell_price, qty_stock, qty_minimum, category_mobile_id,brand_mobile_id,unit_mobile_id);
             }
 
 
@@ -175,7 +180,9 @@ public class EditBarangController implements IEditRequest {
 
     }
 
-    void editOffline(String code_product,Integer brand_id,Integer category_id,Integer unit_id,Integer purchase_price,Integer sell_price,Integer qty_stock,Integer qty_minimum){
+    void editOffline(String code_product,Integer brand_id,Integer category_id,Integer unit_id,Integer purchase_price,Integer sell_price,Integer qty_stock,Integer qty_minimum,String category_mobile_id,
+                     String brand_mobile_id,
+                     String unit_mobile_id){
         item.setName_product(nama_produk);
         item.setImage(imageFilePath);
         item.setCode_product(code_product);
@@ -186,6 +193,9 @@ public class EditBarangController implements IEditRequest {
         item.setSell_price(sell_price);
         item.setQty_stock(qty_stock);
         item.setQty_minimum(qty_minimum);
+        item.setCategory_mobile_id(category_mobile_id);
+        item.setBrand_mobile_id(brand_mobile_id);
+        item.setUnit_mobile_id(unit_mobile_id);
         item.setSync_update(Constants.STATUS_BELUM_SYNC);
         itemHelper.updateItem(item);
 

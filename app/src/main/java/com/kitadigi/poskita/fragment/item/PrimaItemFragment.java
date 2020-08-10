@@ -256,7 +256,11 @@ public class PrimaItemFragment extends BaseFragment implements IBarangResult {
                            String sell_price,
                            String qty_stock,
                            String qty_minimum,
-                           String additional)
+                           String additional,
+                           String category_mobile_id,
+                           String brand_mobile_id,
+                           String unit_mobile_id
+                           )
 
     {
         Intent additems = new Intent(getActivity(), ItemsDataActivity.class);
@@ -279,6 +283,9 @@ public class PrimaItemFragment extends BaseFragment implements IBarangResult {
         additems.putExtra("qty_stock",qty_stock);
         additems.putExtra("qty_minimum",qty_minimum);
         additems.putExtra("additional",additional);
+        additems.putExtra("category_mobile_id", category_mobile_id);
+        additems.putExtra("brand_mobile_id", brand_mobile_id);
+        additems.putExtra("unit_mobile_id",unit_mobile_id);
 
         startActivity(additems);
     }

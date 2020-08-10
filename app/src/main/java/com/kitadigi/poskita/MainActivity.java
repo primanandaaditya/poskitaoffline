@@ -391,8 +391,8 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                 return reportFragment;
             case 8:
 
-                JualFragment jualFragment2=new JualFragment();
-                return jualFragment2;
+                SinkronFragment sinkronFragmenta=new SinkronFragment();
+                return sinkronFragmenta;
             case 9:
 //                Intent syncKategori = new Intent(MainActivity.this, SyncKategoriActivity.class);
 //                startActivity(syncKategori);
@@ -464,9 +464,9 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                         CURRENT_TAG = TAG_REPORTS;
                         break;
                     case R.id.nav_printer:
-                        Intent intent = new Intent(MainActivity.this, CobaActivity.class);
+                        Intent intent = new Intent(MainActivity.this, PrintingActivity.class);
                         startActivity(intent);
-                        navItemIndex = 7;
+                        navItemIndex = 1;
                         CURRENT_TAG = TAG_POS;
                         break;
                     case R.id.nav_sinkron:
@@ -474,8 +474,8 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                         CURRENT_TAG = TAG_SINKRON;
                         break;
                     case R.id.nav_wholesale:
-                        navItemIndex = 8;
-                        CURRENT_TAG = TAG_SINKRON;
+                        navItemIndex = 9;
+                        CURRENT_TAG = TAG_INPUT_MASSAL;
                         break;
                     case R.id.nav_input_massal:
                         navItemIndex = 9;

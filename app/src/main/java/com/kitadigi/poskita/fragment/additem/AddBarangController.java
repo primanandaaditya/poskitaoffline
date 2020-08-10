@@ -102,14 +102,21 @@ public class AddBarangController implements IAddBarangRequest {
     }
 
     @Override
-    public void addBarang(final MultipartBody.Part image, final RequestBody name_product, final Integer brand_id, final Integer category_id, final Integer unit_id, final Integer purchase_price, final Integer sell_price, final String code_product, final Integer qty_stock, final Integer qty_minimum) {
+    public void addBarang(final MultipartBody.Part image,
+                          final RequestBody name_product, final Integer brand_id,
+                          final Integer category_id, final Integer unit_id,
+                          final Integer purchase_price, final Integer sell_price,
+                          final String code_product, final Integer qty_stock,
+                          final Integer qty_minimum, final String category_mobile_id,
+                          final String brand_mobile_id,
+                          final String unit_mobile_id) {
 
 
         if (offlineMode){
 
             //jika mode offline
             //simpan offline
-            simpanOffline(code_product, brand_id, category_id, unit_id, purchase_price, sell_price, qty_stock, qty_minimum);
+            simpanOffline(code_product, brand_id, category_id, unit_id, purchase_price, sell_price, qty_stock, qty_minimum, category_mobile_id,brand_mobile_id,unit_mobile_id);
 
         }else{
 
@@ -193,7 +200,7 @@ public class AddBarangController implements IAddBarangRequest {
                         //jika gagal nembak API, simpan di sqlite
                         //buat var brand
                         //status sync insert = belum sync
-                        simpanOffline(code_product, brand_id, category_id, unit_id, purchase_price, sell_price, qty_stock, qty_minimum);
+                        simpanOffline(code_product, brand_id, category_id, unit_id, purchase_price, sell_price, qty_stock, qty_minimum, category_mobile_id,brand_mobile_id,unit_mobile_id);
 
                         sweetAlertDialog.dismissWithAnimation();
                     }
@@ -204,12 +211,24 @@ public class AddBarangController implements IAddBarangRequest {
                 //jika gagal nembak API, simpan di sqlite
                 //buat var brand
                 //status sync insert = belum sync
-                simpanOffline(code_product, brand_id, category_id, unit_id, purchase_price, sell_price, qty_stock, qty_minimum);
+                simpanOffline(code_product, brand_id, category_id, unit_id, purchase_price, sell_price, qty_stock, qty_minimum, category_mobile_id,brand_mobile_id,unit_mobile_id);
             }
         }
     }
 
-    void simpanOffline(String code_product, Integer brand_id,Integer category_id,Integer unit_id, Integer purchase_price, Integer sell_price,Integer qty_stock, Integer qty_minimum){
+    void simpanOffline(String code_product,
+                       Integer brand_id,
+                       Integer category_id,
+                       Integer unit_id,
+                       Integer purchase_price,
+                       Integer sell_price,
+                       Integer qty_stock,
+                       Integer qty_minimum,
+                       String category_mobile_id,
+                       String brand_mobile_id,
+                       String unit_mobile_id
+    )
+    {
 
 
         //cek duplikasi
@@ -239,7 +258,7 @@ public class AddBarangController implements IAddBarangRequest {
             item.setCategory_id(category_id);
             item.setUnit_id(unit_id);
             item.setBrand_mobile_id(brand_mobile_id);
-            item.setCategory_mobile_id(kategori_mobile_id);
+            item.setCategory_mobile_id(category_mobile_id);
             item.setUnit_mobile_id(unit_mobile_id);
             item.setPurchase_price(purchase_price);
             item.setSell_price(sell_price);

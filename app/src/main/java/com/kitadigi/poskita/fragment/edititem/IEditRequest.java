@@ -15,5 +15,9 @@ public interface IEditRequest {
                           Integer sell_price,
                           String code_product,
                           Integer qty_stock,
-                          Integer qty_minimum);
+                          Integer qty_minimum,
+                           String category_mobile_id,
+                           String brand_mobile_id,
+                           String unit_mobile_id
+                           );
 }

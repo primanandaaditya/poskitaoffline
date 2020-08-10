@@ -21,12 +21,12 @@ public class AlarmReceiver extends BroadcastReceiver implements ISinkronizer {
 
     InternetChecker internetChecker;
     Calendar calendar = Calendar.getInstance();
-//    Sinkronizer sinkronizer;
-    SinkronizerHeader sinkronizer;
+    Sinkronisasi sinkronizer;
     RemoteViews remoteViews;
+    SessionManager sessionManager;
 
     String selesai;
-    int random = getRandomNumberUsingNextInt(100,10000);
+    int random = 1010101;
     NotificationManager mNotificationManager;
 
     @Override
@@ -66,9 +66,12 @@ public class AlarmReceiver extends BroadcastReceiver implements ISinkronizer {
             mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             mNotificationManager.notify(random, mBuilder.build());
 
+            //init session manager untuk nyimpen jam dan tanggal lastsync
+            sessionManager = new SessionManager(context);
+
             //mulai proses sinkronisasi ke server
-            sinkronizer = new SinkronizerHeader(context, this);
-            sinkronizer.doSinkron();
+            sinkronizer = new Sinkronisasi(context, this);
+            sinkronizer.mulaiSinkron();
 
         }else{
 
@@ -149,8 +152,24 @@ public class AlarmReceiver extends BroadcastReceiver implements ISinkronizer {
 
     }
 
-    int getRandomNumberUsingNextInt(int min, int max) {
-        Random random = new Random();
-        return random.nextInt(max - min) + min;
+    @Override
+    public void onSukses() {
+
+        Log.d("on Sukses", "Sukses");
+        remoteViews.setTextViewText(R.id.tv_text, selesai );
+
+        //hilangkan notifikasi dari hp user
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+
+                mNotificationManager.cancel(random);
+            }
+        }, 3000);   //3
+
+        //simpan tanggal dan jam last sync
+        sessionManager.createLasySync();
     }
+
+
 }

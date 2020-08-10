@@ -199,7 +199,16 @@ public class BarangController implements IBarangRequest {
 //                                Log.d("genymotionhost",genymotionHost);
 
 
-                                FileUtil.downloadFile(context, genymotionHost);
+                                //download image dari server
+                                //harus didalam try
+                                //karena yang ini membutuhkan permission akses storage
+                                //khusus untuk user dengan Android marshmallow ke atas
+                                try {
+                                    FileUtil.downloadFile(context, genymotionHost);
+                                }catch (Exception e){
+
+                                }
+
                             }
 
                         }

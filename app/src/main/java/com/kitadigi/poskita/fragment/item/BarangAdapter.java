@@ -162,7 +162,7 @@ public class BarangAdapter extends RecyclerView.Adapter<BarangAdapter.DataViewHo
             @Override
             public void onClick(View v) {
 
-                Log.d("adapter", item.getUnit_id().toString());
+                Log.d("adapter", item.getCategory_mobile_id().toString());
 
                 primaItemFragment.editBarang(
                         item.getId().toString(),
@@ -180,7 +180,10 @@ public class BarangAdapter extends RecyclerView.Adapter<BarangAdapter.DataViewHo
                         item.getSell_price().toString(),
                         item.getQty_stock().toString(),
                         item.getQty_minimum().toString(),
-                        item.getAdditional() == null ? "" : item.getAdditional()
+                        item.getAdditional() == null ? "" : item.getAdditional(),
+                        item.getCategory_mobile_id() == null ? "" : item.getCategory_mobile_id(),
+                        item.getBrand_mobile_id() == null ? "" : item.getBrand_mobile_id(),
+                        item.getUnit_mobile_id() == null ? "" : item.getUnit_mobile_id()
                 );
 
 

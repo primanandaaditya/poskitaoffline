@@ -3,31 +3,31 @@
 3    package="cn.pedant.SweetAlert.test" >
 4
 5    <uses-sdk
-5-->/home/tog/Documents/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2026235743318468548.xml:5:5-72
+5-->/home/tog/Go Application ( Services )/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger92635047506992261.xml:5:5-72
 6        android:minSdkVersion="9"
-6-->/home/tog/Documents/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2026235743318468548.xml:5:15-40
+6-->/home/tog/Go Application ( Services )/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger92635047506992261.xml:5:15-40
 7        android:targetSdkVersion="9" />
-7-->/home/tog/Documents/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2026235743318468548.xml:5:41-69
+7-->/home/tog/Go Application ( Services )/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger92635047506992261.xml:5:41-69
 8
 9    <instrumentation
-9-->/home/tog/Documents/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2026235743318468548.xml:11:5-15:75
+9-->/home/tog/Go Application ( Services )/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger92635047506992261.xml:11:5-15:75
 10        android:name="android.test.InstrumentationTestRunner"
-10-->/home/tog/Documents/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2026235743318468548.xml:11:22-75
+10-->/home/tog/Go Application ( Services )/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger92635047506992261.xml:11:22-75
 11        android:functionalTest="false"
-11-->/home/tog/Documents/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2026235743318468548.xml:14:22-52
+11-->/home/tog/Go Application ( Services )/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger92635047506992261.xml:14:22-52
 12        android:handleProfiling="false"
-12-->/home/tog/Documents/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2026235743318468548.xml:13:22-53
+12-->/home/tog/Go Application ( Services )/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger92635047506992261.xml:13:22-53
 13        android:label="Tests for cn.pedant.SweetAlert.test"
-13-->/home/tog/Documents/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2026235743318468548.xml:15:22-73
+13-->/home/tog/Go Application ( Services )/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger92635047506992261.xml:15:22-73
 14        android:targetPackage="cn.pedant.SweetAlert.test" />
-14-->/home/tog/Documents/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2026235743318468548.xml:12:22-71
+14-->/home/tog/Go Application ( Services )/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger92635047506992261.xml:12:22-71
 15
 16    <application android:debuggable="true" >
-16-->/home/tog/Documents/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2026235743318468548.xml:7:5-9:19
-16-->/home/tog/Documents/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2026235743318468548.xml:7:18-43
+16-->/home/tog/Go Application ( Services )/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger92635047506992261.xml:7:5-9:19
+16-->/home/tog/Go Application ( Services )/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger92635047506992261.xml:7:18-43
 17        <uses-library android:name="android.test.runner" />
-17-->/home/tog/Documents/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2026235743318468548.xml:8:9-60
-17-->/home/tog/Documents/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger2026235743318468548.xml:8:23-57
+17-->/home/tog/Go Application ( Services )/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger92635047506992261.xml:8:9-60
+17-->/home/tog/Go Application ( Services )/poskitaoffline/sweet-alert/build/intermediates/tmp/manifest/androidTest/debug/manifestMerger92635047506992261.xml:8:23-57
 18    </application>
 19
 20</manifest>

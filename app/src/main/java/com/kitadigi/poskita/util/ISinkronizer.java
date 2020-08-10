@@ -5,4 +5,5 @@ public interface ISinkronizer {
     void onBegin();
     void onProgress();
     void onFinish(String pesan);
+    void onSukses();
 }

@@ -74,53 +74,20 @@ import com.kitadigi.poskita.sinkron.unit.insert.SinkronInsertUnitController;
 import com.kitadigi.poskita.sinkron.unit.update.ISinkronUpdateUnitResult;
 import com.kitadigi.poskita.sinkron.unit.update.SinkronUpdateUnitController;
 import com.kitadigi.poskita.util.Constants;
+import com.kitadigi.poskita.util.ISinkronizer;
+import com.kitadigi.poskita.util.Sinkronisasi;
 import com.kitadigi.poskita.util.StringUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class CobaActivity extends BaseActivity implements
-        ISinkronAddKategoriResult, ISinkronUpdateKategoriResult, ISinkronDeleteKategoriResult,
-        ISinkronAddBrandResult, ISinkronUpdateBrandResult, ISinkronDeleteBrandResult,
-        ISinkronAddUnitResult, ISinkronUpdateUnitResult, ISinkronDeleteUnitResult,
-        ISinkronAddProdukResult, ISinkronUpdateProdukResult, ISinkronDeleteProdukResult,
-        ISinkronAddJualResult, ISinkronAddBeliResult,
-        IKategoriResult, IBrandResult, IUnitResult, IBarangResult,
-        IGetJualMasterResult, IGetJualDetailResult, IGetBeliMasterResult, IGetBeliDetailResult
-
+public class CobaActivity extends BaseActivity implements ISinkronizer
 
 {
 
     ImageView iv;
 
-    //sinkronisasi upload (insert,update,delete)
-    SinkronInsertKategoriController sinkronInsertKategoriController;
-    SinkronUpdateKategoriController sinkronUpdateKategoriController;
-    SinkronDeleteKategoriController sinkronDeleteKategoriController;
-    SinkronInsertBrandController sinkronInsertBrandController;
-    SinkronUpdateBrandController sinkronUpdateBrandController;
-    SinkronDeleteBrandController sinkronDeleteBrandController;
-    SinkronInsertUnitController sinkronInsertUnitController;
-    SinkronUpdateUnitController sinkronUpdateUnitController;
-    SinkronDeleteUnitController sinkronDeleteUnitController;
-    SinkronInsertProdukController sinkronInsertProdukController;
-    SinkronUpdateProdukController sinkronUpdateProdukController;
-    SinkronDeleteProdukController sinkronDeleteProdukController;
-    SinkronInsertJualController sinkronInsertJualController;
-    SinkronInsertBeliController sinkronInsertBeliController;
-    GetJualMasterController getJualMasterController;
-    GetJualDetailController getJualDetailController;
-    GetBeliMasterController getBeliMasterController;
-    GetBeliDetailController getBeliDetailController;
-
-
-    //sinkronisasi download/get
-    KategoriController kategoriController;
-    BrandController brandController;
-    UnitController unitController;
-    BarangController barangController;
-
-
+    Sinkronisasi sinkronisasi;
     Button button;
     TextView textView;
 
@@ -150,327 +117,33 @@ public class CobaActivity extends BaseActivity implements
     }
 
     void coba(){
-        sinkronInsertKategoriController=new SinkronInsertKategoriController(CobaActivity.this, this);
-        sinkronInsertKategoriController.insert_kategori();
+        sinkronisasi = new Sinkronisasi(CobaActivity.this, this);
+        sinkronisasi.mulaiSinkron();
     }
 
 
     @Override
-    public void onSinkronAddKategoriSuccess(SinkronResponse sinkronResponse) {
-        if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
-//            this.showToast(sinkronResponse.getStatus().getMessage());
-            //lanjut ke update kategori
-            sinkronUpdateKategoriController=new SinkronUpdateKategoriController(CobaActivity.this, this);
-            sinkronUpdateKategoriController.update_kategori();
-        }
+    public void onNoInternet() {
+        this.showToast(getResources().getString(R.string.no_internet));
     }
 
     @Override
-    public void onSinkronAddKategoriError(String error) {
-        this.showToast(error);
-    }
-
-    @Override
-    public void onSinkronUpdateKategoriSuccess(SinkronResponse sinkronResponse) {
-        if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
-//            this.showToast(sinkronResponse.getStatus().getMessage());
-            sinkronDeleteKategoriController = new SinkronDeleteKategoriController(CobaActivity.this, this);
-            sinkronDeleteKategoriController.delete_kategori();
-        }
-    }
-
-    @Override
-    public void onSinkronUpdateKategoriError(String error) {
-        this.showToast(error);
-    }
-
-    @Override
-    public void onSinkronDeleteKategoriSuccess(SinkronResponse sinkronResponse) {
-        if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
-           sinkronInsertBrandController = new SinkronInsertBrandController(CobaActivity.this,this);
-           sinkronInsertBrandController.insert_brand();
-        }
-    }
-
-    @Override
-    public void onSinkronDeleteKategoriError(String error) {
-
-        this.showToast(error);
-    }
-
-    @Override
-    public void onSinkronAddBrandSuccess(SinkronResponse sinkronResponse) {
-        if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
-//           this.showToast(sinkronResponse.getStatus().getMessage());
-            sinkronUpdateBrandController = new SinkronUpdateBrandController(CobaActivity.this, this);
-            sinkronUpdateBrandController.update_brand();
-        }
-    }
-
-    @Override
-    public void onSinkronAddBrandError(String error) {
-        this.showToast(error);
-    }
-
-    @Override
-    public void onSinkronUpdateBrandSuccess(SinkronResponse sinkronResponse) {
-        if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
-//           this.showToast(sinkronResponse.getStatus().getMessage());
-            sinkronDeleteBrandController =new SinkronDeleteBrandController(CobaActivity.this, this);
-            sinkronDeleteBrandController.delete_brand();
-        }
-    }
-
-    @Override
-    public void onSinkronUpdateBrandError(String error) {
-        this.showToast(error);
-    }
-
-    @Override
-    public void onSinkronDeleteBrandSuccess(SinkronResponse sinkronResponse) {
-        if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
-//           this.showToast(sinkronResponse.getStatus().getMessage());
-           sinkronInsertUnitController = new SinkronInsertUnitController(CobaActivity.this, this);
-           sinkronInsertUnitController.insert_unit();
-        }
-    }
-
-    @Override
-    public void onSinkronDeleteBrandError(String error) {
-        this.showToast(error);
-    }
-
-    @Override
-    public void onSinkronAddUnitSuccess(SinkronResponse sinkronResponse) {
-        if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
-//            this.showToast(sinkronResponse.getStatus().getMessage());
-           sinkronUpdateUnitController = new SinkronUpdateUnitController(CobaActivity.this, this);
-           sinkronUpdateUnitController.update_unit();
-
-        }
-    }
-
-    @Override
-    public void onSinkronAddUnitError(String error) {
-
-        this.showToast(error);
-    }
-
-    @Override
-    public void onSinkronUpdateUnitSuccess(SinkronResponse sinkronResponse) {
-        if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
-//            this.showToast(sinkronResponse.getStatus().getMessage());
-            sinkronDeleteUnitController = new SinkronDeleteUnitController(CobaActivity.this, this);
-            sinkronDeleteUnitController.delete_unit();
-        }
-    }
-
-    @Override
-    public void onSinkronUpdateUnitError(String error) {
-        this.showToast(error);
-    }
-
-    @Override
-    public void onSinkronDeleteUnitSuccess(SinkronResponse sinkronResponse) {
-
-        if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
-//            this.showToast(sinkronResponse.getStatus().getMessage());
-            sinkronInsertProdukController = new SinkronInsertProdukController(CobaActivity.this, this);
-            sinkronInsertProdukController.insert_produk();
-        }
-    }
-
-    @Override
-    public void onSinkronDeleteUnitError(String error) {
-        this.showToast(error);
-    }
-
-    @Override
-    public void onSinkronAddProdukSuccess(SinkronResponse sinkronResponse) {
-        if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
-//            this.showToast(sinkronResponse.getStatus().getMessage());
-
-            sinkronUpdateProdukController = new SinkronUpdateProdukController(CobaActivity.this,this);
-            sinkronUpdateProdukController.update_produk();
-        }
-    }
-
-    @Override
-    public void onSinkronAddProdukError(String error) {
-        this.showToast(error);
-    }
-
-    @Override
-    public void onSinkronUpdateProdukSuccess(SinkronResponse sinkronResponse) {
-        if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
-//            this.showToast(sinkronResponse.getStatus().getMessage());
-
-            sinkronDeleteProdukController =new SinkronDeleteProdukController(CobaActivity.this, this);
-            sinkronDeleteProdukController.delete_produk();
-        }
-    }
-
-    @Override
-    public void onSinkronUpdateProdukError(String error) {
-        this.showToast(error);
-    }
-
-    @Override
-    public void onSinkronDeleteProdukSuccess(SinkronResponse sinkronResponse) {
-        if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
-//            this.showToast(sinkronResponse.getStatus().getMessage());
-
-            sinkronInsertJualController = new SinkronInsertJualController(CobaActivity.this, this);
-            sinkronInsertJualController.insert_jual();
-        }
-    }
-
-    @Override
-    public void onSinkronDeleteProdukError(String error) {
-        this.showToast(error);
-    }
-
-
-    @Override
-    public void onSinkronAddJualSuccess(SinkronResponse sinkronResponse) {
-        if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
-
-            sinkronInsertBeliController = new SinkronInsertBeliController(CobaActivity.this,this);
-            sinkronInsertBeliController.insert_beli();
-//            this.showToast(sinkronResponse.getStatus().getMessage());
-        }
-    }
-
-    @Override
-    public void onSinkronAddJualError(String error) {
-        this.showToast(error);
-    }
-
-    @Override
-    public void onSinkronAddBeliSuccess(SinkronResponse sinkronResponse) {
-
-        if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
-
-
-            kategoriController = new KategoriController(CobaActivity.this, this);
-            kategoriController.getKategoriList();
-//            this.showToast(sinkronResponse.getStatus().getMessage());
-        }
-    }
-
-    @Override
-    public void onSinkronAddBeliError(String error) {
-        this.showToast(error);
-    }
-
-    @Override
-    public void onKategoriSuccess(KategoriModel kategoriModel, List<Kategori> kategoriOffline) {
-       brandController = new BrandController(CobaActivity.this, this);
-       brandController.getBrandList();
-    }
-
-    @Override
-    public void onKategoriError(String error, List<Kategori> kategoriOffline) {
-        this.showToast(error);
-    }
-
-    @Override
-    public void onBrandSuccess(BrandModel brandModel, List<Brand> brandOffline) {
-        unitController = new UnitController(CobaActivity.this, this);
-        unitController.getUnitList();
-    }
-
-    @Override
-    public void onBrandError(String error, List<Brand> brandOffline) {
-        this.showToast(error);
-    }
-
-    @Override
-    public void onUnitSuccess(UnitModel unitModel, List<Unit> units) {
-        barangController = new BarangController(CobaActivity.this, this);
-        barangController.getBarang();
-    }
-
-    @Override
-    public void onUnitError(String error, List<Unit> units) {
-        this.showToast(error);
-    }
-
-    @Override
-    public void onSuccess(BarangResult barangResult, List<Item> items) {
-
-        getJualMasterController = new GetJualMasterController(CobaActivity.this, this);
-        getJualMasterController.getJualMaster();
-    }
-
-    @Override
-    public void onError(String error, List<Item> items) {
-
-        this.showToast(error);
-    }
-
-
-    @Override
-    public void onGetJualMasterSuccess(MasterModel masterModel) {
-
-        if (masterModel.getStatus().getCode().equals(Constants.KODE_200)){
-//            this.showToast(masterModel.getStatus().getMessage());
-//                    getJualDetailController= new GetJualDetailController(CobaActivity.this, this);
-//                    getJualDetailController.getJualDetail();
-
-            getBeliMasterController = new GetBeliMasterController(CobaActivity.this, this);
-            getBeliMasterController.getBeliMaster();
-
-
-        }
-
+    public void onBegin() {
 
     }
 
     @Override
-    public void onGetJualMasterError(String error) {
-        this.showToast(error);
-    }
-
-
-    @Override
-    public void onGetBeliMasterSuccess(GetBeliMasterModel getBeliMasterModel) {
-        if (getBeliMasterModel.getStatus().getCode().equals(Constants.KODE_200)){
-//            this.showToast(getBeliMasterModel.getStatus().getMessage());
-            getJualDetailController = new GetJualDetailController(CobaActivity.this,this);
-            getJualDetailController.getJualDetail();
-        }
+    public void onProgress() {
 
     }
 
     @Override
-    public void onGetBeliMasterError(String error) {
-        this.showToast(error);
-    }
-
-
-    @Override
-    public void onGetJualDetailSuccess(GetDetailModel getDetailModel) {
-        if (getDetailModel.getStatus().getCode().equals(Constants.KODE_200)){
-//            this.showToast(getDetailModel.getStatus().getMessage());
-            getBeliDetailController = new GetBeliDetailController(CobaActivity.this, this);
-            getBeliDetailController.getBeliDetail();
-        }
-
-    }
-
-    public void onGetJualDetailError(String error) {
-
-        this.showToast(error);
+    public void onFinish(String pesan) {
+        this.showToast(pesan);
     }
 
     @Override
-    public void onGetBeliDetailSuccess(GetBeliDetailModel getBeliDetailModel) {
-        this.showToast(getBeliDetailModel.getStatus().toString());
-    }
-
-    @Override
-    public void onGetBeliDetailError(String error) {
-        this.showToast(error);
+    public void onSukses() {
+        this.showToast(getResources().getString(R.string.sinkron_berhasil));
     }
 }

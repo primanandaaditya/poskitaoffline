@@ -41,7 +41,6 @@ public class GetJualMasterController implements IGetJualMasterRequest {
             public void onResponse(Call<MasterModel> call, Response<MasterModel> response) {
                 Log.d("sukses", call.request().url().toString());
 
-                iGetJualMasterResult.onGetJualMasterSuccess(response.body());
 
                 //kalau sukses
                 //hapus data penjualan master di sqlite
@@ -50,6 +49,8 @@ public class GetJualMasterController implements IGetJualMasterRequest {
                 MasterModel masterModel = response.body();
 
                 if (masterModel.getStatus().getMessage().equals(Constants.OK)){
+
+                    iGetJualMasterResult.onGetJualMasterSuccess(response.body());
 
                     //cek jumlah data yang diterima
                     Integer jumlah = masterModel.penjualan_master.size();
@@ -98,7 +99,7 @@ public class GetJualMasterController implements IGetJualMasterRequest {
 
 
                 }else{
-
+                    iGetJualMasterResult.onGetJualMasterError("get jual master ERROR");
                 }
 
 

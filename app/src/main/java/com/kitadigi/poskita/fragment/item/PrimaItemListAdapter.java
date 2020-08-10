@@ -118,7 +118,10 @@ public class PrimaItemListAdapter extends RecyclerView.Adapter<com.kitadigi.posk
                         barang.getSell_price().toString(),
                         barang.getQty_stock().toString(),
                         barang.getQty_minimum().toString(),
-                        barang.getAdditional().toString()
+                        barang.getAdditional().toString(),
+                        barang.getCategory_mobile_id(),
+                        barang.getBrand_mobile_id(),
+                        barang.getUnit_mobile_id()
                 );
             }
         });

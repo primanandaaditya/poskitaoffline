@@ -50,15 +50,18 @@ public class GetBeliMasterController implements IGetBeliMasterRequest {
             public void onResponse(Call<GetBeliMasterModel> call, Response<GetBeliMasterModel> response) {
 
                 Log.d("getbelimaster_sukses",call.request().url().toString() );
+                Log.d("getbelimaster_sukses", response.body().getStatus().getMessage());
 
                 //tampung respon dalam variabel
                 GetBeliMasterModel getBeliMasterModel = response.body();
+
 
                 //jika status = true
                 if (getBeliMasterModel.getStatus().getMessage().equals(Constants.OK)){
 
                     //cek jumlah data yang diterima
                     Integer jumlah = getBeliMasterModel.pembelian_master.size();
+                    Log.d("jumlah beli master",jumlah.toString());
 
                     //jika 0
                     if (jumlah == 0){
@@ -103,6 +106,7 @@ public class GetBeliMasterController implements IGetBeliMasterRequest {
                     iGetBeliMasterResult.onGetBeliMasterSuccess(getBeliMasterModel);
                 }else{
 
+                    iGetBeliMasterResult.onGetBeliMasterError("get beli master ERROR");
                 }
 
             }

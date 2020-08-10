@@ -34,6 +34,7 @@ public class GetJualDetailController implements IGetJualDetailRequest {
     public GetJualDetailController(Context context, IGetJualDetailResult iGetJualDetailResult) {
         this.context = context;
         this.iGetJualDetailResult = iGetJualDetailResult;
+        Log.d("getjualdetailcontroller","constructor");
 
     }
 
@@ -49,7 +50,6 @@ public class GetJualDetailController implements IGetJualDetailRequest {
             @Override
             public void onResponse(Call<GetDetailModel> call, Response<GetDetailModel> response) {
                 Log.d("sukses", call.request().url().toString());
-                iGetJualDetailResult.onGetJualDetailSuccess(response.body());
 
 
 
@@ -61,6 +61,8 @@ public class GetJualDetailController implements IGetJualDetailRequest {
                 Log.d("status", String.valueOf(getDetailModel.status));
 
                 if (getDetailModel.getStatus().getMessage().equals(Constants.OK)){
+
+                    iGetJualDetailResult.onGetJualDetailSuccess(response.body());
 
                     //cek jumlah data yang diterima
                     Integer jumlah = getDetailModel.getPenjualan_detail().size();
@@ -103,6 +105,8 @@ public class GetJualDetailController implements IGetJualDetailRequest {
                     }
 
                 }else{
+
+                    iGetJualDetailResult.onGetJualDetailError("get jual detail ERROR");
 
                 }
 

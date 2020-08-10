@@ -96,7 +96,7 @@ public class GetBeliDetailController implements IGetBeliDetailRequest {
 
                     iGetBeliDetailResult.onGetBeliDetailSuccess(getBeliDetailModel);
                 }else{
-
+                    iGetBeliDetailResult.onGetBeliDetailError("get beli detail ERROR");
                 }
             }
 

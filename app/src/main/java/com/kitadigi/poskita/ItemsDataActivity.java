@@ -152,6 +152,7 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
 
 //    untuk spinner-spinner
     Integer id_kategori,id_unit,id_brand;
+    String category_mobile_id,brand_mobile_id,unit_mobile_id;
 
     //untuk cek inten dari adapter
     Bundle extras;
@@ -181,6 +182,9 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
         id_brand=0;
         id_kategori=0;
         id_unit=0;
+        category_mobile_id="";
+        brand_mobile_id = "";
+        unit_mobile_id = "";
 
         //init controller
 //        addBarangController=new AddBarangController(this,ItemsDataActivity.this);
@@ -304,14 +308,18 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
                     extras.getString("sell_price"),
                     extras.getString("qty_stock"),
                     extras.getString("qty_minimum"),
-                    extras.getString("additional")
+                    extras.getString("additional"),
+                    extras.getString("category_mobile_id"),
+                    extras.getString("brand_mobile_id"),
+                    extras.getString("unit_mobile_id"),
+                    extras.getString("mobile_id")
 
             );
 
-            Log.d("brand_id", extras.getString("brands_id"));
-            Log.d("category_id", extras.getString("category_id"));
-            Log.d("units_id", extras.getString("units_id"));
-
+//            Log.d("brand_id", extras.getString("brands_id"));
+//            Log.d("category_id", extras.getString("category_id"));
+//            Log.d("units_id", extras.getString("units_id"));
+//
 
 
 
@@ -785,7 +793,10 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
                         sell_price,
                         code_product,
                         qty_stok,
-                        qty_minimum
+                        qty_minimum,
+                        category_mobile_id,
+                        brand_mobile_id,
+                        unit_mobile_id
 
                 );
 
@@ -871,7 +882,10 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
                         sell_price,
                         code_product,
                         qty_stok,
-                        qty_minimum
+                        qty_minimum,
+                        category_mobile_id,
+                        brand_mobile_id,
+                        unit_mobile_id
 
                 );
 
@@ -891,69 +905,66 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
     @Override
     public void onBrandSuccess(BrandModel brandModel,List<Brand> brandOffline) {
 
-        if (brandModel==null){
-
-        }else{
-
-            this.sessionExpired(brandModel.getMessage());
-
-            //populasikan daftar kategori di dropdown brand
-            //===============================================================================
-
-            //buat hashmap dan counter
-            //untuk mode edit
-            int counter = 0;
-            HashMap<Integer,Integer> hash = new HashMap<>();
-
-            List<String> listBrand = new ArrayList<String>();
-            final List<Integer> idBrandList=new ArrayList<Integer>();
-//            for( BrandData brandData:brandModel.getData()){
-//                listBrand.add(brandData.getName());
-//                idBrandList.add(Integer.parseInt(brandData.getId()));
-//                hash.put(Integer.parseInt(brandData.getId()), counter);
+//        if (brandModel==null){
+//
+//        }else{
+//
+//            this.sessionExpired(brandModel.getMessage());
+//
+//            //populasikan daftar kategori di dropdown brand
+//            //===============================================================================
+//
+//            //buat hashmap dan counter
+//            //untuk mode edit
+//            int counter = 0;
+//            HashMap<Integer,Integer> hash = new HashMap<>();
+//
+//            List<String> listBrand = new ArrayList<String>();
+//            final List<Integer> idBrandList=new ArrayList<Integer>();
+////            for( BrandData brandData:brandModel.getData()){
+////                listBrand.add(brandData.getName());
+////                idBrandList.add(Integer.parseInt(brandData.getId()));
+////                hash.put(Integer.parseInt(brandData.getId()), counter);
+////                counter = counter + 1;
+////            }
+//
+//            for (Brand brand:brandOffline){
+//                listBrand.add(brand.getName());
+//                idBrandList.add(Integer.parseInt(brand.getId().toString()));
+//                hash.put(Integer.parseInt(brand.getId().toString()), counter);
 //                counter = counter + 1;
 //            }
-
-            for (Brand brand:brandOffline){
-                listBrand.add(brand.getName());
-                idBrandList.add(Integer.parseInt(brand.getId().toString()));
-                hash.put(Integer.parseInt(brand.getId().toString()), counter);
-                counter = counter + 1;
-            }
-            MySpinnerAdapter brandAdapter = new MySpinnerAdapter(
-                    ItemsDataActivity.this,
-                    R.layout.myspinner,
-                    listBrand
-            );
-            sp_brand_id.setAdapter(brandAdapter);
-            sp_brand_id.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    id_brand=idBrandList.get(position);
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-            if(barang!=null){
-//                id_kategori=Integer.parseInt(barang.getCategory_id());
-                Integer selected = hash.get(Integer.parseInt(barang.getBrands_id()));
-                sp_brand_id.setSelection(selected);
-            }
-
-            //===============================================================================
-            //populasi selesai
-        }
+//            MySpinnerAdapter brandAdapter = new MySpinnerAdapter(
+//                    ItemsDataActivity.this,
+//                    R.layout.myspinner,
+//                    listBrand
+//            );
+//            sp_brand_id.setAdapter(brandAdapter);
+//            sp_brand_id.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                @Override
+//                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                    id_brand=idBrandList.get(position);
+//                }
+//
+//                @Override
+//                public void onNothingSelected(AdapterView<?> parent) {
+//
+//                }
+//            });
+//            if(barang!=null){
+////                id_kategori=Integer.parseInt(barang.getCategory_id());
+//                Integer selected = hash.get(Integer.parseInt(barang.getBrand_mobile_id()));
+//                sp_brand_id.setSelection(selected);
+//            }
+//
+//            //===============================================================================
+//            //populasi selesai
+//        }
     }
 
     @Override
     public void onBrandError(String error,List<Brand> brandOffline) {
 
-//        Toast.makeText(ItemsDataActivity.this,"Brand error",Toast.LENGTH_SHORT).show();
-        //populasikan daftar kategori di dropdown brand
-        //===============================================================================
 
         //find id
         sp_brand_id=(Spinner)findViewById(R.id.sp_brand_id);
@@ -963,33 +974,52 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
 
 
         int counter = 0;
-        HashMap<Integer,Integer> hash = new HashMap<>();
 
-        List<String> listBrand = new ArrayList<String>();
+        //hashmap untuk pasangan mobile_id dan counter
+        HashMap<String,Integer> hash = new HashMap<>();
+
+        //array untuk nampung mobile_id dari sqlite
+        final List<String> listBrand = new ArrayList<String>();
+
+        //array untuk nampung nama, nantinya ditampilkan di dropdown
+        List<String> namaBrand = new ArrayList<>();
+
         final List<Integer> idBrandList=new ArrayList<Integer>();
-//            for( BrandData brandData:brandModel.getData()){
-//                listBrand.add(brandData.getName());
-//                idBrandList.add(Integer.parseInt(brandData.getId()));
-//                hash.put(Integer.parseInt(brandData.getId()), counter);
-//                counter = counter + 1;
-//            }
 
+
+        //looping dari sqlite
         for (Brand brand:brandOffline){
-            listBrand.add(brand.getName());
+
+            //tambahkan mobileid ke array
+            listBrand.add(brand.getKode_id());
+
+            //tambahkan nama ke array
+            namaBrand.add(brand.getName());
+
             idBrandList.add(Integer.parseInt(brand.getId().toString()));
-            hash.put(Integer.parseInt(brand.getId().toString()), counter);
+
+            //hash untuk pasangan mobile_id dan counter
+            hash.put(brand.getKode_id(), counter);
+
             counter = counter + 1;
         }
+
+        //format dropdown
         MySpinnerAdapter brandAdapter = new MySpinnerAdapter(
                 ItemsDataActivity.this,
                 R.layout.myspinner,
-                listBrand
+                namaBrand
         );
+
+        //set adapter
         sp_brand_id.setAdapter(brandAdapter);
+
+        //jika user menubah dropdown
         sp_brand_id.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 id_brand=idBrandList.get(position);
+                brand_mobile_id = listBrand.get(position);
             }
 
             @Override
@@ -998,12 +1028,10 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
             }
         });
 
-//        Toast.makeText(ItemsDataActivity.this,barang.getBrands_id(),Toast.LENGTH_SHORT).show();
 
-
+        //jika dalam mode EDIT
         if(barang!=null) {
-//                id_kategori=Integer.parseInt(barang.getCategory_id());
-            Integer selected = hash.get(Integer.parseInt(barang.getBrands_id()));
+            Integer selected = hash.get(barang.getBrand_mobile_id());
             sp_brand_id.setSelection(selected);
 
 
@@ -1014,72 +1042,6 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
     @Override
     public void onKategoriSuccess(KategoriModel kategoriModel,List<Kategori> kategoriOffline) {
 
-        if(kategoriModel==null){
-
-        }else{
-
-            this.sessionExpired(kategoriModel.getMessage());
-
-            //populasikan daftar kategori di dropdown kategori
-            //===============================================================================
-
-            //buat hashmap dan counter
-            //untuk mode edit
-            int counter = 0;
-            HashMap<Integer,Integer> hashKategori = new HashMap<>();
-
-            //buat array string
-            List<String> listKategori = new ArrayList<String>();
-
-            //buat array integer
-            final List<Integer> idKategoriList=new ArrayList<Integer>();
-
-            //looping kategori dari sqlite
-            //masukkan ke array
-            for(Datum datum:kategoriModel.getData()){
-
-                //var listKategori berisi list nama
-                listKategori.add(datum.getName());
-
-                //var idKategoriList berisi list id
-                idKategoriList.add(Integer.parseInt(datum.getId()));
-
-                //hashmap dapat id dan counter
-                hashKategori.put(Integer.parseInt(datum.getId()), counter);
-
-                counter = counter + 1;
-            }
-
-            MySpinnerAdapter kategoriAdapter = new MySpinnerAdapter(
-                    ItemsDataActivity.this,
-                    R.layout.myspinner,
-                    listKategori
-            );
-
-            sp_kategori.setAdapter(kategoriAdapter);
-            sp_kategori.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    id_kategori=idKategoriList.get(position);
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-            //===============================================================================
-            //populasi selesai
-            //sesudah populasi kategori selesai, lanjutkan populasi unit
-            if(barang!=null){
-//                id_kategori=Integer.parseInt(barang.getCategory_id());
-                Integer selected = hashKategori.get(Integer.parseInt(barang.getCategory_id()));
-                sp_kategori.setSelection(selected);
-            }
-
-        }
-
-        unitController.getUnitList();
     }
 
     @Override
@@ -1091,31 +1053,48 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
         //buat hashmap dan counter
         //untuk mode edit
         int counter = 0;
-        HashMap<Integer,Integer> hashKategori = new HashMap<>();
+        HashMap<String,Integer> hashKategori = new HashMap<>();
 
-        List<String> listKategori = new ArrayList<String>();
+        //array ini untuk menyimpan mobile_id
+        final List<String> listKategoriWithMobileID = new ArrayList<String>();
+
+        //array ini untuk menyimpan nama, dan ditampilkan di dropdown
+        List<String> namaKategori = new ArrayList<String>();
+
         final List<Integer> idKategoriList=new ArrayList<Integer>();
+
+        //looping dari sqlite
         for(Kategori kategori:kategoriOffline){
 
-            listKategori.add(kategori.getName_category());
+            //tambahkan mobile_id di list
+            listKategoriWithMobileID.add(kategori.getKode_id());
+
+            //tambahkan nama di array
+            namaKategori.add(kategori.getName_category());
+
 //            idKategoriList.add(Integer.parseInt(kategori.getKode_id()));
 //            hashKategori.put(Integer.parseInt(kategori.getKode_id()), counter);
             idKategoriList.add(Integer.parseInt(kategori.getId().toString()));
-            hashKategori.put(Integer.parseInt(kategori.getId().toString()), counter);
+
+            //hash nyimpan mobile_id dan counter integer urut
+            hashKategori.put(kategori.getKode_id(), counter);
             counter = counter + 1;
         }
         MySpinnerAdapter kategoriAdapter = new MySpinnerAdapter(
                 ItemsDataActivity.this,
                 R.layout.myspinner,
-                listKategori
+                namaKategori
         );
         sp_kategori=(Spinner)findViewById(R.id.sp_kategori);
 
         sp_kategori.setAdapter(kategoriAdapter);
+
+        //jika dropdown dipilih user
         sp_kategori.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 id_kategori=idKategoriList.get(position);
+                category_mobile_id = listKategoriWithMobileID.get(position);
             }
 
             @Override
@@ -1123,16 +1102,20 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
 
             }
         });
+
+
+        //jika pada saat edit mode
+        //dropdown harus sesuai indexnya
+        if(barang!=null){
+//                id_kategori=Integer.parseInt(barang.getCategory_id());
+            Log.d("categorymid",barang.getCategory_mobile_id());
+            Integer selected = hashKategori.get(barang.getCategory_mobile_id());
+            sp_kategori.setSelection(selected);
+        }
+
         //===============================================================================
         //populasi selesai
         //sesudah populasi kategori selesai, lanjutkan populasi unit
-        if(barang!=null){
-//                id_kategori=Integer.parseInt(barang.getCategory_id());
-            Integer selected = hashKategori.get(Integer.parseInt(barang.getCategory_id()));
-            sp_kategori.setSelection(selected);
-        }
-//        Toast.makeText(ItemsDataActivity.this, error,Toast.LENGTH_LONG).show();
-
         //trigger data unit ke spinner
         unitController.getUnitList();
     }
@@ -1140,105 +1123,63 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
     @Override
     public void onUnitSuccess(UnitModel unitModel,List<Unit> units) {
 
-        if (unitModel==null){
-
-        }else{
-
-            this.sessionExpired(unitModel.getMessage());
-
-            //populasikan daftar kategori di dropdown kategori
-            //===============================================================================
-
-            //buat hashmap dan counter
-            //untuk mode edit
-            int counter = 0;
-            HashMap<Integer,Integer> hash = new HashMap<>();
-
-            List<String> listUnit = new ArrayList<String>();
-            final List<Integer> idUnitList=new ArrayList<Integer>();
-//            for(UnitData unitData:unitModel.getData()){
-//                listUnit.add(unitData.getName());
-//                idUnitList.add(Integer.parseInt(unitData.getId()));
-//                hash.put(Integer.parseInt(unitData.getId()), counter);
-//                counter = counter + 1;
-//            }
-            for(Unit unit:units){
-                listUnit.add(unit.getName());
-                idUnitList.add(Integer.parseInt(unit.getId().toString()));
-                hash.put(Integer.parseInt(unit.getId().toString()),counter);
-                counter = counter + 1;
-            }
-            MySpinnerAdapter unitAdapter = new MySpinnerAdapter(
-                    ItemsDataActivity.this,
-                    R.layout.myspinner,
-                    listUnit
-            );
-            sp_unit_id.setAdapter(unitAdapter);
-            sp_unit_id.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    id_unit=idUnitList.get(position);
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-
-            if(barang!=null){
-//                id_kategori=Integer.parseInt(barang.getCategory_id());
-                Integer selected = hash.get(Integer.parseInt(barang.getUnits_id()));
-                sp_unit_id.setSelection(selected);
-            }
-            //===============================================================================
-            //populasi selesai
-            //sesudah populasi kategori selesai, lanjutkan populasi brand
-
-
-            brandController.getBrandList();
-        }
     }
 
     @Override
     public void onUnitError(String error,List<Unit> units) {
-//        Toast.makeText(ItemsDataActivity.this,error,Toast.LENGTH_SHORT).show();
 
-        //buat hashmap dan counter
-        //untuk mode edit
-//        Toast.makeText(ItemsDataActivity.this,"Unit error",Toast.LENGTH_SHORT).show();
 
         //find id
         sp_unit_id=(Spinner)findViewById(R.id.sp_unit_id);
 
 
         int counter = 0;
-        HashMap<Integer,Integer> hash = new HashMap<>();
 
-        List<String> listUnit = new ArrayList<String>();
+        //buat hashmap untuk pasangan mobile_id dan integer index
+        HashMap<String,Integer> hash = new HashMap<>();
+
+        //array untuk nyimpen mobile_id
+        final List<String> listUnit = new ArrayList<String>();
+
+        //array untuk nyimpen nama, nanti yang akan ditampilkan di dropdown
+        List<String> namaUnit = new ArrayList<>();
+
         final List<Integer> idUnitList=new ArrayList<Integer>();
-//            for(UnitData unitData:unitModel.getData()){
-//                listUnit.add(unitData.getName());
-//                idUnitList.add(Integer.parseInt(unitData.getId()));
-//                hash.put(Integer.parseInt(unitData.getId()), counter);
-//                counter = counter + 1;
-//            }
+
+        //looping data dari sqlite untuk ditampilkan di dropdown
         for(Unit unit:units){
-            listUnit.add(unit.getName());
+
+            //tambahkan mobile id ke array
+            listUnit.add(unit.getKode_id());
+
+            //tambahkan nama ke array, ini nanti ditampilkan di dropdown
+            namaUnit.add(unit.getName());
+
+
             idUnitList.add(Integer.parseInt(unit.getId().toString()));
-            hash.put(Integer.parseInt(unit.getId().toString()),counter);
+
+            //pasangkan mobile_id dengan integer counter
+            hash.put(unit.getKode_id(),counter);
+
             counter = counter + 1;
         }
+
+        //format dropdown
         MySpinnerAdapter unitAdapter = new MySpinnerAdapter(
                 ItemsDataActivity.this,
                 R.layout.myspinner,
-                listUnit
+                namaUnit
         );
+
+        //assignken array denga spinner
         sp_unit_id.setAdapter(unitAdapter);
+
+        //jika user ganti spinner value
         sp_unit_id.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 id_unit=idUnitList.get(position);
+                unit_mobile_id = listUnit.get(position);
             }
 
             @Override
@@ -1247,9 +1188,10 @@ public class ItemsDataActivity extends BaseActivity implements IAddBarangResult,
             }
         });
 
+
+        //jika dalam mode EDIT
         if(barang!=null){
-//                id_kategori=Integer.parseInt(barang.getCategory_id());
-            Integer selected = hash.get(Integer.parseInt(barang.getUnits_id()));
+            Integer selected = hash.get(barang.getUnit_mobile_id());
             sp_unit_id.setSelection(selected);
         }
         //===============================================================================
