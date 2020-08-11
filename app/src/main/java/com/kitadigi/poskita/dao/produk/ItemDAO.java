@@ -44,6 +44,9 @@ public interface ItemDAO {
     @Query("SELECT * FROM item WHERE sync_delete = 0")
     public List<Item> getItemTerhapus();
 
+
+
+
     //ini untuk hapus data kategori yang sync-delete nya 0
     //mau dihapus dari sqlite
     //kalau sudah nembak API delete
@@ -69,4 +72,15 @@ public interface ItemDAO {
 
     @Query("SELECT * FROM item WHERE unit_mobile_id =:unit_mobile_id")
     public  List<Item> getItemByUnitMobileId(String unit_mobile_id);
+
+
+    //fungsi untuk mengurangi stok barang, karena penjualan
+    @Query("UPDATE item SET qty_stock = qty_stock - :jumlah WHERE kode_id = :kode_id")
+    public void kurangiStok(Integer jumlah,String kode_id);
+
+
+    //fungsi untuk menambah stok barang, karena pembelian
+    @Query("UPDATE item SET qty_stock = qty_stock + :jumlah WHERE kode_id = :kode_id")
+    public void tambahStok(Integer jumlah,String kode_id);
+
 }

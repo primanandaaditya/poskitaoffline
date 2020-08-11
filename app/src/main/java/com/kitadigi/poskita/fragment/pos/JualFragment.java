@@ -228,15 +228,8 @@ public class JualFragment extends BaseFragment implements IStokResult {
     private void initMain(View view) {
 
 
-        //init barkode scanner
-//        intentIntegrator = new IntentIntegrator.forSupportFragment(JualFragment.this);
-//        IntentIntegrator.forSupportFragment(MyFragment.this).initiateScan();
-
         //session manager untuk myimpen penjualan offline
         sessionManager = new SessionManager(getActivity());
-
-//        sessionManager.clearPenjualanOffline();
-//        Toast.makeText(getActivity(),String.valueOf(sessionManager.sumTotalPenjualanOffline()),Toast.LENGTH_SHORT).show();
 
 
         final MainActivity mainActivity = (MainActivity) getActivity();
@@ -411,28 +404,28 @@ public class JualFragment extends BaseFragment implements IStokResult {
         }
 
 
-        checkTemp                       = db.getCountListItemsTempTipe("0");
-        if (checkTemp == 0){
-            db.addListItemsTemp("0", "Add Shortcuts", "", "","ic_plus", "","0", "1");
-            db.addListItemsTemp("0","Add Custom\nPenjualan", "", "","ic_plus", "","3", "1");
-            db.addListItemsTemp("1","Gulaku 1KG", "10000", "15000","https://ecs7.tokopedia.net/img/cache/700/product-1/2017/1/22/2833458/2833458_3d1a6760-03cf-4227-b23c-0723df51040a_2048_2048.jpg", "Gulaku 1KG","1", "1");
-            db.addListItemsTemp("2","Bimoli 1L", "10000", "15000","https://ecs7.tokopedia.net/img/cache/700/product-1/2016/5/16/9320291/9320291_ec3262ab-9a6e-4944-8362-40440c0440a9.jpg", "Bimoli 1L","1", "1");
-            db.addListItemsTemp("3","Beras Rojolele 10KG", "10000", "15000","https://www.lifull-produk.id/bundles/assets/img/product/1440560791abc_kecap_manis_pouch_580ml-_1.jpg", "Beras Rojolele 10KG","1", "1");
-            db.addListItemsTemp("4","Kecap Manis ABC 580ML", "10000", "15000","https://assets.klikindomaret.com/products/20063269/20063269_1.jpg", "Kecap Manis ABC 580ML","1", "1");
-            db.addListItemsTemp("5","Sabun Cair Nuvo 450ML", "10000", "15000","https://www.rinso.com/content/dam/unilever/dirt_is_good/indonesia/pack_shot/front/laundry/fabrics_cleaning/rinso_deterjen_bubuk_anti_noda_450gr/rinso_anti_noda_12x430g-front-1195144.png", "Sabun Cair Nuvo 450ML","1", "1");
-            db.addListItemsTemp("6","Sabun Cuci Rinso 475GR", "10000", "15000","https://ecs7.tokopedia.net/img/cache/700/product-1/2018/8/20/3607562/3607562_c91dbe15-117a-427d-8456-bae02e22a492_1620_1620.jpg", "Sabun Cuci Rinso 475GR","1", "1");
-            db.addListItemsTemp("7","Desaku Bubuk Balado 11GR", "10000", "15000","https://ecs7.tokopedia.net/img/cache/700/product-1/2018/8/20/3607562/3607562_c91dbe15-117a-427d-8456-bae02e22a492_1620_1620.jpg", "Desaku Bubuk Balado 11GR","1", "1");
-            db.addListItemsTemp("8","Masako Ayam 100GR", "10000", "15000","https://assets.klikindomaret.com/products/10035898/10035898_1.jpg", "Masako Ayam 100GR","1", "1");
-
-            db.addListItemsTemp("1","Gulaku 1KG", "10000", "15000","https://ecs7.tokopedia.net/img/cache/700/product-1/2017/1/22/2833458/2833458_3d1a6760-03cf-4227-b23c-0723df51040a_2048_2048.jpg", "Gulaku 1KG","2", "1");
-            db.addListItemsTemp("2","Bimoli 1L", "10000", "15000","https://ecs7.tokopedia.net/img/cache/700/product-1/2016/5/16/9320291/9320291_ec3262ab-9a6e-4944-8362-40440c0440a9.jpg", "Bimoli 1L","2", "1");
-            db.addListItemsTemp("3","Beras Rojolele 10KG", "10000", "15000","https://www.lifull-produk.id/bundles/assets/img/product/1440560791abc_kecap_manis_pouch_580ml-_1.jpg", "Beras Rojolele 10KG","2", "1");
-            db.addListItemsTemp("4","Kecap Manis ABC 580ML", "10000", "15000","https://assets.klikindomaret.com/products/20063269/20063269_1.jpg", "Kecap Manis ABC 580ML","2", "1");
-            db.addListItemsTemp("5","Sabun Cair Nuvo 450ML", "10000", "15000","https://www.rinso.com/content/dam/unilever/dirt_is_good/indonesia/pack_shot/front/laundry/fabrics_cleaning/rinso_deterjen_bubuk_anti_noda_450gr/rinso_anti_noda_12x430g-front-1195144.png", "Sabun Cair Nuvo 450ML","2", "1");
-            db.addListItemsTemp("6","Sabun Cuci Rinso 475GR", "10000", "15000","https://ecs7.tokopedia.net/img/cache/700/product-1/2018/8/20/3607562/3607562_c91dbe15-117a-427d-8456-bae02e22a492_1620_1620.jpg", "Sabun Cuci Rinso 475GR","2", "1");
-            db.addListItemsTemp("7","Desaku Bubuk Balado 11GR", "10000", "15000","https://ecs7.tokopedia.net/img/cache/700/product-1/2018/8/20/3607562/3607562_c91dbe15-117a-427d-8456-bae02e22a492_1620_1620.jpg", "Desaku Bubuk Balado 11GR","2", "1");
-            db.addListItemsTemp("8","Masako Ayam 100GR", "10000", "15000","https://assets.klikindomaret.com/products/10035898/10035898_1.jpg", "Masako Ayam 100GR","2", "1");
-        }
+//        checkTemp                       = db.getCountListItemsTempTipe("0");
+//        if (checkTemp == 0){
+//            db.addListItemsTemp("0", "Add Shortcuts", "", "","ic_plus", "","0", "1");
+//            db.addListItemsTemp("0","Add Custom\nPenjualan", "", "","ic_plus", "","3", "1");
+//            db.addListItemsTemp("1","Gulaku 1KG", "10000", "15000","https://ecs7.tokopedia.net/img/cache/700/product-1/2017/1/22/2833458/2833458_3d1a6760-03cf-4227-b23c-0723df51040a_2048_2048.jpg", "Gulaku 1KG","1", "1");
+//            db.addListItemsTemp("2","Bimoli 1L", "10000", "15000","https://ecs7.tokopedia.net/img/cache/700/product-1/2016/5/16/9320291/9320291_ec3262ab-9a6e-4944-8362-40440c0440a9.jpg", "Bimoli 1L","1", "1");
+//            db.addListItemsTemp("3","Beras Rojolele 10KG", "10000", "15000","https://www.lifull-produk.id/bundles/assets/img/product/1440560791abc_kecap_manis_pouch_580ml-_1.jpg", "Beras Rojolele 10KG","1", "1");
+//            db.addListItemsTemp("4","Kecap Manis ABC 580ML", "10000", "15000","https://assets.klikindomaret.com/products/20063269/20063269_1.jpg", "Kecap Manis ABC 580ML","1", "1");
+//            db.addListItemsTemp("5","Sabun Cair Nuvo 450ML", "10000", "15000","https://www.rinso.com/content/dam/unilever/dirt_is_good/indonesia/pack_shot/front/laundry/fabrics_cleaning/rinso_deterjen_bubuk_anti_noda_450gr/rinso_anti_noda_12x430g-front-1195144.png", "Sabun Cair Nuvo 450ML","1", "1");
+//            db.addListItemsTemp("6","Sabun Cuci Rinso 475GR", "10000", "15000","https://ecs7.tokopedia.net/img/cache/700/product-1/2018/8/20/3607562/3607562_c91dbe15-117a-427d-8456-bae02e22a492_1620_1620.jpg", "Sabun Cuci Rinso 475GR","1", "1");
+//            db.addListItemsTemp("7","Desaku Bubuk Balado 11GR", "10000", "15000","https://ecs7.tokopedia.net/img/cache/700/product-1/2018/8/20/3607562/3607562_c91dbe15-117a-427d-8456-bae02e22a492_1620_1620.jpg", "Desaku Bubuk Balado 11GR","1", "1");
+//            db.addListItemsTemp("8","Masako Ayam 100GR", "10000", "15000","https://assets.klikindomaret.com/products/10035898/10035898_1.jpg", "Masako Ayam 100GR","1", "1");
+//
+//            db.addListItemsTemp("1","Gulaku 1KG", "10000", "15000","https://ecs7.tokopedia.net/img/cache/700/product-1/2017/1/22/2833458/2833458_3d1a6760-03cf-4227-b23c-0723df51040a_2048_2048.jpg", "Gulaku 1KG","2", "1");
+//            db.addListItemsTemp("2","Bimoli 1L", "10000", "15000","https://ecs7.tokopedia.net/img/cache/700/product-1/2016/5/16/9320291/9320291_ec3262ab-9a6e-4944-8362-40440c0440a9.jpg", "Bimoli 1L","2", "1");
+//            db.addListItemsTemp("3","Beras Rojolele 10KG", "10000", "15000","https://www.lifull-produk.id/bundles/assets/img/product/1440560791abc_kecap_manis_pouch_580ml-_1.jpg", "Beras Rojolele 10KG","2", "1");
+//            db.addListItemsTemp("4","Kecap Manis ABC 580ML", "10000", "15000","https://assets.klikindomaret.com/products/20063269/20063269_1.jpg", "Kecap Manis ABC 580ML","2", "1");
+//            db.addListItemsTemp("5","Sabun Cair Nuvo 450ML", "10000", "15000","https://www.rinso.com/content/dam/unilever/dirt_is_good/indonesia/pack_shot/front/laundry/fabrics_cleaning/rinso_deterjen_bubuk_anti_noda_450gr/rinso_anti_noda_12x430g-front-1195144.png", "Sabun Cair Nuvo 450ML","2", "1");
+//            db.addListItemsTemp("6","Sabun Cuci Rinso 475GR", "10000", "15000","https://ecs7.tokopedia.net/img/cache/700/product-1/2018/8/20/3607562/3607562_c91dbe15-117a-427d-8456-bae02e22a492_1620_1620.jpg", "Sabun Cuci Rinso 475GR","2", "1");
+//            db.addListItemsTemp("7","Desaku Bubuk Balado 11GR", "10000", "15000","https://ecs7.tokopedia.net/img/cache/700/product-1/2018/8/20/3607562/3607562_c91dbe15-117a-427d-8456-bae02e22a492_1620_1620.jpg", "Desaku Bubuk Balado 11GR","2", "1");
+//            db.addListItemsTemp("8","Masako Ayam 100GR", "10000", "15000","https://assets.klikindomaret.com/products/10035898/10035898_1.jpg", "Masako Ayam 100GR","2", "1");
+//        }
 
 
         //tombol untuk scan barkode
@@ -553,7 +546,7 @@ public class JualFragment extends BaseFragment implements IStokResult {
 
     public void setData(final String json) {
 
-        fetchListItems(json);
+//        fetchListItems(json);
 //        mShimmerViewContainer.setVisibility(View.VISIBLE);
 //        mShimmerViewContainer.startShimmerAnimation();
 //        new Handler().postDelayed(new Runnable() {
@@ -724,106 +717,106 @@ public class JualFragment extends BaseFragment implements IStokResult {
     //fungsi ini untuk mendapatkan jumlah item yang dibeli
     //dari tabel pembelian di sqlite
     //tapi hanya untuk yang di tabel master yang belum di-sync
-    public  Integer getJumlahBeli(String mobile_id){
-
-        Integer hasil=0;
-        String nomor;
-        Integer qty=0;
-        BeliMaster beliMaster;
-
-        //init database sqlite
-        BeliMasterHelper beliMasterHelper = new BeliMasterHelper(context);
-        BeliDetailHelper beliDetailHelper = new BeliDetailHelper(context);
-
-        //dapatkan semua item beli dari tabel beli detail
-        //yang sesuai parameter di atas (mobile_id)
-        List<BeliDetail> beliDetails = beliDetailHelper.getBeliDetailByMobileId(mobile_id);
-
-        //tampung jumlah dalam variabel
-        int jumlah = beliDetails.size();
-
-        //jika jumlah nya 0
-        //maka langsung return 0
-        if (jumlah ==0 ){
-            hasil = 0;
-        }else{
-
-            //looping list beli detail tadi
-            //cek satu persatu nomor trx-nya di tabel beli master
-            for (BeliDetail beliDetail: beliDetails){
-
-                //tampung nomor_trx dalam var nomor
-                nomor = beliDetail.getNomor();
-
-                //cari di tabel beli master
-                //cek apakah status belum sync atau sudah
-                beliMaster = beliMasterHelper.getBeliMasterByNomor(nomor);
-
-                //jika status sync belum
-                //masukkan ke dalam counter
-                if (beliMaster.getSync_insert() == Constants.STATUS_BELUM_SYNC){
-                    qty = Integer.parseInt(beliDetail.getQty());
-                    hasil = hasil + qty;
-                }
-            }
-
-        }
-
-        Log.d("jumlah beli", hasil.toString());
-        return hasil;
-    }
+//    public  Integer getJumlahBeli(String mobile_id){
+//
+//        Integer hasil=0;
+//        String nomor;
+//        Integer qty=0;
+//        BeliMaster beliMaster;
+//
+//        //init database sqlite
+//        BeliMasterHelper beliMasterHelper = new BeliMasterHelper(context);
+//        BeliDetailHelper beliDetailHelper = new BeliDetailHelper(context);
+//
+//        //dapatkan semua item beli dari tabel beli detail
+//        //yang sesuai parameter di atas (mobile_id)
+//        List<BeliDetail> beliDetails = beliDetailHelper.getBeliDetailByMobileId(mobile_id);
+//
+//        //tampung jumlah dalam variabel
+//        int jumlah = beliDetails.size();
+//
+//        //jika jumlah nya 0
+//        //maka langsung return 0
+//        if (jumlah ==0 ){
+//            hasil = 0;
+//        }else{
+//
+//            //looping list beli detail tadi
+//            //cek satu persatu nomor trx-nya di tabel beli master
+//            for (BeliDetail beliDetail: beliDetails){
+//
+//                //tampung nomor_trx dalam var nomor
+//                nomor = beliDetail.getNomor();
+//
+//                //cari di tabel beli master
+//                //cek apakah status belum sync atau sudah
+//                beliMaster = beliMasterHelper.getBeliMasterByNomor(nomor);
+//
+//                //jika status sync belum
+//                //masukkan ke dalam counter
+//                if (beliMaster.getSync_insert() == Constants.STATUS_BELUM_SYNC){
+//                    qty = Integer.parseInt(beliDetail.getQty());
+//                    hasil = hasil + qty;
+//                }
+//            }
+//
+//        }
+//
+//        Log.d("jumlah beli", hasil.toString());
+//        return hasil;
+//    }
 
     //fungsi ini untuk mendapatkan jumlah item yang dijual
     //dari tabel penjualan di sqlite
     //tapi hanya untuk yang di tabel master yang belum di-sync
-    public  Integer getJumlahJual(String mobile_id){
-
-        Integer hasil=0;
-        String nomor;
-        Integer qty=0;
-        JualMaster jualMaster;
-
-        //init database sqlite
-        JualMasterHelper jualMasterHelper = new JualMasterHelper(context);
-        JualDetailHelper jualDetailHelper = new JualDetailHelper(context);
-
-        //dapatkan semua item jual dari tabel jual detail
-        //yang sesuai parameter di atas (mobile_id)
-        List<JualDetail> jualDetails = jualDetailHelper.getJualDetailByKodeId(mobile_id);
-
-        //tampung jumlah dalam variabel
-        int jumlah = jualDetails.size();
-
-        //jika jumlah nya 0
-        //maka langsung return 0
-        if (jumlah ==0 ){
-            hasil = 0;
-        }else{
-
-            //looping list jual detail tadi
-            //cek satu persatu nomor trx-nya di tabel jual master
-            for (JualDetail jualDetail : jualDetails){
-
-                //tampung nomor_trx dalam var nomor
-                nomor = jualDetail.getNomor();
-
-                //cari di tabel jual master
-                //cek apakah status belum sync atau sudah
-                jualMaster = jualMasterHelper.getJualMasterByNomor(nomor);
-
-                //jika status sync belum
-                //masukkan ke dalam counter
-                if (jualMaster.getSync_insert() == Constants.STATUS_BELUM_SYNC){
-                    qty = jualDetail.getQty();
-                    hasil = hasil + qty;
-                }
-            }
-
-        }
-
-        Log.d("jumlah jual", hasil.toString());
-        return hasil;
-    }
+//    public  Integer getJumlahJual(String mobile_id){
+//
+//        Integer hasil=0;
+//        String nomor;
+//        Integer qty=0;
+//        JualMaster jualMaster;
+//
+//        //init database sqlite
+//        JualMasterHelper jualMasterHelper = new JualMasterHelper(context);
+//        JualDetailHelper jualDetailHelper = new JualDetailHelper(context);
+//
+//        //dapatkan semua item jual dari tabel jual detail
+//        //yang sesuai parameter di atas (mobile_id)
+//        List<JualDetail> jualDetails = jualDetailHelper.getJualDetailByKodeId(mobile_id);
+//
+//        //tampung jumlah dalam variabel
+//        int jumlah = jualDetails.size();
+//
+//        //jika jumlah nya 0
+//        //maka langsung return 0
+//        if (jumlah ==0 ){
+//            hasil = 0;
+//        }else{
+//
+//            //looping list jual detail tadi
+//            //cek satu persatu nomor trx-nya di tabel jual master
+//            for (JualDetail jualDetail : jualDetails){
+//
+//                //tampung nomor_trx dalam var nomor
+//                nomor = jualDetail.getNomor();
+//
+//                //cari di tabel jual master
+//                //cek apakah status belum sync atau sudah
+//                jualMaster = jualMasterHelper.getJualMasterByNomor(nomor);
+//
+//                //jika status sync belum
+//                //masukkan ke dalam counter
+//                if (jualMaster.getSync_insert() == Constants.STATUS_BELUM_SYNC){
+//                    qty = jualDetail.getQty();
+//                    hasil = hasil + qty;
+//                }
+//            }
+//
+//        }
+//
+//        Log.d("jumlah jual", hasil.toString());
+//        return hasil;
+//    }
 
 
 
@@ -882,33 +875,21 @@ public class JualFragment extends BaseFragment implements IStokResult {
                 //kode dibawah ini untuk menentukan berapa qty available
                 //ditinjau dari jumlah pembelian, penjualan, item yang sudah dimasukkan dalam cart
                 int qty_yang_sudah_diinput;
-                int qty_yang_sudah_terjual;
-                int qty_yang_sudah_terbeli;
                 int qty_total;
                 int qty_available;
                 int qty_stok_sekarang;
 
-
                 qty_stok_sekarang = item.getQty_stock();
-
-
 
                 //cari jumlah barang yang sudah di-add ke keranjang
                 qty_yang_sudah_diinput = sessionManager.jumlahItemYangDiinputKePenjualanOffline(kodeId);
 
-                //cari jumlah barang terjual yang ada disqlite, tapi belum di-sync
-                qty_yang_sudah_terjual = getJumlahJual(kodeId);
-
-                //cari jumlah barang terbeli yang ada disqlite, tapi belum di-sync
-                qty_yang_sudah_terbeli = getJumlahBeli(kodeId);
-                Log.d("terbeli", String.valueOf(qty_yang_sudah_terbeli));
-
                 //jumlahkan kedua variabel diatas, nantinya akan dijadikan pengurang
-                qty_total = qty_stok_sekarang + qty_yang_sudah_terbeli - (qty_yang_sudah_diinput + qty_yang_sudah_terjual);
+                qty_total = qty_stok_sekarang - qty_yang_sudah_diinput;
 
                 //jika stok =0 atau jumlah stok sama dengan yang diinputkan
                 //munculkan pesan, kalau overstok
-                if ( (qty_stok_sekarang + qty_yang_sudah_terbeli )<=0 || ( (qty_stok_sekarang + qty_yang_sudah_terbeli ) - qty_yang_sudah_diinput == 0)  ){
+                if ( qty_stok_sekarang <=0 ){
                     Toast.makeText(getActivity(),getActivity().getResources().getString(R.string.stok_kosong),Toast.LENGTH_SHORT).show();
                 }else{
                     //jika lebih dari 0
@@ -919,12 +900,7 @@ public class JualFragment extends BaseFragment implements IStokResult {
                     //bukan id item lagi
 
                     //kurangkan qty_available pada stok dengan qty_total
-                    //tambahkan dengan qty_terbeli, karena pembelian sifatnya menambah stok
                     qty_available = qty_total;
-                    Log.d("qty sdh diinput", String.valueOf(qty_yang_sudah_diinput));
-                    Log.d("qty sdh terjual", String.valueOf(qty_yang_sudah_terjual));
-                    Log.d("qty sdh terbeli", String.valueOf(qty_yang_sudah_terbeli));
-                    Log.d("qty total",String.valueOf(qty_total));
 
                     //tampilkan popup dari jualfragment.java
                     //lihat fungsi addItems()

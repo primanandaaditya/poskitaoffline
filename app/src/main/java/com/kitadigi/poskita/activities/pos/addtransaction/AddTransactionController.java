@@ -11,6 +11,7 @@ import com.kitadigi.poskita.dao.jualdetail.JualDetail;
 import com.kitadigi.poskita.dao.jualdetail.JualDetailHelper;
 import com.kitadigi.poskita.dao.jualmaster.JualMaster;
 import com.kitadigi.poskita.dao.jualmaster.JualMasterHelper;
+import com.kitadigi.poskita.dao.produk.ItemHelper;
 import com.kitadigi.poskita.model.ArrayPosModel;
 import com.kitadigi.poskita.model.JualModel;
 import com.kitadigi.poskita.model.ListJualModel;
@@ -46,6 +47,9 @@ public class AddTransactionController implements IAddTransactionRequest {
     JualMaster jualMaster;
     JualDetail jualDetail;
 
+    //untuk ngurangi stok
+    ItemHelper itemHelper;
+
     boolean offlineMode;
 
 
@@ -60,6 +64,7 @@ public class AddTransactionController implements IAddTransactionRequest {
         jualHelper=new JualHelper(context);
         jualMasterHelper = new JualMasterHelper(context);
         jualDetailHelper = new JualDetailHelper(context);
+        itemHelper = new ItemHelper(context);
 
     }
 
@@ -76,6 +81,8 @@ public class AddTransactionController implements IAddTransactionRequest {
         jualHelper=new JualHelper(context);
         jualMasterHelper = new JualMasterHelper(context);
         jualDetailHelper = new JualDetailHelper(context);
+        itemHelper = new ItemHelper(context);
+
     }
 
     @Override
@@ -153,43 +160,11 @@ public class AddTransactionController implements IAddTransactionRequest {
 
             }
 
-
-
         }
-
-
 
     }
 
 
-    //ini fungsi yang tidak usah digunakan!!!!!!
-    //===============================================================================================
-    void simpanPenjualanKeSQLite(String contact_id, int total_pay, int total_price, boolean sudahSync){
-
-        //siapkan 3 string untuk idproductmaster,qty dan price
-        ArrayPosModel arrayPosModel = siapkanArray();
-
-        jual=new Jual();
-        jual.setContact_id(contact_id);
-        jual.setId_product_master(arrayPosModel.getArrayIdProductMaster());
-        jual.setPrice(arrayPosModel.getArrayPrice());
-        jual.setQty(arrayPosModel.getArrayQty());
-        jual.setTotal_pay(total_pay);
-        jual.setTotal_price(total_price);
-        jual.setSync_delete(Constants.STATUS_SUDAH_SYNC);
-        jual.setSync_update(Constants.STATUS_SUDAH_SYNC);
-        if (sudahSync){
-            jual.setSync_insert(Constants.STATUS_SUDAH_SYNC);
-        }else{
-            jual.setSync_insert(Constants.STATUS_BELUM_SYNC);
-        }
-
-        //commit insert
-        jualHelper.addJual(jual);
-
-    }
-    //===============================================================================================
-    //===============================================================================================
 
     private ArrayPosModel siapkanArray(){
 
@@ -258,6 +233,9 @@ public class AddTransactionController implements IAddTransactionRequest {
 
             //commit insert ke tabel JualDetail
             jualDetailHelper.addJualDetail(jualDetail);
+
+            //kurangi stok di tabel item
+            itemHelper.kurangiStok(jualModel.getQty(), jualModel.getId());
         }
 
         //insert row untuk tabel JualMaster

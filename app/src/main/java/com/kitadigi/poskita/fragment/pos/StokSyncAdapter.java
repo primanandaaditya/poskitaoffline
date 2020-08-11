@@ -176,18 +176,18 @@ public class StokSyncAdapter extends RecyclerView.Adapter<StokSyncAdapter.DataVi
                 qty_yang_sudah_diinput = sessionManager.jumlahItemYangDiinputKePenjualanOffline(id);
 
                 //cari jumlah barang terjual yang ada disqlite, tapi belum di-sync
-                qty_yang_sudah_terjual = jualFragment.getJumlahJual(mobile_id);
+//                qty_yang_sudah_terjual = jualFragment.getJumlahJual(mobile_id);
 
                 //cari jumlah barang terbeli yang ada disqlite, tapi belum di-sync
-                qty_yang_sudah_terbeli = jualFragment.getJumlahBeli(mobile_id);
-                Log.d("terbeli", String.valueOf(qty_yang_sudah_terbeli));
+//                qty_yang_sudah_terbeli = jualFragment.getJumlahBeli(mobile_id);
+//                Log.d("terbeli", String.valueOf(qty_yang_sudah_terbeli));
 
                 //jumlahkan kedua variabel diatas, nantinya akan dijadikan pengurang
-                qty_total = qty_stok_sekarang + qty_yang_sudah_terbeli - (qty_yang_sudah_diinput + qty_yang_sudah_terjual);
+                qty_total = qty_stok_sekarang - qty_yang_sudah_diinput;
 
                 //jika stok =0 atau jumlah stok sama dengan yang diinputkan
                 //munculkan pesan, kalau overstok
-                if ( (stok.getQty_available() + qty_yang_sudah_terbeli )<=0 || ( (stok.getQty_available() + qty_yang_sudah_terbeli ) - qty_yang_sudah_diinput == 0)  ){
+                if ( qty_total <= 0 ){
                     Toast.makeText(mContext,mContext.getResources().getString(R.string.stok_kosong),Toast.LENGTH_SHORT).show();
                 }else{
                     //jika lebih dari 0
@@ -201,8 +201,8 @@ public class StokSyncAdapter extends RecyclerView.Adapter<StokSyncAdapter.DataVi
                     //tambahkan dengan qty_terbeli, karena pembelian sifatnya menambah stok
                     qty_available = qty_total;
                     Log.d("qty sdh diinput", String.valueOf(qty_yang_sudah_diinput));
-                    Log.d("qty sdh terjual", String.valueOf(qty_yang_sudah_terjual));
-                    Log.d("qty sdh terbeli", String.valueOf(qty_yang_sudah_terbeli));
+//                    Log.d("qty sdh terjual", String.valueOf(qty_yang_sudah_terjual));
+//                    Log.d("qty sdh terbeli", String.valueOf(qty_yang_sudah_terbeli));
                     Log.d("qty total",String.valueOf(qty_total));
 
                     //tampilkan popup dari jualfragment.java

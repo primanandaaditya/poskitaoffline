@@ -11,6 +11,7 @@ import com.kitadigi.poskita.dao.belidetail.BeliDetail;
 import com.kitadigi.poskita.dao.belidetail.BeliDetailHelper;
 import com.kitadigi.poskita.dao.belimaster.BeliMaster;
 import com.kitadigi.poskita.dao.belimaster.BeliMasterHelper;
+import com.kitadigi.poskita.dao.produk.ItemHelper;
 import com.kitadigi.poskita.model.ArrayPosModel;
 import com.kitadigi.poskita.model.BeliModel;
 import com.kitadigi.poskita.model.ListBeliModel;
@@ -45,6 +46,9 @@ public class AddPembelianController implements IAddPembelianRequest {
     BeliMaster beliMaster;
     BeliDetail beliDetail;
 
+    //untuk nambah stok (karena pembelian), pakai itemHelper
+    ItemHelper itemHelper;
+
     boolean offlineMode;
 
     public AddPembelianController(Context context, IAddPembelianResult iAddPembelianResult, boolean offlineMode) {
@@ -60,6 +64,7 @@ public class AddPembelianController implements IAddPembelianRequest {
 
         beliMasterHelper=new BeliMasterHelper(context);
         beliDetailHelper=new BeliDetailHelper(context);
+        itemHelper = new ItemHelper(context);
 
     }
 
@@ -76,7 +81,7 @@ public class AddPembelianController implements IAddPembelianRequest {
         beliMasterHelper=new BeliMasterHelper(context);
         beliDetailHelper=new BeliDetailHelper(context);
 
-
+        itemHelper = new ItemHelper(context);
     }
 
     @Override
@@ -181,6 +186,9 @@ public class AddPembelianController implements IAddPembelianRequest {
 
             //commit insert ke tabel JualDetail
             beliDetailHelper.addBeli(beliDetail);
+
+            //tambahkan stok di tabel item
+            itemHelper.tambahStok(beliModel.getQty(), beliModel.getId());
         }
 
         //insert row untuk tabel BeliMaster

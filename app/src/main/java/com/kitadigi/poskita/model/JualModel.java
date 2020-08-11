@@ -64,7 +64,6 @@ public class JualModel {
         this.name_product = name_product;
     }
 
-
     public static Comparator<JualModel> jualModelComparator = new Comparator<JualModel>() {
         public int compare(JualModel s1, JualModel s2) {
             String dt1 = s1.getId().toUpperCase();
@@ -79,9 +78,6 @@ public class JualModel {
         }
 
     };
-
-
-
 
 }
 

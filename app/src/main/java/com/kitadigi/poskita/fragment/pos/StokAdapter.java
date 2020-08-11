@@ -130,19 +130,19 @@ public class StokAdapter extends RecyclerView.Adapter<com.kitadigi.poskita.fragm
                 mobile_id = stokDatum.getKode_id();
 
                 qty_yang_sudah_diinput = sessionManager.jumlahItemYangDiinputKePenjualanOffline(id);
-                qty_yang_sudah_dibeli = jualFragment.getJumlahBeli(mobile_id);
-                Log.d("qty sdh beli", String.valueOf(qty_yang_sudah_dibeli));
+//                qty_yang_sudah_dibeli = jualFragment.getJumlahBeli(mobile_id);
+//                Log.d("qty sdh beli", String.valueOf(qty_yang_sudah_dibeli));
 
                 //jika stok =0 atau jumlah stok sama dengan yang diinputkan
                 //munculkan pesan, kalau overstok
-                if ( (stokDatum.getQty_available() + qty_yang_sudah_dibeli )<=0 || ( (stokDatum.getQty_available() - qty_yang_sudah_diinput) + qty_yang_sudah_dibeli ==0 )  ){
-                    Toast.makeText(mContext,mContext.getResources().getString(R.string.stok_kosong),Toast.LENGTH_SHORT).show();
-                }else{
-                    //jika lebih dari 0
-                    //tampilkan dialog
-
-                    jualFragment.addItems(stokDatum.getId(),stokDatum.getName_product(),stokDatum.getSell_price(), bitmap,"", stokDatum.getQty_available());
-                }
+//                if ( (stokDatum.getQty_available() + qty_yang_sudah_dibeli )<=0 || ( (stokDatum.getQty_available() - qty_yang_sudah_diinput) + qty_yang_sudah_dibeli ==0 )  ){
+//                    Toast.makeText(mContext,mContext.getResources().getString(R.string.stok_kosong),Toast.LENGTH_SHORT).show();
+//                }else{
+//                    //jika lebih dari 0
+//                    //tampilkan dialog
+//
+//                    jualFragment.addItems(stokDatum.getId(),stokDatum.getName_product(),stokDatum.getSell_price(), bitmap,"", stokDatum.getQty_available());
+//                }
 
             }
         });

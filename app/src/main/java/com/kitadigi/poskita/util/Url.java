@@ -2,7 +2,7 @@ package com.kitadigi.poskita.util;
 
 public class Url {
 
-//
+
     public static final String DIKI_URL = "http://192.168.1.16:4444/api/";
     public static final String DIKI_IMAGE_URL = "http://192.168.1.16:4444/upload_api/master_product/media/";
 
@@ -59,6 +59,8 @@ public class Url {
     //url ini untuk percobaan
 
     public static final String SINKRON_BASE_URL = "http://192.168.1.16:5555/sync/";
+//    public static final String SINKRON_BASE_URL = "http://poskita-sync.kitadigi.com/";
+
 //    public static final String SINKRON_BASE_URL = "http://192.168.1.17/sync/";
 //    public static final String SINKRON_BASE_URL = "http://192.168.1.15/sync/";
     public static final String SINKRON_INSERT_KATEGORI = "category/insert/";

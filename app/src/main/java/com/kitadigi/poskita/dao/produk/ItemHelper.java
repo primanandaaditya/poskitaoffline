@@ -182,4 +182,12 @@ public class ItemHelper {
         Log.d("ada", String.valueOf(hasil));
         return hasil;
     }
+
+    public void kurangiStok(Integer jumlah,String kode_id){
+        itemDAO.kurangiStok(jumlah,kode_id);
+    }
+
+    public void tambahStok(Integer jumlah, String kode_id){
+        itemDAO.tambahStok(jumlah, kode_id);
+    }
 }
