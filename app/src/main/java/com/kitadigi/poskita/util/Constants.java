@@ -40,7 +40,11 @@ public class Constants {
     public static Integer STATUS_BELUM_SYNC=0;
 
     public static String poskita = "poskita";
-    public final static String auth_token = "auth_token";
+
+//    public final static String auth_token = "auth_token";
+    public final static String auth_token = "auth-token";
+    public final static String data = "data";
+
     public final static String token_key = "085B7120909C0DB4FBC3C9C568975E6F";
     public final static String KODE_200 = "200";
     public final static String ICON_STOCK = "icon_stock.png";

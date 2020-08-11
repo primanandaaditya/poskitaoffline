@@ -1,6 +1,7 @@
 package com.kitadigi.poskita.activities.reportoffline.revenue;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.kitadigi.poskita.R;
@@ -58,6 +59,7 @@ public class RORevenueController implements IRORevenueRequest {
             }
         }
 
+        Log.d("rorevenue","total qty = " + hasil);
         textView.setText(hasil.toString() + " item");
     }
 
@@ -79,6 +81,7 @@ public class RORevenueController implements IRORevenueRequest {
         }
 
         String s = StringUtil.formatRupiah(hasil);
+        Log.d("rorevenue","total grand = " + hasil);
         textView.setText("Grand total : " + s);
     }
 }
