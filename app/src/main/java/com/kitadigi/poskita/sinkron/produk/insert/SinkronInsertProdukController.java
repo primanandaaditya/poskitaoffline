@@ -97,7 +97,7 @@ public class SinkronInsertProdukController implements ISinkronAddProdukRequest {
                 //munculkan progress
                 sweetAlertDialog=new SweetAlertDialog(context,SweetAlertDialog.PROGRESS_TYPE);
                 sweetAlertDialog.setTitleText(context.getResources().getString(R.string.now_loading));
-//                sweetAlertDialog.show();
+
 
 
                 //buat request body untuk fungsi 'kumpulkan data' dulu
@@ -113,9 +113,20 @@ public class SinkronInsertProdukController implements ISinkronAddProdukRequest {
 
                         Log.d("sukses",call.request().url().toString());
                         Log.d("kanaeru", String.valueOf(response.code()) + response.toString());
-                        iSinkronAddProdukResult.onSinkronAddProdukSuccess(response.body());
 
-                        ubahStatusSudahSync();
+                        SinkronResponse sinkronResponse = response.body();
+                        Log.d("Respon Add Produk", sinkronResponse.getStatus().getCode());
+                        if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
+
+                            iSinkronAddProdukResult.onSinkronAddProdukSuccess(response.body());
+                            ubahStatusSudahSync();
+
+                        }else{
+
+                            iSinkronAddProdukResult.onSinkronAddProdukError("Error add produk");
+                        }
+
+
 //                        sweetAlertDialog.dismissWithAnimation();
                     }
 

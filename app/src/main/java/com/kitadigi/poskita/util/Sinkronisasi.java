@@ -122,6 +122,10 @@ public class Sinkronisasi implements
     
     Context context;
 
+    //var ini untuk progress sejauh mana proses sync berjalan
+    //nilainya akan dinaikkan 1 setiap kali sub sync selesai (entah sukses/gagal)
+    Integer progress = 0;
+
     ISinkronizer iSinkronizer;
 
     InternetChecker internetChecker;
@@ -131,10 +135,20 @@ public class Sinkronisasi implements
 
 
 
+
     public Sinkronisasi(Context context, ISinkronizer iSinkronizer) {
         this.context = context;
         this.iSinkronizer = iSinkronizer;
     }
+
+
+    public Sinkronisasi(Context context, Integer progress, ISinkronizer iSinkronizer) {
+        this.context = context;
+        this.progress = progress;
+        this.iSinkronizer = iSinkronizer;
+    }
+
+
 
     public void mulaiSinkron(){
 
@@ -160,6 +174,11 @@ public class Sinkronisasi implements
 
     @Override
     public void onSinkronAddKategoriSuccess(SinkronResponse sinkronResponse) {
+
+        progress ++;
+        Log.d("Progress : " ,progress.toString());
+        iSinkronizer.onProgress(progress);
+
         if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
 //            this.showToast(sinkronResponse.getStatus().getMessage());
             //lanjut ke update kategori
@@ -175,6 +194,10 @@ public class Sinkronisasi implements
 
     @Override
     public void onSinkronUpdateKategoriSuccess(SinkronResponse sinkronResponse) {
+        progress ++;
+        Log.d("Progress : " ,progress.toString());
+        iSinkronizer.onProgress(progress);
+
         if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
 //            this.showToast(sinkronResponse.getStatus().getMessage());
             sinkronDeleteKategoriController = new SinkronDeleteKategoriController(context, this);
@@ -189,6 +212,10 @@ public class Sinkronisasi implements
 
     @Override
     public void onSinkronDeleteKategoriSuccess(SinkronResponse sinkronResponse) {
+        progress ++;
+        iSinkronizer.onProgress(progress);
+        Log.d("Progress : " ,progress.toString());
+
         if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
             sinkronInsertBrandController = new SinkronInsertBrandController(context,this);
             sinkronInsertBrandController.insert_brand();
@@ -202,6 +229,10 @@ public class Sinkronisasi implements
 
     @Override
     public void onSinkronAddBrandSuccess(SinkronResponse sinkronResponse) {
+        progress ++;
+        Log.d("Progress : " ,progress.toString());
+        iSinkronizer.onProgress(progress);
+
         if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
 //           this.showToast(sinkronResponse.getStatus().getMessage());
             sinkronUpdateBrandController = new SinkronUpdateBrandController(context, this);
@@ -216,6 +247,10 @@ public class Sinkronisasi implements
 
     @Override
     public void onSinkronUpdateBrandSuccess(SinkronResponse sinkronResponse) {
+        progress ++;
+        Log.d("Progress : " ,progress.toString());
+        iSinkronizer.onProgress(progress);
+
         if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
 //           this.showToast(sinkronResponse.getStatus().getMessage());
             sinkronDeleteBrandController =new SinkronDeleteBrandController(context, this);
@@ -230,6 +265,10 @@ public class Sinkronisasi implements
 
     @Override
     public void onSinkronDeleteBrandSuccess(SinkronResponse sinkronResponse) {
+        progress ++;
+        Log.d("Progress : " ,progress.toString());
+        iSinkronizer.onProgress(progress);
+
         if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
 //           this.showToast(sinkronResponse.getStatus().getMessage());
             sinkronInsertUnitController = new SinkronInsertUnitController(context, this);
@@ -244,6 +283,10 @@ public class Sinkronisasi implements
 
     @Override
     public void onSinkronAddUnitSuccess(SinkronResponse sinkronResponse) {
+        progress ++;
+        Log.d("Progress : " ,progress.toString());
+        iSinkronizer.onProgress(progress);
+
         if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
 //            this.showToast(sinkronResponse.getStatus().getMessage());
             sinkronUpdateUnitController = new SinkronUpdateUnitController(context, this);
@@ -259,6 +302,10 @@ public class Sinkronisasi implements
 
     @Override
     public void onSinkronUpdateUnitSuccess(SinkronResponse sinkronResponse) {
+        progress ++;
+        Log.d("Progress : " ,progress.toString());
+        iSinkronizer.onProgress(progress);
+
         if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
 //            this.showToast(sinkronResponse.getStatus().getMessage());
             sinkronDeleteUnitController = new SinkronDeleteUnitController(context, this);
@@ -274,6 +321,10 @@ public class Sinkronisasi implements
     @Override
     public void onSinkronDeleteUnitSuccess(SinkronResponse sinkronResponse) {
 
+        progress ++;
+        Log.d("Progress : " ,progress.toString());
+        iSinkronizer.onProgress(progress);
+
         if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
 //            this.showToast(sinkronResponse.getStatus().getMessage());
             sinkronInsertProdukController = new SinkronInsertProdukController(context, this);
@@ -288,6 +339,10 @@ public class Sinkronisasi implements
 
     @Override
     public void onSinkronAddProdukSuccess(SinkronResponse sinkronResponse) {
+        progress ++;
+        Log.d("Progress : " ,progress.toString());
+        iSinkronizer.onProgress(progress);
+
         if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
 //            this.showToast(sinkronResponse.getStatus().getMessage());
 
@@ -303,6 +358,10 @@ public class Sinkronisasi implements
 
     @Override
     public void onSinkronUpdateProdukSuccess(SinkronResponse sinkronResponse) {
+        progress ++;
+        Log.d("Progress : " ,progress.toString());
+        iSinkronizer.onProgress(progress);
+
         if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
 //            this.showToast(sinkronResponse.getStatus().getMessage());
 
@@ -318,6 +377,10 @@ public class Sinkronisasi implements
 
     @Override
     public void onSinkronDeleteProdukSuccess(SinkronResponse sinkronResponse) {
+        progress ++;
+        Log.d("Progress : " ,progress.toString());
+        iSinkronizer.onProgress(progress);
+
         if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
 //            this.showToast(sinkronResponse.getStatus().getMessage());
 
@@ -334,6 +397,10 @@ public class Sinkronisasi implements
 
     @Override
     public void onSinkronAddJualSuccess(SinkronResponse sinkronResponse) {
+        progress ++;
+        Log.d("Progress : " ,progress.toString());
+        iSinkronizer.onProgress(progress);
+
         if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
 
             sinkronInsertBeliController = new SinkronInsertBeliController(context,this);
@@ -350,6 +417,9 @@ public class Sinkronisasi implements
 
     @Override
     public void onSinkronAddBeliSuccess(SinkronResponse sinkronResponse) {
+        progress ++;
+        Log.d("Progress : " ,progress.toString());
+        iSinkronizer.onProgress(progress);
 
         if (sinkronResponse.getStatus().getCode().equals(Constants.KODE_200)){
 
@@ -369,6 +439,10 @@ public class Sinkronisasi implements
 
     @Override
     public void onKategoriSuccess(KategoriModel kategoriModel, List<Kategori> kategoriOffline) {
+        progress ++;
+        Log.d("Progress : " ,progress.toString());
+        iSinkronizer.onProgress(progress);
+
         brandController = new BrandController(context, this);
         brandController.getBrandList();
     }
@@ -380,6 +454,10 @@ public class Sinkronisasi implements
 
     @Override
     public void onBrandSuccess(BrandModel brandModel, List<Brand> brandOffline) {
+        progress ++;
+        Log.d("Progress : " ,progress.toString());
+        iSinkronizer.onProgress(progress);
+
         unitController = new UnitController(context, this);
         unitController.getUnitList();
     }
@@ -391,6 +469,10 @@ public class Sinkronisasi implements
 
     @Override
     public void onUnitSuccess(UnitModel unitModel, List<Unit> units) {
+        progress ++;
+        Log.d("Progress : " ,progress.toString());
+        iSinkronizer.onProgress(progress);
+
         barangController = new BarangController(this,context);
         barangController.getBarang();
     }
@@ -402,6 +484,10 @@ public class Sinkronisasi implements
 
     @Override
     public void onSuccess(BarangResult barangResult, List<Item> items) {
+
+        progress ++;
+        Log.d("Progress : " ,progress.toString());
+        iSinkronizer.onProgress(progress);
 
         getJualMasterController = new GetJualMasterController(context, this);
         getJualMasterController.getJualMaster();
@@ -417,6 +503,10 @@ public class Sinkronisasi implements
     @Override
     public void onGetJualMasterSuccess(MasterModel masterModel) {
 
+        progress ++;
+        Log.d("Progress : " ,progress.toString());
+        iSinkronizer.onProgress(progress);
+
         getBeliMasterController = new GetBeliMasterController(context, this);
         getBeliMasterController.getBeliMaster();
 
@@ -429,10 +519,13 @@ public class Sinkronisasi implements
         Log.d("get jual master","Error");
     }
 
-
     @Override
     public void onGetBeliMasterSuccess(GetBeliMasterModel getBeliMasterModel) {
+        progress ++;
+        Log.d("Progress : " ,progress.toString());
         Log.d("get beli master","sukses");
+        iSinkronizer.onProgress(progress);
+
         getJualDetailController = new GetJualDetailController(context,this);
         getJualDetailController.getJualDetail();
     }
@@ -443,13 +536,17 @@ public class Sinkronisasi implements
         Log.d("get beli master","Error");
     }
 
-
     @Override
     public void onGetJualDetailSuccess(GetDetailModel getDetailModel) {
+        progress ++;
+        Log.d("Progress : " ,progress.toString());
+        iSinkronizer.onProgress(progress);
+
         getBeliDetailController = new GetBeliDetailController(context, this);
         getBeliDetailController.getBeliDetail();
         Log.d("get jual detail","sukses");
     }
+
 
     public void onGetJualDetailError(String error) {
         iSinkronizer.onFinish(error);
@@ -458,7 +555,11 @@ public class Sinkronisasi implements
 
     @Override
     public void onGetBeliDetailSuccess(GetBeliDetailModel getBeliDetailModel) {
+        progress ++;
+        Log.d("Progress : " ,progress.toString());
         iSinkronizer.onSukses();
+
+        iSinkronizer.onProgress(progress);
         Log.d("get beli detail","Sinkron sukses");
     }
 
@@ -470,5 +571,12 @@ public class Sinkronisasi implements
 
 
 
+    //getter dan setter untk progress sync
+    public Integer getProgress() {
+        return progress;
+    }
+    public void setProgress(Integer progress) {
+        this.progress = progress;
+    }
 
 }

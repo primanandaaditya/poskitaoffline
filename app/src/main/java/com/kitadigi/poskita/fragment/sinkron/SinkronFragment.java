@@ -126,6 +126,7 @@ public class SinkronFragment extends BaseFragment implements ISinkronizer
 //    ListView lv;
 
     Sinkronisasi sinkronisasi;
+    Integer progrez = Constants.progress;
 
 
 
@@ -272,8 +273,8 @@ public class SinkronFragment extends BaseFragment implements ISinkronizer
     }
 
     @Override
-    public void onProgress() {
-
+    public void onProgress(Integer progress) {
+        sweetAlertDialog.setContentText(progress.toString() + "/" + progrez.toString());
     }
 
     @Override
@@ -281,7 +282,7 @@ public class SinkronFragment extends BaseFragment implements ISinkronizer
 
         //this.showToast(stokModel.getMessage());
         sweetAlertDialog.changeAlertType(SweetAlertDialog.ERROR_TYPE);
-        sweetAlertDialog.setTitleText(getActivity().getResources().getString(R.string.sinkron_berhasil));
+        sweetAlertDialog.setTitleText(getActivity().getResources().getString(R.string.sinkron_gagal));
 
         //sweetAlertDialog.dismissWithAnimation();
         //simpan tanggal sekarang di session
@@ -295,7 +296,8 @@ public class SinkronFragment extends BaseFragment implements ISinkronizer
         //this.showToast(stokModel.getMessage());
         sweetAlertDialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
         sweetAlertDialog.setTitleText(getActivity().getResources().getString(R.string.sinkron_berhasil));
-        //sweetAlertDialog.dismissWithAnimation();
+        sweetAlertDialog.setContentText("");
+
 
         //simpan tanggal sekarang di session
         sessionManager.createLasySync();

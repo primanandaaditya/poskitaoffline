@@ -149,7 +149,7 @@ public class Sinkronizer implements
             //jika ada internet, langsungkan sinkron
 
             //interface menyatakan sedang dalam progress
-            iSinkronizer.onProgress();
+            iSinkronizer.onProgress(0);
 
             //init session, untuk menampilkan tanggal di tvLastSync
             sessionManager=new SessionManager(context);

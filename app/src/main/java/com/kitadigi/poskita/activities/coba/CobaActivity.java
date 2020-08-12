@@ -133,7 +133,7 @@ public class CobaActivity extends BaseActivity implements ISinkronizer
     }
 
     @Override
-    public void onProgress() {
+    public void onProgress(Integer progress) {
 
     }
 

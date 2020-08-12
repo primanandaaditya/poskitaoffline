@@ -195,7 +195,7 @@ public class BarangController implements IBarangRequest {
                                 //simpan thumbnail gambar di hp user
                                 //simpan gambar di hp user lewat picasso
                                 //dengan nama file-nya = datum.getImage()
-                                genymotionHost = datum.getImage().replace("localhost","192.168.1.16");
+                                genymotionHost = datum.getImage();
 //                                Log.d("genymotionhost",genymotionHost);
 
 

@@ -55,6 +55,7 @@ public class Constants {
     public static Integer maxInput = 100;
     public static Integer maxInput50 = 50;
     public static Integer randomString = 20;
+    public static Integer progress = 23;
 /*********************************************************************************/
 
 }

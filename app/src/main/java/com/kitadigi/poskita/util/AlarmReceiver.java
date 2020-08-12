@@ -132,7 +132,7 @@ public class AlarmReceiver extends BroadcastReceiver implements ISinkronizer {
     }
 
     @Override
-    public void onProgress() {
+    public void onProgress(Integer progress) {
         Log.d("on progress", "PROGRESS");
     }
 
