@@ -41,6 +41,7 @@ import com.kitadigi.poskita.database.Database;
 import com.kitadigi.poskita.fragment.POSFragment;
 import com.kitadigi.poskita.fragment.brand.BrandFragment;
 import com.kitadigi.poskita.fragment.dashboard.DashboardFragment;
+import com.kitadigi.poskita.fragment.dashboard.IDashboard;
 import com.kitadigi.poskita.fragment.inputmassal.InputMassalFragment;
 import com.kitadigi.poskita.fragment.item.PrimaItemFragment;
 import com.kitadigi.poskita.fragment.kategori.PrimaKategoriFragment;
@@ -65,12 +66,14 @@ import java.util.TimeZone;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements
+        OnFragmentInteractionListener, IDashboard {
     private static final String TAG         = MainActivity.class.getSimpleName();
     private Context context;
 
 
     private SessionManager sessionManager;
+
 
 
     //init ui
@@ -219,14 +222,6 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
             db.addBalance("25000000", "0", "0");
         }
 
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-        // load nav menu header data
         loadNavHeader();
 
         // initializing navigation menu
@@ -242,13 +237,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
 
     }
 
-    // show or hide the fab
-//    private void toggleFab() {
-//        if (navItemIndex == 0 || navItemIndex == 3)
-//            fab.show();
-//        else
-//            fab.hide();
-//    }
+
 
     /***
      * Load navigation menu header information
@@ -281,18 +270,6 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         tv_remark_balance.setText(nama);
         tv_balance.setText(email);
 
-//        tv_balance.setText(nominal);
-
-//        // Loading profile image
-//        Glide.with(this).load(urlProfileImg)
-//                .crossFade()
-//                .thumbnail(0.5f)
-//                .bitmapTransform(new CircleTransform(this))
-//                .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                .into(iv_nav_header);
-
-        // showing dot next to notifications label
-        //navigationView.getMenu().getItem(3).setActionView(R.layout.menu_dot);
     }
 
 
@@ -318,20 +295,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         FragmentManager fragmentManager = getSupportFragmentManager();
         // this will clear the back stack and displays no animation on the screen
         fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-//        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-//            Log.d(TAG, "Result " + getSupportFragmentManager().getBackStackEntryCount());
-//            drawer.closeDrawers();
-//            //getSupportFragmentManager().popBackStack();
-////            getSupportFragmentManager().popBackStack("wholesale", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-//            FragmentManager fragmentManager = getSupportFragmentManager();
-//            // this will clear the back stack and displays no animation on the screen
-//            fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-//            return;
-//        }
-        // Sometimes, when fragment has huge data, screen seems hanging
-        // when switching between navigation menus
-        // So using runnable, the fragment is loaded with cross fade effect
-        // This effect can be seen in GMail app
+
         Runnable mPendingRunnable = new Runnable() {
             @Override
             public void run() {
@@ -363,13 +327,13 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     private Fragment getHomeFragment() {
         switch (navItemIndex) {
             case 0:
-                DashboardFragment dashboardFragment = new DashboardFragment();
+                DashboardFragment dashboardFragment = new DashboardFragment(this);
                 return dashboardFragment;
             case 1:
-//                POSFragment homeFragment = new POSFragment();
-//                return homeFragment;
+
                 JualFragment jualFragment=new JualFragment();
                 return jualFragment;
+
             case 2:
                 PembelianFragment pembelianFragment =new PembelianFragment();
                 return pembelianFragment;
@@ -537,7 +501,6 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                     menuItem.setChecked(true);
                 }
                 menuItem.setChecked(true);
-
                 loadHomeFragment();
 
                 return true;
@@ -577,28 +540,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     @Override
     public void onResume() {
         super.onResume();
-        Log.d(TAG, "onResume");
-//        checkTransaction = db.getCountTransactionsDetail("1");
-//
-//        if(checkTransaction != 0){
-//            new Handler().postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    totalQty                    = String.valueOf(db.getTotalQty("1"));
-//                    count = Integer.parseInt(totalQty);
-//                    invalidateOptionsMenu();
-//                    Log.d(TAG, "total QTY " + totalQty);
-//                }
-//            }, 200);
-//        }else{
-//            new Handler().postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    count = 0;
-//                    invalidateOptionsMenu();
-//                }
-//            }, 200);
-//        }
+
     }
 
 //    boolean doubleBackToExitPressedOnce = false;
@@ -683,15 +625,8 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-//        if (navItemIndex == 0) {
-//            getMenuInflater().inflate(R.menu.menu_toolbar, menu);
-//            MenuItem menuItem = menu.findItem(R.id.item_cart);
-//            menuItem.setIcon(buildCounterDrawable(count, R.drawable.ic_shopping_cart));
-//
-//        }else{
-            getMenuInflater().inflate(R.menu.menu_toolbar_hide, menu);
-        //}
+
+        getMenuInflater().inflate(R.menu.menu_toolbar_hide, menu);
         return true;
     }
 
@@ -728,17 +663,6 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-//        if (id == R.id.item_cart) {
-////            Toast.makeText(MainActivity.this, "Action clicked", Toast.LENGTH_LONG).show();
-//            Intent transaction = new Intent(MainActivity.this, ItemsTransactionsActivity.class);
-//            jsonTransaction = db.getListTransactionsDetail("0", "1");
-//            transaction.putExtra("transaction", jsonTransaction);
-//            startActivityForResult(transaction, REQUEST_HOME);
-//            return true;
-//        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -781,11 +705,54 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
             fragmentTransaction.addToBackStack("kategori");
             fragmentTransaction.commit();
 
-//            WholeSaleFragment wholeSaleFragment = new WholeSaleFragment();
-//            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//            fragmentTransaction.replace(R.id.fl_container, wholeSaleFragment, "wholesale");
-//            fragmentTransaction.addToBackStack("wholesale");
-//            fragmentTransaction.commit();
         }
+    }
+
+    @Override
+    public void layarPOS() {
+
+        navItemIndex = 1;
+        CURRENT_TAG = TAG_POS;
+        loadHomeFragment();
+    }
+
+    @Override
+    public void layarPembelian() {
+
+        navItemIndex = 2;
+        CURRENT_TAG = TAG_PEMBELIAN;
+        loadHomeFragment();
+    }
+
+    @Override
+    public void layarProduk() {
+
+        navItemIndex = 3;
+        CURRENT_TAG = TAG_ITEMS;
+        loadHomeFragment();
+    }
+
+    @Override
+    public void layarKategori() {
+
+        navItemIndex = 4;
+        CURRENT_TAG = TAG_KATEGORI;
+        loadHomeFragment();
+    }
+
+    @Override
+    public void layarBrand() {
+
+        navItemIndex = 5;
+        CURRENT_TAG = TAG_BRAND;
+        loadHomeFragment();
+    }
+
+    @Override
+    public void layarUnit() {
+
+        navItemIndex = 6;
+        CURRENT_TAG = TAG_UNIT;
+        loadHomeFragment();
     }
 }
