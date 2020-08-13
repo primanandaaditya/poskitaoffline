@@ -36,6 +36,7 @@ import android.widget.Toast;
 import com.kitadigi.poskita.activities.coba.CobaActivity;
 import com.kitadigi.poskita.activities.printer.PrintingActivity;
 import com.kitadigi.poskita.adapter.ItemsAdapter;
+import com.kitadigi.poskita.dao.database.HapusTabel;
 import com.kitadigi.poskita.database.Database;
 import com.kitadigi.poskita.fragment.POSFragment;
 import com.kitadigi.poskita.fragment.brand.BrandFragment;
@@ -396,14 +397,16 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
             case 9:
 //                Intent syncKategori = new Intent(MainActivity.this, SyncKategoriActivity.class);
 //                startActivity(syncKategori);
-                SinkronFragment sinkronFragment=new SinkronFragment();
-                return sinkronFragment;
+//                SinkronFragment sinkronFragment=new SinkronFragment();
+//                return sinkronFragment;
+                InputMassalFragment inputMassalFragment = new InputMassalFragment();
+                return inputMassalFragment;
             case 10:
 //                AddressFragment addressFragment = new AddressFragment();
 //                return addressFragment;
 
-                InputMassalFragment inputMassalFragment = new InputMassalFragment();
-                return inputMassalFragment;
+                InputMassalFragment inputMassalFragmentx = new InputMassalFragment();
+                return inputMassalFragmentx;
 
             default:
                 return new POSFragment();
@@ -490,7 +493,13 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                     @Override
                                     public void onClick(SweetAlertDialog sDialog) {
+
+                                        //fungsi untuk logout ada di sessionManager
                                         sessionManager.logoutUser();
+
+                                        //saat logout, hapus emptykan semua tabel di sqlite
+                                        HapusTabel hapusTabel = new HapusTabel(MainActivity.this);
+                                        hapusTabel.execute();
 
                                         //saat logout, matikan juga alarm sinkronsisasi
                                         PackageManager pm  = getPackageManager();

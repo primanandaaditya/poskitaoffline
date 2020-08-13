@@ -216,7 +216,13 @@ public class ItemsPaymentResultActivity extends BaseActivity implements IAddTran
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+//        super.onBackPressed();
+
+        //jika user tekan tombol BACK
+        //cegah itu
+
+        moveTaskToBack(true);
+
     }
 
     @Override
@@ -239,6 +245,8 @@ public class ItemsPaymentResultActivity extends BaseActivity implements IAddTran
         addTransactionController.addTransaction("",dibayar,total_penjualan);
 
     }
+
+
 
     @Override
     public void onAddTransactionSuccess(BaseResponse baseResponse) {
