@@ -43,6 +43,13 @@
         android:background="@color/colorBg"
         android:orientation="vertical">
 
+        <SearchView
+            android:id="@+id/sv"
+            android:queryHint="@string/cari_nama_kota"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </SearchView>
+
         <ListView
             android:id="@+id/lv"
             android:layout_width="match_parent"

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ public class KecamatanActivity extends BaseActivity implements IKecamatanResult 
     TextView tv_nav_header;
     Intent intent;
     String idKota;
+    SearchView sv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +61,7 @@ public class KecamatanActivity extends BaseActivity implements IKecamatanResult 
     @Override
     public void onGetKecamatanSuccess(KecamatanModel kecamatanModel) {
 
-        KecamatanAdapter kecamatanAdapter= new KecamatanAdapter(KecamatanActivity.this, kecamatanModel);
+        final KecamatanAdapter kecamatanAdapter= new KecamatanAdapter(KecamatanActivity.this, kecamatanModel);
         listView.setAdapter(kecamatanAdapter);
 
 
@@ -80,6 +82,25 @@ public class KecamatanActivity extends BaseActivity implements IKecamatanResult 
                 ((Activity) view.getContext()).finish();
 
             }
+        });
+
+        //filter kecamatan
+        //search untuk filter kecamatan
+        sv=(SearchView)findViewById(R.id.sv);
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                kecamatanAdapter.filter(s);
+                return false;
+
+            }
+
         });
 
     }

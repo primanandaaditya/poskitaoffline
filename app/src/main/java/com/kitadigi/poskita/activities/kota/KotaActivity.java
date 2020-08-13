@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ public class KotaActivity extends BaseActivity implements IKotaResult {
     TextView tv_nav_header;
     Intent intent;
     String idPropinsi;
+    SearchView sv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +55,14 @@ public class KotaActivity extends BaseActivity implements IKotaResult {
     }
 
     @Override
-    public void onGetKotaSuccess(KotaModel kotaModel) {
-        KotaAdapter kotaAdapter = new KotaAdapter(KotaActivity.this, kotaModel);
+    public void onGetKotaSuccess(final KotaModel kotaModel) {
+
+        //tampilkan list kota
+        final KotaAdapter kotaAdapter = new KotaAdapter(KotaActivity.this, kotaModel);
         listView.setAdapter(kotaAdapter);
 
 
+        //jika listview diklik maka akan muncul
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -75,6 +80,25 @@ public class KotaActivity extends BaseActivity implements IKotaResult {
                 ((Activity) view.getContext()).finish();
 
             }
+        });
+
+        //filter kota
+        //search untuk filter kota
+        sv=(SearchView)findViewById(R.id.sv);
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                kotaAdapter.filter(s);
+                return false;
+
+            }
+
         });
     }
 

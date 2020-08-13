@@ -3,6 +3,7 @@
     <string name="app_name" tools:ignore="MissingTranslation">Pos Kita</string>
     <string name="hint_username">Masukkan username</string>
     <string name="hint_password">Masukkan password</string>
+    <string name="tampilkan_password" translatable="false">Tampilkan password   </string>
     <string name="tersimpan_offline" translatable="false">Tersimpan offline</string>
     <string name="tidak_ada_koneksi_internet">Tidak ada koneksi internet</string>
     <string name="anda_ingin_keluar_aplikasi">Anda ingin keluar aplikasi?</string>
@@ -277,6 +278,9 @@
     <string name="bluetooth">Bluetooth</string>
     <string name="keterangan">Keterangan</string>
     <string name="cari_printer">Cari printer</string>
+    <string name="cari_nama_propinsi" translatable="false">Cari nama propinsi</string>
+    <string name="cari_nama_kota" translatable="false">Cari nama kota</string>
+    <string name="cari_nama_kecamatan" translatable="false">Cari nama kecamatan</string>
     <string name="cari_nama_kategori" translatable="false">Cari nama kategori</string>
     <string name="cari_nama_brand" translatable="false">Cari nama brand</string>
     <string name="cari_nama_unit" translatable="false">Cari nama unit</string>

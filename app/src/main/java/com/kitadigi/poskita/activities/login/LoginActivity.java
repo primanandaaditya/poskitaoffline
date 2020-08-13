@@ -4,10 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.kitadigi.poskita.MainActivity;
@@ -33,6 +37,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     SimpleMD5 simpleMD5;
     EditText etUserName,etPassword;
     Button btnLogin, btnRegister;
+    Switch swTampilkanPassword;
 
     Context context;
 
@@ -71,6 +76,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         etPassword=(EditText)findViewById(R.id.etPassword);
         btnLogin=(Button)findViewById(R.id.btnLogin);
         btnRegister=(Button)findViewById(R.id.btnRegister);
+        swTampilkanPassword=(Switch)findViewById(R.id.swTampilkanPassword);
 
 
         /* init fonts */
@@ -78,6 +84,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         this.applyFontBoldToButton(btnRegister);
         this.applyFontRegularToEditText(etUserName);
         this.applyFontRegularToEditText(etPassword);
+        this.applyFontRegularToButton(swTampilkanPassword);
 
         //jika tombol register ditekan
         //muncul layar register
@@ -101,6 +108,20 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
                     presenter=new LoginActivityPresenter(LoginActivity.this,new LoginActivityImpl(etUserName.getText().toString(),etPassword.getText().toString()));
                     presenter.onLoginButtonClick();
+                }
+
+            }
+        });
+
+        //untuk switch tampilkan password
+        swTampilkanPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked){
+                    etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }else{
+                    etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
 
             }

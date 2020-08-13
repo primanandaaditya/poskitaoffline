@@ -494,12 +494,12 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                                     @Override
                                     public void onClick(SweetAlertDialog sDialog) {
 
-                                        //fungsi untuk logout ada di sessionManager
-                                        sessionManager.logoutUser();
-
                                         //saat logout, hapus emptykan semua tabel di sqlite
                                         HapusTabel hapusTabel = new HapusTabel(MainActivity.this);
                                         hapusTabel.execute();
+
+                                        //fungsi untuk logout ada di sessionManager
+                                        sessionManager.logoutUser();
 
                                         //saat logout, matikan juga alarm sinkronsisasi
                                         PackageManager pm  = getPackageManager();

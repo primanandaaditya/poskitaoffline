@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,9 +24,16 @@ import java.util.List;
 
 public class PilihPropinsiActivity extends BaseActivity implements IPropinsiResult {
 
+    //Catatan:
+    //untuk mendapatkan list propinsi
+    //diperoleh dari asset/json/propinsi.json
+    //bukan dari API
+
+
     ListView listView;
     ImageView iv_back;
     TextView tv_nav_header;
+    SearchView sv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +64,13 @@ public class PilihPropinsiActivity extends BaseActivity implements IPropinsiResu
     @Override
     public void onGetPropinsiSuccess(PropinsiModel propinsiModel) {
 
-        PropinsiAdapter propinsiAdapter = new PropinsiAdapter(PilihPropinsiActivity.this, propinsiModel);
+
+        //tampilkan daftar propinsi
+        final PropinsiAdapter propinsiAdapter = new PropinsiAdapter(PilihPropinsiActivity.this, propinsiModel);
         listView.setAdapter(propinsiAdapter);
 
 
+        //jika listview diklik, akan muncul dialog pilih propinsi
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -79,6 +90,25 @@ public class PilihPropinsiActivity extends BaseActivity implements IPropinsiResu
                 ((Activity) view.getContext()).finish();
 
             }
+        });
+
+
+        //search untuk filter propinsi
+        sv=(SearchView)findViewById(R.id.sv);
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                propinsiAdapter.filter(s);
+                return false;
+
+            }
+
         });
     }
 
