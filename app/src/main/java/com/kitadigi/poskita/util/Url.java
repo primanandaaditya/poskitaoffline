@@ -1,15 +1,13 @@
 package com.kitadigi.poskita.util;
 
+import com.kitadigi.poskita.BuildConfig;
+
 public class Url {
 
 
-    public static final String DIKI_URL = "https://poskita.monstercode.net/api/";
+    public static final String DIKI_URL = BuildConfig.SERVER_URL;
     public static final String DIKI_IMAGE_URL = "https://poskita.monstercode.net/upload_api/master_product/media/";
 
-
-//    public static final String DIKI_URL = "http://poskita.monstercode.net/api/";
-//    public static final String DIKI_IMAGE_URL = "http://poskita.monstercode.net/upload_api/master_product/media/";
-//
 
 //    public static final String DIKI_URL = "http://192.168.1.16:4444/api/";
 //    public static final String DIKI_IMAGE_URL = "http://192.168.1.16:4444/upload_api/master_product/media/";
@@ -64,7 +62,8 @@ public class Url {
     //url ini untuk percobaan
 
 //    public static final String SINKRON_BASE_URL = "http://192.168.1.16:5555/sync/";
-    public static final String SINKRON_BASE_URL = "https://poskita-sync.kitadigi.com/sync/";
+    public static final String SINKRON_BASE_URL = BuildConfig.SYNC_URL;
+
 
 
     public static final String SINKRON_INSERT_KATEGORI = "category/insert/";

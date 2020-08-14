@@ -4,14 +4,25 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.kitadigi.poskita"
-        minSdkVersion 21
+        minSdkVersion 17
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+
+        def SERVER_URL = "SERVER_URL"
+        def SYNC_URL = "SYNC_URL"
+
+        debug{
+            buildConfigField "String", SERVER_URL,  "\"https://poskita.monstercode.net/api/\""
+            buildConfigField "String", SYNC_URL,  "\"https://poskita-sync.kitadigi.com/sync/\""
+        }
+
         release {
+            buildConfigField "String", SERVER_URL,  "\"https://poskita.monstercode.net/api/\""
+            buildConfigField "String", SYNC_URL,  "\"https://poskita-sync.kitadigi.com/sync/\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

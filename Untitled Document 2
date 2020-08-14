@@ -1,0 +1,13 @@
+POSKITA sign-in:
+- gunakan poskita.jks yang ada di git (cek di folder luar)
+- copy poskita.jks di komputer/laptop
+- pada Android Studio pilih menu Build | Generate Signed Bundle or APK
+  isikan sbb
+	
+	Key Store Path		:	path dari poskita.jks
+	Key store password	:	TOG57588
+	Key alias		:	KEY
+	Key password		: 	TOG57588
+
+- klik Next, tunggu proses selesai.
+

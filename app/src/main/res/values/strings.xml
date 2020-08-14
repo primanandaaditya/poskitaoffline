@@ -306,7 +306,7 @@
     <string name="berhasil_disimpan" translatable="false">Berhasil disimpan</string>
     <string name="berhasil_diedit" translatable="false">Berhasil diedit</string>
     <string name="berhasil_dihapus" translatable="false">Berhasil dihapus</string>
-    <string name="item" translatable="false">Item</string>
+    <string name="item" translatable="false">Produk</string>
     <string name="qty" translatable="false">Qty</string>
     <string name="harga" translatable="false">Harga</string>
     <string name="tunai" translatable="false">Tunai </string>
